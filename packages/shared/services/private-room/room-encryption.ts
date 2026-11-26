@@ -374,9 +374,9 @@ async function wrapFilesForMembers(
 }
 
 /**
- * The encrypted files each member lacks a key on, by file, as the server
- * reports them for the room; null when the request fails, so the sweep
- * covers every file for every member instead.
+ * The encrypted files each member, and each external link, lacks a key on,
+ * by file, as the server reports them for the room; null when the request
+ * fails, so the sweep covers every file for every member instead.
  */
 async function readMissingFileKeys(
   roomId: number,
@@ -384,8 +384,7 @@ async function readMissingFileKeys(
   try {
     const entries = await getRoomMissingFileKeys(roomId);
     const byFile = new Map<number, Set<string>>();
-    for (const { userId, fileIds, isLink } of entries) {
-      if (isLink) continue;
+    for (const { userId, fileIds } of entries) {
       for (const fileId of fileIds) {
         const users = byFile.get(fileId) ?? new Set<string>();
         users.add(String(userId));
@@ -402,8 +401,11 @@ async function readMissingFileKeys(
  * Wraps, for every member with a verified key other than the caller, the
  * encrypted files of the room the server lists them as lacking a key on;
  * when that list cannot be read, every encrypted file for every member.
+ * An external link is covered the same way, for the files the server lists
+ * it as lacking, which are those it covers; without that list no link is.
  * Its callers bound how often it runs.
  * Spec: private-rooms/room-membership, "Backfill re-wraps every member".
+ * Spec: private-rooms/encryption-core, "An external link has a key pair of its own".
  *
  * Recipient discovery uses the file-level endpoint `getFilePublicKeys`;
  * room member keys are loaded once for HPKE-Auth sender verification.
@@ -431,7 +433,9 @@ export async function backfillEncryptedFilesForRoomMembers(
   // For HPKE-Auth sender verification we need a pool of known room-member
   // public keys (the sender of each existing wrap must be in here). Union
   // the room-level and file-level endpoints to maximise coverage.
-  const { list: roomMemberKeys } = await loadRoomMemberKeys(roomId);
+  const { list: roomMemberKeys, links = [] } =
+    await loadRoomMemberKeys(roomId);
+  const linkIds = new Set(links.map((link) => link.userId));
   const senderCandidates: RoomMemberPublicKey[] = [...roomMemberKeys];
   const senderSeen = new Set(
     roomMemberKeys.map((k) => `${k.userId}:${k.publicKey}`),
@@ -503,12 +507,16 @@ export async function backfillEncryptedFilesForRoomMembers(
             : [key],
       );
 
-      if (candidates.length === 0) {
+      const linkRecipients = lacking
+        ? links.filter((link) => lacking.has(link.userId))
+        : [];
+
+      if (candidates.length === 0 && linkRecipients.length === 0) {
         fileResults.push({ fileId: fileId, success: true });
         continue;
       }
 
-      const recipients: RoomMemberPublicKey[] = [];
+      const recipients: RoomMemberPublicKey[] = [...linkRecipients];
       for (const c of candidates) {
         const pk = await verifyAndCache(c.userId, c.publicKey);
         if (pk)
@@ -575,6 +583,7 @@ export async function backfillEncryptedFilesForRoomMembers(
           ...(written?.skippedUserIds ?? []),
         ]) {
           const id = String(userId);
+          if (linkIds.has(id)) continue;
           if (!recipients.some((r) => String(r.userId) === id)) continue;
           missingFileIdsByMember[id] = [
             ...(missingFileIdsByMember[id] ?? []),

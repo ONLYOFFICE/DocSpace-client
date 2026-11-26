@@ -717,6 +717,16 @@ none is open. The technical decisions below follow from them.
     guard. How the page's policy reaches one route of a single-page client
     is open and is the first step of task 4.5.
 
+28. **The key of a link is used as the server lists it (2026-11-26, with
+    task 3.3).** A member's key is checked against the one seen before,
+    and a change is put to the user. A link has no person to ask about and
+    its public key does not change, since the server refuses another one
+    for a link that has one; so the upload and the backfill wrap for the
+    key the room lists, as they do for a member seen for the first time.
+    Alternative: keep the key of every link in the store of seen keys.
+    Rejected: a mismatch would open the dialog of a changed member key
+    for something that is not a member.
+
 ## Risks / Trade-offs
 
 - [The address leaks: a forwarded message, a browser history, a

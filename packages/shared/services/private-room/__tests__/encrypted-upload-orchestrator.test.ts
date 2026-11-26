@@ -1242,6 +1242,36 @@ describe("orchestrateEncryptedUpload - room fan-out", () => {
     expect(fanOut.recipients.map((r) => r.userId)).toEqual(["alice"]);
   });
 
+  it("File added under a linked folder", async () => {
+    const { getRoomEncryptionKeys } = await import("../../../api/privacy");
+    const { setFileEncryptionKeys } = await import("../../../api/files");
+    const { wrapDekForRecipients } = await import(
+      "../../encryption/room-file-access"
+    );
+    const COVERING = "44444444-4444-4444-8444-444444444444";
+    const OTHER = "55555555-5555-4555-8555-555555555555";
+    vi.mocked(getRoomEncryptionKeys).mockResolvedValueOnce([
+      { id: "a-1", userId: "alice", publicKey: pk("a"), privateKeyEnc: "", date: "2026-01-01T00:00:00" },
+      { id: COVERING, userId: COVERING, publicKey: pk("l-1"), isLink: true },
+      { id: OTHER, userId: OTHER, publicKey: pk("l-2"), isLink: true },
+    ] as never);
+    vi.mocked(setFileEncryptionKeys)
+      .mockResolvedValueOnce(undefined as never)
+      .mockResolvedValueOnce({ skippedUserIds: [OTHER] } as never);
+
+    const { results } = await upload();
+
+    const fanOut = vi.mocked(wrapDekForRecipients).mock.calls[1][0];
+    expect(fanOut.recipients.map((r) => r.userId)).toEqual([
+      "alice",
+      COVERING,
+      OTHER,
+    ]);
+    expect(results[0].ok).toBe(true);
+    expect(results[0].shareFailed).toBeFalsy();
+    expect(pendingAccessStore.get(10, OTHER)).toBeUndefined();
+  });
+
   it("Sharing with the members fails", async () => {
     const { getRoomEncryptionKeys } = await import("../../../api/privacy");
     const { setFileEncryptionKeys } = await import("../../../api/files");

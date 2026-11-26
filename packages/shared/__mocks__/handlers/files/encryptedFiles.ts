@@ -112,6 +112,12 @@ export type EncryptedFilesHandlerHandle = {
    */
   setUnreadableUsers: (userIds: string[]) => void;
   /**
+   * The working external links of the room and of its items, each with the
+   * files it covers (the mock keeps no tree of folders, so the spec names
+   * them): a link is a recipient of the keys of those files.
+   */
+  setLinks: (links: Array<{ id: string; fileIds: number[] }>) => void;
+  /**
    * The users who may change the room's access (its owner and managers), for
    * the missing-keys route. Until set, the owner and every user with a key in
    * `roomUserKeys` may.
@@ -588,6 +594,7 @@ export const encryptedFilesHandlers = (
   const createdOn = new Map<string, string>();
   const outsidePrivateRoom = new Set<number>();
   const unreadableUsers = new Set<string>();
+  const links = new Map<string, number[]>();
   let accessManagers: Set<string> | null = null;
   let ownerChangers: Set<string> | null = null;
   /** files_file_keys.create_on: set when the row is written. */
@@ -686,6 +693,10 @@ export const encryptedFilesHandlers = (
       unreadableUsers.clear();
       for (const id of userIds) unreadableUsers.add(String(id));
     },
+    setLinks: (list) => {
+      links.clear();
+      for (const link of list) links.set(link.id, link.fileIds.slice());
+    },
     setRoomAccessManagers: (userIds) => {
       accessManagers = new Set(userIds.map(String));
     },
@@ -715,6 +726,7 @@ export const encryptedFilesHandlers = (
       createdOn.clear();
       outsidePrivateRoom.clear();
       unreadableUsers.clear();
+      links.clear();
       accessManagers = null;
       ownerChangers = null;
       requests.length = 0;
@@ -956,7 +968,10 @@ export const encryptedFilesHandlers = (
      * those who can read in one SetFileKey, which deletes their rows and
      * inserts the new ones so every other user's row stays, and answers the
      * others as `FileKeysWrittenDto.skippedUserIds`; the mock takes the users
-     * who cannot read from `setUnreadableUsers`. A missing file is an
+     * who cannot read from `setUnreadableUsers`. A working link that covers
+     * the file is a recipient too, under its id
+     * (FileStorageService.GetCoveringLinksAsync); a link that does not cover
+     * it is skipped as a user who cannot read is. A missing file is an
      * InvalidOperationException, so 403. The caller's own read, private-room
      * and create-right checks are not modelled here.
      */
@@ -977,12 +992,15 @@ export const encryptedFilesHandlers = (
         const keys = body as EncryptedFileKey[];
         const f = files.get(fileId);
         if (!f) return errorResponse(403, `file ${fileId} not found`);
-        const accepted = keys.filter(
-          (k) => !unreadableUsers.has(String(k.userId)),
-        );
-        const skippedUserIds = keys
-          .filter((k) => unreadableUsers.has(String(k.userId)))
-          .map((k) => String(k.userId));
+        const refused = (k: EncryptedFileKey) => {
+          const id = String(k.userId);
+          const covered = links.get(id);
+          return covered
+            ? covered.indexOf(fileId) === -1
+            : unreadableUsers.has(id);
+        };
+        const accepted = keys.filter((k) => !refused(k));
+        const skippedUserIds = keys.filter(refused).map((k) => String(k.userId));
         // Two entries for one user collide on the (tenant, file, user) key;
         // the mock refuses the whole write like the failed transaction.
         const listed = new Set<string>();
@@ -1056,7 +1074,9 @@ export const encryptedFilesHandlers = (
      * RoomMissingFileKeysDto per named user, or per direct member and the
      * creator when none is named, who lacks a key on an encrypted file of the
      * room, with those file ids; a user with every key is absent and a file
-     * stored in the clear is never reported. 403 when the caller cannot read
+     * stored in the clear is never reported. A working link is checked with
+     * the members when nobody is named, and can be named: its entry carries
+     * `isLink` and only the files the link covers. 403 when the caller cannot read
      * the room, 400 for a room that is not private, 403 when the caller may
      * not change its access or the room is archived, 400 for a malformed id;
      * another room's id is left to that room's instance, so an unknown room
@@ -1093,19 +1113,29 @@ export const encryptedFilesHandlers = (
         if (named.some((userId) => !guidRe.test(userId))) {
           return errorResponse(400, "The value is not valid");
         }
-        const subjects = named.length > 0 ? named : Array.from(members);
+        const subjects =
+          named.length > 0
+            ? named
+            : [...Array.from(members), ...Array.from(links.keys())];
         const encrypted = Array.from(files.values()).filter((f) => f.encrypted);
-        const answer: { userId: string; fileIds: number[] }[] = [];
+        const answer: { userId: string; fileIds: number[]; isLink?: true }[] =
+          [];
         for (const userId of Array.from(new Set(subjects.map(String)))) {
+          const covered = links.get(userId);
           const fileIds = encrypted
             .filter(
               (f) =>
+                (!covered || covered.indexOf(f.id) !== -1) &&
                 !f.fileKeys.some(
                   (k) => String(k.userId).toLowerCase() === userId.toLowerCase(),
                 ),
             )
             .map((f) => f.id);
-          if (fileIds.length > 0) answer.push({ userId, fileIds });
+          if (fileIds.length > 0) {
+            answer.push(
+              covered ? { userId, fileIds, isLink: true } : { userId, fileIds },
+            );
+          }
         }
         return okResponse(answer);
       },

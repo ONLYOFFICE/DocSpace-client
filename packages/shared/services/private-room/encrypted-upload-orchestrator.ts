@@ -60,7 +60,7 @@ import { wrapDekForRecipients } from "../encryption/room-file-access";
 import { getEncryptionErrorMessage } from "../encryption/error-i18n";
 import { CryptoError } from "../encryption/errors";
 import type { DSE3Header, IdentityKeyPair } from "../encryption/types";
-import { selectMemberKeys } from "./room-member-keys";
+import { selectLinkKeys, selectMemberKeys } from "./room-member-keys";
 import { pendingAccessStore } from "./pending-access";
 import {
   verifyMemberKeys,
@@ -667,8 +667,11 @@ async function wrapDekForSelfAndRoom(args: {
         });
       }
 
+      // Spec: private-rooms/encryption-core, "An external link has a key pair of its own"
+      const links = selectLinkKeys(publicKeys);
+
       readMembers = recipients.map((recipient) => recipient.userId);
-      if (recipients.length === 0) return { skipped: [] };
+      if (recipients.length === 0 && links.length === 0) return { skipped: [] };
 
       const { verified, skipped: unverified } = await verifyMemberKeys(
         recipients,
@@ -683,7 +686,7 @@ async function wrapDekForSelfAndRoom(args: {
       const notShared = unverified
         .filter((s) => s.reason !== "key-mismatch-refused")
         .map((s) => s.userId);
-      if (verified.length === 0) {
+      if (verified.length === 0 && links.length === 0) {
         return notShared.length > 0 ? { skipped, failedFor: notShared } : { skipped };
       }
 
@@ -691,7 +694,9 @@ async function wrapDekForSelfAndRoom(args: {
         dek,
         senderIdentity: identity,
         senderUserId: userId,
-        recipients: verified,
+        // The server stores the wrap of a link that covers the file and
+        // names any other link among the skipped.
+        recipients: [...verified, ...links],
         fileId: fileIdNumeric,
       });
 
@@ -714,7 +719,9 @@ async function wrapDekForSelfAndRoom(args: {
         ...newKeys,
       ];
       const written = await setFileEncryptionKeys(fileId, allKeys);
-      const unreadableFor = (written?.skippedUserIds ?? []).map(String);
+      const unreadableFor = (written?.skippedUserIds ?? [])
+        .map(String)
+        .filter((id) => !links.some((link) => link.userId === id));
       return {
         skipped,
         ...notWrapped,

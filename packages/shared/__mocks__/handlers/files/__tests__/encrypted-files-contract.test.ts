@@ -542,6 +542,34 @@ describe("encryptedFiles mock — GET /privacyroom/{roomId}/access/missing (mirr
     ]);
   });
 
+  it("Link among the missing wraps, and a wrap stored for it", async () => {
+    const LINK_ID = "44444444-4444-4444-8444-444444444444";
+    handle.current!.setLinks([{ id: LINK_ID, fileIds: [21] }]);
+
+    const before = await ask(ROOM_ID);
+    expect(before.body.response).toContainEqual({
+      userId: LINK_ID,
+      fileIds: [21],
+      isLink: true,
+    });
+
+    const put = (fileId: number) =>
+      fetch(FILE_ACCESS_URL(fileId), {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify([
+          { userId: LINK_ID, publicKeyId: LINK_ID, privateKeyEnc: "l" },
+        ]),
+      }).then((res) => res.json());
+
+    // Wrap for a link that does not cover the file
+    expect((await put(22)).response.skippedUserIds).toEqual([LINK_ID]);
+    expect((await put(21)).response.skippedUserIds).toEqual([]);
+
+    const after = await ask(ROOM_ID, LINK_ID);
+    expect(after.body.response).toEqual([]);
+  });
+
   it("Member without a key on one file", async () => {
     const { status, body } = await ask(ROOM_ID, BOB_ID);
     expect(status).toBe(200);

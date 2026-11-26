@@ -58,6 +58,23 @@ const toMemberKeys = (
 };
 
 /**
+ * The external links among the keys of a room, each with its id in the
+ * place of a user id: a file key is wrapped for a link as for a member.
+ *
+ * Spec: private-rooms/encryption-core, "An external link has a key pair of its own"
+ */
+export const selectLinkKeys = (
+  keys: readonly TMemberEncryptionKey[] | null | undefined,
+): RoomMemberPublicKey[] =>
+  (Array.isArray(keys) ? keys : [])
+    .filter((k) => k?.isLink && k.userId && k.publicKey)
+    .map((k) => ({
+      userId: String(k.userId),
+      publicKey: k.publicKey,
+      publicKeyId: k.id,
+    }));
+
+/**
  * One key per user, chosen with `selectUserKey` from everything the server
  * lists for that user.
  * Spec: private-rooms/encryption-core, "One selected key per user".
@@ -100,9 +117,15 @@ export async function loadRoomMemberKeys(
   keyByUserId: Map<string, RoomMemberPublicKey>;
   /** Every listed key: unwrapping needs all of a sender's keys. */
   list: RoomMemberPublicKey[];
+  /** The working links of the room and of the items in it. */
+  links: RoomMemberPublicKey[];
 }> {
   const keys = await getRoomEncryptionKeys(roomId);
-  return { keyByUserId: selectMemberKeys(keys), list: toMemberKeys(keys) };
+  return {
+    keyByUserId: selectMemberKeys(keys),
+    list: toMemberKeys(keys),
+    links: selectLinkKeys(keys),
+  };
 }
 
 export async function loadRoomMemberKeysSafe(

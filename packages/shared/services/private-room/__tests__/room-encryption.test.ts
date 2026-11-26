@@ -785,21 +785,37 @@ describe("backfillEncryptedFilesForRoomMembers", () => {
     vi.unstubAllGlobals();
   });
 
-  it("Link entry among the keys of a room", async () => {
+  it("File added under a linked folder: the backfill wraps it for the link", async () => {
+    const LINK_ID = "44444444-4444-4444-8444-444444444444";
+    const link = await generateIdentityKeyPair();
     getRoomMissingFileKeysMock.mockResolvedValue([
-      { userId: "link-1", fileIds: [FILE_ID], isLink: true },
+      { userId: LINK_ID, fileIds: [FILE_ID], isLink: true },
+    ]);
+    getFileEncryptionAccessMock.mockResolvedValue({
+      fileKeys: aliceOwnWrap,
+      userKeys: [],
+    });
+    getFilePublicKeysMock.mockResolvedValue([
+      { userId: ALICE, publicKey: pubB64(alice) },
+      { userId: BOB, publicKey: pubB64(bob) },
     ]);
     getRoomEncryptionKeysMock.mockResolvedValue([
       { userId: ALICE, publicKey: pubB64(alice) },
       { userId: BOB, publicKey: pubB64(bob) },
+      { id: LINK_ID, userId: LINK_ID, publicKey: pubB64(link), isLink: true },
     ]);
 
-    await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
+    const result = await backfillEncryptedFilesForRoomMembers(ROOM_ID, {
       currentUserId: ALICE,
       identity: alice,
     });
 
-    expect(getFileEncryptionAccessMock).not.toHaveBeenCalled();
+    const written = setFileEncryptionKeysMock.mock.calls[0][1] as Array<{
+      userId: string;
+    }>;
+    expect(written.map((k) => k.userId)).toEqual([ALICE, LINK_ID]);
+    expect(result.missingFileIdsByMember).toEqual({});
+    expect(result.skippedMembers).toEqual([]);
   });
 
   it("Backfill wraps the missing files only", async () => {

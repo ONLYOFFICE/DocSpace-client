@@ -39,7 +39,7 @@ import { redirect } from "next/navigation";
 import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
-import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateLinkPage";
 
 import {
   getData,

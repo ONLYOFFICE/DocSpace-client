@@ -39,7 +39,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateLinkPage";
 import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/common";
 
 import { LinkType } from "SRC_DIR/helpers/constants";

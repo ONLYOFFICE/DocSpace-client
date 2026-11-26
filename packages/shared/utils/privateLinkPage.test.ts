@@ -35,7 +35,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { getPrivateLinkPagePath } from "./privateRooms";
+import { getPrivateLinkPagePath } from "./privateLinkPage";
 
 describe("Link of a private item", () => {
   it("is sent to the page of a visitor with its key", () => {

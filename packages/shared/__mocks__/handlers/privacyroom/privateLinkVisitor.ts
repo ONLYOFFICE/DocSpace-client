@@ -220,7 +220,7 @@ export const privateLinkVisitorHandlers = (
     http.get(`${api}/file/:fileId(\\d+)/publickeys`, ({ params, request }) => {
       const fileId = Number(params.fileId);
       const token = request.headers.get("Request-Token");
-      const covered = Object.prototype.hasOwnProperty.call(opts.files, fileId);
+      const covered = fileId in opts.files;
       if (token !== opts.key || !open || settled() !== null || !covered) {
         return refusal(403, "Access denied");
       }

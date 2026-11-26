@@ -46,23 +46,3 @@ export const PRIVATE_ROOMS_FLAG_KEY = "privateRooms";
 /** Whether a frame property or URL parameter value turns the opt-in on. */
 export const isPrivateRoomsOptInValue = (value: unknown): boolean =>
   value === true || value === "true" || value === "1";
-
-/**
- * The page a visitor of an external link of a private item opens. The other
- * pages of a link send such a link here: they would ask for an ordinary
- * password, which the link does not take. The secret after `#` is not part
- * of the address built here; a redirect of the server keeps it, and a
- * navigation of the page adds it again.
- *
- * Spec: private-rooms/file-operations, "A visitor opens an external link without an account"
- */
-export const PRIVATE_LINK_PAGE_PATH = "/share/private";
-
-export const getPrivateLinkPagePath = (
-  key: string,
-  folderId?: string | number | null,
-): string => {
-  const params = new URLSearchParams({ key });
-  if (folderId) params.set("folder", String(folderId));
-  return `${PRIVATE_LINK_PAGE_PATH}?${params.toString()}`;
-};

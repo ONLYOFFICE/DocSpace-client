@@ -42,7 +42,7 @@ import { DeviceType, ValidationStatus } from "@docspace/shared/enums";
 import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
 import { getSettingsFiles } from "@docspace/shared/api/files";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateLinkPage";
 
 export const useDeviceType = () => {
   const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(() =>

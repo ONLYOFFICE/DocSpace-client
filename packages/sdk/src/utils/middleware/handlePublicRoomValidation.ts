@@ -36,7 +36,7 @@
 import { NextRequest } from "next/server";
 
 import { ValidationStatus } from "@docspace/shared/enums";
-import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateLinkPage";
 
 import { validatePublicRoomKey } from "@/api/rooms";
 import { PUBLIC_ROOM_TITLE_HEADER } from "@/utils/constants";

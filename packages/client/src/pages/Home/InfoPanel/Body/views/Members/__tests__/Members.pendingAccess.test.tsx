@@ -75,6 +75,7 @@ vi.mock("@docspace/shared/services/private-room/room-encryption", () => ({
 
 vi.mock("@docspace/shared/services/encryption/secret-storage", () => ({
   requireUnlock: mocks.requireUnlock,
+  SecretStorage: { hasUnlocked: () => false },
 }));
 
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({

@@ -16,7 +16,7 @@ Out of scope: the roles a room offers and what they allow (`room-role-permission
 paid limit (`billing`); private rooms (`private-rooms/room-membership`); agents (change `ai-chat-agents-design`).
 
 Implementation: `packages/client/src/components/panels/InvitePanel`, `packages/client/src/components/panels/LinkSettingsPanel`,
-`packages/client/src/components/dialogs/InviteQuotaWarningDialog`, `packages/login/src/app/(confirm)` invite pages.
+`packages/client/src/components/dialogs/InviteQuotaWarningDialog`, `packages/login/src/app/(root)/confirm` invite pages.
 
 ## Requirements
 

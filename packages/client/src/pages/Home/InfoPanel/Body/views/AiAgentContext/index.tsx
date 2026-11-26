@@ -41,6 +41,7 @@ import { FOLDER_CONTEXTS_LIMIT } from "@onlyoffice/ai-chat";
 import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
+import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import {
   useI18n as useAiChatI18n,
   useStores as useAiChatStores,
@@ -52,6 +53,8 @@ import {
   type TAiProjectSkillsRoom,
   type TAiProjectSource,
 } from "@docspace/shared/api/ai/projects";
+
+import { getFileInfo } from "@docspace/shared/api/files";
 
 import { useStore } from "SRC_DIR/store/useStore";
 import type { TAgentRoomsKind } from "SRC_DIR/store/AiProjectsStore";
@@ -234,7 +237,8 @@ type AiAgentContextProps = {
 /**
  * The Context tab of an agent's Info panel: the skill sets the agent is
  * linked to, each unfolded to its skills until folded by hand, each skill
- * with the skill's icon, and its knowledge bases. Each
+ * with the skill's icon and opening its instructions to read on a click,
+ * and its knowledge bases. Each
  * section is headed as the same list is in the composer's slash menu: a
  * caption and a line saying what the assistant does with it, which is all
  * an empty section shows. A name opens its room. While the chat runs on the
@@ -250,6 +254,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
   // shows over the same lists: read from its translations, not copied here.
   const { t: chatT } = useAiChatI18n();
   const aiProjectsStore = useStore("aiProjectsStore");
+  const dialogsStore = useStore("dialogsStore");
   // The chat runs on this agent: on its page, or picked in the chat panel.
   const isChatAgent =
     useStore("aiPresetsStore").activePreset?.id === String(id);
@@ -285,6 +290,14 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
       cancelled = true;
     };
   }, [id, revision]);
+
+  // A skill opens as it does in the list of its set: its instructions to
+  // read, in the skill dialog, which asks for the file the skill is kept in.
+  const openSkill = (skillId: string) => {
+    getFileInfo(skillId)
+      .then((file) => dialogsStore.setEditSkillFile(file, true))
+      .catch((e) => toastr.error(e as Error));
+  };
 
   if (failed)
     return (
@@ -355,6 +368,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
                   id={room.id}
                   title={room.title}
                   icon="instructionsRoom.svg"
+                  isPlainIcon
                   isExpanded={isExpanded}
                   onToggle={
                     skills.length > 0
@@ -370,15 +384,23 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
               {isExpanded ? (
                 <ul className={styles.skills}>
                   {skills.map((skill) => (
-                    <li key={skill.id} className={styles.skillRow}>
-                      <SkillIcon kind="skill" size={24} />
-                      <Text
-                        fontSize="13px"
-                        className={styles.skill}
+                    <li key={skill.id}>
+                      <button
+                        type="button"
+                        className={styles.skillRow}
                         title={skill.description}
+                        onClick={() => openSkill(skill.id)}
+                        data-testid="ai-agent-context-skill"
                       >
-                        {skill.name}
-                      </Text>
+                        <SkillIcon kind="skill" size={24} />
+                        <Text
+                          as="span"
+                          fontSize="13px"
+                          className={styles.skill}
+                        >
+                          {skill.name}
+                        </Text>
+                      </button>
                     </li>
                   ))}
                 </ul>

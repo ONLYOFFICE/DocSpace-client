@@ -33,31 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import ReactMarkdown, { type Components } from "react-markdown";
-import remarkGfm from "remark-gfm";
-
-import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
+import MarkdownField from "@onlyoffice/apps-ui-kit/ai-agent/markdown";
 
 import styles from "./EditSkillDialog.module.scss";
-
-// A link of a skill leaves the portal's page alone: it opens in a new tab.
-const components: Components = {
-  a: ({ href, children }) => (
-    <Link
-      tag="a"
-      href={href}
-      target={LinkTarget.blank}
-      rel="noopener noreferrer"
-      color="accent"
-      fontSize="inherit"
-      lineHeight="inherit"
-    >
-      {children}
-    </Link>
-  ),
-};
-
-const remarkPlugins = [remarkGfm];
 
 type SkillPreviewProps = {
   /** The instructions, the file after its frontmatter. */
@@ -66,14 +44,12 @@ type SkillPreviewProps = {
 
 /**
  * A skill's instructions as they read, not as they are written: the Markdown
- * laid out with its headings, lists, tables and code. HTML in the text is
- * shown as text, never run.
+ * laid out by ui-kit's own Markdown view, the one the chat draws its replies
+ * with.
  */
 const SkillPreview = ({ value }: SkillPreviewProps) => (
-  <div className={styles.preview} dir="auto" data-testid="view-skill-preview">
-    <ReactMarkdown remarkPlugins={remarkPlugins} components={components}>
-      {value}
-    </ReactMarkdown>
+  <div className={styles.preview} data-testid="view-skill-preview">
+    <MarkdownField chatMessage={value} />
   </div>
 );
 

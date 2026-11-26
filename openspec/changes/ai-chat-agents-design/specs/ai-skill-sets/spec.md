@@ -99,7 +99,7 @@ The Details tab of a skill SHALL show its description first, when the file gives
 - **THEN** the dialog shows the Edit skill form on the same skill
 
 ### Requirement: Formatted instructions
-The dialog of "View instructions" SHALL show the instructions laid out as formatted text: the Markdown rendered with its headings, lists, tables and code, not shown as its source and not in an editor. HTML in the instructions SHALL be shown as text.
+The dialog of "View instructions" SHALL show the instructions laid out as formatted text: the Markdown rendered with its headings, lists, tables and code, not shown as its source and not in an editor.
 
 #### Scenario: Heading and list
 - **WHEN** a user opens the instructions of a skill whose text has "## Steps" and a numbered list under it

@@ -42,6 +42,7 @@ import { DeviceType, ValidationStatus } from "@docspace/shared/enums";
 import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
 import { getSettingsFiles } from "@docspace/shared/api/files";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
 
 export const useDeviceType = () => {
   const [currentDeviceType, setCurrentDeviceType] = useState<DeviceType>(() =>
@@ -97,6 +98,13 @@ export const publicPreviewLoader = async ({ request }: LoaderFunctionArgs) => {
     validatePublicRoomKey(key),
     getSettingsFiles(),
   ]);
+
+  // Spec: private-rooms/file-operations, "A visitor opens an external link without an account"
+  if (validateData?.isPrivate) {
+    return redirectDocument(
+      `${getPrivateLinkPagePath(key)}${url.hash || window.location.hash}`,
+    );
+  }
 
   if (
     validateData?.status === ValidationStatus.Ok &&

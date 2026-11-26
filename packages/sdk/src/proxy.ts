@@ -250,6 +250,14 @@ export async function proxy(request: NextRequest) {
       shareKey || "",
     );
 
+    // A redirect, not a rewrite: the browser carries the part of the
+    // address after # over to the page of the portal.
+    if (validationResult?.portalRedirect) {
+      return NextResponse.redirect(
+        new URL(validationResult.portalRedirect, redirectUrl),
+      );
+    }
+
     const mediaViewerLinkError =
       isMediaViewer && validationResult?.status !== undefined
         ? MEDIA_VIEWER_LINK_ERRORS[validationResult.status]

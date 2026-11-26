@@ -36,6 +36,7 @@
 import { NextRequest } from "next/server";
 
 import { ValidationStatus } from "@docspace/shared/enums";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
 
 import { validatePublicRoomKey } from "@/api/rooms";
 import { PUBLIC_ROOM_TITLE_HEADER } from "@/utils/constants";
@@ -52,6 +53,8 @@ export async function handlePublicRoomValidation(
   shareKey: string,
 ): Promise<{
   redirect?: string;
+  /** A page of the portal outside the SDK, which the frame is sent to. */
+  portalRedirect?: string;
   status?: ValidationStatus;
   anonymousSessionKeyCookie?: string;
 } | null> {
@@ -63,6 +66,17 @@ export async function handlePublicRoomValidation(
 
   const { response: validation, anonymousSessionKeyCookie } =
     await validatePublicRoomKey(shareKey, search);
+
+  // Spec: private-rooms/sdk-surface, "No external links of private items in the SDK"
+  if (validation.isPrivate) {
+    return {
+      portalRedirect: getPrivateLinkPagePath(
+        shareKey,
+        search.get("folderId") ?? search.get("folder"),
+      ),
+      status: validation.status,
+    };
+  }
 
   const redirectPath = redirects[validation.status];
   if (!redirectPath) return { anonymousSessionKeyCookie };

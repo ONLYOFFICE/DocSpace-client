@@ -34,10 +34,12 @@
  */
 
 import { cookies, headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
 
 import {
   getData,
@@ -166,6 +168,13 @@ async function Page(props: RootPageProps) {
       return;
     }
     const { status } = roomData.response;
+
+    // Spec: private-rooms/file-operations, "A visitor opens an external link without an account"
+    if (roomData.response.isPrivate) {
+      redirect(
+        `${hdrs.get("x-forwarded-proto") ?? "https"}://${hostname}${getPrivateLinkPagePath(share)}`,
+      );
+    }
 
     if (status === ValidationStatus.Password) {
       logger.debug(

@@ -39,6 +39,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { getPrivateLinkPagePath } from "@docspace/shared/utils/privateRooms";
 import { isPublicRoom as isPublicRoomUtil } from "@docspace/shared/utils/common";
 
 import { LinkType } from "SRC_DIR/helpers/constants";
@@ -390,6 +391,17 @@ class PublicRoomStore {
       >
     )
       .then((res) => {
+        // Spec: private-rooms/file-operations, "A visitor opens an external link without an account"
+        if (res?.isPrivate) {
+          window.location.replace(
+            combineUrl(
+              window.ClientConfig?.proxy?.url,
+              getPrivateLinkPagePath(key, folderId),
+            ) + window.location.hash,
+          );
+          return;
+        }
+
         const needPassword = res.status === ValidationStatus.Password;
 
         if (res?.shared && !needPassword) {

@@ -70,6 +70,21 @@ describe("proxy — /media-viewer", () => {
     },
   );
 
+  test("Link of a private item: the frame is redirected to the portal's own page", async () => {
+    vi.mocked(handlePublicRoomValidation).mockResolvedValueOnce({
+      portalRedirect: "/share/private?key=k",
+      status: ValidationStatus.Password,
+    });
+
+    const response = await proxy(makeRequest("/public-room?key=k"));
+
+    expect(response!.status).toBe(307);
+    expect(new URL(response!.headers.get("location")!).pathname).toBe(
+      "/share/private",
+    );
+    expect(response!.headers.get("x-middleware-rewrite")).toBeNull();
+  });
+
   test("still sends a link with a password to the password page", async () => {
     vi.mocked(handlePublicRoomValidation).mockResolvedValueOnce({
       redirect: "/sdk/public-room/password",

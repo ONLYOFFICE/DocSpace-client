@@ -37,7 +37,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 
-import { messageActions } from "SRC_DIR/helpers/plugins/utils";
+import { messageActions, settleWithin } from "SRC_DIR/helpers/plugins/utils";
 import { PluginActions, PluginToastType } from "SRC_DIR/helpers/plugins/enums";
 import type { TMessageActionsParams } from "SRC_DIR/helpers/plugins/types";
 
@@ -279,5 +279,36 @@ describe("messageActions", () => {
     expect(closeMobileArticle).toHaveBeenCalledTimes(2);
 
     window.history.replaceState(null, "", "/");
+  });
+});
+
+describe("settleWithin", () => {
+  it("settles with the work when it ends in time", async () => {
+    await expect(settleWithin(Promise.resolve("done"), 1000)).resolves.toBe(
+      undefined,
+    );
+    await expect(
+      settleWithin(Promise.reject(new Error("failed")), 1000),
+    ).rejects.toThrow("failed");
+  });
+
+  it("settles once the time is up when the work never ends", async () => {
+    vi.useFakeTimers();
+
+    try {
+      let settled = false;
+
+      settleWithin(new Promise(() => {}), 1000).then(() => {
+        settled = true;
+      });
+
+      await vi.advanceTimersByTimeAsync(999);
+      expect(settled).toBe(false);
+
+      await vi.advanceTimersByTimeAsync(1);
+      expect(settled).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });

@@ -63,14 +63,22 @@ vi.mock("@docspace/shared/api", () => ({
 
 import api from "@docspace/shared/api";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import SocketHelper, {
+  SocketEvents,
+} from "@onlyoffice/apps-ui-kit/utils/socket";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
-import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import type {
+  TAPIPlugin,
+  TMemberPlugin,
+} from "@docspace/shared/api/plugins/types";
 
 import PluginStore from "../PluginStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
 import type { TPlugin } from "../../helpers/plugins/types";
+import { PluginScopes } from "../../helpers/plugins/enums";
+import { PLUGIN_WAIT_MS } from "../../helpers/plugins/utils";
 
 const NAME = "hello";
 
@@ -99,6 +107,8 @@ const withLoadedPlugin = (personal: boolean) => {
       } as unknown as TPlugin,
     ];
   });
+
+  store.setIsInit(true);
 
   return store;
 };
@@ -180,6 +190,9 @@ describe("uninstallPlugin", () => {
   it("reads the member's own list again when the delete is refused", async () => {
     const store = withLoadedPlugin(true);
 
+    runInAction(() => {
+      store.personalPlugins = [{ name: "stale" } as unknown as TAPIPlugin];
+    });
     deletePlugin.mockRejectedValueOnce(new Error("Plugin not found"));
     vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([]);
 
@@ -215,6 +228,29 @@ describe("fetchPersonalPlugins", () => {
       expect(store.isPersonalLoaded).toBe(true);
     },
   );
+
+  it("keeps the newer list when an older read answers last", async () => {
+    const store = withLoadedPlugin(true);
+    let finishOlder: (plugins: TAPIPlugin[]) => void = () => {};
+
+    vi.mocked(api.plugins.getPersonalPlugins)
+      .mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            finishOlder = resolve;
+          }),
+      )
+      .mockResolvedValueOnce([{ name: "newer" } as unknown as TAPIPlugin]);
+
+    const older = store.fetchPersonalPlugins(false);
+
+    await store.fetchPersonalPlugins(false);
+
+    finishOlder([{ name: "older" } as unknown as TAPIPlugin]);
+    await older;
+
+    expect(store.personalPlugins.map((p) => p.name)).toEqual(["newer"]);
+  });
 });
 
 describe("updatePlugin of a personal plugin refused after it was saved", () => {
@@ -280,6 +316,7 @@ describe("updatePlugins", () => {
 
     expect(store.isLoaded).toBe(false);
 
+    await vi.waitFor(() => expect(api.plugins.getPlugins).toHaveBeenCalled());
     finishRead([]);
     await reload;
 
@@ -339,6 +376,33 @@ describe("a portal plugin loaded over a personal one", () => {
     });
 
     expect(store.plugins.map((p) => p.name)).toEqual(["other"]);
+  });
+
+  it("drops the reload mark of the personal plugin it unloads", async () => {
+    const store = withLoadedPlugin(true);
+
+    runInAction(() => {
+      store.reloadRequiredPlugins = [NAME];
+    });
+
+    await store.initLoadedModulePlugin(portalPlugin(NAME, "Hello"), {
+      onLoadCallback: async () => {},
+    });
+
+    expect(store.reloadRequiredPlugins).toEqual([]);
+  });
+
+  it("adds no styles of a plugin switched off while it starts", async () => {
+    const store = withLoadedPlugin(false);
+
+    await store.initLoadedModulePlugin(portalPlugin("styled", "Styled"), {
+      cssUrl: "https://portal.test/plugins/styled/plugin.css",
+      onLoadCallback: async () => {
+        await store.deactivatePlugin("styled");
+      },
+    });
+
+    expect(document.getElementById("plugin-styles-Styled")).toBeNull();
   });
 });
 
@@ -709,19 +773,496 @@ describe("handlePersonalPluginStateChange", () => {
         "CSP header size exceeds maximum allowed size of 15360 bytes.",
       );
     });
-    vi.mocked(api.plugins.getPersonalPlugins).mockImplementationOnce(
-      async () => {
+    vi.mocked(api.plugins.getPersonalPlugins)
+      .mockResolvedValueOnce([ownModulePlugin()])
+      .mockImplementationOnce(async () => {
         uploadsAtRead = store.pendingPersonalUploads;
 
         return [ownModulePlugin()];
-      },
-    );
+      });
 
     await store.addPlugin(new FormData(), true);
     await store.personalChanges;
 
+    expect(api.plugins.getPersonalPlugins).toHaveBeenCalledTimes(2);
     expect(uploadsAtRead).toBe(0);
     expect(store.plugins.map((p) => p.name)).toContain("own");
+    expect(store.personalPlugins.map((p) => p.name)).toEqual(["own"]);
+  });
+});
+
+describe("personal events and the session", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+    vi.useRealTimers();
+  });
+
+  const ownModulePlugin = (cspDomains?: string, enabled = true) =>
+    ({
+      name: "own",
+      pluginName: "Own",
+      enabled,
+      personal: true,
+      scopes: "",
+      url: "https://portal.test/plugins/own/plugin.js",
+      version: "1.0.0",
+      runtime: "module",
+      cspDomains,
+    }) as unknown as TAPIPlugin;
+
+  const withoutPluginScripts = () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: false, status: 404, text: async () => "" }),
+    );
+    vi.spyOn(console, "error").mockImplementation(() => {});
+  };
+
+  it("has the workspace list sync the page's domains before it asks for a reload", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+    const marksAtSync: number[] = [];
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      ownModulePlugin("https://api.example.com"),
+    ]);
+    vi.mocked(api.plugins.getPlugins).mockImplementationOnce(async () => {
+      marksAtSync.push(store.reloadRequiredPlugins.length);
+
+      return [];
+    });
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: true,
+    });
+
+    expect(api.plugins.getPlugins).toHaveBeenCalledWith(null);
+    expect(marksAtSync).toEqual([0]);
+    expect(store.reloadRequiredPlugins).toEqual(["own"]);
+  });
+
+  it("does not read the workspace list for a plugin without domains", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      ownModulePlugin(),
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: true,
+    });
+
+    expect(api.plugins.getPlugins).not.toHaveBeenCalled();
+  });
+
+  it("does not read the workspace list again for the echo of its own upload", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+
+    runInAction(() => {
+      store.reloadRequiredPlugins = ["own"];
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      ownModulePlugin("https://api.example.com"),
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: true,
+    });
+
+    expect(api.plugins.getPlugins).not.toHaveBeenCalled();
+  });
+
+  it("lists a switched-off plugin, so the member can switch it on without a reload", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      ownModulePlugin("https://api.example.com", false),
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: false,
+    });
+
+    expect(store.plugins.find((p) => p.name === "own")?.enabled).toBe(false);
+    expect(store.reloadRequiredPlugins).toEqual([]);
+  });
+
+  it("does not start a plugin that failed to start again on the echo of that start", async () => {
+    const store = withLoadedPlugin(true);
+    let starts = 0;
+
+    runInAction(() => {
+      store.plugins[0].initError = { kind: "init", message: "failed" } as never;
+      store.plugins[0].onLoadCallback = async () => {
+        starts += 1;
+      };
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      { name: NAME, pluginName: "Hello", enabled: true } as TAPIPlugin,
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+
+    expect(starts).toBe(0);
+  });
+
+  it("hands the settings saved in another tab to the running plugin", async () => {
+    const store = withLoadedPlugin(true);
+    const setAdminPluginSettingsValue = vi.fn();
+
+    runInAction(() => {
+      store.plugins[0].scopes = [PluginScopes.Settings];
+      store.plugins[0].settings = "old";
+      store.plugins[0].setAdminPluginSettingsValue = setAdminPluginSettingsValue;
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      { name: NAME, enabled: true, settings: "new" } as unknown as TAPIPlugin,
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+
+    expect(setAdminPluginSettingsValue).toHaveBeenCalledWith("new");
+  });
+
+  it("moves on to the next change when a plugin never finishes starting", async () => {
+    vi.useFakeTimers();
+
+    const store = withLoadedPlugin(true);
+
+    runInAction(() => {
+      store.plugins[0].enabled = false;
+      store.plugins[0].onLoadCallback = () => new Promise<void>(() => {});
+    });
+    vi.mocked(api.plugins.getPersonalPlugins)
+      .mockResolvedValueOnce([
+        { name: NAME, pluginName: "Hello", enabled: true } as TAPIPlugin,
+      ])
+      .mockResolvedValueOnce([
+        { name: NAME, pluginName: "Hello", enabled: false } as TAPIPlugin,
+      ]);
+
+    store.handlePersonalPluginStateChange({ webPluginName: NAME, enabled: true });
+    const next = store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: false,
+    });
+
+    await vi.advanceTimersByTimeAsync(PLUGIN_WAIT_MS);
+    await next;
+
+    expect(api.plugins.getPersonalPlugins).toHaveBeenCalledTimes(2);
+    expect(store.plugins[0].enabled).toBe(false);
+  });
+
+  it("finishes the plugin list when a plugin never finishes loading", async () => {
+    vi.useFakeTimers();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => new Promise(() => {})),
+    );
+
+    const store = new PluginStore(
+      { culture: "en", addAbortControllers: vi.fn() } as unknown as SettingsStore,
+      {} as unknown as SelectedFolderStore,
+      { user: null } as unknown as UserStore,
+      {} as unknown as CurrentTariffStatusStore,
+    );
+
+    vi.mocked(api.plugins.getPlugins).mockResolvedValueOnce([
+      ownModulePlugin(),
+    ]);
+
+    const load = store.updatePlugins(true);
+
+    await vi.advanceTimersByTimeAsync(PLUGIN_WAIT_MS - 1);
+    expect(store.isLoaded).toBe(false);
+
+    await vi.advanceTimersByTimeAsync(1);
+    await load;
+
+    expect(api.plugins.getPlugins).toHaveBeenCalledTimes(1);
+    expect(store.isLoaded).toBe(true);
+  });
+
+  it("applies the changes held back by two uploads only once both end", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+    let finishFirst: () => void = () => {};
+    let finishSecond: () => void = () => {};
+
+    vi.mocked(api.plugins.addPlugin)
+      .mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            finishFirst = () => resolve(ownModulePlugin());
+          }),
+      )
+      .mockImplementationOnce(
+        () =>
+          new Promise((resolve) => {
+            finishSecond = () =>
+              resolve({
+                ...ownModulePlugin(),
+                name: "second",
+                pluginName: "Second",
+              });
+          }),
+      );
+
+    const first = store.addPlugin(new FormData(), true);
+    const second = store.addPlugin(new FormData(), true);
+
+    store.handlePersonalPluginStateChange({ webPluginName: "own", enabled: true });
+
+    finishFirst();
+    await first;
+
+    expect([...store.deferredPersonalChanges]).toEqual(["own"]);
+
+    finishSecond();
+    await second;
+
+    expect(store.deferredPersonalChanges.size).toBe(0);
+
+    await store.personalChanges;
+
+    expect(api.plugins.getPersonalPlugins).toHaveBeenCalledTimes(3);
+  });
+
+  const flush = async () => {
+    for (let i = 0; i < 10; i += 1) await vi.advanceTimersByTimeAsync(20);
+  };
+
+  it("takes back a plugin whose load outlived the switch that turned personal plugins off", async () => {
+    vi.useFakeTimers();
+    vi.spyOn(console, "error").mockImplementation(() => {});
+
+    let finishScript: () => void = () => {};
+
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(
+        () =>
+          new Promise((resolve) => {
+            finishScript = () =>
+              resolve({ ok: false, status: 404, text: async () => "" });
+          }),
+      ),
+    );
+
+    const settingsStore = {
+      culture: "en",
+      pluginOptions: { personal: true },
+      setPersonalPluginsEnabled(personal: boolean) {
+        this.pluginOptions = { personal };
+      },
+    };
+    const store = new PluginStore(
+      settingsStore as unknown as SettingsStore,
+      {} as unknown as SelectedFolderStore,
+      { user: null } as unknown as UserStore,
+      {} as unknown as CurrentTariffStatusStore,
+    );
+
+    store.setIsInit(true);
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      ownModulePlugin(),
+    ]);
+
+    store.handlePersonalPluginsSwitch({ enabled: true });
+    await vi.advanceTimersByTimeAsync(PLUGIN_WAIT_MS);
+    await store.handlePersonalPluginsSwitch({ enabled: false });
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockRejectedValue(
+      new Error("Forbidden"),
+    );
+
+    try {
+      finishScript();
+      await flush();
+      await store.personalChanges;
+
+      expect(store.plugins.filter((p) => p.personal)).toEqual([]);
+    } finally {
+      vi.mocked(api.plugins.getPersonalPlugins).mockReset();
+    }
+  });
+
+  it("loads the member's other plugins while one of them still loads", async () => {
+    vi.useFakeTimers();
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((url: string) =>
+        url.includes("/stuck/")
+          ? new Promise(() => {})
+          : Promise.resolve({ ok: false, status: 404, text: async () => "" }),
+      ),
+    );
+
+    const store = withLoadedPlugin(false);
+    const plugin = (name: string) =>
+      ({
+        ...ownModulePlugin(),
+        name,
+        pluginName: name,
+        url: `https://portal.test/plugins/${name}/plugin.js`,
+      }) as TAPIPlugin;
+
+    store.setIsInit(true);
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      plugin("stuck"),
+      plugin("quick"),
+    ]);
+
+    (
+      store as unknown as {
+        settingsStore: { setPersonalPluginsEnabled: () => void };
+      }
+    ).settingsStore.setPersonalPluginsEnabled = vi.fn();
+
+    store.handlePersonalPluginsSwitch({ enabled: true });
+    await flush();
+
+    expect(store.plugins.map((p) => p.name)).toContain("quick");
+  });
+
+  it("starts a plugin switched back on while its first start was still running", async () => {
+    vi.useFakeTimers();
+
+    const store = withLoadedPlugin(true);
+    let finishStart: () => void = () => {};
+    let starts = 0;
+
+    runInAction(() => {
+      store.plugins[0].enabled = false;
+      store.plugins[0].onLoadCallback = () => {
+        starts += 1;
+
+        return starts === 1
+          ? new Promise<void>((resolve) => {
+              finishStart = resolve;
+            })
+          : Promise.resolve();
+      };
+    });
+
+    const on = { name: NAME, pluginName: "Hello", enabled: true } as TAPIPlugin;
+    const off = { ...on, enabled: false };
+
+    vi.mocked(api.plugins.getPersonalPlugins)
+      .mockResolvedValueOnce([on])
+      .mockResolvedValueOnce([off])
+      .mockResolvedValueOnce([on])
+      .mockResolvedValueOnce([on]);
+
+    store.handlePersonalPluginStateChange({ webPluginName: NAME, enabled: true });
+    await vi.advanceTimersByTimeAsync(PLUGIN_WAIT_MS);
+    store.handlePersonalPluginStateChange({ webPluginName: NAME, enabled: false });
+    await store.handlePersonalPluginStateChange({
+      webPluginName: NAME,
+      enabled: true,
+    });
+
+    finishStart();
+    await flush();
+    await store.personalChanges;
+
+    expect(starts).toBe(2);
+    expect(store.plugins[0].enabled).toBe(true);
+  });
+
+  it("takes the styles of a copy off the page when another copy of the plugin replaces it", async () => {
+    const store = withLoadedPlugin(false);
+    const own = {
+      ...ownModulePlugin(),
+      name: "styled",
+      pluginName: "Styled",
+      settings: "",
+    } as TAPIPlugin;
+    const cssUrl = "https://portal.test/plugins/styled/plugin.css";
+
+    await store.initLoadedModulePlugin(own, {
+      cssUrl,
+      onLoadCallback: async () => {},
+    });
+
+    expect(document.getElementById("plugin-styles-Styled")).not.toBeNull();
+
+    await store.initLoadedModulePlugin(
+      { ...own, enabled: false },
+      { cssUrl, onLoadCallback: async () => {} },
+    );
+
+    expect(document.getElementById("plugin-styles-Styled")).toBeNull();
+  });
+
+  it("has the workspace list sync the domains of a new version that adds them", async () => {
+    withoutPluginScripts();
+
+    const store = withLoadedPlugin(false);
+
+    runInAction(() => {
+      store.plugins = [
+        ...store.plugins,
+        {
+          name: "own",
+          pluginName: "Own",
+          enabled: true,
+          personal: true,
+          scopes: [],
+          url: "https://portal.test/plugins/own/plugin.js?hash=1.0.0",
+        } as unknown as TPlugin,
+      ];
+    });
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      {
+        ...ownModulePlugin("https://api.example.com"),
+        url: "https://portal.test/plugins/own/plugin.js?hash=2.0.0",
+        version: "2.0.0",
+      } as TAPIPlugin,
+    ]);
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: true,
+    });
+
+    expect(api.plugins.getPlugins).toHaveBeenCalledWith(null);
+  });
+});
+
+describe("socket subscriptions", () => {
+  it("listens to the personal plugin events of the member and of the workspace", () => {
+    const store = withLoadedPlugin(false);
+
+    expect(SocketHelper?.on).toHaveBeenCalledWith(
+      SocketEvents.ChangePersonalWebPlugin,
+      store.handlePersonalPluginStateChange,
+    );
+    expect(SocketHelper?.on).toHaveBeenCalledWith(
+      SocketEvents.ChangePersonalWebPlugins,
+      store.handlePersonalPluginsSwitch,
+    );
   });
 });
 
@@ -877,13 +1418,18 @@ describe("handlePersonalPluginsSwitch", () => {
       ];
     });
 
+    store.setIsInit(true);
+
     return { store, settingsStore };
   };
 
   it("unloads the personal plugins and keeps the portal ones when switched off", async () => {
     const { store, settingsStore } = withPortalAndPersonalPlugin();
+    const personal = store.plugins.find((p) => p.personal);
 
     await store.handlePersonalPluginsSwitch({ enabled: false });
+
+    expect(personal?.enabled).toBe(false);
 
     expect(settingsStore.setPersonalPluginsEnabled).toHaveBeenCalledWith(
       false,
@@ -927,7 +1473,7 @@ describe("handlePersonalPluginsSwitch", () => {
 
 describe("users' plugins for an administrator", () => {
   const usersPlugin = (name: string, userId: string, enabled = true) =>
-    ({ name, enabled, createBy: { id: userId } }) as unknown as TAPIPlugin;
+    ({ name, enabled, createBy: { id: userId } }) as unknown as TMemberPlugin;
 
   const withUsersPlugins = () => {
     const settingsStore = {
@@ -987,17 +1533,112 @@ describe("users' plugins for an administrator", () => {
     expect(store.usersPlugins.map((p) => p.createBy.id)).toEqual(["u1"]);
   });
 
-  it("keeps the list when a deletion is refused", async () => {
+  it("shows the list the server has when a deletion is refused", async () => {
     const { store } = withUsersPlugins();
 
     vi.mocked(api.plugins.deleteMemberPlugin).mockRejectedValueOnce(
       new Error("Access denied"),
     );
+    vi.mocked(api.plugins.getMembersPlugins).mockResolvedValueOnce([
+      usersPlugin(NAME, "u1"),
+      usersPlugin(NAME, "u2"),
+    ]);
 
     await store.deleteUserPlugin("u2", NAME, t);
 
     expect(store.usersPlugins).toHaveLength(2);
-    expect(toastr.error).toHaveBeenCalled();
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("drops the row of a plugin another administrator has already deleted", async () => {
+    const { store } = withUsersPlugins();
+
+    vi.mocked(api.plugins.deleteMemberPlugin).mockRejectedValueOnce(
+      new Error("Not found"),
+    );
+    vi.mocked(api.plugins.getMembersPlugins).mockResolvedValueOnce([
+      usersPlugin(NAME, "u1"),
+    ]);
+
+    await store.deleteUserPlugin("u2", NAME, t);
+
+    expect(store.usersPlugins.map((p) => p.createBy.id)).toEqual(["u1"]);
+  });
+
+  it("shows the state the server has when switching is refused", async () => {
+    const { store } = withUsersPlugins();
+
+    vi.mocked(api.plugins.updateMemberPlugin).mockRejectedValueOnce(
+      new Error("Access denied"),
+    );
+    vi.mocked(api.plugins.getMembersPlugins).mockResolvedValueOnce([
+      usersPlugin(NAME, "u1"),
+      usersPlugin(NAME, "u2", false),
+    ]);
+
+    await store.updateUserPlugin("u1", NAME, false);
+
+    expect(store.usersPlugins.map((p) => p.enabled)).toEqual([true, false]);
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not show an empty list when reading the list fails", async () => {
+    const { store } = withUsersPlugins();
+
+    vi.mocked(api.plugins.getMembersPlugins).mockRejectedValueOnce(
+      new Error("Server error"),
+    );
+
+    await store.fetchUsersPlugins();
+
+    expect(toastr.error).toHaveBeenCalledTimes(1);
+    expect(store.isUsersPluginsLoaded).toBe(true);
+    expect(store.isUsersPluginsFailed).toBe(true);
+    expect(store.usersPlugins).toHaveLength(2);
+  });
+
+  it("applies a change to the administrator's own plugin in the session at once", async () => {
+    const settingsStore = { culture: "en", setPersonalPluginsEnabled: vi.fn() };
+    const store = new PluginStore(
+      settingsStore as unknown as SettingsStore,
+      {} as unknown as SelectedFolderStore,
+      { user: { id: "me" } } as unknown as UserStore,
+      {} as unknown as CurrentTariffStatusStore,
+    );
+
+    runInAction(() => {
+      store.plugins = [
+        {
+          name: NAME,
+          pluginName: "Hello",
+          enabled: true,
+          personal: true,
+          scopes: [],
+        } as unknown as TPlugin,
+      ];
+      store.usersPlugins = [usersPlugin(NAME, "me")];
+    });
+    store.setIsInit(true);
+
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([
+      { name: NAME, pluginName: "Hello", enabled: false } as TAPIPlugin,
+    ]);
+
+    await store.updateUserPlugin("me", NAME, false);
+    await store.personalChanges;
+
+    expect(store.plugins[0].enabled).toBe(false);
+  });
+
+  it("leaves the session alone when the plugin of another user changes", async () => {
+    const { store } = withUsersPlugins();
+
+    store.setIsInit(true);
+
+    await store.updateUserPlugin("u1", NAME, false);
+    await store.personalChanges;
+
+    expect(api.plugins.getPersonalPlugins).not.toHaveBeenCalled();
   });
 
   it("switches personal plugins for the workspace and shows the new state at once", async () => {
@@ -1022,5 +1663,142 @@ describe("users' plugins for an administrator", () => {
 
     expect(settingsStore.setPersonalPluginsEnabled).not.toHaveBeenCalled();
     expect(toastr.error).toHaveBeenCalled();
+  });
+});
+
+describe("personal changes and the plugin list", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  const ownPlugin = {
+    name: "own",
+    pluginName: "Own",
+    enabled: true,
+    personal: true,
+    scopes: "",
+    url: "https://portal.test/plugins/own/plugin.js",
+    version: "1.0.0",
+    runtime: "module",
+  } as unknown as TAPIPlugin;
+
+  const newStore = () => {
+    const settingsStore = {
+      culture: "en",
+      addAbortControllers: vi.fn(),
+      setPersonalPluginsEnabled: vi.fn(),
+    };
+
+    const store = new PluginStore(
+      settingsStore as unknown as SettingsStore,
+      {} as unknown as SelectedFolderStore,
+      { user: null } as unknown as UserStore,
+      { isNotPaidPeriod: false } as unknown as CurrentTariffStatusStore,
+    );
+
+    return { store, settingsStore };
+  };
+
+  const withoutPluginScripts = () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: false, status: 404, text: async () => "" }),
+    );
+    vi.spyOn(console, "error").mockImplementation(() => {});
+  };
+
+  it("ignores personal events until the plugins are initialized", async () => {
+    const { store, settingsStore } = newStore();
+
+    await store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: true,
+    });
+    await store.handlePersonalPluginsSwitch({ enabled: true });
+
+    expect(settingsStore.setPersonalPluginsEnabled).toHaveBeenCalledWith(true);
+    expect(api.plugins.getPersonalPlugins).not.toHaveBeenCalled();
+    expect(store.plugins).toEqual([]);
+  });
+
+  it("applies a personal event that arrives while the plugin list loads after the list", async () => {
+    withoutPluginScripts();
+
+    const { store } = newStore();
+    let finishRead: (plugins: TAPIPlugin[]) => void = () => {};
+
+    vi.mocked(api.plugins.getPlugins).mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          finishRead = resolve;
+        }),
+    );
+    vi.mocked(api.plugins.getPersonalPlugins).mockResolvedValueOnce([ownPlugin]);
+
+    store.setIsInit(true);
+
+    const load = store.updatePlugins(true);
+    const change = store.handlePersonalPluginStateChange({
+      webPluginName: "own",
+      enabled: true,
+    });
+
+    await vi.waitFor(() => expect(api.plugins.getPlugins).toHaveBeenCalled());
+    expect(api.plugins.getPersonalPlugins).not.toHaveBeenCalled();
+
+    finishRead([]);
+    await load;
+    await change;
+
+    expect(api.plugins.getPersonalPlugins).toHaveBeenCalledTimes(1);
+    expect(store.plugins.map((p) => p.name)).toEqual(["own"]);
+  });
+
+  it("marks the workspace list empty when only personal plugins come back", async () => {
+    withoutPluginScripts();
+
+    const { store } = newStore();
+
+    vi.mocked(api.plugins.getPlugins).mockResolvedValueOnce([ownPlugin]);
+
+    await store.updatePlugins(true);
+
+    expect(store.isEmptyList).toBe(true);
+  });
+
+  it("marks the workspace list empty when its last plugin is deleted while a personal one stays", async () => {
+    const store = withLoadedPlugin(false);
+
+    runInAction(() => {
+      store.plugins = [
+        ...store.plugins,
+        {
+          name: "own",
+          pluginName: "Own",
+          enabled: true,
+          personal: true,
+          scopes: [],
+        } as unknown as TPlugin,
+      ];
+    });
+
+    await store.uninstallPlugin(NAME, t, false);
+
+    expect(store.plugins.map((p) => p.name)).toEqual(["own"]);
+    expect(store.isEmptyList).toBe(true);
+  });
+
+  it("keeps the workspace list empty after a personal upload", async () => {
+    withoutPluginScripts();
+
+    const { store } = newStore();
+
+    store.setIsEmptyList(true);
+    vi.mocked(api.plugins.addPlugin).mockResolvedValueOnce(ownPlugin);
+
+    await store.addPlugin(new FormData(), true);
+
+    expect(store.isEmptyList).toBe(true);
   });
 });

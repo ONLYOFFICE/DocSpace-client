@@ -436,3 +436,19 @@ export function borderToStyle(border: IBox["borderProp"]): {
   };
 }
 
+
+export const PLUGIN_WAIT_MS = 10000;
+
+export const settleWithin = (
+  work: Promise<unknown>,
+  ms = PLUGIN_WAIT_MS,
+): Promise<void> => {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+
+  return Promise.race([
+    work.then(() => undefined),
+    new Promise<void>((resolve) => {
+      timer = setTimeout(resolve, ms);
+    }),
+  ]).finally(() => clearTimeout(timer));
+};

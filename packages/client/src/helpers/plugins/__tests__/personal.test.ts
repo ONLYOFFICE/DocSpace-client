@@ -39,6 +39,7 @@ import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
 
 import {
   clashesWith,
+  hasCspDomains,
   isUserPlugin,
   getPersonalPluginRows,
 } from "SRC_DIR/helpers/plugins/personal";
@@ -116,6 +117,21 @@ describe("getPersonalPluginRows", () => {
 
     expect(row.loaded).toBeUndefined();
     expect(row.shadowedBy).toBeUndefined();
+  });
+});
+
+describe("hasCspDomains", () => {
+  it("is true when the plugin lists a domain", () => {
+    expect(hasCspDomains({ cspDomains: "https://api.example.com" })).toBe(true);
+    expect(hasCspDomains({ cspDomains: " , https://api.example.com" })).toBe(
+      true,
+    );
+  });
+
+  it("is false when the plugin lists no domain", () => {
+    expect(hasCspDomains({})).toBe(false);
+    expect(hasCspDomains({ cspDomains: "" })).toBe(false);
+    expect(hasCspDomains({ cspDomains: " , " })).toBe(false);
   });
 });
 

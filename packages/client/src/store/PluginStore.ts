@@ -113,10 +113,19 @@ import type {
   TMessageActionsParams,
 } from "SRC_DIR/helpers/plugins/types";
 
-import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
+import {
+  getPluginUrl,
+  messageActions,
+  PLUGIN_WAIT_MS,
+  settleWithin,
+} from "../helpers/plugins/utils";
 import { PluginLoadError, toPluginError } from "../helpers/plugins/errors";
 import { matchesUserAccess, matchesUserRole } from "../helpers/plugins/roles";
-import { clashesWith, isUserPlugin } from "../helpers/plugins/personal";
+import {
+  clashesWith,
+  hasCspDomains,
+  isUserPlugin,
+} from "../helpers/plugins/personal";
 import { getLocalizedText } from "../helpers/plugins/locale";
 import {
   isSupersededPluginItem,
@@ -245,6 +254,7 @@ class PluginStore {
   deletePluginDialogProps: null | {
     pluginName: string;
     personal?: boolean;
+    member?: boolean;
     userId?: string;
     userName?: string;
     pluginTitle?: string;
@@ -258,13 +268,21 @@ class PluginStore {
 
   isUsersPluginsLoaded = false;
 
+  isUsersPluginsFailed = false;
+
   reloadRequiredPlugins: string[] = [];
 
   pendingPersonalUploads = 0;
 
+  personalReads = 0;
+
+  appliedPersonalRead = 0;
+
   deferredPersonalChanges = new Set<string>();
 
   personalChanges: Promise<void> = Promise.resolve();
+
+  personalEpoch = 0;
 
   activatingPlugins = new Set<string>();
 
@@ -309,8 +327,11 @@ class PluginStore {
       profileTabItems: observable.shallow,
       profileFieldItems: observable.shallow,
       pendingPersonalUploads: false,
+      personalReads: false,
+      appliedPersonalRead: false,
       deferredPersonalChanges: false,
       personalChanges: false,
+      personalEpoch: false,
       activatingPlugins: false,
     });
 
@@ -344,12 +365,28 @@ class PluginStore {
   }: TChangePersonalWebPluginsData) => {
     this.settingsStore.setPersonalPluginsEnabled(enabled);
 
-    this.personalChanges = this.personalChanges
-      .then(() =>
+    if (!this.isInit) return this.personalChanges;
+
+    return this.enqueue(
+      () =>
         enabled ? this.loadPersonalPlugins() : this.unloadPersonalPlugins(),
-      )
+      "[Plugins] Personal plugins switch failed:",
+    );
+  };
+
+  private enqueue = (
+    work: () => unknown,
+    failure: string,
+    ms = PLUGIN_WAIT_MS,
+  ) => {
+    this.personalChanges = this.personalChanges
+      .then(() => {
+        this.personalEpoch += 1;
+
+        return settleWithin(Promise.resolve(work()), ms);
+      })
       .catch((e) => {
-        console.error("[Plugins] Personal plugins switch failed:", e);
+        console.error(failure, e);
       });
 
     return this.personalChanges;
@@ -358,9 +395,13 @@ class PluginStore {
   private loadPersonalPlugins = async () => {
     if (!(await this.fetchPersonalPlugins(false))) return;
 
-    for (const own of this.personalPlugins) {
-      await this.syncPersonalPlugin(own.name);
-    }
+    await this.syncSessionCsp(this.personalPlugins);
+
+    await Promise.allSettled(
+      this.personalPlugins.map((own) =>
+        settleWithin(this.syncPersonalPlugin(own.name)),
+      ),
+    );
   };
 
   private unloadPersonalPlugins = () => {
@@ -377,6 +418,8 @@ class PluginStore {
   handlePersonalPluginStateChange = ({
     webPluginName,
   }: TChangeWebPluginData) => {
+    if (!this.isInit) return this.personalChanges;
+
     if (this.pendingPersonalUploads) {
       this.deferredPersonalChanges.add(webPluginName);
 
@@ -386,15 +429,11 @@ class PluginStore {
     return this.queuePersonalChange(webPluginName);
   };
 
-  private queuePersonalChange = (name: string) => {
-    this.personalChanges = this.personalChanges
-      .then(() => this.applyPersonalChange(name))
-      .catch((e) => {
-        console.error(`[Plugin: ${name}] Personal plugin change failed:`, e);
-      });
-
-    return this.personalChanges;
-  };
+  private queuePersonalChange = (name: string) =>
+    this.enqueue(
+      () => this.applyPersonalChange(name),
+      `[Plugin: ${name}] Personal plugin change failed:`,
+    );
 
   private finishPersonalUpload = () => {
     this.pendingPersonalUploads -= 1;
@@ -409,6 +448,15 @@ class PluginStore {
   };
 
   private applyPersonalChange = async (name: string) => {
+    if (this.settingsStore.pluginOptions?.personal === false) {
+      runInAction(() => {
+        this.personalPlugins = [];
+      });
+
+      await this.syncPersonalPlugin(name);
+      return;
+    }
+
     if (!(await this.fetchPersonalPlugins(false))) return;
 
     if (this.pendingPersonalUploads) {
@@ -416,26 +464,73 @@ class PluginStore {
       return;
     }
 
+    await this.syncSessionCsp(
+      this.personalPlugins.filter((p) => p.name === name),
+    );
+
     await this.syncPersonalPlugin(name);
   };
 
+  private syncSessionCsp = async (plugins: TAPIPlugin[]) => {
+    const needsCsp = plugins.some(
+      (own) =>
+        own.enabled &&
+        hasCspDomains(own) &&
+        !this.reloadRequiredPlugins.includes(own.name) &&
+        !this.plugins.some(
+          (p) =>
+            p.personal && p.name === own.name && p.enabled && p.url === own.url,
+        ),
+    );
+
+    if (!needsCsp) return;
+
+    try {
+      await api.plugins.getPlugins(null);
+    } catch (e) {
+      console.error("[Plugins] Session CSP sync failed:", e);
+    }
+  };
+
   private syncPersonalPlugin = async (name: string) => {
+    const epoch = this.personalEpoch;
+
+    await this.applyPersonalState(name);
+
+    if (epoch !== this.personalEpoch) this.queuePersonalChange(name);
+  };
+
+  private applyPersonalState = async (name: string) => {
     const loaded = this.plugins.find((p) => p.personal && p.name === name);
     const own = this.personalPlugins.find((p) => p.name === name);
 
-    if (!own?.enabled) {
-      if (loaded?.enabled) this.deactivatePlugin(name);
+    if (!own) {
+      if (!loaded) return;
 
-      if (loaded && !own) {
-        runInAction(() => {
-          this.plugins = this.plugins.filter((p) => p !== loaded);
-        });
-      }
+      if (loaded.enabled) await this.deactivatePlugin(name);
+
+      runInAction(() => {
+        this.plugins = this.plugins.filter((p) => p !== loaded);
+      });
+
+      return;
+    }
+
+    if (!own.enabled && loaded) {
+      if (loaded.enabled) await this.deactivatePlugin(name);
 
       return;
     }
 
     if (this.plugins.some((p) => !p.personal && clashesWith(own, p))) return;
+
+    if (!own.enabled) {
+      await this.loadPlugin(own, true).catch((e) => {
+        console.error(`[Plugin: ${name}] Plugin initialization failed:`, e);
+      });
+
+      return;
+    }
 
     if (loaded && loaded.url === own.url) {
       if (loaded.settings !== own.settings) {
@@ -449,7 +544,7 @@ class PluginStore {
         }
       }
 
-      await this.activatePlugin(name);
+      if (!loaded.enabled) await this.activatePlugin(name);
       return;
     }
 
@@ -469,7 +564,7 @@ class PluginStore {
   ) => {
     if (
       !plugin.personal ||
-      !plugin.cspDomains?.split(",").some((domain) => domain.trim()) ||
+      !hasCspDomains(plugin) ||
       this.reloadRequiredPlugins.includes(plugin.name)
     )
       return;
@@ -479,9 +574,9 @@ class PluginStore {
     });
   };
 
-  private loadPlugin = async (plugin: TAPIPlugin) => {
+  private loadPlugin = async (plugin: TAPIPlugin, fromList?: boolean) => {
     if (plugin.runtime === "module") await this.initModulePlugin(plugin);
-    else await this.initPlugin(plugin);
+    else await this.initPlugin(plugin, undefined, fromList);
   };
 
   handlePluginStateChange = (data: TChangeWebPluginData) => {
@@ -699,19 +794,33 @@ class PluginStore {
     this.setIsInit(true);
   };
 
-  updatePlugins = async (fromList?: boolean) => {
+  updatePlugins = (fromList?: boolean) => {
     if (this.isNotPaidPeriod) {
       this.setIsLoaded(true);
-      return;
+      return Promise.resolve();
     }
 
+    this.setIsLoaded(false);
+
+    return this.enqueue(
+      () => this.loadPluginList(fromList),
+      "[Plugins] Plugin list load failed:",
+      PLUGIN_WAIT_MS * 2,
+    );
+  };
+
+  private loadPluginList = async (fromList?: boolean) => {
     const abortController = new AbortController();
-    this.settingsStore.addAbortControllers(abortController);
+    const epoch = this.personalEpoch;
 
     this.setIsLoaded(false);
 
     try {
-      this.plugins = [];
+      this.settingsStore.addAbortControllers(abortController);
+
+      runInAction(() => {
+        this.plugins = [];
+      });
 
       const plugins = await api.plugins.getPlugins(
         null,
@@ -721,11 +830,15 @@ class PluginStore {
       this.setIsEmptyList(plugins.every((p) => p.personal));
       await Promise.allSettled(
         plugins.map((plugin) =>
-          plugin.runtime === "module"
-            ? this.initModulePlugin(plugin)
-            : this.initPlugin(plugin, undefined, fromList),
+          settleWithin(this.loadPlugin(plugin, fromList)),
         ),
       );
+
+      if (epoch !== this.personalEpoch) {
+        for (const plugin of this.plugins.filter((p) => p.personal)) {
+          this.queuePersonalChange(plugin.name);
+        }
+      }
     } catch (e) {
       if (axios.isCancel(e)) {
         return;
@@ -776,20 +889,39 @@ class PluginStore {
     }
   };
 
-  fetchUsersPlugins = async () => {
+  setIsUsersPluginsLoaded = (isUsersPluginsLoaded: boolean) => {
+    this.isUsersPluginsLoaded = isUsersPluginsLoaded;
+  };
+
+  fetchUsersPlugins = async (notifyError = true) => {
     try {
       const plugins = await api.plugins.getMembersPlugins();
 
       runInAction(() => {
         this.usersPlugins = plugins;
+        this.isUsersPluginsFailed = false;
       });
     } catch (e) {
-      toastr.error(e as TData);
+      if (notifyError) toastr.error(e as TData);
+
+      runInAction(() => {
+        this.isUsersPluginsFailed = true;
+      });
     } finally {
       runInAction(() => {
         this.isUsersPluginsLoaded = true;
       });
     }
+  };
+
+  private syncOwnMemberPlugin = (
+    userId: string,
+    name: string,
+    enabled: boolean,
+  ) => {
+    if (userId !== this.userStore.user?.id) return;
+
+    this.handlePersonalPluginStateChange({ webPluginName: name, enabled });
   };
 
   updateUserPlugin = async (userId: string, name: string, enabled: boolean) => {
@@ -801,8 +933,12 @@ class PluginStore {
           isUserPlugin(p, userId, name) ? { ...p, enabled } : p,
         );
       });
+
+      this.syncOwnMemberPlugin(userId, name, enabled);
     } catch (e) {
       toastr.error(e as TData);
+
+      await this.fetchUsersPlugins(false);
     }
   };
 
@@ -816,19 +952,31 @@ class PluginStore {
         );
       });
 
+      this.syncOwnMemberPlugin(userId, name, false);
+
       toastr.success(t("PluginDeletedSuccessfully"));
     } catch (e) {
       toastr.error(e as TData);
+
+      await this.fetchUsersPlugins(false);
     }
   };
 
   fetchPersonalPlugins = async (notifyError = true) => {
+    this.personalReads += 1;
+
+    const read = this.personalReads;
+
     try {
       const plugins = await api.plugins.getPersonalPlugins();
 
-      runInAction(() => {
-        this.personalPlugins = plugins;
-      });
+      if (read > this.appliedPersonalRead) {
+        this.appliedPersonalRead = read;
+
+        runInAction(() => {
+          this.personalPlugins = plugins;
+        });
+      }
 
       return true;
     } catch (e) {
@@ -857,7 +1005,7 @@ class PluginStore {
       let thrownInitError: TPluginError | undefined;
 
       try {
-        await this.loadPlugin(plugin);
+        await settleWithin(this.loadPlugin(plugin));
       } catch (e) {
         console.error(
           `[Plugin: ${plugin.name}] Plugin initialization failed:`,
@@ -882,6 +1030,8 @@ class PluginStore {
       };
     } catch (e) {
       toastr.error(e as TData);
+
+      if (personal) this.fetchPersonalPlugins(false);
     } finally {
       if (personal) this.finishPersonalUpload();
     }
@@ -1213,6 +1363,9 @@ class PluginStore {
 
     runInAction(() => {
       this.plugins = this.plugins.filter((p) => !shadowed.includes(p));
+      this.reloadRequiredPlugins = this.reloadRequiredPlugins.filter(
+        (name) => !shadowed.some((p) => p.name === name),
+      );
     });
   };
 
@@ -1230,6 +1383,19 @@ class PluginStore {
       });
 
       return this.plugins[0];
+    }
+
+    const previous = this.plugins[idx];
+
+    if (previous !== plugin && previous.enabled) {
+      try {
+        this.uninstallPluginCss(previous);
+        this.unregisterPluginItems(previous);
+      } catch (e) {
+        console.error(`[Plugin: ${plugin.name}] Failed to unregister:`, e);
+      } finally {
+        releaseModuleEvents(previous.name);
+      }
     }
 
     runInAction(() => {
@@ -1326,7 +1492,7 @@ class PluginStore {
       this.updatePluginStatus(name);
     }
 
-    if (plugin.status === PluginStatus.hide) return;
+    if (!plugin.enabled || plugin.status === PluginStatus.hide) return;
 
     this.installPluginCss(plugin);
 
@@ -1378,12 +1544,13 @@ class PluginStore {
       toastr.error(e as TData);
       console.log(e);
 
-      if (status === true && this.pluginList.find((p) => p.name === name)?.personal) {
-        await this.fetchPersonalPlugins(false);
-
-        if (this.personalPlugins.some((p) => p.name === name && p.enabled)) {
-          this.activatePlugin(name);
-        }
+      if (
+        status === true &&
+        this.pluginList.find((p) => p.name === name)?.personal &&
+        (await this.fetchPersonalPlugins(false)) &&
+        this.personalPlugins.some((p) => p.name === name && p.enabled)
+      ) {
+        this.activatePlugin(name);
       }
     }
   };
@@ -1439,12 +1606,16 @@ class PluginStore {
 
     const plugin = this.plugins[idx];
 
-    this.uninstallPluginCss(plugin);
+    try {
+      this.uninstallPluginCss(plugin);
 
-    this.unregisterPluginItems(plugin);
-
-    // a disabled plugin keeps no socket listeners or module rooms behind
-    releaseModuleEvents(plugin.name);
+      this.unregisterPluginItems(plugin);
+    } catch (e) {
+      console.error(`[Plugin: ${name}] Failed to unregister:`, e);
+    } finally {
+      // a disabled plugin keeps no socket listeners or module rooms behind
+      releaseModuleEvents(plugin.name);
+    }
   };
 
   getUserRole = () => {

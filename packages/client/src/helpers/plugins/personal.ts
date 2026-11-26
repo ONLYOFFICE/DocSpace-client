@@ -51,6 +51,9 @@ const isSameName = (a: string, b: string) =>
 export const clashesWith = (plugin: TPluginIdentity, other: TPluginIdentity) =>
   isSameName(plugin.name, other.name) || plugin.pluginName === other.pluginName;
 
+export const hasCspDomains = (plugin: Pick<TAPIPlugin, "cspDomains">) =>
+  !!plugin.cspDomains?.split(",").some((domain) => domain.trim());
+
 export const isUserPlugin = (
   plugin: Pick<TAPIPlugin, "name" | "createBy">,
   userId: string,

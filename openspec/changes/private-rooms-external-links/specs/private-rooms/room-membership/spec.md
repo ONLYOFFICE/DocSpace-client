@@ -189,7 +189,7 @@ The system SHALL NOT offer an external link in an archived private room, and SHA
 - **THEN** the links it held work again
 
 ### Requirement: An administrator switches external links of private rooms
-The system SHALL show a DocSpace admin, in the portal settings next to the setting of external links, a switch for external links of private rooms, while private rooms are available on the portal and external links are allowed. It SHALL send a change to the server at once, without the save of the page it stands on, SHALL keep the shown state as the server answers it, and SHALL apply a change of the setting to the open pages of other users without a reload. It SHALL NOT show the switch to anybody else.
+The system SHALL show a DocSpace admin a switch for external links of private rooms next to the setting of external links, while private rooms are available and external links are allowed, and SHALL NOT show it to anybody else. A change SHALL go to the server at once, without the save of the page; the switch SHALL show the value the server answered, and the open pages of other users SHALL follow the change without a reload.
 
 #### Scenario: Administrator turns the links off
 - **WHEN** a DocSpace admin turns the switch off

@@ -612,11 +612,19 @@ none is open. The technical decisions below follow from them.
     14 these are all the links of the room. Alternative: revoke them
     without asking. Rejected by the owner: the recipients would lose
     access for a change they have nothing to do with.
-16. **A password is replaced, never read (decided by the owner on
-    2026-11-16).** A new password seals the private key of the link again
-    and makes a new proof from the same secret, so the address does not
-    change and the old password stops working. A forgotten password is
-    replaced the same way by anybody who manages links.
+16. **A password is never read and not replaced; a new password is a
+    new link (decided by the owner on 2026-11-26, in place of the
+    decision of 2026-11-16).** The first decision kept the address at a
+    new password: the private key of the link sealed again under the same
+    secret. To do that after the password is forgotten, everybody who
+    manages links would have to hold the private key of the link, since
+    the server gives the sealed key only against the proof of the old
+    password. The owner dropped it: whoever gets a new password has to be
+    told anyway, and can be told a new address as well. A link keeps the
+    password it was made with; to change it, or after it is forgotten,
+    the link is revoked and another is made. The server still accepts a
+    new sealed key and proof hash for an existing link; the client does
+    not send them.
 17. **No link in a private Virtual Data Room that restricts downloading
     (decided by the owner on 2026-11-16).** While the room-wide
     restriction is on, a link cannot be created there and the existing
@@ -727,21 +735,16 @@ none is open. The technical decisions below follow from them.
     Rejected: a mismatch would open the dialog of a changed member key
     for something that is not a member.
 
-29. **The wrap of a link's secret carries the private key of the link as
-    well (2026-11-26, with task 3.4).** Decision 16 lets anybody who
-    manages links set a new password, also when the old one is forgotten.
-    A new password seals the same key pair again, and the server gives
-    the sealed key only against the proof of the old password, so a
-    manager has to hold the private key itself. The wrap a manager gets
-    is therefore two wraps joined by a dot, the secret and the private
-    key, each made as a file key is wrapped, under a label of its own and
-    bound to the maker, the user and the id of the link in the place of a
-    file id; the server stores the value as it comes. A manager is a
-    member of the room and reads every file the link covers, so the
-    private key gives them nothing they do not have. The id of the link
-    is the server's, so the wrap is stored by a second request after the
-    link is made. Alternative: wrap the secret alone and ask for the old
-    password. Rejected: a forgotten password would end the address.
+29. **The wrap of a link's secret (2026-11-26, with task 3.4).** The
+    32 bytes of the secret are wrapped for a user who manages links as a
+    file key is wrapped, under a label of its own and bound to the maker,
+    the user and the id of the link in the place of a file id; the server
+    stores the value as it comes. The id of the link is the server's, so
+    the wrap is stored by a second request after the link is made, which
+    repeats the settings of the link. A first form of the same day held
+    the private key of the link next to the secret, for a new password
+    without the old one; it went with the change of decision 16, and the
+    private key of a link is kept nowhere but sealed on the server.
 
 ## Risks / Trade-offs
 

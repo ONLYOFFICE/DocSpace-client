@@ -136,16 +136,20 @@ The system SHALL, when a member who could copy the addresses of the room's links
 - **WHEN** the same is done in a private room that holds no link
 - **THEN** no notice about links is shown
 
-### Requirement: Password of a link is replaced, never shown
-The system SHALL let those who manage links set a new password for a link, which keeps the address and ends the old password, and SHALL NOT show the password of an existing link to anybody.
-
-#### Scenario: New password
-- **WHEN** a manager sets a new password on a link
-- **THEN** the address is unchanged, the old password no longer opens the link and the new one does
+### Requirement: Password of a link is neither shown nor changed
+The system SHALL keep for an external link of a private item the password it was made with, and SHALL NOT show that password to anybody or offer to change, add or remove it. It SHALL say in the settings of such a link that another password takes a new link.
 
 #### Scenario: Looking for the old password
 - **WHEN** the settings of a link with a password are opened
-- **THEN** the password is not shown, and only its replacement is offered
+- **THEN** the password is not shown and no field takes a new one, and the settings say that another password takes a new link
+
+#### Scenario: Password forgotten
+- **WHEN** nobody remembers the password of a link
+- **THEN** a manager revokes the link and makes another, whose address and password are new
+
+#### Scenario: Link to a file made without a password
+- **WHEN** the settings of a link to a file that asks for no password are opened
+- **THEN** no password can be added to it
 
 ### Requirement: No link in a private virtual data room that restricts downloading
 The system SHALL NOT offer an external link in a private room of the virtual data room type while its room-wide restriction on downloading is on, and SHALL show its existing links as not working for that reason.

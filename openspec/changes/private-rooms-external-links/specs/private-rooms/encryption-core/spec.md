@@ -70,7 +70,7 @@ The system SHALL describe a private item that can carry an external link by who 
 - **THEN** the interface says the link carries the key, so anybody who has it opens the item, and that the server does not get the key
 
 ### Requirement: The secret of a link is wrapped for those who manage links
-The system SHALL wrap the secret of an external link, and with it the private key of the link, for the public key of the room's owner and of each room manager, as a file key is wrapped and bound to the link, so that any of them can show the address again and seal the link under a new password. It SHALL NOT store the secret or the private key anywhere else, and SHALL wrap them for a manager named later from the browser of one who holds them.
+The system SHALL wrap the secret of an external link for the public key of the room's owner and of each room manager, as a file key is wrapped and bound to the link, so that any of them can show the address again. It SHALL NOT store the secret anywhere else, SHALL NOT store the private key of the link anywhere but sealed on the server, and SHALL wrap the secret for a manager named later from the browser of one who holds it.
 
 #### Scenario: Address copied by another manager
 - **WHEN** a room manager who did not create the link copies its address
@@ -79,10 +79,6 @@ The system SHALL wrap the secret of an external link, and with it the private ke
 #### Scenario: Wrap offered to another link
 - **WHEN** the wrap made for one link is opened as the wrap of another link, or with the key of another user
 - **THEN** opening fails
-
-#### Scenario: New password set by a manager who did not create the link
-- **WHEN** a manager who holds a wrap sets a new password on the link
-- **THEN** the same key pair is sealed again, without the old password
 
 #### Scenario: Manager named later
 - **WHEN** a member becomes a room manager after a link was created

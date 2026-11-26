@@ -93,9 +93,9 @@ Decided by the owner on 2026-11-16:
 - When a member who could copy the addresses leaves the room or stops
   being a manager, the links stay, and the interface warns at that moment
   that the member still knows them and offers to revoke them.
-- The password of a link can be replaced and not read: nobody, the server
-  included, stores it in a readable form. A new password leaves the
-  address as it is.
+- The password of a link cannot be read: nobody, the server included,
+  stores it in a readable form. It is not changed either: a new password
+  is a new link, with a new address (the owner's decision of 2026-11-26).
 - The link types, the roles and the settings are the portal's own; Proton
   is the reference for the approach only.
 - The access to view comes first; commenting, reviewing and editing

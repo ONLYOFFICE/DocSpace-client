@@ -60,6 +60,8 @@ import type {
   AiThreadFilesMock,
 } from "@docspace/shared/__mocks__/handlers";
 
+import { expectElementScreenshot } from "@docspace/shared/__mocks__/e2e";
+
 import { expect, test, TEST_PORT } from "./fixtures/base";
 
 /**
@@ -124,6 +126,7 @@ const THREADS: AiChatThreadMock[] = [
 const SALES_CHART = { id: 880001, title: "Sales chart.png", fileExst: ".png" };
 const REGIONS_CHART = { id: 880002, title: "Regions chart.png", fileExst: ".png" };
 const BRIEF = { id: 880101, title: "Brief.docx", fileExst: ".docx" };
+const SUMMARY = { id: 880003, title: "Summary.docx", fileExst: ".docx" };
 
 const FILES: Record<string, AiThreadFilesMock> = {
   [REPORT.threadId]: {
@@ -212,7 +215,7 @@ test.describe("Content of an agent's conversation", () => {
   });
 
   // Spec: ai-agent-info-panel, "Files of the conversation"
-  test("a new chat shows both sections empty", async ({ page, baseUrl }) => {
+  test("a new chat shows the empty screen", async ({ page, baseUrl }) => {
     await page.goto(`${baseUrl}${agentUrl(AGENT.id)}`);
     await openConversation(page, REPORT.threadId);
     await openContent(page);
@@ -220,9 +223,96 @@ test.describe("Content of an agent's conversation", () => {
 
     await page.locator("#chat-toolbar").getByRole("button", { name: "New chat" }).click();
 
-    await expect(artifacts(page)).toContainText("No files yet");
-    await expect(attachments(page)).toContainText("No files yet");
+    const empty = page.getByTestId("ai-agent-content-empty");
+    await expect(empty).toContainText("No files yet");
+    await expect(empty.locator("img")).toBeVisible();
+    await expect(empty).toContainText(
+      "Files created by the agent and files you attach in this conversation will appear here.",
+    );
+    await expect(artifacts(page)).toHaveCount(0);
+    await expect(attachments(page)).toHaveCount(0);
     await expect(page.getByTestId("ai-agent-content-file")).toHaveCount(0);
+
+    await expectElementScreenshot(empty, [
+      "desktop",
+      "ai-agent-content",
+      "content-empty.png",
+    ]);
+  });
+
+  // Spec: ai-agent-info-panel, "Empty screen of Content"
+  test("a conversation with attachments only shows no Artifacts section", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      ...aiThreadFilesHandlers(TEST_PORT, [...AI_PROJECTS], {
+        [REPORT.threadId]: { artifacts: [], attachments: [BRIEF] },
+      }),
+    );
+    await page.goto(`${baseUrl}${agentUrl(AGENT.id)}`);
+    await openConversation(page, REPORT.threadId);
+    await openContent(page);
+
+    await expect(attachments(page)).toContainText(BRIEF.title);
+    await expect(artifacts(page)).toHaveCount(0);
+    await expect(page.getByTestId("ai-agent-content")).not.toContainText("Artifacts");
+    await expect(page.getByTestId("ai-agent-content")).not.toContainText("No files yet");
+    await expect(page.getByTestId("ai-agent-content-empty")).toHaveCount(0);
+  });
+
+  // Spec: ai-agent-info-panel, "Content follows the files the server announces"
+  test("a new artifact the server announces is listed without a reload, the attachments left as they are", async ({
+    page,
+    baseUrl,
+    mockRequest,
+    wsMock,
+  }) => {
+    // The other tests run without a socket; this one listens to it.
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.AuthenticatedWithSocket),
+    );
+    await wsMock.setupWebSocketMock();
+    await page.goto(`${baseUrl}${agentUrl(AGENT.id)}`);
+    await openConversation(page, REPORT.threadId);
+    await openContent(page);
+    await expect(artifacts(page).getByTestId("ai-agent-content-file")).toHaveCount(2);
+
+    // The agent saved one more file, on another device.
+    mockRequest.use(
+      ...aiThreadFilesHandlers(TEST_PORT, [...AI_PROJECTS], {
+        [REPORT.threadId]: {
+          artifacts: [SUMMARY, SALES_CHART, REGIONS_CHART],
+          attachments: [BRIEF],
+        },
+      }),
+    );
+    const attachmentsRead = { count: 0 };
+    page.on("request", (request) => {
+      if (request.url().includes(`/threads/${REPORT.threadId}/attachments`))
+        attachmentsRead.count += 1;
+    });
+
+    // An event of another conversation is none of this tab's.
+    wsMock.emitModifyThreadFiles({
+      cmd: "create",
+      id: SUMMARY.id,
+      threadId: DELETED.threadId,
+      kind: "artifacts",
+    });
+    wsMock.emitModifyThreadFiles({
+      cmd: "create",
+      id: SUMMARY.id,
+      // The server writes the id as a GUID in its own case.
+      threadId: REPORT.threadId.toUpperCase(),
+      kind: "artifacts",
+    });
+
+    await expect(artifacts(page).getByTestId("ai-agent-content-file")).toHaveCount(3);
+    await expect(artifacts(page)).toContainText(SUMMARY.title);
+    await expect(attachments(page).getByTestId("ai-agent-content-file")).toHaveCount(1);
+    expect(attachmentsRead.count).toBe(0);
   });
 
   // Spec: ai-agent-info-panel, "Actions of a Content row"

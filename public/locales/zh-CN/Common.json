@@ -128,6 +128,7 @@
   "AIChatRecent": "最近",
   "AIChats": "AI 聊天",
   "AiContentEmpty": "暂无文件",
+  "AiContentEmptyDescription": "智能体创建的文件以及您在本次聊天中附加的文件会显示在此处。",
   "AIDisabledInfoBlockActivateWalletDescription": "激活 AI 与您的智能体聊天、访问其知识库并让它们在您的应用中执行任务。AI 使用量将从您的钱包余额中扣除。",
   "AIDisabledInfoBlockContactAdminDescription": "请联系超级管理员以激活 AI，与您的智能体聊天、访问其知识库并让它们在您的应用中执行任务。",
   "AIDisabledInfoBlockStandaloneDescription": "AI 功能当前已关闭，这意味着此智能体无法处理聊天或任务。连接您自己的 AI 服务，以解锁工作区中的高级功能。",

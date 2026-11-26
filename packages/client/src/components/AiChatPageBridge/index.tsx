@@ -59,6 +59,19 @@ import {
 /** How many conversations the sidebar's Recent lists. */
 const RECENT_THREADS_COUNT = 5;
 
+/**
+ * How many conversations one read of Recent asks for. More than it shows:
+ * the ones without a title among the latest are not listed.
+ */
+const RECENT_READ_COUNT = 20;
+
+/**
+ * How long a change of the general chat's list waits before Recent is read
+ * again: a round changes the list more than once, and on the way between
+ * two agents the list changes with no general chat behind it.
+ */
+export const RECENT_REFRESH_DELAY_MS = 500;
+
 // The chat's settings on the default agent: no model and no rooms of an agent.
 const DEFAULT_AGENT = {
   profileId: null,
@@ -76,15 +89,9 @@ type AiChatPageBridgeProps = {
   /**
    * The agent the chat is scoped to (Shell's `chatEntityId`): on its page,
    * or picked in the chat panel. The chat then lists that agent's
-   * conversations, and Recent is read apart from it.
+   * conversations; Recent is read apart from the chat's list either way.
    */
   chatEntityId?: string;
-};
-
-/** The conversations Recent lists, as one read of them answered. */
-type TRecentSource = {
-  threads: { threadId: string; title?: string }[];
-  hasMore: boolean;
 };
 
 /**
@@ -99,8 +106,8 @@ type TRecentSource = {
  * - mirrors the latest conversations and the open one into `dialogsStore`
  *   for Recent's entries. They are read even while the chat is closed, since
  *   the sidebar shows them all the time. Recent lists the conversations of
- *   no agent: while the chat is scoped to an agent, they are read apart from
- *   the chat's own list;
+ *   no agent, by a read of its own, and reads them again only when the
+ *   general chat changed - never because an agent was opened or left;
  * - remembers the fullscreen chat for the tab and opens it again after a
  *   reload: the chat has no address, so the reload would show the page it
  *   covered - the agents list - in its place;
@@ -133,8 +140,6 @@ const AiChatPageBridgeComponent = ({
   const openHistory = useRouter((s) => s.openHistory);
   const switchToThread = useThreadsStore((s) => s.onSwitchToThread);
   const threads = useThreadsStore((s) => s.threads);
-  // More pages may be stored than the store has read.
-  const hasMoreThreads = useThreadsStore((s) => s.hasMoreThreads);
   const activeThreadId = useThreadsStore((s) => s.threadId);
   const threadsLoaded = useThreadsStore((s) => s.threadsLoaded);
 
@@ -222,80 +227,91 @@ const AiChatPageBridgeComponent = ({
     };
   }, [isChatPage, t]);
 
-  // Recent lists the conversations of no agent. Outside an agent they are
-  // the chat's own list, read once per scope (the chat reads it the same way
-  // when it opens, so this costs it nothing then); `isListUnscoped` is set
-  // once the list is that one, not an agent's left over. While the chat is
-  // scoped to an agent, they are read apart, once per scope.
-  const [isListUnscoped, setIsListUnscoped] = React.useState(false);
-  const [unscopedRead, setUnscopedRead] = React.useState<TRecentSource | null>(
-    null,
-  );
+  // The chat's own list is read while the chat is on no agent, even closed:
+  // the chat a reload interrupted is looked up in it, and the chat reads it
+  // the same way when it opens, so this costs it nothing then.
   React.useEffect(() => {
-    if (!canLoadThreads) return undefined;
-    let cancelled = false;
-    if (chatEntityId === undefined) {
-      setUnscopedRead(null);
-      useThreadsStore
-        .getState()
-        .ensureThreads(undefined)
-        .then(() => {
-          if (!cancelled) setIsListUnscoped(true);
-        })
-        .catch(() => {
-          // AI may be unavailable to the caller: Recent lists nothing, and
-          // there is no chat to reopen.
-          setInterrupted(null);
-        });
-    } else {
-      setIsListUnscoped(false);
-      chatApiRef.current.threads
-        .list(undefined, RECENT_THREADS_COUNT + 1)
-        .then((list) => {
-          if (cancelled) return;
-          setUnscopedRead({
-            threads: list,
-            hasMore: list.length > RECENT_THREADS_COUNT,
-          });
-        })
-        .catch(() => {
-          // Recent keeps what it lists.
-        });
-    }
-    return () => {
-      cancelled = true;
-    };
+    if (!canLoadThreads || chatEntityId !== undefined) return;
+    useThreadsStore
+      .getState()
+      .ensureThreads(undefined)
+      .catch(() => {
+        // AI may be unavailable to the caller: there is no chat to reopen.
+        setInterrupted(null);
+      });
   }, [canLoadThreads, chatEntityId, useThreadsStore]);
 
-  // The store keeps them most recent first. A conversation without a title
-  // has not had its first message yet. Until a scope's list is read, Recent
-  // keeps what it lists.
+  // Recent lists the conversations of no agent, and only a read of its own
+  // fills it: the chat's list is an agent's while the chat is on one, and
+  // on the way from one agent to another it may hold either's under no
+  // agent at all. A conversation without a title has not had its first
+  // message yet. A read that fails keeps what Recent lists.
+  const recentReadRef = React.useRef(0);
+  const readRecent = React.useCallback(() => {
+    recentReadRef.current += 1;
+    const read = recentReadRef.current;
+    chatApiRef.current.threads
+      .list(undefined, RECENT_READ_COUNT)
+      .then((list) => {
+        if (read !== recentReadRef.current) return;
+        const titled = list.filter((thread) => thread.title);
+        dialogsStore.setAiChatRecentThreads(
+          titled
+            .slice(0, RECENT_THREADS_COUNT)
+            .map((thread) => ({ id: thread.threadId, title: thread.title ?? "" })),
+          titled.length > RECENT_THREADS_COUNT ||
+            list.length >= RECENT_READ_COUNT,
+        );
+      })
+      .catch(() => {});
+  }, [dialogsStore]);
+
   React.useEffect(() => {
     if (!canLoadThreads) {
+      recentReadRef.current += 1;
       dialogsStore.setAiChatRecentThreads([]);
       return;
     }
-    const source: TRecentSource | null =
-      chatEntityId === undefined && isListUnscoped
-        ? { threads, hasMore: hasMoreThreads }
-        : unscopedRead;
-    if (!source) return;
-    const titled = source.threads.filter((thread) => thread.title);
-    dialogsStore.setAiChatRecentThreads(
-      titled
-        .slice(0, RECENT_THREADS_COUNT)
-        .map((thread) => ({ id: thread.threadId, title: thread.title ?? "" })),
-      titled.length > RECENT_THREADS_COUNT || source.hasMore,
-    );
-  }, [
-    threads,
-    hasMoreThreads,
-    canLoadThreads,
-    chatEntityId,
-    isListUnscoped,
-    unscopedRead,
-    dialogsStore,
-  ]);
+    readRecent();
+  }, [canLoadThreads, readRecent, dialogsStore]);
+
+  // Recent is read again only when the general chat changed: a conversation
+  // of no agent got its first message, another one, a new name, or is gone.
+  // The chat's list tells it while the chat is on no agent - by its latest
+  // titled conversations, compared with what it showed on no agent before,
+  // so opening an agent, another one or leaving one reads nothing. The list
+  // only says when to read, never what Recent shows.
+  const generalThreadsKey =
+    chatEntityId === undefined && threadsLoaded
+      ? JSON.stringify(
+          threads
+            .filter((thread) => thread.title)
+            .slice(0, RECENT_THREADS_COUNT + 1)
+            .map((thread) => [thread.threadId, thread.title]),
+        )
+      : null;
+  const seenGeneralThreadsKeyRef = React.useRef<string | null>(null);
+  const recentRefreshRef = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  React.useEffect(() => {
+    if (!canLoadThreads || generalThreadsKey === null) return;
+    const seen = seenGeneralThreadsKeyRef.current;
+    seenGeneralThreadsKeyRef.current = generalThreadsKey;
+    // The first list seen is what the first read of Recent covers.
+    if (seen === null || seen === generalThreadsKey) return;
+    if (recentRefreshRef.current) clearTimeout(recentRefreshRef.current);
+    recentRefreshRef.current = setTimeout(() => {
+      recentRefreshRef.current = null;
+      readRecent();
+    }, RECENT_REFRESH_DELAY_MS);
+  }, [canLoadThreads, generalThreadsKey, readRecent]);
+  React.useEffect(
+    () => () => {
+      if (recentRefreshRef.current) clearTimeout(recentRefreshRef.current);
+    },
+    [],
+  );
 
   React.useEffect(() => {
     dialogsStore.setAiChatActiveThreadId(activeThreadId);

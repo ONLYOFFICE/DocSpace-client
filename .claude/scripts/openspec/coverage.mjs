@@ -10,9 +10,10 @@
  *            the backlog of missing tests
  *   uncited  Playwright spec files and Vitest test files that no
  *            verification.md cites, so a spec may be missing a row or a
- *            capability may be missing altogether; the AI tests (owned by
- *            the change ai-chat-agents-design) and the private rooms tests
- *            (their own workflow) are expected and only counted
+ *            capability may be missing altogether; the AI chat E2E files
+ *            listed below (owned by the change ai-chat-agents-design) and
+ *            the private rooms tests (their own workflow) are expected and
+ *            only counted; an AI file a spec stops citing is not hidden
  *   stale    `file:line` citations of E2E-CONFIRMED and UNIT-CONFIRMED rows
  *            whose line no longer opens a test (`test(`, `it(`, `describe(`
  *            on that line or the next) or lies past the end of the file;
@@ -69,15 +70,36 @@ const STATUSES = [
 const MAX_REQUIREMENT_LENGTH = 500;
 const CONTROL_CHARS = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/;
 const LITERAL_NEWLINE = /\\n(?=[a-z])/;
+const AI_CHAT_E2E = new Set(
+  [
+    "ai-agent-content",
+    "ai-chat-agent-menu",
+    "ai-chat-composer-menus",
+    "ai-chat-header-button",
+    "ai-chat-messages",
+    "ai-chat-round",
+    "ai-knowledge-bases",
+    "ai-projects",
+    "ai-skill-sets",
+    "ai-templates",
+  ].map((name) => `packages/client/__tests__/${name}.spec.ts`),
+);
 const EXPECTED_UNCITED = [
-  { pattern: /^ai-/, owner: "change ai-chat-agents-design" },
   {
-    pattern: /^(private-rooms?-|keys-management|key-flow-|encrypted-)/,
+    matches: (path) => AI_CHAT_E2E.has(path),
+    owner: "change ai-chat-agents-design",
+  },
+  {
+    matches: (path) =>
+      /^(private-rooms?-|keys-management|key-flow-|encrypted-)/.test(
+        basename(path),
+      ),
     owner: "private-rooms",
   },
 ];
 const TEST_FILE = /\.(spec|test)\.(ts|tsx|js|jsx|mts)$/;
-const TEST_DECLARATION = /\b(test|it|describe)(\.\w+)*\s*\(/;
+const TEST_DECLARATION =
+  /(?<![\w.$])(test|it|describe)(\.(describe|only|skip|fixme|fail|each|concurrent|serial|parallel|todo))*\s*\(/;
 const CONFIRMED_ROW = /\| (E2E|UNIT)-CONFIRMED \|\s*$/;
 
 const args = process.argv.slice(2);
@@ -160,7 +182,7 @@ const isCited = (path, texts) => {
 };
 
 const expectedOwner = (path) =>
-  EXPECTED_UNCITED.find(({ pattern }) => pattern.test(basename(path)))?.owner;
+  EXPECTED_UNCITED.find(({ matches }) => matches(path))?.owner;
 
 const getUncited = () => {
   const texts = capabilityDirs().map((dir) => readIf(join(dir, "verification.md")));

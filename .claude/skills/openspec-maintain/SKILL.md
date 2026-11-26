@@ -55,7 +55,7 @@ where the details are kept. Full wording: the "Security defects" paragraph of `o
   scenarios and status counts per capability; test files no verification.md cites; cited lines that no longer open
   a test; requirement bodies of 500
   characters or more, control characters and a literal `\n` before a word in `openspec/**/*.md`. `uncited` only
-  counts the AI tests and the private rooms tests. `stale` checks that each `file:line` of an E2E-CONFIRMED or
+  counts the AI chat E2E files listed by path in the script and the private rooms tests. `stale` checks that each `file:line` of an E2E-CONFIRMED or
   UNIT-CONFIRMED row still opens a test (`test(`, `it(` or `describe(` on that line or the next); a row cites the
   declaration of the test, not a line inside it. Exit 1 on a lint or stale finding.
 - `$env:OPENSPEC_TELEMETRY='0'; npx -y @fission-ai/openspec@1.17.0 validate --all --strict` (the pre-push gate runs

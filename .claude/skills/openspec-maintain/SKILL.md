@@ -52,7 +52,8 @@ where the details are kept. Full wording: the "Security defects" paragraph of `o
 
 - `node .claude/scripts/openspec/coverage.mjs [counts|uncited|lint] [--e2e|--unit] [--json]`: requirements,
   scenarios and status counts per capability; test files no verification.md cites; requirement bodies of 500
-  characters or more and control characters in `openspec/**/*.md`. Exit 1 on a lint finding.
+  characters or more, control characters and a literal `\n` before a word in `openspec/**/*.md`. Exit 1 on a lint
+  finding.
 - `$env:OPENSPEC_TELEMETRY='0'; npx -y @fission-ai/openspec@1.17.0 validate --all --strict` (the pre-push gate runs
   the same command when the pushed commits touch `openspec/**`), or `validate <name> --type spec --strict`.
 - operationIds: find the route of the client call in `packages/shared/api/**`, then the path in

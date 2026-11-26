@@ -13,7 +13,8 @@
  *            capability may be missing altogether
  *   lint     requirement bodies of 500 characters or more, and control
  *            characters in any openspec Markdown file (a PowerShell
- *            "`f" inside double quotes writes a form feed)
+ *            "`f" inside double quotes writes a form feed), and a literal
+ *            "\n" before a word (a line break written as text by a script)
  *
  * A file counts as cited when a verification.md holds its repository path,
  * its path below `packages/<app>/__tests__/`, or its file name together with
@@ -59,6 +60,7 @@ const STATUSES = [
 ];
 const MAX_REQUIREMENT_LENGTH = 500;
 const CONTROL_CHARS = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/;
+const LITERAL_NEWLINE = /\\n(?=[a-z])/;
 
 const args = process.argv.slice(2);
 const report = args.find((arg) => !arg.startsWith("--")) ?? "all";
@@ -185,6 +187,11 @@ const getLint = () => {
           findings.push({
             file: `${toPosix(relative(ROOT, file))}:${index + 1}`,
             problem: "control character",
+          });
+        if (LITERAL_NEWLINE.test(line))
+          findings.push({
+            file: `${toPosix(relative(ROOT, file))}:${index + 1}`,
+            problem: "literal \\n",
           });
       });
   }

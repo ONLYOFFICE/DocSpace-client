@@ -34,7 +34,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Kinds on the server | `server`, "Notification kinds a member can switch" | SERVER-SPEC |
 | **Muting a room** | | |
 | The menu entry runs the mute action; the room's mute flag follows | `packages/client/src/store/contextOptionsStore/__tests__/ContextOptionsStore.actions.test.ts:177`; `packages/client/src/store/filesActionsStore/__tests__/FilesActionsStore.actions.test.ts:53` | UNIT-CONFIRMED |
-| No mute entries for an admin outside an AI agent, whose security does not allow muting | `ai-projects-access.spec.ts:604-623` | E2E-CONFIRMED |
+| No mute entries for an admin who is not a member of an AI agent | `ai-projects-access.spec.ts:604-623` | E2E-CONFIRMED |
 | Offered by the room's security outside a public room; counter adjusted; toasts; muted badge unmutes | `packages/client/src/store/contextOptionsStore/folderModel.helpers.ts:133-153`; `packages/client/src/store/filesActionsStore/rooms.helpers.ts:143-188`; `packages/client/src/HOCs/withBadges.js:117-128` | CODE-ONLY |
 | Muted list on the server | `server`, "Muting single rooms" | SERVER-SPEC |
 | **New files badge** | | |

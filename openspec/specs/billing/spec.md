@@ -213,7 +213,8 @@ top-up to the payer only.
 
 The Docs Connect page SHALL let the payer buy a plan for a number of users, with the Dev Pack raising the minimum to
 ten, more than 999 users turning into a sales request, and a short balance into a top-up. It SHALL show a paid plan's
-charge, a scheduled user change or cancellation, keep a deactivated plan as the previous one, and renew a canceled\nplan with its previous size.
+charge, a scheduled user change or cancellation, keep a deactivated plan as the previous one, and renew a canceled
+plan with its previous size.
 
 #### Scenario: More than 999 users
 
@@ -235,7 +236,8 @@ with their type and a View invoice link opening the provider's page in a new tab
 
 After the provider's checkout the client SHALL top up the wallet and then perform the purchase it was opened for —
 plan, storage, backups, AI tools, AI search or Docs Connect — step by step, and land on its page. A failed top-up
-SHALL say the card is kept and skip the purchase; a failed purchase SHALL keep the top-up and lead back to the\nadd-on.
+SHALL say the card is kept and skip the purchase; a failed purchase SHALL keep the top-up and lead back to the
+add-on.
 
 #### Scenario: Failed activation
 

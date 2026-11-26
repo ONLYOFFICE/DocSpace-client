@@ -57,6 +57,12 @@ export type EncryptedFileSeed = {
   encryptedNameHeader?: string;
   /** One of `folders`; the room itself when left out. */
   folderId?: number;
+  /**
+   * The working links set on the file, as FileEntryDtoHelper answers them to
+   * the owner and the room managers; left out, the entry carries no count,
+   * as for any other caller.
+   */
+  externalLinksCount?: number;
   /** The file's `version` and `versionGroup`; 1 when left out. */
   versionGroup?: number;
   /** The user who created the file; the room's owner when left out. */
@@ -69,10 +75,12 @@ export type EncryptedFileRecord = Required<
     | "bytes"
     | "encryptedNameHeader"
     | "folderId"
+    | "externalLinksCount"
     | "versionGroup"
     | "createdBy"
   >
 > & {
+  externalLinksCount?: number;
   bytes?: Uint8Array;
   encryptedNameHeader?: string;
   folderId?: number;
@@ -317,6 +325,7 @@ const seedToRecord = (seed: EncryptedFileSeed): EncryptedFileRecord => ({
   bytes: seed.bytes,
   encryptedNameHeader: seed.encryptedNameHeader,
   folderId: seed.folderId,
+  externalLinksCount: seed.externalLinksCount,
   versionGroup: seed.versionGroup,
   createdBy: seed.createdBy,
 });
@@ -368,6 +377,9 @@ const buildFileDto = (
     access: 0,
     canShare: true,
     shared: false,
+    ...(record.externalLinksCount === undefined
+      ? {}
+      : { externalLinksCount: record.externalLinksCount }),
     mute: false,
     ...(record.encrypted ? { encrypted: true } : {}),
     thumbnailStatus: 1,

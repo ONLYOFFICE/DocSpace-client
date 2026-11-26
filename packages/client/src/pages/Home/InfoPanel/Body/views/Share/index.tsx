@@ -157,7 +157,10 @@ export default inject<TStore>(
         selection !== null &&
         (("encrypted" in selection && selection.encrypted === true) ||
           treeFoldersStore.isPrivacyFolder) &&
-        canManagePrivateLinks(infoPanelStore.infoPanelRoomSelection),
+        canManagePrivateLinks(
+          infoPanelStore.infoPanelRoomSelection,
+          filesSettingsStore.privateRoomLinks,
+        ),
       privateLinksClosed: arePrivateLinksClosed(
         infoPanelStore.infoPanelRoomSelection,
       ),

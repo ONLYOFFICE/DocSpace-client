@@ -244,16 +244,22 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     // Spec: private-rooms/room-membership, "A private item shows its active links".
-    // The server tells that an entry holds a link, not how many nor whether
-    // one still works, so the mark carries no number.
-    hasPrivateLinksMark = () => {
-      const { item, isPrivacyFolder, openRoom } = this.props;
-      if (!item.shared) return false;
-      if (item.isRoom) return canManagePrivateRoomLinks(item);
-      return (
-        (item.encrypted === true || isPrivacyFolder) &&
-        canManagePrivateLinks(openRoom)
-      );
+    // The count comes only to who manages the links of the room, and counts
+    // the links of the entry that still work.
+    getPrivateLinksCount = () => {
+      const { item, isPrivacyFolder, openRoom, privateRoomLinks } = this.props;
+      if (!privateRoomLinks) return 0;
+      if (typeof item.externalLinksCount === "number") {
+        return item.externalLinksCount;
+      }
+      // A server that answers no count: the entry tells only that it holds
+      // a link, and the room who manages it.
+      if (!item.shared) return 0;
+      const manages = item.isRoom
+        ? canManagePrivateRoomLinks(item)
+        : (item.encrypted === true || isPrivacyFolder) &&
+          canManagePrivateLinks(openRoom);
+      return manages ? undefined : 0;
     };
 
     render() {
@@ -306,8 +312,11 @@ export default function withQuickButtons(WrappedComponent) {
           isTrashFolder={isTrashFolder}
           openShareTab={this.openShareTab}
           onOpenPrivateLinks={
-            this.hasPrivateLinksMark() ? this.openPrivateLinks : undefined
+            this.getPrivateLinksCount() === 0
+              ? undefined
+              : this.openPrivateLinks
           }
+          privateLinksCount={this.getPrivateLinksCount()}
           onUseInChat={
             this.getUseInChatRoom() ? this.onUseInChat : undefined
           }
@@ -396,6 +405,7 @@ export default function withQuickButtons(WrappedComponent) {
         isTrashFolder,
         showForcedInfoPanelLoader,
         isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
+        privateRoomLinks: filesSettingsStore.privateRoomLinks,
         isPrivacyFolder,
         // The room that is open, whose right decides the links of its items.
         // shortcut: inside a subfolder the room is known only once the info

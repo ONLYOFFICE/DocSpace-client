@@ -94,6 +94,7 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
     openShareTab,
     onUseInChat,
     onOpenPrivateLinks,
+    privateLinksCount,
   } = props;
 
   const { id, shared, security } = item;
@@ -295,6 +296,14 @@ export const QuickButtons = memo((props: QuickButtonsProps) => {
               title={t("Common:SharedLinks")}
               dataTestId="quick-buttons-private-links"
             />
+          ) : null}
+          {onOpenPrivateLinks && privateLinksCount ? (
+            <span
+              className={styles.privateLinksCount}
+              data-testid="quick-buttons-private-links-count"
+            >
+              {privateLinksCount}
+            </span>
           ) : null}
           {showCopyLinkIcon ? (
             <IconButton

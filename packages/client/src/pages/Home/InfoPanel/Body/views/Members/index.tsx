@@ -513,6 +513,7 @@ export default inject(
     treeFoldersStore,
     dialogsStore,
     infoPanelStore,
+    filesSettingsStore,
   }: TStore) => {
     const {
       infoPanelRoomSelection,
@@ -549,7 +550,10 @@ export default inject(
     // a private room shows its links to who manages them, and only a Custom
     // room has links to itself.
     const isPublicRoomType = isPrivateRoom
-      ? canManagePrivateRoomLinks(infoPanelRoomSelection)
+      ? canManagePrivateRoomLinks(
+          infoPanelRoomSelection,
+          filesSettingsStore.privateRoomLinks,
+        )
       : isPublicRoom || isCustomRoom || isFormRoom;
 
     const { isRootFolder } = selectedFolderStore;

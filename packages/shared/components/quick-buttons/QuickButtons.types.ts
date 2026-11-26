@@ -69,6 +69,8 @@ export type QuickButtonsProps = {
    * manages them: the row carries the mark of its links, which opens them.
    */
   onOpenPrivateLinks?: VoidFunction;
+  /** How many links the mark stands for, when the server tells. */
+  privateLinksCount?: number;
   /**
    * Opens the AI chat with the item in use: a skill set connected, or the
    * set a skill lies in. Given, the row offers "Use in chat" in place of its

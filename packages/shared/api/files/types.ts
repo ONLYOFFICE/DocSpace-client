@@ -56,6 +56,12 @@ import type { TRoom } from "../rooms/types";
 
 export type TFile = TFileBase & {
   encrypted?: boolean;
+  /**
+   * The working external links set on the entry itself. Answered only for a
+   * private room and its items, and only to the owner and the room managers;
+   * null for anybody else.
+   */
+  externalLinksCount?: number | null;
   startFilling?: boolean;
   hasMetadataFields?: boolean;
 };
@@ -226,6 +232,12 @@ export type TFolder = {
   title: string;
   access: ShareAccessRights;
   shared: boolean;
+  /**
+   * The working external links set on the entry itself. Answered only for a
+   * private room and its items, and only to the owner and the room managers;
+   * null for anybody else.
+   */
+  externalLinksCount?: number | null;
   created: string;
   createdBy: TCreatedBy;
   updated: string;

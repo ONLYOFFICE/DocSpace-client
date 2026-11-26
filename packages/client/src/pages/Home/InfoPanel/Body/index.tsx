@@ -120,6 +120,7 @@ export default inject(
     treeFoldersStore,
     aiProjectsStore,
     aiTemplatesStore,
+    filesSettingsStore,
   }: TStore) => {
     const { contactsTab } = peopleStore.usersStore;
 
@@ -172,6 +173,7 @@ export default inject(
       isPrivacyFolder: treeFoldersStore.isPrivacyFolder,
       canManagePrivateLinks: canManagePrivateLinksOf(
         infoPanelStore.infoPanelRoomSelection,
+        filesSettingsStore.privateRoomLinks,
       ),
       aiChatProjectId: aiProjectsStore.activeProject?.id ?? null,
       isAiTemplate: !!aiTemplatesStore.selected,

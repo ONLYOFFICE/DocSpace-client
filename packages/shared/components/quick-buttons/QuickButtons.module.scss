@@ -40,3 +40,11 @@
 .quickButtons {
   --icon-button-focus-offset: -2px;
 }
+
+// Spec: private-rooms/room-membership, "A private item shows its active links"
+.privateLinksCount {
+  color: var(--accent-main);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}

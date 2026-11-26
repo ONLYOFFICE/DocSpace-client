@@ -163,6 +163,7 @@ const renderMembersOf = (room: TRoom, list = members()) => {
         isArchiveFolderRoot: false,
         isAIAgentsFolderRoot: false,
       }}
+      filesSettingsStore={{ privateRoomLinks: true }}
       dialogsStore={{
         setTemplateAccessSettingsVisible: vi.fn(),
         setEditMembersGroup: vi.fn(),

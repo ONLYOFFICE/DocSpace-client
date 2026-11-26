@@ -216,6 +216,9 @@ class FilesSettingsStore {
 
   externalShare = true;
 
+  /** Whether the portal allows external links of private rooms and of their items. */
+  privateRoomLinks = true;
+
   defaultShareLinkInternal = false;
 
   externalShareApplyToDocuments = true;
@@ -261,6 +264,17 @@ class FilesSettingsStore {
         this.externalShareApplyToRooms = settings.externalShareApplyToRooms;
         this.blockExistingLinksOnRestrict =
           settings.blockExistingLinksOnRestrict;
+      }) as () => void,
+    );
+
+    SocketHelper?.on(
+      // The event is not in ui-kit's SocketEvents yet; it comes to the room
+      // of the portal's quota, as the event above does.
+      "s:change-private-room-links-settings" as unknown as SocketEvents,
+      ((data?: { enabled?: boolean }) => {
+        if (typeof data?.enabled === "boolean") {
+          this.privateRoomLinks = data.enabled;
+        }
       }) as () => void,
     );
   }
@@ -386,6 +400,11 @@ class FilesSettingsStore {
 
   setFilesSetting = (setting: string, val: unknown) => {
     (this as unknown as Record<string, unknown>)[setting] = val;
+  };
+
+  setPrivateRoomLinks = async (set: boolean) => {
+    this.privateRoomLinks = await api.files.setPrivateRoomLinks(set);
+    return this.privateRoomLinks;
   };
 
   setAccessControlSettings = async (settings: TAccessControlSettings) => {

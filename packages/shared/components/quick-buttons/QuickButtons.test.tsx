@@ -306,6 +306,21 @@ describe("<QuickButtons />", () => {
       expect(screen.queryByTitle("Copy Shared Link")).not.toBeInTheDocument();
     });
 
+    it("Item with links: the mark carries their number", () => {
+      renderWithTheme(
+        <QuickButtons
+          {...baseProps}
+          item={privateRoom}
+          onOpenPrivateLinks={vi.fn()}
+          privateLinksCount={3}
+        />,
+      );
+
+      expect(
+        screen.getByTestId("quick-buttons-private-links-count"),
+      ).toHaveTextContent("3");
+    });
+
     it("Manager in the SDK", () => {
       // No handler given, as where the links are not offered: no mark, and
       // no copy of a link either.

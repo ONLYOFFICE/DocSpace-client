@@ -132,6 +132,16 @@ describe("canManagePrivateLinks", () => {
     ).toBe(false);
   });
 
+  it("Portal forbids external links of private rooms", () => {
+    expect(canManagePrivateLinks(room({}), false)).toBe(false);
+    expect(
+      canManagePrivateRoomLinks(
+        room({ roomType: RoomsType.CustomRoom }),
+        false,
+      ),
+    ).toBe(false);
+  });
+
   it("Room archived", () => {
     expect(
       canManagePrivateLinks(room({ rootFolderType: FolderType.Archive })),

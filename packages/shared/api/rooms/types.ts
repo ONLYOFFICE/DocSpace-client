@@ -126,6 +126,12 @@ export type TRoom = {
   title: string;
   access: ShareAccessRights;
   shared: boolean;
+  /**
+   * The working external links set on the entry itself. Answered only for a
+   * private room and its items, and only to the owner and the room managers;
+   * null for anybody else.
+   */
+  externalLinksCount?: number | null;
   created: string;
   createdBy: TCreatedBy;
   updated: string;
@@ -191,6 +197,12 @@ export type TValidateShareRoom = {
   isAuthenticated: boolean;
   linkId: string;
   shared: boolean;
+  /**
+   * The working external links set on the entry itself. Answered only for a
+   * private room and its items, and only to the owner and the room managers;
+   * null for anybody else.
+   */
+  externalLinksCount?: number | null;
   status: ValidationStatus;
   tenantId: number;
   title: string;

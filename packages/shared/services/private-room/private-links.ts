@@ -360,11 +360,16 @@ export type TPrivateLinkOptions = {
  * itself, so the room answers: its owner and its room managers, outside the
  * archive.
  *
+ * Nobody does while the portal forbids external links of private rooms
+ * (`privateRoomLinks` of the files settings).
+ *
  * Spec: private-rooms/room-membership, "No public sharing for private rooms"
  */
 export const canManagePrivateLinks = (
   room: Pick<TRoom, "private" | "security" | "rootFolderType"> | null | undefined,
+  portalAllowsLinks = true,
 ): boolean =>
+  portalAllowsLinks &&
   !!room &&
   room.private === true &&
   room.security?.EditAccess === true &&
@@ -382,8 +387,10 @@ export const canManagePrivateRoomLinks = (
     | Pick<TRoom, "private" | "security" | "rootFolderType" | "roomType">
     | null
     | undefined,
+  portalAllowsLinks = true,
 ): boolean =>
-  canManagePrivateLinks(room) && room?.roomType === RoomsType.CustomRoom;
+  canManagePrivateLinks(room, portalAllowsLinks) &&
+  room?.roomType === RoomsType.CustomRoom;
 
 /**
  * What a link of a private item lacks: a password, which a link to a folder

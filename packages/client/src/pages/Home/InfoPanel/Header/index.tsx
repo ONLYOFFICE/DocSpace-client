@@ -94,6 +94,7 @@ export default inject(
     treeFoldersStore,
     aiProjectsStore,
     aiTemplatesStore,
+    filesSettingsStore,
   }: TStore) => {
     const { infoPanelItemsList } = pluginStore;
 
@@ -129,6 +130,7 @@ export default inject(
       isPrivacyFolder,
       canManagePrivateLinks: canManagePrivateLinksOf(
         infoPanelStore.infoPanelRoomSelection,
+        filesSettingsStore.privateRoomLinks,
       ),
       aiChatProjectId: aiProjectsStore.activeProject?.id ?? null,
       isAiTemplate: !!aiTemplatesStore.selected,

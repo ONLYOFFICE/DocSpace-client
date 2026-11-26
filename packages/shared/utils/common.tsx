@@ -172,8 +172,15 @@ export const isPublicRoom = () => {
   );
 };
 
+/**
+ * A page a visitor of a link opens outside the portal's own interface: the
+ * preview of a shared file, or the page of a link of a private item.
+ */
 export const isPublicPreview = () => {
-  return window.location.pathname.includes("/share/preview/");
+  return (
+    window.location.pathname.includes("/share/preview/") ||
+    window.location.pathname === "/share/private"
+  );
 };
 
 export const parseDomain = (

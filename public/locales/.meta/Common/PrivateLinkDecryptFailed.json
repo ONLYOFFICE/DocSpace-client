@@ -1,0 +1,29 @@
+{
+  "key_path": "PrivateLinkDecryptFailed",
+  "content": "The file could not be decrypted.",
+  "content_en_sha1_hash": "a93a2f40b28e2536aec0d4975ae0509974628e28",
+  "created_at": "2026-11-26T09:48:28.020Z",
+  "updated_at": "2026-11-26T09:49:15.292Z",
+  "comment": {
+    "text": "Error toast on the page a visitor opens through an external link of a private (end-to-end encrypted) room, shown when a file was downloaded but could not be decrypted in the browser. Full sentence with a period.",
+    "is_auto": true,
+    "updated_at": "2026-11-26T09:49:15.292Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PrivateLink/PrivateLinkContent.tsx",
+      "line_number": 115,
+      "context": "if (result === \"not-ready\") {\n setNotReady(true);\n return null;\n }\n if (!result.success || !result.file) {\n toastr.error(t(\"Common:PrivateLinkDecryptFailed\"));\n return null;\n }\n return result.file;\n } finally {\n setIsBusy(false);",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

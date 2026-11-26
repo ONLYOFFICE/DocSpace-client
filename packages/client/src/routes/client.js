@@ -819,6 +819,25 @@ const ClientRoutes = [
     loader: publicPreviewLoader,
   },
   {
+    // Spec: private-rooms/file-operations, "A visitor opens an external link without an account"
+    path: "/share/private",
+    async lazy() {
+      const { PrivateLinkPage } = await componentLoader(
+        () => import("SRC_DIR/pages/PrivateLink"),
+      );
+
+      const Component = () => (
+        <PublicRoute>
+          <ErrorBoundary>
+            <PrivateLinkPage />
+          </ErrorBoundary>
+        </PublicRoute>
+      );
+
+      return { Component };
+    },
+  },
+  {
     path: "/rooms/share",
     async lazy() {
       const { WrappedComponent } = await componentLoader(

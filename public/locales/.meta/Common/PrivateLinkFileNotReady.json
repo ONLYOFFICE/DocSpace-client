@@ -1,0 +1,29 @@
+{
+  "key_path": "PrivateLinkFileNotReady",
+  "content": "This file is not available through the link yet. Try again later.",
+  "content_en_sha1_hash": "ca56a318694023b0e845eb9b90dbaa98db7f606c",
+  "created_at": "2026-11-26T09:48:28.057Z",
+  "updated_at": "2026-11-26T09:49:15.292Z",
+  "comment": {
+    "text": "Note under a file on the page a visitor opens through an external link of a private (end-to-end encrypted) room. The file is listed but cannot be opened yet, because no room member has prepared its key for the link; it becomes available later without any action of the visitor. Two full sentences with periods.",
+    "is_auto": true,
+    "updated_at": "2026-11-26T09:49:15.292Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PrivateLink/PrivateLinkContent.tsx",
+      "line_number": 167,
+      "context": "</div>\n )}\n </div>\n {isNotReady ? (\n <Text fontSize=\"12px\" className={styles.note}>\n {t(\"Common:PrivateLinkFileNotReady\")}\n </Text>\n ) : null}\n {previewUrl ? (\n <img className={styles.preview} src={previewUrl} alt={title} />\n ) : null}",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

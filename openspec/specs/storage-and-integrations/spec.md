@@ -14,7 +14,8 @@ called: `getCapabilities`, `getThirdPartyAccounts`, `getAllProviders`, `saveThir
 
 Out of scope: the room created on a third-party storage (`room-types`); the backup itself and its third-party storages
 (`backup-and-restore`); the keys an administrator enters for a service (`access-settings`, "Third-party services");
-the data storage, CDN and storage encryption of an installation, which the management app offers (`spaces-management`).
+the storage encryption of an installation, which the management app offers (`spaces-management`); the data storage
+and CDN of an installation, which no client page offers.
 
 Implementation: the connect and delete third-party dialogs and the direct third-party connection component of
 `packages/shared`, the third-party store, and the third-party storage picker of the create room dialog.

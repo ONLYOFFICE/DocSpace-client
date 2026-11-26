@@ -36,6 +36,7 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 
 | What | Why | Where |
 |---|---|---|
-| Storage encryption, data storage and CDN | Offered by the management app; owned by `spaces-management` | `packages/management/src/app/settings/encrypt-data/` |
+| Storage encryption | Offered by the management app; owned by `spaces-management` | `packages/management/src/app/settings/encrypt-data/` |
+| Data storage and CDN of an installation | No client page offers them | — |
 | Enabling users to connect storages | The client has a store action but no control that calls it | `packages/client/src/store/FilesSettingsStore.ts:485` |
 | Provider title shown instead of a quota | Owned by `quotas` | `packages/client/src/components/SpaceQuota/index.js:189-194` |

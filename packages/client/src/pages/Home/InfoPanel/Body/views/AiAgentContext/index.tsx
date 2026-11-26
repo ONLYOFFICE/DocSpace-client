@@ -42,6 +42,7 @@ import { IconButton } from "@onlyoffice/apps-ui-kit/components/icon-button";
 import { Link, LinkType } from "@onlyoffice/apps-ui-kit/components/link";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
+import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import {
   useI18n as useAiChatI18n,
   useStores as useAiChatStores,
@@ -67,6 +68,11 @@ import FolderIcon from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import RoomIcon from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg";
 
 import styles from "./AiAgentContext.module.scss";
+
+// The one tooltip of the tab: a skill's description and a skill set's
+// name, drawn as the composer's slash menu draws a skill's, not as the
+// browser's own title.
+const TOOLTIP_ID = "ai-agent-context-tooltip";
 
 // The data sources of this portal, as the chat's store marks them.
 const PORTAL_CLOUD = "docspace";
@@ -205,7 +211,8 @@ const DataSources = () => {
             fontSize="13px"
             fontWeight={600}
             lineHeight="15px"
-            title={room.name}
+            data-tooltip-id={TOOLTIP_ID}
+            data-tooltip-content={room.name}
             truncate
             noSelect
           >
@@ -369,6 +376,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
                   title={room.title}
                   icon="instructionsRoom.svg"
                   isPlainIcon
+                  tooltipId={TOOLTIP_ID}
                   isExpanded={isExpanded}
                   onToggle={
                     skills.length > 0
@@ -388,7 +396,8 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
                       <button
                         type="button"
                         className={styles.skillRow}
-                        title={skill.description}
+                        data-tooltip-id={skill.description ? TOOLTIP_ID : undefined}
+                        data-tooltip-content={skill.description || undefined}
                         onClick={() => openSkill(skill.id)}
                         data-testid="ai-agent-context-skill"
                       >
@@ -424,7 +433,12 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
             {sourceRow(
               "knowledge",
               room,
-              <RoomItem id={room.id} title={room.title} icon="knowledgeRoom.svg" />,
+              <RoomItem
+                id={room.id}
+                title={room.title}
+                icon="knowledgeRoom.svg"
+                tooltipId={TOOLTIP_ID}
+              />,
             )}
           </React.Fragment>
         ),
@@ -435,6 +449,7 @@ const AiAgentContext = ({ id }: AiAgentContextProps) => {
         ),
       )}
       {isChatAgent ? <DataSources /> : null}
+      <Tooltip id={TOOLTIP_ID} place="right" maxWidth="400px" />
     </div>
   );
 };

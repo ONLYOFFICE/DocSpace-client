@@ -118,6 +118,14 @@ describe("AiAgentContext", () => {
     expect(base.dataset.plainIcon).toBe("false");
   });
 
+  it("tells a skill's description in the tab's tooltip, not the browser's title", async () => {
+    render(<AiAgentContext id={5} />);
+    const skill = await screen.findByTestId("ai-agent-context-skill");
+    expect(skill.getAttribute("data-tooltip-id")).toBe("ai-agent-context-tooltip");
+    expect(skill.getAttribute("data-tooltip-content")).toBe("Checks");
+    expect(skill.hasAttribute("title")).toBe(false);
+  });
+
   it("opens a skill's instructions to read on a click on the skill", async () => {
     const file = { id: 9, title: "Clause check.md" };
     files.getFileInfo.mockResolvedValue(file);

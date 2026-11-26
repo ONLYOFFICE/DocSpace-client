@@ -55,6 +55,11 @@ type RoomItemProps = {
   icon: TSourceRoomIcon;
   /** The icon without its tinted square. */
   isPlainIcon?: boolean;
+  /**
+   * The id of a ui-kit Tooltip that shows the room's title on hover, in
+   * place of the browser's own title.
+   */
+  tooltipId?: string;
   /** Called before the room opens, e.g. to close the aside the item sits in. */
   onOpen?: () => void;
   /** With `onToggle`, an expander before the room, as the folder tree draws one. */
@@ -90,7 +95,7 @@ export const SourceRoomLogo = ({ icon, size = "24px", isPlain, className }: Sour
 );
 
 /** A linked room as the new-files panel draws one; a click opens the room. */
-const RoomItem = ({ id, title, icon, isPlainIcon, onOpen, isExpanded, onToggle }: RoomItemProps) => {
+const RoomItem = ({ id, title, icon, isPlainIcon, tooltipId, onOpen, isExpanded, onToggle }: RoomItemProps) => {
   const navigate = useNavigate();
 
   const onClick = (e: React.MouseEvent) => {
@@ -104,7 +109,17 @@ const RoomItem = ({ id, title, icon, isPlainIcon, onOpen, isExpanded, onToggle }
   const item = (
     <div className={styles.roomItem} onClick={onClick} data-testid={`ai-project-room-${id}`}>
       <SourceRoomLogo icon={icon} isPlain={isPlainIcon} />
-      <Text className="room-item-title" fontSize="13px" fontWeight={600} lineHeight="15px" title={title} truncate noSelect>
+      <Text
+        className="room-item-title"
+        fontSize="13px"
+        fontWeight={600}
+        lineHeight="15px"
+        title={tooltipId ? undefined : title}
+        data-tooltip-id={tooltipId}
+        data-tooltip-content={tooltipId ? title : undefined}
+        truncate
+        noSelect
+      >
         {title}
       </Text>
     </div>

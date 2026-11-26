@@ -35,7 +35,7 @@
 
 import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { TUser } from "@docspace/shared/api/people/types";
 import { EDITOR_CONTRACT_VERSION } from "@docspace/shared/services/encryption/types";
@@ -103,6 +103,9 @@ const visitor = vi.hoisted(() => ({
   openVisitorLink: vi.fn(),
   readVisitorFileDek: vi.fn(),
 }));
+const validatePublicRoomKey = vi.hoisted(() => vi.fn());
+
+vi.mock("@docspace/shared/api/rooms", () => ({ validatePublicRoomKey }));
 
 vi.mock(
   "@docspace/shared/services/private-room/private-link-visitor",
@@ -211,6 +214,37 @@ describe("useFileEncryptionKeys", () => {
       window.history.replaceState({}, "", "/");
       visitor.openVisitorLink.mockReset();
       visitor.readVisitorFileDek.mockReset();
+      validatePublicRoomKey.mockReset();
+    });
+
+    beforeEach(() => {
+      validatePublicRoomKey.mockResolvedValue({ passwordRequired: false });
+    });
+
+    it("Link with a password: the editor asks for it before any proof is sent", async () => {
+      window.history.replaceState({}, "", `/doceditor?share=k#${SECRET}`);
+      validatePublicRoomKey.mockResolvedValue({ passwordRequired: true });
+      render(config([]));
+
+      expect(await settledAt("link-password")).toBe("link-password");
+      expect(visitor.openVisitorLink).not.toHaveBeenCalled();
+
+      visitor.openVisitorLink.mockResolvedValue({ state: "wrong-proof" });
+      act(() => state?.submitLinkPassword("guess"));
+      for (let i = 0; i < 20 && !state?.linkPasswordWrong; i += 1) {
+        await act(async () => {
+          await new Promise((resolve) => setTimeout(resolve, 0));
+        });
+      }
+      expect(state?.linkPasswordWrong).toBe(true);
+      expect(visitor.openVisitorLink).toHaveBeenLastCalledWith("k", SECRET, "guess");
+
+      visitor.openVisitorLink.mockResolvedValue({ state: "open", link });
+      visitor.readVisitorFileDek.mockResolvedValue(Uint8Array.from(DEK));
+      act(() => state?.submitLinkPassword("right"));
+
+      expect((await settled())?.status).toBe("ready");
+      expect(visitor.openVisitorLink).toHaveBeenLastCalledWith("k", SECRET, "right");
     });
 
     it("Document opened through a link", async () => {
@@ -226,7 +260,7 @@ describe("useFileEncryptionKeys", () => {
       render(config([]));
 
       expect((await settled())?.status).toBe("ready");
-      expect(visitor.openVisitorLink).toHaveBeenCalledWith("k", SECRET);
+      expect(visitor.openVisitorLink).toHaveBeenCalledWith("k", SECRET, undefined);
       expect(visitor.readVisitorFileDek).toHaveBeenCalledWith(link, FILE_ID);
       expect(state?.encryptionKeys).toEqual({
         dek: arrayBufferToBase64(DEK),

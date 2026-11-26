@@ -39,6 +39,7 @@ import React from "react";
 import type { EditorConfigBase } from "@onlyoffice/doceditor-types";
 
 import { getFileEncryptionAccess } from "@docspace/shared/api/files";
+import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
 import { useEncryptionOptional } from "@docspace/shared/context/encryption";
 import { unwrapDekForCurrentUser } from "@docspace/shared/services/encryption/room-file-access";
 import { KeyReplacedError } from "@docspace/shared/services/encryption/errors";
@@ -90,16 +91,22 @@ export type TFileEncryptionStatus =
   | "key-replaced"
   | "no-key"
   | "load-failed"
-  | "error";
+  | "error"
+  /** A visitor of a link that has a password: the page waits for it. */
+  | "link-password";
 
 type TFileEncryptionState = {
   status: TFileEncryptionStatus;
   encryptionKeys?: TEditorEncryptionKeys;
+  /** The password of the link sent last did not open it. */
+  linkPasswordWrong?: boolean;
 };
 
 export type TUseFileEncryptionKeys = TFileEncryptionState & {
   /** Runs the flow again; a failed read of the user's key list is repeated first. */
   retry: () => void;
+  /** Opens a link that has a password with what its visitor typed. */
+  submitLinkPassword: (password: string) => void;
 };
 
 type TFileEncryptionAccess = Awaited<
@@ -169,6 +176,8 @@ const useFileEncryptionKeys = (
     status: isEncrypted ? "loading" : "off",
   });
   const [attempt, setAttempt] = React.useState(0);
+  // What the visitor of a link typed; kept for this page only.
+  const linkPassword = React.useRef("");
   // Spec: private-rooms/editor-integration, "Editor fetches the file's access entries"
   const accessRequest = React.useRef<{
     key: string;
@@ -215,7 +224,29 @@ const useFileEncryptionKeys = (
           typeof fileId === "number" ? fileId : Number(fileId);
         setState({ status: "loading" });
 
-        const opened = await openVisitorLink(share, secret);
+        // The sealed key of a link comes with a proof alone, so the page of
+        // the editor opens the link again. A link with a password is asked
+        // for it first: a proof without it would count as a wrong password.
+        const linkStatus = await validatePublicRoomKey(share);
+        const needsPassword = !!linkStatus?.passwordRequired;
+        const password = linkPassword.current;
+        if (needsPassword && !password) {
+          if (!cancelled) setState({ status: "link-password" });
+          return;
+        }
+
+        const opened = await openVisitorLink(
+          share,
+          secret,
+          needsPassword ? password : undefined,
+        );
+        if (opened.state === "wrong-proof" && needsPassword) {
+          linkPassword.current = "";
+          if (!cancelled) {
+            setState({ status: "link-password", linkPasswordWrong: true });
+          }
+          return;
+        }
         if (opened.state !== "open") {
           if (!cancelled) setState({ status: "no-access" });
           return;
@@ -391,7 +422,15 @@ const useFileEncryptionKeys = (
     setAttempt((current) => current + 1);
   }, [keysLoadFailed, reloadKeys]);
 
-  return React.useMemo(() => ({ ...state, retry }), [state, retry]);
+  const submitLinkPassword = React.useCallback((password: string) => {
+    linkPassword.current = password;
+    setAttempt((current) => current + 1);
+  }, []);
+
+  return React.useMemo(
+    () => ({ ...state, retry, submitLinkPassword }),
+    [state, retry, submitLinkPassword],
+  );
 };
 
 export default useFileEncryptionKeys;

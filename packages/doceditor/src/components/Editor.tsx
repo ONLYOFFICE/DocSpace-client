@@ -48,6 +48,8 @@ import { useResolvedFileTitle } from "@docspace/shared/hooks/useResolvedFileTitl
 import { isOAuthFrame } from "@docspace/shared/utils/oauthToken";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import { PasswordInput } from "@onlyoffice/apps-ui-kit/components/password-input";
+import { InputSize } from "@onlyoffice/apps-ui-kit/components/text-input";
 
 import UserAvatarBaseSvgUrl from "PUBLIC_DIR/images/avatar.editor.base.svg?url";
 import UserAvatarDarkSvgUrl from "PUBLIC_DIR/images/avatar.editor.dark.svg?url";
@@ -106,6 +108,59 @@ const KEY_FLOW_ENDS: Partial<Record<TFileEncryptionStatus, TKeyFlowEnd>> = {
     action: "Common:TryAgain",
   },
   error: { message: "Common:SomethingWentWrong" },
+};
+
+/**
+ * The password of a link of a private item, asked for again on the page of
+ * the editor: the key of the link is given against a proof alone, and the
+ * password is part of it.
+ */
+const LinkPasswordForm = ({
+  isWrong,
+  onSubmit,
+}: {
+  isWrong: boolean;
+  onSubmit: (password: string) => void;
+}) => {
+  const { t } = useTranslation(["Common"]);
+  const [password, setPassword] = React.useState("");
+
+  return (
+    <form
+      data-testid="link-password-form"
+      style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (password) onSubmit(password);
+      }}
+    >
+      <div>{t("Common:PasswordRequired")}</div>
+      <PasswordInput
+        simpleView
+        id="link-password"
+        inputName="password"
+        placeholder={t("Common:Password")}
+        inputValue={password}
+        hasError={isWrong}
+        size={InputSize.large}
+        scale
+        autoComplete="off"
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      {isWrong ? (
+        <div data-testid="link-password-wrong" role="alert">
+          {t("Common:IncorrectPassword")}
+        </div>
+      ) : null}
+      <Button
+        primary
+        type="submit"
+        size={ButtonSize.medium}
+        label={t("Common:ContinueButton")}
+        testId="link-password-submit"
+      />
+    </form>
+  );
 };
 
 const EditorMessage = ({
@@ -513,6 +568,16 @@ const EditorBody = ({
   const renderMessage = (message: React.ReactNode) => (
     <EditorMessage config={config}>{message}</EditorMessage>
   );
+
+  if (isEncryptionGating && encryption.status === "link-password") {
+    // Spec: private-rooms/file-operations, "A visitor opens an external link without an account"
+    return renderMessage(
+      <LinkPasswordForm
+        isWrong={!!encryption.linkPasswordWrong}
+        onSubmit={encryption.submitLinkPassword}
+      />,
+    );
+  }
 
   if (isEncryptionGating) {
     const end = KEY_FLOW_ENDS[encryption.status];

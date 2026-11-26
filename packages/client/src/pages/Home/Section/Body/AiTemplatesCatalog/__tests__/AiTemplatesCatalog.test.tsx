@@ -176,6 +176,16 @@ describe("AiTemplatesCatalog", () => {
     expect(navigate.mock.calls[0][0]).not.toContain("tab=templates");
   });
 
+  it("opens a new agent on its own page after its template is installed", async () => {
+    api.installAiTemplate.mockResolvedValue({ kind: "agent", id: "42", title: "Contract Reviewer" });
+    render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
+    expect(navigate).toHaveBeenCalledWith("/ai-rooms/42/filter?folder=42");
+  });
+
   it("re-reads the sidebar's agents after an agent is installed, not after a skill set", async () => {
     api.installAiTemplate.mockResolvedValue({ kind: "agent", title: "Contract Reviewer" });
     const { unmount } = render(<AiTemplatesCatalog />);

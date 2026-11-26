@@ -256,6 +256,10 @@ export const isAiWorkspaceTemplates = (search: string): boolean =>
   hasAiWorkspaceTemplates(search) &&
   new URLSearchParams(search).get(TAB_PARAM) === TEMPLATES_TAB;
 
+/** The URL of an agent's own page: the agent's room, opened as Files opens a room. */
+export const getAgentPageUrl = (id: number | string): string =>
+  `/ai-rooms/${id}/filter?folder=${id}`;
+
 /**
  * The URL of a list, or of the Agents' Templates tab. Both are the section's
  * list narrowed to the type, so the title, the sidebar entry and the header

@@ -591,9 +591,20 @@ Added the same day, with the portal owner signed in:
   that is not signed in answers ExternalAccessDenied. The settings were
   put back as they were.
 
-Still not checked: the change of the setting reaching an open page of
-another user through the socket event, and the link opened with its
-proof while the portal blocks it.
+Added later the same day, with two sessions at once, the portal owner in
+a browser and the room manager on a socket connection of its own,
+subscribed to the quota room as the client subscribes:
+
+- Each change of the setting by the owner reached the manager's session
+  as `s:change-private-room-links-settings` with `{ "enabled": false }`
+  and then `{ "enabled": true }`, within a second.
+- A change sent past the page, by a request of its own, moved the switch
+  of the owner's open page without a reload: the store follows the
+  event, not only the answer of its own request.
+
+Still not checked: the link controls of a manager's open page going away
+with the event, which the store they read drives, and the link opened
+with its proof while the portal blocks it.
 
 ## Goals / Non-Goals
 

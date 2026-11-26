@@ -79,12 +79,24 @@ In a folder where the user may create, the section header SHALL offer New with t
 
 A list SHALL be shown as a table, rows or tiles, as the user chose; the choice SHALL be kept in the browser. Switching
 to tiles SHALL request the thumbnails of the entries shown. A layout that does not fit the chosen view (a phone, a room
-type with a fixed view) SHALL show the view that fits instead.
+type with a fixed view) SHALL show the view that fits instead. Tiles SHALL fill every row with as many tiles as the grid
+has columns and regroup when the window is resized.
 
 #### Scenario: Tiles
 
 - **WHEN** a user switches the list to tiles
 - **THEN** the choice is kept and thumbnails are requested for the entries
+
+### Requirement: Files being edited
+
+A file open in an editor SHALL carry an editing icon. Hovering it SHALL list who edits the file under
+`Common:FileCurrentlyEditedBy`, scrolling past its maximum height, with an anonymous editor shown as `Common:Anonymous`
+and no photo requested for one. On a phone a tap SHALL open the list in a modal that a tap on the backdrop closes.
+
+#### Scenario: Hovering the icon
+
+- **WHEN** a user hovers the editing icon of a file two people edit
+- **THEN** both editors are listed under `Common:FileCurrentlyEditedBy`
 
 ### Requirement: Sorting and filtering
 

@@ -30,6 +30,9 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | New with the create menu in a folder | `helpers/getSectionCreateButton.test.ts:23` | UNIT-CONFIRMED |
 | **Views of a list** | | |
 | Table, rows or tiles; kept in the browser; tiles request thumbnails; fitted view for the layout | `packages/client/src/store/FilesStore.ts:951-980` | CODE-ONLY |
+| Full tile rows at every width and regrouped after a resize (personal files of the SDK frame) | `packages/sdk/__tests__/e2e/personal-files/tiles.spec.ts:75, 94` | E2E-CONFIRMED |
+| **Files being edited** | | |
+| Editing icon; hover list with an anonymous editor; scroll past the maximum height; no photo for an anonymous editor; phone modal closed by the backdrop | `editors-tooltip.spec.ts:62, 72, 102, 123, 165, 172, 195, 213` | E2E-CONFIRMED |
 | **Sorting and filtering** | | |
 | Filter resets paging; sort saved per user; Rooms loaded 100 per page | `fs/filter.test.ts:63, 76, 95` | UNIT-CONFIRMED |
 | The server stores `sortBy` as the account's default rooms sort | yaml `getRoomsFolder` description | SERVER-SPEC |

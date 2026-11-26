@@ -74,6 +74,8 @@ export const mockPlugin1: TAPIPlugin = {
   system: false,
   url: "/plugins/test-plugin-one/plugin.js",
   settings: "",
+  personal: false,
+  cspDomains: "",
 };
 
 export const mockPlugin2: TAPIPlugin = {

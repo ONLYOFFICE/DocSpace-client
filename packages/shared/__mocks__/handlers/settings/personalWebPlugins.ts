@@ -140,22 +140,29 @@ export const membersPluginsHandler = (
     Response.json({ response: plugins, count: plugins.length, status: 0 }),
   );
 
+const findMemberPlugin = (params: Record<string, unknown>) =>
+  mockMemberPlugins.find(
+    (p) => p.createBy.id === params.userId && p.name === params.name,
+  );
+
 export const memberPluginUpdateHandler = (port: string) =>
   http.put(
     `${pluginsUrl(port)}/:userId/:name`,
     async ({ params, request }) => {
       const { enabled } = (await request.json()) as { enabled: boolean };
-      const plugin = mockMemberPlugins.find(
-        (p) => p.createBy.id === params.userId && p.name === params.name,
-      );
+      const plugin = findMemberPlugin(params);
+
+      if (!plugin) return new Response(null, { status: 404 });
 
       return Response.json({ response: { ...plugin, enabled }, status: 0 });
     },
   );
 
 export const memberPluginDeleteHandler = (port: string) =>
-  http.delete(`${pluginsUrl(port)}/:userId/:name`, () =>
-    Response.json({ response: null, status: 0 }),
+  http.delete(`${pluginsUrl(port)}/:userId/:name`, ({ params }) =>
+    findMemberPlugin(params)
+      ? Response.json({ response: null, status: 0 })
+      : new Response(null, { status: 404 }),
   );
 
 export const mockOwnPersonalPlugin: TAPIPlugin = {
@@ -188,18 +195,38 @@ const ownPluginSource = `export default {
 const isPersonal = (request: Request) =>
   new URL(request.url).searchParams.get("personal") === "true";
 
+const shadows = (portalPlugin: TAPIPlugin, plugin: TAPIPlugin) =>
+  portalPlugin.name.toLowerCase() === plugin.name.toLowerCase() ||
+  portalPlugin.pluginName === plugin.pluginName;
+
 export const ownPersonalPluginsHandlers = (
   port: string,
   own: TAPIPlugin[] = [],
+  portal: TAPIPlugin[] = [],
 ) => {
   const plugins = [...own];
   const url = `${BASE_URL}:${port}/${API_PREFIX}/${PATH_WEB_PLUGINS}`;
 
   return [
     http.get(url, ({ request }) => {
-      const list = isPersonal(request) ? plugins : [];
+      const list = isPersonal(request)
+        ? plugins
+        : [
+            ...portal,
+            ...plugins.filter((p) => !portal.some((x) => shadows(x, p))),
+          ];
 
       return Response.json({ response: list, count: list.length, status: 0 });
+    }),
+    http.delete(`${url}/:name`, ({ request, params }) => {
+      if (!isPersonal(request)) return new Response(null, { status: 403 });
+
+      const index = plugins.findIndex((p) => p.name === params.name);
+      if (index === -1) return new Response(null, { status: 404 });
+
+      plugins.splice(index, 1);
+
+      return Response.json({ status: 0 });
     }),
     http.post(url, ({ request }) => {
       if (!isPersonal(request)) return new Response(null, { status: 403 });

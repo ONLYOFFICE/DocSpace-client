@@ -108,9 +108,9 @@ test.describe("Users' plugins", () => {
     await expect(own.getByText("(Me)")).toBeVisible();
     await expect(admins.getByText("(Me)")).toHaveCount(0);
 
-    await expect(own.locator(".owner_icon")).toBeVisible();
-    await expect(admins.locator(".admin_icon")).toBeVisible();
-    await expect(user.locator(".owner_icon, .admin_icon")).toHaveCount(0);
+    await expect(own.getByTestId("member_avatar_owner")).toBeVisible();
+    await expect(admins.getByTestId("member_avatar_admin")).toBeVisible();
+    await expect(user.getByTestId("member_avatar_user")).toBeVisible();
 
     await expectScreenshot(page, [
       "desktop",
@@ -127,7 +127,7 @@ test.describe("Users' plugins", () => {
     await expect(page.locator(ROWS)).toHaveCount(4);
 
     const pluginHeader = page
-      .locator(".table-container_header")
+      .getByTestId("table-header")
       .getByText("Plugin", { exact: true });
 
     await pluginHeader.click();
@@ -171,7 +171,6 @@ test.describe("Users' plugins", () => {
     await expect(weather.getByText("https://api.open-meteo.com")).toBeVisible();
 
     await page.reload();
-    await page.getByTestId("users_tab").click();
 
     await expect(weather.getByText("https://api.open-meteo.com")).toBeVisible();
     await expect(weather.getByText("2.1.0")).toHaveCount(0);
@@ -183,17 +182,42 @@ test.describe("Users' plugins", () => {
   }) => {
     await openUsersPlugins(page, baseUrl);
 
+    const title = page
+      .getByTestId(rowId(MEMBER_PLUGIN_USER_ID, "weather-now"))
+      .getByText("Weather now", { exact: true });
     const description = page.getByText(
       "Shows the current weather in Riga from the profile menu.",
     );
+
+    await expect(title).toBeVisible();
     await expect(description).toHaveCount(0);
 
-    await page
-      .getByTestId(rowId(MEMBER_PLUGIN_USER_ID, "weather-now"))
-      .getByText("Weather now", { exact: true })
-      .hover();
+    await title.hover();
 
     await expect(description).toBeVisible();
+  });
+
+  test("shows the description of a plugin when its name gets keyboard focus", async ({
+    page,
+    baseUrl,
+  }) => {
+    await openUsersPlugins(page, baseUrl);
+
+    const title = page.getByTestId(
+      `plugin_title_${MEMBER_PLUGIN_USER_ID}_weather-now`,
+    );
+    const description = page.getByText(
+      "Shows the current weather in Riga from the profile menu.",
+    );
+
+    await expect(title).toBeVisible();
+    await expect(description).toHaveCount(0);
+
+    await title.focus();
+    await expect(description).toBeVisible();
+
+    await title.blur();
+    await expect(description).toHaveCount(0);
   });
 
   test("switches a member's plugin off for that member", async ({
@@ -207,7 +231,9 @@ test.describe("Users' plugins", () => {
 
     const toggle = page
       .getByTestId(rowId(MEMBER_PLUGIN_USER_ID, "weather-now"))
-      .getByTestId("user_plugin_weather-now_toggle_button");
+      .getByTestId(
+        `${rowId(MEMBER_PLUGIN_USER_ID, "weather-now")}_toggle_button`,
+      );
     const input = toggle.getByTestId("toggle-button-input");
     await expect(input).toBeChecked();
 
@@ -236,7 +262,7 @@ test.describe("Users' plugins", () => {
     await openUsersPlugins(page, baseUrl);
 
     const row = page.getByTestId(rowId(MEMBER_PLUGIN_USER_ID, "weather-now"));
-    await row.locator(".expandButton").click();
+    await row.click({ button: "right" });
     await page.getByTestId("user-plugin_delete").click();
 
     await expect(
@@ -396,5 +422,44 @@ test.describe("Personal plugins in the profile", () => {
       "plugins",
       "personal-plugins-profile.png",
     ]);
+  });
+
+  test("deletes one's own plugin that a workspace plugin shadows for oneself alone", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const { name } = mockOwnPersonalPlugin;
+    const workspaceCopy = {
+      ...mockOwnPersonalPlugin,
+      version: "2.0.0",
+      personal: false,
+    };
+
+    mockRequest.use(
+      ...ownPersonalPluginsHandlers(
+        TEST_PORT,
+        [mockOwnPersonalPlugin],
+        [workspaceCopy],
+      ),
+    );
+
+    await page.goto(`${baseUrl}/profile/plugins`);
+
+    const card = page.getByTestId(`personal_plugin_${name}`);
+    await expect(card.getByTestId(`plugin_shadowed_${name}_text`)).toBeVisible();
+
+    await card.getByTestId(`delete_plugin_${name}_link`).click();
+
+    const deletion = page.waitForRequest(
+      (r) =>
+        r.method() === "DELETE" &&
+        new URL(r.url()).pathname.endsWith(`/settings/webplugins/${name}`),
+    );
+    await page.getByTestId("confirm_delete_plugin_button").click();
+    const request = await deletion;
+
+    expect(new URL(request.url()).searchParams.get("personal")).toBe("true");
+    await expect(card).toHaveCount(0);
   });
 });

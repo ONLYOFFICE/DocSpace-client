@@ -20,6 +20,7 @@ asserts it), **CODE-ONLY** (read from the code, no test).
 | **Welcome header** | | |
 | Plan line for a SaaS owner or admin, naming the plan; none for others or on a server installation; Community upgrade line for its admins and owner | `da:580-600` | E2E-CONFIRMED |
 | Upgrade and customize offers lead to the payments page | `dash/sub-components/Header.tsx:121-150` | CODE-ONLY |
+| The Community offer opens a dialog comparing Docs Enterprise and Docs Developer, with demo, support and sales links, fitting a desktop, a laptop and a phone | `upgrade-path-dialog.spec.ts:152` | E2E-CONFIRMED |
 | **Profile card** | | |
 | Card for everyone; rename pencil for admin and owner only; type with its help icon except for the owner | `da:564-578` | E2E-CONFIRMED |
 | Set password reached with Tab and opened with Enter | `dashboard-profile-keyboard.spec.ts:58` | E2E-CONFIRMED |

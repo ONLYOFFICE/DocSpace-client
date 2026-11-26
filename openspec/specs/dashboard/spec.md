@@ -24,7 +24,8 @@ The screenshot matrix and its axes are described in `.claude/rules/dashboard-mat
 
 The header SHALL welcome the reader to the organization. A SaaS owner or DocSpace admin SHALL see the plan line naming
 Startup or Business with an offer leading to the payments page; on a Community server installation they SHALL see the
-offer of the Enterprise and Developer editions instead. Nobody else SHALL see either line.
+offer of the Enterprise and Developer editions instead, opening a dialog that compares the two editions with links to
+order a demo, contact support and write to sales. Nobody else SHALL see either line.
 
 #### Scenario: Room admin on a paid SaaS portal
 
@@ -35,6 +36,11 @@ offer of the Enterprise and Developer editions instead. Nobody else SHALL see ei
 
 - **WHEN** an administrator of a Community server installation opens the dashboard
 - **THEN** the offer of the Enterprise and Developer editions is shown instead of a plan line
+
+#### Scenario: Comparing the editions
+
+- **WHEN** the administrator opens the offer of the Enterprise and Developer editions
+- **THEN** a dialog compares the two editions and links to a demo, support and sales
 
 ### Requirement: Profile card
 

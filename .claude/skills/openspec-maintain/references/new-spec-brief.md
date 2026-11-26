@@ -31,11 +31,12 @@ Header: `> Written <date> on <branch> (base <branch> at <commit>)`, that no test
 operationIds were checked against; then the shorthands of the paths used in the rows. Then `## Requirement rows`:
 a bold row per requirement, a row per claim, status E2E-CONFIRMED, UNIT-CONFIRMED, CODE-ONLY or SERVER-SPEC (see
 the skill). Then `## Left out of the spec` with `What | Why | Where`. Spell shorthands out in full paths: the
-coverage script recognises a test file by its path or by its file name next to its folder name.
+coverage script recognises a test file by its path or by its file name next to its folder name. A
+CONFIRMED row cites the line that declares the test (`test(`, `it(`), which `coverage.mjs stale` checks.
 
 ## Finish
 
-`node .claude/scripts/openspec/coverage.mjs lint`, then
+`node .claude/scripts/openspec/coverage.mjs stale` and `lint`, then
 `$env:OPENSPEC_TELEMETRY='0'; npx -y @fission-ai/openspec@1.17.0 validate <NAME> --type spec --strict`. Commit
 `OpenSpec: <NAME>: add client spec`. Report: requirement count, status counts, what was left out and why, suspected
 defects. A suspected security defect is written into no file; report it in the conversation only.

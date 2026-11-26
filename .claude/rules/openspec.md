@@ -26,7 +26,8 @@ are in `openspec/config.yaml`.
 - **Keeping the specs true** (re-sync after a merge, coverage, a new capability,
   a deviation) is the `openspec-maintain` skill; its
   `.claude/scripts/openspec/coverage.mjs` reports status counts, test files no
-  spec cites, and requirements over 500 characters.
+  spec cites, cited test lines that moved, and requirements over 500
+  characters. A test change that moves a cited line updates the row.
 - **Private rooms** (`openspec/specs/private-rooms/*`) keep their own workflow:
   `.claude/rules/private-rooms.md`.
 - **The AI agents and chat** are specified by the open change

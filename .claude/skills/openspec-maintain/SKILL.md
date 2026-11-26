@@ -19,7 +19,8 @@ description: "Keeping the OpenSpec main specs of the web client (openspec/specs/
   bold row per requirement, then a "Left out of the spec" table (`What | Why | Where`) for everything seen in the
   code or the tests that the spec does not state, with its owner.
 - `openspec/deviations.md`: the register of behaviour that looks wrong (`C<n>` rows: client vs server, client vs
-  product matrix, suspected client defects) with status OPEN, OPEN (product decision), FIXED <commit> or REFUTED.
+  product matrix, suspected client defects) with status OPEN, OPEN (product decision), FIXED <commit>, REFUTED or
+  NOT A DEFECT (behaviour recorded so nobody files it); a row that is no longer open moves to "Closed".
   A requirement never describes such behaviour; it states the intended one or stays silent.
 - `openspec/specs/private-rooms/*`: private rooms, maintained through changes (`.claude/rules/private-rooms.md`);
   they have no verification.md and this skill does not edit them.
@@ -50,10 +51,13 @@ where the details are kept. Full wording: the "Security defects" paragraph of `o
 
 ## Tools
 
-- `node .claude/scripts/openspec/coverage.mjs [counts|uncited|lint] [--e2e|--unit] [--json]`: requirements,
-  scenarios and status counts per capability; test files no verification.md cites; requirement bodies of 500
-  characters or more, control characters and a literal `\n` before a word in `openspec/**/*.md`. Exit 1 on a lint
-  finding.
+- `node .claude/scripts/openspec/coverage.mjs [counts|uncited|stale|lint] [--e2e|--unit] [--json]`: requirements,
+  scenarios and status counts per capability; test files no verification.md cites; cited lines that no longer open
+  a test; requirement bodies of 500
+  characters or more, control characters and a literal `\n` before a word in `openspec/**/*.md`. `uncited` only
+  counts the AI tests and the private rooms tests. `stale` checks that each `file:line` of an E2E-CONFIRMED or
+  UNIT-CONFIRMED row still opens a test (`test(`, `it(` or `describe(` on that line or the next); a row cites the
+  declaration of the test, not a line inside it. Exit 1 on a lint or stale finding.
 - `$env:OPENSPEC_TELEMETRY='0'; npx -y @fission-ai/openspec@1.17.0 validate --all --strict` (the pre-push gate runs
   the same command when the pushed commits touch `openspec/**`), or `validate <name> --type spec --strict`.
 - operationIds: find the route of the client call in `packages/shared/api/**`, then the path in
@@ -73,12 +77,12 @@ where the details are kept. Full wording: the "Security defects" paragraph of `o
 3. Update per `references/resync-brief.md`: fix a changed requirement and its scenario, keep requirement names
    stable, move rows whose cited lines moved, upgrade CODE-ONLY rows that new tests now cover, and set FIXED or
    REFUTED on the deviations the range touches.
-4. `node .claude/scripts/openspec/coverage.mjs lint` and `validate --all --strict`.
+4. `node .claude/scripts/openspec/coverage.mjs stale` (moved test lines), `lint` and `validate --all --strict`.
 
 ## Mode B: coverage
 
 1. `node .claude/scripts/openspec/coverage.mjs counts` for the CODE-ONLY backlog per capability, and
-   `uncited --e2e` for Playwright files no spec cites (AI and private rooms files are expected there, see above).
+   `uncited --e2e` for Playwright files no spec cites (AI and private rooms files are only counted, see above).
 2. An uncited E2E file belongs to an existing capability (add its rows, or a "Left out" row with the owner) or
    shows a missing capability (mode C).
 3. Covering CODE-ONLY rows with tests follows `.claude/rules/e2e-tests.md` and `.claude/rules/unit-tests.md`;

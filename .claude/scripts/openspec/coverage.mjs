@@ -3,14 +3,21 @@
  * Coverage of the OpenSpec main specs by tests, read from the text of the
  * specs. Read-only: never edits a file.
  *
- * Three reports:
+ * Four reports:
  *   counts   per capability: requirements, scenarios and the rows of each
  *            verification.md status (E2E-CONFIRMED, UNIT-CONFIRMED,
  *            CODE-ONLY, SERVER-SPEC, MATRIX-ONLY); the CODE-ONLY column is
  *            the backlog of missing tests
  *   uncited  Playwright spec files and Vitest test files that no
  *            verification.md cites, so a spec may be missing a row or a
- *            capability may be missing altogether
+ *            capability may be missing altogether; the AI tests (owned by
+ *            the change ai-chat-agents-design) and the private rooms tests
+ *            (their own workflow) are expected and only counted
+ *   stale    `file:line` citations of E2E-CONFIRMED and UNIT-CONFIRMED rows
+ *            whose line no longer opens a test (`test(`, `it(`, `describe(`
+ *            on that line or the next) or lies past the end of the file;
+ *            a citation through a shorthand of the file's header that does
+ *            not resolve to one test file is only counted as unchecked
  *   lint     requirement bodies of 500 characters or more, and control
  *            characters in any openspec Markdown file (a PowerShell
  *            "`f" inside double quotes writes a form feed), and a literal
@@ -28,10 +35,11 @@
  *   node .claude/scripts/openspec/coverage.mjs counts
  *   node .claude/scripts/openspec/coverage.mjs uncited --e2e   Playwright only
  *   node .claude/scripts/openspec/coverage.mjs uncited --unit  Vitest only
+ *   node .claude/scripts/openspec/coverage.mjs stale
  *   node .claude/scripts/openspec/coverage.mjs lint
  *   node .claude/scripts/openspec/coverage.mjs --json
  *
- * Exit code: 0 clean, 1 a lint finding, 2 script error.
+ * Exit code: 0 clean, 1 a lint or stale finding, 2 script error.
  */
 
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
@@ -61,6 +69,16 @@ const STATUSES = [
 const MAX_REQUIREMENT_LENGTH = 500;
 const CONTROL_CHARS = /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/;
 const LITERAL_NEWLINE = /\\n(?=[a-z])/;
+const EXPECTED_UNCITED = [
+  { pattern: /^ai-/, owner: "change ai-chat-agents-design" },
+  {
+    pattern: /^(private-rooms?-|keys-management|key-flow-|encrypted-)/,
+    owner: "private-rooms",
+  },
+];
+const TEST_FILE = /\.(spec|test)\.(ts|tsx|js|jsx|mts)$/;
+const TEST_DECLARATION = /\b(test|it|describe)(\.\w+)*\s*\(/;
+const CONFIRMED_ROW = /\| (E2E|UNIT)-CONFIRMED \|\s*$/;
 
 const args = process.argv.slice(2);
 const report = args.find((arg) => !arg.startsWith("--")) ?? "all";
@@ -107,12 +125,13 @@ const getCounts = () =>
     })
     .sort((a, b) => a.capability.localeCompare(b.capability));
 
-const testFiles = () => {
-  const files = walk(PACKAGES_DIR, (path) =>
-    /\.(spec|test)\.(ts|tsx|js|jsx|mts)$/.test(path),
-  ).map((path) => toPosix(relative(ROOT, path)));
+const allTestFiles = () =>
+  walk(PACKAGES_DIR, (path) => TEST_FILE.test(path)).map((path) =>
+    toPosix(relative(ROOT, path)),
+  );
 
-  return files
+const testFiles = () =>
+  allTestFiles()
     .map((path) => ({
       path,
       kind: /\/__tests__\/.*\.spec\.(ts|tsx)$/.test(path) &&
@@ -123,7 +142,6 @@ const testFiles = () => {
     .filter(({ kind }) =>
       onlyE2e ? kind === "e2e" : onlyUnit ? kind === "unit" : true,
     );
-};
 
 const isCited = (path, texts) => {
   const belowTests = path.replace(/^packages\/[^/]+\/__tests__\//, "");
@@ -141,9 +159,91 @@ const isCited = (path, texts) => {
   );
 };
 
+const expectedOwner = (path) =>
+  EXPECTED_UNCITED.find(({ pattern }) => pattern.test(basename(path)))?.owner;
+
 const getUncited = () => {
   const texts = capabilityDirs().map((dir) => readIf(join(dir, "verification.md")));
-  return testFiles().filter(({ path }) => !isCited(path, texts));
+  const uncited = testFiles().filter(({ path }) => !isCited(path, texts));
+  return {
+    unexpected: uncited.filter(({ path }) => !expectedOwner(path)),
+    expected: uncited
+      .filter(({ path }) => expectedOwner(path))
+      .map((file) => ({ ...file, owner: expectedOwner(file.path) })),
+  };
+};
+
+const opensTest = (path, line) => {
+  const lines = readFileSync(join(ROOT, path), "utf8").split("\n");
+  return (
+    line <= lines.length &&
+    TEST_DECLARATION.test(lines.slice(line - 1, line + 1).join("\n"))
+  );
+};
+
+const resolveCitation = (cited, files) => {
+  if (cited.startsWith("packages/"))
+    return { paths: files.includes(cited) ? [cited] : [], direct: true };
+  const direct = files.filter(
+    (path) => path.includes("/__tests__/") && path.endsWith(`/${cited}`),
+  );
+  if (direct.length) return { paths: direct, direct: true };
+  const shortened = cited.split("/").slice(1).join("/");
+  return {
+    paths: shortened
+      ? files.filter((path) => path.endsWith(`/${shortened}`))
+      : [],
+    direct: false,
+  };
+};
+
+const getStale = () => {
+  const files = allTestFiles();
+  const findings = [];
+  let checked = 0;
+  let unchecked = 0;
+
+  for (const dir of capabilityDirs()) {
+    const rows = readIf(join(dir, "verification.md"))
+      .split("\n")
+      .filter((line) => CONFIRMED_ROW.test(line));
+
+    for (const row of rows) {
+      for (const [, cited, numbers] of row.matchAll(/`([^`\s]+?):([\d, -]+)`/g)) {
+        if (!TEST_FILE.test(cited)) continue;
+        const lines = numbers
+          .split(/[, ]+/)
+          .filter(Boolean)
+          .map((part) => Number(part.split("-")[0]));
+        const { paths, direct } = resolveCitation(cited, files);
+        const fitting = paths.find((path) =>
+          lines.every((line) => opensTest(path, line)),
+        );
+
+        if (fitting) {
+          checked += lines.length;
+        } else if (direct && paths.length) {
+          checked += lines.length;
+          const missed = lines.filter((line) => !opensTest(paths[0], line));
+          findings.push({
+            capability: capabilityName(dir),
+            citation: `${cited}:${missed.join(", ")}`,
+            problem: "the line opens no test",
+          });
+        } else if (direct) {
+          findings.push({
+            capability: capabilityName(dir),
+            citation: cited,
+            problem: "no such test file",
+          });
+        } else {
+          unchecked += lines.length;
+        }
+      }
+    }
+  }
+
+  return { checked, unchecked, findings };
 };
 
 const getLint = () => {
@@ -210,6 +310,7 @@ try {
   const result = {};
   if (report === "all" || report === "counts") result.counts = getCounts();
   if (report === "all" || report === "uncited") result.uncited = getUncited();
+  if (report === "all" || report === "stale") result.stale = getStale();
   if (report === "all" || report === "lint") result.lint = getLint();
 
   if (asJson) {
@@ -231,9 +332,22 @@ try {
       );
     }
     if (result.uncited) {
-      console.log(`## Test files no verification.md cites (${result.uncited.length})\n`);
-      for (const { path, kind } of result.uncited) console.log(`- [${kind}] ${path}`);
-      console.log("");
+      const { unexpected, expected } = result.uncited;
+      console.log(`## Test files no verification.md cites (${unexpected.length})\n`);
+      for (const { path, kind } of unexpected) console.log(`- [${kind}] ${path}`);
+      const owners = [...new Set(expected.map(({ owner }) => owner))];
+      console.log(
+        `\nExpected and left out: ${expected.length} (${owners.join(", ") || "none"})\n`,
+      );
+    }
+    if (result.stale) {
+      const { checked, unchecked, findings } = result.stale;
+      console.log(`## Stale citations (${findings.length})\n`);
+      for (const { capability, citation, problem } of findings)
+        console.log(`- ${capability}: ${citation}: ${problem}`);
+      console.log(
+        `\nChecked ${checked} cited lines; ${unchecked} cited through a shorthand were not checked\n`,
+      );
     }
     if (result.lint) {
       console.log(`## Lint (${result.lint.length})\n`);
@@ -241,7 +355,7 @@ try {
     }
   }
 
-  process.exit(result.lint?.length ? 1 : 0);
+  process.exit(result.lint?.length || result.stale?.findings.length ? 1 : 0);
 } catch (error) {
   console.error(error);
   process.exit(2);

@@ -28,7 +28,7 @@ changes status. Change no product code or tests. Do not push.
 
 ## Finish
 
-`node .claude/scripts/openspec/coverage.mjs lint` and
+`node .claude/scripts/openspec/coverage.mjs stale`, `lint` and
 `$env:OPENSPEC_TELEMETRY='0'; npx -y @fission-ai/openspec@1.17.0 validate --all --strict`. One commit per capability,
 `OpenSpec: <capability>: <what changed>`. Report per spec what changed, rows upgraded, deviation verdicts, what you
 did not verify. A suspected security defect is written into no file; report it in the conversation only.

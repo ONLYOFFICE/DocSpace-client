@@ -81,6 +81,18 @@ The server SHALL store, for a link of a private item, a wrap of its secret for t
 - **WHEN** a room manager is removed from the room or given a lower role
 - **THEN** the wraps of the secrets made for that user are deleted, and the links stay
 
+#### Scenario: Wrap for a user who does not manage links
+- **WHEN** a request carries a wrap of a link's secret for a user who is neither the owner nor a room manager, or two wraps for one user
+- **THEN** the server answers 400 and stores nothing
+
+#### Scenario: Manager without a wrap
+- **WHEN** a link is read while the owner or a room manager has no wrap of its secret
+- **THEN** the answer names that user among the managers without a wrap
+
+#### Scenario: Wrap added to an existing link
+- **WHEN** a manager sends a wrap of the secret for another manager with a change of an existing link and no key material
+- **THEN** the server stores the wrap and keeps the key material of the link
+
 ### Requirement: Password of a link of a private item is replaced with new key material
 The server SHALL accept, from a user who manages links, a new sealed private key and a new proof hash for an existing link of a private item, keeping its id, its public key and its wraps, and SHALL refuse from then on the proof of the earlier ones.
 
@@ -91,6 +103,14 @@ The server SHALL accept, from a user who manages links, a new sealed private key
 #### Scenario: Public key changed in the same request
 - **WHEN** the request also carries another public key for the link
 - **THEN** the server answers 400 and changes nothing
+
+#### Scenario: Password flag changed without new key material
+- **WHEN** a change of an existing link says otherwise than the link whether a password is asked, and carries no key material
+- **THEN** the server answers 400 and changes nothing
+
+#### Scenario: Change meets a revocation
+- **WHEN** a change of a link arrives while the same link is being revoked
+- **THEN** the server answers 404 and the link stays revoked
 
 ### Requirement: No link in a private virtual data room that restricts downloading
 The server SHALL refuse with 403 an external link on a private Virtual Data Room, or on an item of one, while the room-wide restriction on downloading is on, and SHALL serve none that the room holds until it is off. It SHALL NOT delete them.

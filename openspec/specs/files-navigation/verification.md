@@ -2,6 +2,7 @@
 
 > Written 2026-11-25 on `feature/openspec-client-specs` (base `release/v4.1.0` at `f588b7668dd`). No test was run
 > for this file: an E2E or unit citation means the cited test asserts the claim, not that it passed on this commit.
+> Rows added after `release/v4.1.0` was merged in at `b5479f67ea9` were checked on that merge.
 > The operationIds of Purpose were checked against `../server/sdk/docspace-api-spec/docspace-backend.yaml`
 > (submodule `ce37da4`) by the route each client call uses.
 

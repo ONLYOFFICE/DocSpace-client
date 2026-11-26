@@ -2,6 +2,7 @@
 
 > Written 2026-11-26 on `feature/openspec-client-specs` (base `release/v4.1.0` at `f588b7668dd`). No test was run
 > for this file: an E2E or unit citation means the cited test asserts the claim, not that it passed on this commit.
+> Rows added after `release/v4.1.0` was merged in at `b5479f67ea9` were checked on that merge.
 > The page calls no operation of its own, so Purpose names no operationIds.
 
 Every requirement and scenario of `spec.md`, with where it is shown. Paths are relative to the repository root;

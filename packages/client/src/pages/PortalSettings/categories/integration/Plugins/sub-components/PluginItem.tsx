@@ -186,7 +186,7 @@ const PluginItem = ({
       <img
         className={styles.pluginLogo}
         src={imgSrc || PluginDefaultLogoUrl}
-        alt="Plugin logo"
+        alt=""
         data-testid="plugin_logo"
       />
       <div className={styles.pluginInfo}>

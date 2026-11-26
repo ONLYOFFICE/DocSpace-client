@@ -40,7 +40,9 @@ import type { TTheme } from "@onlyoffice/apps-ui-kit/providers/theme/themes";
 
 import PluginItem from "../PluginItem";
 
-const renderItem = (props: { isNotLoaded?: boolean }) =>
+const renderItem = (
+  props: Partial<React.ComponentProps<typeof PluginItem>>,
+) =>
   render(
     <PluginItem
       name="own"
@@ -75,5 +77,44 @@ describe("PluginItem", () => {
     renderItem({});
 
     expect(screen.queryByTestId("plugin_not_loaded_own_icon")).toBeNull();
+  });
+
+  it("names the workspace plugin that took the place of a shadowed one", () => {
+    renderItem({
+      shadowedBy: { nameLocale: "Hello", version: "2.0.0", enabled: true },
+    });
+
+    expect(screen.getByTestId("plugin_shadowed_own_text").textContent).toBe(
+      "WebPlugins:PersonalPluginShadowed",
+    );
+  });
+
+  it("says when the workspace plugin that shadows it is turned off", () => {
+    renderItem({
+      shadowedBy: { nameLocale: "Hello", version: "2.0.0", enabled: false },
+    });
+
+    expect(screen.getByTestId("plugin_shadowed_own_text").textContent).toBe(
+      "WebPlugins:PersonalPluginShadowedDisabled",
+    );
+  });
+
+  it("shows a shadowed plugin switched off and locked", () => {
+    renderItem({
+      shadowedBy: { nameLocale: "Hello", version: "2.0.0", enabled: true },
+      isNotLoaded: false,
+    });
+
+    expect(screen.getByTestId("enable_plugin_toggle_button")).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+    expect(screen.getByTestId("toggle-button-input")).toBeDisabled();
+  });
+
+  it("shows the logo as decoration, since the name stands next to it", () => {
+    renderItem({});
+
+    expect(screen.getByTestId("plugin_logo")).toHaveAttribute("alt", "");
   });
 });

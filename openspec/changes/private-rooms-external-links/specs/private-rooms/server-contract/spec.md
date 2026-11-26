@@ -138,14 +138,18 @@ The server SHALL list the public keys of the external links that cover a file wi
 - **THEN** the server refuses it and stores nothing
 
 ### Requirement: A link is served only against a proof of its secret
-The server SHALL give the sealed private key of a link, the wraps made for it and the content it covers only to a request that carries the proof value whose hash the link was stored with, and SHALL answer every other request with nothing of the link. It SHALL NOT store the proof value itself or accept the secret of the address.
+The server SHALL open a session of a link of a private item only for a request that carries the proof value whose hash the link was stored with. It SHALL give the sealed private key of the link in the answer to that request and in no other, SHALL serve the wraps made for the link and the content it covers only within the session that request opened, and SHALL answer every other request with nothing of the link. It SHALL NOT store the proof value itself or accept the secret of the address.
 
 #### Scenario: Valid proof
 - **WHEN** a visitor without an account sends the proof of a link that is neither revoked nor past its end date
-- **THEN** the server answers with the sealed key and serves the items the link covers
+- **THEN** the server answers with the sealed key and opens a session that serves the items the link covers
+
+#### Scenario: Request of an open session
+- **WHEN** a request without a proof comes in the session a valid proof opened
+- **THEN** the server serves the items the link covers and MUST NOT answer with the sealed key again
 
 #### Scenario: Wrong or missing proof
-- **WHEN** a request names a link without its proof or with a wrong one
+- **WHEN** a request names a link with a wrong proof, or with no proof outside a session of the link
 - **THEN** the server refuses it and MUST NOT answer with the sealed key, a wrap or any content
 
 #### Scenario: Link that asks for no password requested without a proof

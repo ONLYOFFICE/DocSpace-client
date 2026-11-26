@@ -481,9 +481,13 @@ What follows for this change:
 - An uploader cannot tell from the keys of a room which links cover the
   file, and wraps for every link of the room; the server skips the
   others. To ask of the backend team: the item of the link in its entry.
-- The switch of the portal setting for an administrator has no
-  requirement and no task here; the owner decides whether this change
-  holds it.
+- The switch of the portal setting for an administrator had no
+  requirement and no task here. Decided by the owner on 2026-11-26: this
+  change holds it, next to the setting of external links (task 3.6, the
+  `room-membership` delta). The same day: the item of a link in its
+  entry is asked of the backend team and not waited for, and the page of
+  a visitor is started on the components of the public room without
+  waiting for the screens of task 0.4.
 
 ## Goals / Non-Goals
 

@@ -38,7 +38,9 @@ import type { Page } from "@playwright/test";
 import {
   encryptedFilesHandlers,
   filesSettingsHandler,
+  openEditHandler,
   privacyroomKeysHandlers,
+  privateLinkVisitorHandlers,
 } from "@docspace/shared/__mocks__/handlers";
 import type { SetupServer } from "@docspace/shared/__mocks__/e2e";
 import { encryptFile } from "@docspace/shared/services/encryption/file-keys";
@@ -46,6 +48,10 @@ import {
   generateIdentityKeyPair,
   serializeIdentity,
 } from "@docspace/shared/services/encryption/identity";
+import {
+  createLinkKey,
+  generateLinkSecret,
+} from "@docspace/shared/services/encryption/link-key";
 import { wrapDekForRecipients } from "@docspace/shared/services/encryption/room-file-access";
 import { EDITOR_CONTRACT_VERSION } from "@docspace/shared/services/encryption/types";
 import { arrayBufferToBase64 } from "@docspace/shared/services/encryption/utils";
@@ -155,6 +161,76 @@ const serveEncryptedFile = async (
   return { dekBase64 };
 };
 
+const LINK_ID = "33333333-3333-4333-8333-333333333333";
+const LINK_KEY = "signed-link-key";
+const LINK_PASSWORD = "correct horse battery";
+
+/**
+ * The same .docx reached through an external link: its key is wrapped for
+ * the link by a member of the room, and the link answers its sealed key to
+ * the proof alone.
+ */
+const serveLinkedFile = async (
+  mockBoth: (...handlers: THandler[]) => void,
+  port: string,
+  password?: string,
+) => {
+  const secret = generateLinkSecret();
+  const { material } = await createLinkKey(secret, password);
+  const member = await generateIdentityKeyPair();
+  const memberPublicKey = arrayBufferToBase64(member.publicKey);
+
+  const { encryptedBlob, dek } = await encryptFile(
+    new TextEncoder().encode("Quarterly report, readable through the link."),
+    { fileName: "Report.docx" },
+  );
+  const dekBase64 = arrayBufferToBase64(dek.slice().buffer as ArrayBuffer);
+  const fileKeys = await wrapDekForRecipients({
+    dek,
+    senderIdentity: member,
+    senderUserId: SELF_ID,
+    recipients: [
+      { userId: SELF_ID, publicKey: memberPublicKey },
+      { userId: LINK_ID, publicKey: material.linkPublicKey, publicKeyId: LINK_ID },
+    ],
+    fileId: FILE_ID,
+  });
+  const forLink = fileKeys.find((key) => key.userId === LINK_ID)!.privateKeyEnc;
+
+  mockBoth(
+    ...encryptedFilesHandlers(port, {
+      roomId: ROOM_ID,
+      ownerId: SELF_ID,
+      initialFiles: [
+        {
+          id: FILE_ID,
+          title: "Report.docx",
+          serverTitle: "3d8f2a61-9c47-4b1e-8a05-6f2c4e7d1b93.docx",
+          size: encryptedBlob.size,
+          encrypted: true,
+          fileKeys,
+          bytes: new Uint8Array(await encryptedBlob.arrayBuffer()),
+        },
+      ],
+    }),
+  );
+  // After the room: the keys of the file are answered to the visitor of the link.
+  mockBoth(
+    ...privateLinkVisitorHandlers(port, {
+      key: LINK_KEY,
+      linkId: LINK_ID,
+      entryId: FILE_ID,
+      entryType: 2,
+      passwordRequired: !!password,
+      ...material,
+      memberKeys: [{ id: "key-1", userId: SELF_ID, publicKey: memberPublicKey }],
+      files: { [FILE_ID]: forLink },
+    }),
+  );
+
+  return { secret, dekBase64 };
+};
+
 const passphrasePrompt = (page: Page) =>
   page.getByRole("dialog").filter({ hasText: "Enter passphrase" });
 
@@ -237,5 +313,129 @@ test.describe("Private room editor", () => {
     await expect(passphrasePrompt(page)).toHaveCount(0);
     expect(await editorConfigs(page)).toEqual([]);
     expect(accessReads).toEqual([]);
+  });
+});
+
+test.describe("Private room editor: a visitor of an external link", () => {
+  test.skip(
+    ({ isMobile }) => isMobile,
+    "Tablets and phones get the deep link page instead of the editor",
+  );
+
+  test("Document opened through a link", async ({
+    page,
+    port,
+    baseUrl,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+  }) => {
+    test.slow();
+    const mockBoth = (...handlers: THandler[]) => {
+      serverRequestInterceptor.use(...handlers);
+      clientRequestInterceptor.use(...handlers);
+    };
+    mockBoth(filesSettingsHandler(port));
+    const { secret, dekBase64 } = await serveLinkedFile(mockBoth, port);
+    await stubDocsApi(page);
+    const sent: string[] = [];
+    page.on("request", (request) => {
+      sent.push(`${request.url()} ${request.postData() ?? ""}`);
+    });
+
+    await page.goto(
+      `${baseUrl}/doceditor?fileId=${FILE_ID}&share=${LINK_KEY}&action=view#${secret}`,
+    );
+
+    await expect
+      .poll(async () => (await editorConfigs(page)).length, { timeout: 15000 })
+      .toBeGreaterThan(0);
+    const configs = await editorConfigs(page);
+    const config = configs[configs.length - 1];
+
+    expect(config.editorConfig?.encryptionKeys).toMatchObject({
+      dek: dekBase64,
+      contractVersion: EDITOR_CONTRACT_VERSION,
+    });
+    // The key of no user is asked for, and the part after # is sent nowhere.
+    await expect(passphrasePrompt(page)).toHaveCount(0);
+    expect(sent.some((entry) => entry.includes(secret))).toBe(false);
+  });
+
+  test("Link with a password: the editor asks for it again", async ({
+    page,
+    port,
+    baseUrl,
+    serverRequestInterceptor,
+    clientRequestInterceptor,
+  }) => {
+    test.slow();
+    const mockBoth = (...handlers: THandler[]) => {
+      serverRequestInterceptor.use(...handlers);
+      clientRequestInterceptor.use(...handlers);
+    };
+    mockBoth(filesSettingsHandler(port));
+    const { secret, dekBase64 } = await serveLinkedFile(
+      mockBoth,
+      port,
+      LINK_PASSWORD,
+    );
+    await stubDocsApi(page);
+
+    await page.goto(
+      `${baseUrl}/doceditor?fileId=${FILE_ID}&share=${LINK_KEY}&action=view#${secret}`,
+    );
+
+    const form = page.getByTestId("link-password-form");
+    await expect(form).toBeVisible({ timeout: 15000 });
+    expect(await editorConfigs(page)).toEqual([]);
+
+    await form.locator("#link-password").fill("not the password");
+    await page.getByTestId("link-password-submit").click();
+    await expect(page.getByTestId("link-password-wrong")).toBeVisible();
+    expect(await editorConfigs(page)).toEqual([]);
+
+    await form.locator("#link-password").fill(LINK_PASSWORD);
+    await page.getByTestId("link-password-submit").click();
+
+    await expect
+      .poll(async () => (await editorConfigs(page)).length, { timeout: 15000 })
+      .toBeGreaterThan(0);
+    const configs = await editorConfigs(page);
+    expect(
+      configs[configs.length - 1].editorConfig?.encryptionKeys,
+    ).toMatchObject({ dek: dekBase64 });
+  });
+
+  test("Link of a private item: the address of an ordinary link goes to the page of a visitor", async ({
+    page,
+    port,
+    baseUrl,
+    serverRequestInterceptor,
+  }) => {
+    const secret = generateLinkSecret();
+    const { material } = await createLinkKey(secret);
+    serverRequestInterceptor.use(
+      filesSettingsHandler(port),
+      openEditHandler(port, true),
+      ...privateLinkVisitorHandlers(port, {
+        key: LINK_KEY,
+        linkId: LINK_ID,
+        entryId: FILE_ID,
+        entryType: 2,
+        passwordRequired: false,
+        ...material,
+        memberKeys: [],
+        files: {},
+      }),
+    );
+
+    await page.goto(
+      `${baseUrl}/doceditor?fileId=${FILE_ID}&share=${LINK_KEY}#${secret}`,
+    );
+
+    await expect(page).toHaveURL(
+      `${baseUrl}/share/private?key=${LINK_KEY}#${secret}`,
+    );
+    await expect(page.getByTestId("form-wrapper")).toHaveCount(0);
   });
 });

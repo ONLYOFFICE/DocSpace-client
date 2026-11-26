@@ -34,7 +34,6 @@
  */
 
 import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
@@ -52,6 +51,7 @@ import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
 import OAuthEditor from "@/components/OAuthEditor";
 import FilePassword from "@/components/file-password";
+import PrivateLinkRedirect from "@/components/PrivateLinkRedirect";
 import type { TFrameConfig, TFrameTheme } from "@docspace/shared/types/Frame";
 
 const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
@@ -171,9 +171,7 @@ async function Page(props: RootPageProps) {
 
     // Spec: private-rooms/file-operations, "A visitor opens an external link without an account"
     if (roomData.response.isPrivate) {
-      redirect(
-        `${hdrs.get("x-forwarded-proto") ?? "https"}://${hostname}${getPrivateLinkPagePath(share)}`,
-      );
+      return <PrivateLinkRedirect path={getPrivateLinkPagePath(share)} />;
     }
 
     if (status === ValidationStatus.Password) {

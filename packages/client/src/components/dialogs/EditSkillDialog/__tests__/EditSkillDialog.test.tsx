@@ -39,6 +39,12 @@ vi.mock("SRC_DIR/components/CreateEditDialogParams/InputParam", () => ({
     <input data-testid={dataTestId} value={value} onChange={onChange} />
   ),
 }));
+// ui-kit's Markdown view lays the text out; here it only shows what it was given.
+vi.mock("@onlyoffice/apps-ui-kit/ai-agent/markdown", () => ({
+  default: ({ chatMessage }: { chatMessage: string }) => (
+    <div data-testid="markdown">{chatMessage}</div>
+  ),
+}));
 vi.mock("../../GenerateSkillDialog/SkillEditor", () => ({
   default: ({ value, onChange }: { value: string; onChange: (value: string) => void }) => (
     <textarea data-testid="editor" value={value} onChange={(e) => onChange(e.target.value)} />
@@ -158,10 +164,10 @@ describe("EditSkillDialog", () => {
   it("shows only the instructions for View instructions, and edits them on Edit", async () => {
     const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
     render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
-    // Laid out as it reads: a heading, not the Markdown that writes it.
+    // The instructions alone, without the frontmatter, go to the Markdown
+    // view, which lays them out; no editor shows their source.
     const preview = await screen.findByTestId("view-skill-preview");
-    expect(preview.querySelector("h1")?.textContent).toBe("Steps");
-    expect(preview.textContent).not.toContain("#");
+    expect(preview.querySelector('[data-testid="markdown"]')?.textContent).toBe("# Steps");
     expect(screen.queryByTestId("editor")).toBeNull();
     expect(screen.queryByTestId("edit-skill-name")).toBeNull();
     fireEvent.click(screen.getByTestId("view-skill-edit"));

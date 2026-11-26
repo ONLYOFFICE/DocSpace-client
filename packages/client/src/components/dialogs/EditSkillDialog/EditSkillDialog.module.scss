@@ -187,3 +187,167 @@
 .message {
   color: var(--text-secondary);
 }
+
+// The instructions as they read: the Markdown laid out, in the text of the
+// portal. It scrolls with the dialog's body.
+.preview {
+  min-width: 0;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-color);
+  overflow-wrap: anywhere;
+  user-select: text;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 20px 0 8px;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 23px;
+    line-height: 28px;
+  }
+
+  h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  h3 {
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  p,
+  ul,
+  ol,
+  blockquote,
+  pre,
+  table {
+    margin: 0 0 12px;
+  }
+
+  ul,
+  ol {
+    padding-inline-start: 24px;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li > ul,
+  li > ol {
+    margin-bottom: 0;
+  }
+
+  li + li {
+    margin-top: 4px;
+  }
+
+  // A task list keeps its checkboxes and drops the bullets.
+  :global(.contains-task-list) {
+    padding-inline-start: 4px;
+    list-style: none;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  blockquote {
+    padding-inline-start: 12px;
+    border-inline-start: 3px solid var(--aside-header-border-color);
+    color: var(--text-secondary);
+  }
+
+  hr {
+    margin: 16px 0;
+    border: 0;
+    border-top: 1px solid var(--aside-header-border-color);
+  }
+
+  // The page sets its font on every element, so code gets its own by name.
+  code,
+  pre,
+  pre * {
+    font-family:
+      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 12px;
+  }
+
+  code {
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: var(--article-catalog-background);
+  }
+
+  pre {
+    padding: 12px;
+    overflow-x: auto;
+    border: 1px solid var(--aside-header-border-color);
+    border-radius: 3px;
+    background: var(--article-catalog-background);
+    line-height: 18px;
+    // Code reads left to right in every language of the portal.
+    direction: ltr;
+    text-align: left;
+
+    code {
+      padding: 0;
+      background: none;
+    }
+  }
+
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 6px 12px;
+    border: 1px solid var(--aside-header-border-color);
+    text-align: start;
+    vertical-align: top;
+  }
+
+  th {
+    font-weight: 600;
+    background: var(--article-catalog-background);
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

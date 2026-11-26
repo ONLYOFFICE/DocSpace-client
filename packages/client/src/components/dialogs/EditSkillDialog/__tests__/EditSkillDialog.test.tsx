@@ -158,7 +158,11 @@ describe("EditSkillDialog", () => {
   it("shows only the instructions for View instructions, and edits them on Edit", async () => {
     const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
     render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
-    expect(((await screen.findByTestId("editor")) as HTMLTextAreaElement).value).toBe("# Steps");
+    // Laid out as it reads: a heading, not the Markdown that writes it.
+    const preview = await screen.findByTestId("view-skill-preview");
+    expect(preview.querySelector("h1")?.textContent).toBe("Steps");
+    expect(preview.textContent).not.toContain("#");
+    expect(screen.queryByTestId("editor")).toBeNull();
     expect(screen.queryByTestId("edit-skill-name")).toBeNull();
     fireEvent.click(screen.getByTestId("view-skill-edit"));
     expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("Clause check");
@@ -167,7 +171,7 @@ describe("EditSkillDialog", () => {
   it("opens the instructions and the form as a modal dialog", async () => {
     const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
     render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
-    await screen.findByTestId("editor");
+    await screen.findByTestId("view-skill-preview");
     expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
     fireEvent.click(screen.getByTestId("view-skill-edit"));
     expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
@@ -180,7 +184,7 @@ describe("EditSkillDialog", () => {
 
   it("offers no Edit in the instructions view to those who may not edit the skill", async () => {
     render(<EditSkillDialog file={file} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
-    await screen.findByTestId("editor");
+    await screen.findByTestId("view-skill-preview");
     expect(screen.queryByTestId("view-skill-edit")).toBeNull();
   });
 

@@ -19,6 +19,7 @@ asserts it), **CODE-ONLY** (read from the code, no test).
 | **The profile menu** | | |
 | Billing entry for an admin, none for a member | `billing-access.spec.ts:577, 591` | E2E-CONFIRMED |
 | Entries by type, edition and installation; unpaid period | `menu:450-635` | CODE-ONLY |
+| Editors' admin panel right below Settings for an administrator of a server installation, opened in a new tab; none for a Room admin, on SaaS or without a published address | `docs-admin-panel.spec.ts:101, 133, 166, 176, 191` | E2E-CONFIRMED |
 | **Help and session entries of the profile menu** | | |
 | Help, support, feature, hotkeys, live chat, About, sign out in a frame | `menu:522-687` | CODE-ONLY |
 | **Menu entries as links** | | |
@@ -51,6 +52,9 @@ asserts it), **CODE-ONLY** (read from the code, no test).
 | **Fitting the top row** | | |
 | Collapse button at the trailing edge; squeezed slot collapses | `top-row-fit.spec.ts:179, 256, 307, 462` | E2E-CONFIRMED |
 | Settings on a phone open the section list | `settings-mobile-section-list.spec.ts:74` | E2E-CONFIRMED |
+| **A crowded room header** | | |
+| Nothing spills out of the row; ellipsis on a shortened share label; tariff line hidden instead of cut; chat button label given up first; readable minimum of the name | `room-header-crowding.spec.ts:351, 388, 449, 485, 518` | E2E-CONFIRMED |
+| Frames per language, width and name length | `room-header-crowding.spec.ts:328` | E2E-CONFIRMED |
 
 ## Left out of the spec
 

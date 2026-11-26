@@ -25,14 +25,19 @@ portal-not-found handling of `packages/shared/routes`.
 ### Requirement: The profile menu
 
 The profile menu SHALL offer Profile, Contacts to every type but User and Guest, Settings to administrators, Billing (or
-Payments on a server installation) to administrators outside Community Edition, and Spaces and the editors' admin panel
-to administrators of a server installation. While the portal is unpaid it SHALL leave out Profile, Contacts, Settings and
-Billing.
+Payments on a server installation) to administrators outside Community Edition, and Spaces to administrators of a server
+installation, and to them too, right below Settings, the editors' admin panel in a new tab where the backend publishes
+its address. While the portal is unpaid it SHALL leave out Profile, Contacts, Settings and Billing.
 
 #### Scenario: User's menu
 
 - **WHEN** a User opens the profile menu
 - **THEN** neither Contacts nor Settings is offered
+
+#### Scenario: Room admin on a server installation
+
+- **WHEN** a Room admin of a server installation opens the profile menu
+- **THEN** the editors' admin panel is not offered
 
 ### Requirement: Help and session entries of the profile menu
 
@@ -139,3 +144,15 @@ button rather than clip it. On a phone, Settings from the profile menu SHALL ope
 
 - **WHEN** a DocSpace admin opens Settings from the profile menu on a phone
 - **THEN** the list of settings sections is shown
+
+### Requirement: A crowded room header
+
+When the header of a room runs out of width — a long room name, a longer language, the info panel open — nothing SHALL
+spill out of its row: the tariff line SHALL disappear rather than be cut, the AI chat button SHALL give up its label
+before its neighbours are cut, a shortened share label SHALL end in an ellipsis, and the room name SHALL keep a readable
+minimum.
+
+#### Scenario: Info panel open
+
+- **WHEN** a user opens the info panel in a room with a long name at 1280 pixels
+- **THEN** every control of the header stays inside its row

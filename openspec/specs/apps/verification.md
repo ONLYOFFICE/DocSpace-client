@@ -41,6 +41,8 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | **What a switched-off application takes along** | | |
 | No create-room entry while Rooms is off | `src/store/filesStore/__tests__/FilesStore.contextOptions.test.ts:228`; `src/store/filesActionsStore/__tests__/FilesActionsStore.isAvailableOption.test.ts:135` | UNIT-CONFIRMED |
 | Pickers drop Rooms and Forms | `src/components/FilesSelector/__tests__/utils.test.ts:86, 92` | UNIT-CONFIRMED |
+| No Create room in the file and folder menus, the selection header and the group menu while Rooms is off, offered while on | `packages/client/__tests__/rooms-app-off.spec.ts:174, 202, 230, 259` | E2E-CONFIRMED |
+| Move and Copy selector roots without Rooms while it is off, Forms kept; without Forms while Forms is off | `packages/client/__tests__/rooms-app-off.spec.ts:307, 336` | E2E-CONFIRMED |
 | Start page falls back to Home; Private falls back to Home when Rooms is off too | `src/helpers/__tests__/defaultStartPage.test.ts:154, 167, 180` | UNIT-CONFIRMED |
 | Start page setting does not offer a switched-off section | `src/pages/Profile/Section/Body/sub-components/file-management/sub-components/__tests__/DefaultPageSetting.test.tsx:128, 139` | UNIT-CONFIRMED |
 | **A switch made elsewhere** | | |

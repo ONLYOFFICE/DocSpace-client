@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 
@@ -104,6 +104,11 @@ const ids = (store: TreeFoldersStore) =>
 describe("TreeFoldersStore AI projects of the sidebar", () => {
   beforeEach(() => {
     getFoldersTree.mockReset();
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it("reads the projects of the AI rooms section with the tree, pinned or not", async () => {
@@ -135,6 +140,7 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
     await store.fetchTreeFolders();
 
     store.syncAiHubRootProject(project(12, "Renamed"));
+    await vi.runAllTimersAsync();
 
     expect(store.aiHubRootProjects.map((p) => p.name)).toEqual(["First", "Renamed"]);
     expect(getFoldersTree).toHaveBeenCalledTimes(1);
@@ -149,7 +155,8 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
     );
 
     store.syncAiHubRootProject(project(11, "First", false));
-    await vi.waitFor(() => expect(ids(store)).toEqual(["12", "11"]));
+    await vi.runAllTimersAsync();
+    expect(ids(store)).toEqual(["12", "11"]);
 
     expect(store.aiHubRootProjects[1].pinned).toBe(false);
     expect(getFoldersTree).toHaveBeenCalledTimes(2);
@@ -164,7 +171,8 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
     );
 
     store.syncAiHubRootProject(project(20, "New"));
-    await vi.waitFor(() => expect(ids(store)[0]).toBe("20"));
+    await vi.runAllTimersAsync();
+    expect(ids(store)[0]).toBe("20");
 
     expect(ids(store)).toEqual(["20", "11", "12", "13", "14"]);
   });
@@ -178,7 +186,8 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
     );
 
     store.syncAiHubRootProject(project(30, "Created", false));
-    await vi.waitFor(() => expect(ids(store)).toEqual(["11", "30"]));
+    await vi.runAllTimersAsync();
+    expect(ids(store)).toEqual(["11", "30"]);
   });
 
   it("reads the tree again for a new project that may push out one that is not pinned", async () => {
@@ -189,6 +198,7 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
     await store.fetchTreeFolders();
 
     store.syncAiHubRootProject(project(30, "Created", false));
+    await vi.runAllTimersAsync();
 
     expect(getFoldersTree).toHaveBeenCalledTimes(2);
   });
@@ -199,9 +209,24 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
     await store.fetchTreeFolders();
 
     store.syncAiHubRootProject(project(30, "Created", false));
+    await vi.runAllTimersAsync();
 
     expect(ids(store)).toEqual(["11", "12", "13", "14", "15"]);
     expect(getFoldersTree).toHaveBeenCalledTimes(1);
+  });
+
+  it("reads the tree once for a burst of changes", async () => {
+    getFoldersTree.mockResolvedValue(tree(room(11, "First")));
+    const store = createStore();
+    await store.fetchTreeFolders();
+
+    store.syncAiHubRootProject(project(30, "Created", false));
+    store.syncAiHubRootProject(project(30, "Created", false));
+    store.syncAiHubRootProject(project(31, "Another", false));
+    expect(getFoldersTree).toHaveBeenCalledTimes(1);
+    await vi.runAllTimersAsync();
+
+    expect(getFoldersTree).toHaveBeenCalledTimes(2);
   });
 
   it("drops a deleted project by its id, and ignores one that is not listed", async () => {
@@ -211,6 +236,7 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
 
     store.removeAiHubRootProject(11);
     store.removeAiHubRootProject(40);
+    await vi.runAllTimersAsync();
 
     expect(ids(store)).toEqual(["12"]);
     expect(getFoldersTree).toHaveBeenCalledTimes(1);
@@ -226,7 +252,8 @@ describe("TreeFoldersStore AI projects of the sidebar", () => {
 
     store.removeAiHubRootProject(11);
     expect(ids(store)).toEqual(["12", "13", "14", "15"]);
-    await vi.waitFor(() => expect(ids(store)).toHaveLength(5));
+    await vi.runAllTimersAsync();
+    expect(ids(store)).toHaveLength(5);
 
     expect(ids(store)).toEqual(["12", "13", "14", "15", "16"]);
   });

@@ -79,6 +79,20 @@ export type TAiHubRootProject = {
 /** How many AI projects `@root` lists in the AI rooms section at most. */
 const AI_HUB_ROOT_PROJECTS_COUNT = 5;
 
+/**
+ * How long a change of an AI project waits before the tree is read again
+ * for the sidebar's list. One change arrives more than once - from the
+ * action and over the socket - and a room's updates come in bursts, while
+ * `@root` is the most expensive listing there is: they are read as one.
+ */
+export const AI_HUB_ROOT_REFRESH_DELAY_MS = 300;
+
+// The pending read of each store, kept out of its observable state.
+const aiHubRootRefreshTimers = new WeakMap<
+  object,
+  ReturnType<typeof setTimeout>
+>();
+
 const toAiHubRootProject = (
   project: Pick<TAiProject, "id" | "title" | "logo" | "pinned">,
 ): TAiHubRootProject => ({
@@ -187,6 +201,20 @@ class TreeFoldersStore {
     this.aiHubRootProjects = projects;
   };
 
+  /** Reads the tree again for the sidebar's AI projects, once for a burst of changes. */
+  private refreshAiHubRootProjects = () => {
+    const pending = aiHubRootRefreshTimers.get(this);
+    if (pending) clearTimeout(pending);
+    aiHubRootRefreshTimers.set(
+      this,
+      setTimeout(() => {
+        aiHubRootRefreshTimers.delete(this);
+        // A read that fails keeps the list as it is.
+        this.fetchTreeFolders().catch(() => {});
+      }, AI_HUB_ROOT_REFRESH_DELAY_MS),
+    );
+  };
+
   /**
    * An AI project was created or changed. A listed one takes its new name
    * and logo at once. Which projects are listed, and in what order, only the
@@ -207,14 +235,14 @@ class TreeFoldersStore {
       this.aiHubRootProjects = this.aiHubRootProjects.map((p) =>
         p.id === id ? toAiHubRootProject(project) : p,
       );
-      if (listed.pinned !== pinned) void this.fetchTreeFolders();
+      if (listed.pinned !== pinned) this.refreshAiHubRootProjects();
       return;
     }
 
     const hasRoom =
       this.aiHubRootProjects.length < AI_HUB_ROOT_PROJECTS_COUNT ||
       this.aiHubRootProjects.some((p) => !p.pinned);
-    if (pinned || hasRoom) void this.fetchTreeFolders();
+    if (pinned || hasRoom) this.refreshAiHubRootProjects();
   };
 
   /**
@@ -229,7 +257,7 @@ class TreeFoldersStore {
     this.aiHubRootProjects = this.aiHubRootProjects.filter(
       (p) => p.id !== projectId,
     );
-    if (wasFull) void this.fetchTreeFolders();
+    if (wasFull) this.refreshAiHubRootProjects();
   };
 
   listenTreeFolders = (treeFolders: TTreeFolder[]) => {

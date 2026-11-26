@@ -46,11 +46,15 @@ Context SHALL list what the agent draws on in two sections: Skill sets (`Common:
 - **THEN** it is not listed
 
 ### Requirement: Skills of a skill set
-On Context a skill set that has skills SHALL unfold to the names of its skills. When the skills cannot be read, the skill sets SHALL still be listed, without the unfold control.
+On Context a skill set that has skills SHALL unfold to the names of its skills. A skill SHALL open the dialog of "View instructions" (`ai-skill-sets`) on a click. When the skills cannot be read, the skill sets SHALL still be listed, without the unfold control.
 
 #### Scenario: Unfold a skill set
 - **WHEN** a Member unfolds the skill set "Document assistant"
 - **THEN** its skills are listed under it
+
+#### Scenario: Click on a skill
+- **WHEN** a Member clicks the skill "Document summary" under its skill set
+- **THEN** its instructions are shown read-only in the skill dialog
 
 #### Scenario: Skills unavailable
 - **WHEN** the skills of the agent cannot be read

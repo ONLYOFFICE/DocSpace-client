@@ -53,6 +53,8 @@ type RoomItemProps = {
   title: string;
   /** The kind of room, drawn with its own icon. */
   icon: TSourceRoomIcon;
+  /** The icon without its tinted square. */
+  isPlainIcon?: boolean;
   /** Called before the room opens, e.g. to close the aside the item sits in. */
   onOpen?: () => void;
   /** With `onToggle`, an expander before the room, as the folder tree draws one. */
@@ -63,6 +65,8 @@ type RoomItemProps = {
 type SourceRoomLogoProps = {
   icon: TSourceRoomIcon;
   size?: string;
+  /** The glyph alone, without the tinted square behind it. */
+  isPlain?: boolean;
   className?: string;
 };
 
@@ -76,16 +80,17 @@ const SKILL_ICON_KINDS: Record<TSourceRoomIcon, "set" | "knowledge"> = {
  * the skill set icon and the knowledge base icon, as the lists, the Info
  * panel and Details draw them: a logo stored for such a room is not shown.
  */
-export const SourceRoomLogo = ({ icon, size = "24px", className }: SourceRoomLogoProps) => (
+export const SourceRoomLogo = ({ icon, size = "24px", isPlain, className }: SourceRoomLogoProps) => (
   <SkillIcon
     kind={SKILL_ICON_KINDS[icon]}
     size={Number.parseInt(size, 10)}
+    isPlain={isPlain}
     className={classNames("room-icon", className)}
   />
 );
 
 /** A linked room as the new-files panel draws one; a click opens the room. */
-const RoomItem = ({ id, title, icon, onOpen, isExpanded, onToggle }: RoomItemProps) => {
+const RoomItem = ({ id, title, icon, isPlainIcon, onOpen, isExpanded, onToggle }: RoomItemProps) => {
   const navigate = useNavigate();
 
   const onClick = (e: React.MouseEvent) => {
@@ -98,7 +103,7 @@ const RoomItem = ({ id, title, icon, onOpen, isExpanded, onToggle }: RoomItemPro
 
   const item = (
     <div className={styles.roomItem} onClick={onClick} data-testid={`ai-project-room-${id}`}>
-      <SourceRoomLogo icon={icon} />
+      <SourceRoomLogo icon={icon} isPlain={isPlainIcon} />
       <Text className="room-item-title" fontSize="13px" fontWeight={600} lineHeight="15px" title={title} truncate noSelect>
         {title}
       </Text>

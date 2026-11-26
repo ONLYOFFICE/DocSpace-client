@@ -110,6 +110,7 @@ type SectionBodyContentProps = {
   fetchPersonalPlugins?: PluginStore["fetchPersonalPlugins"];
   pluginTabs?: PluginStore["profileTabItemsList"];
   arePluginsPending?: boolean;
+  isPersonalPluginsPending?: boolean;
 };
 
 const SectionBodyContent = (props: SectionBodyContentProps) => {
@@ -142,6 +143,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     fetchPersonalPlugins,
     pluginTabs = [],
     arePluginsPending = false,
+    isPersonalPluginsPending = false,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -180,7 +182,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   }, []);
 
   useEffect(() => {
-    fetchPersonalPlugins?.();
+    fetchPersonalPlugins?.(false);
   }, [fetchPersonalPlugins]);
 
   const {
@@ -306,6 +308,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     getProfileTabId(location.pathname),
     data.map((item) => item.id),
     arePluginsPending && !isPluginWaitOver,
+    isPersonalPluginsPending ? ["plugins"] : [],
   );
 
   const onSelect = (e: TTabItem) => {
@@ -443,6 +446,10 @@ export default inject(
           : undefined,
       pluginTabs: pluginStore?.profileTabItemsList,
       arePluginsPending: settingsStore.enablePlugins && !pluginStore?.isLoaded,
+      isPersonalPluginsPending:
+        canHavePersonalPlugins &&
+        !settingsStore.pluginOptions.upload &&
+        !pluginStore?.isPersonalLoaded,
     };
   },
 )(

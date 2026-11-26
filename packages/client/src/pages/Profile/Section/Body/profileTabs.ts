@@ -33,10 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { PLUGIN_WAIT_MS } from "SRC_DIR/helpers/plugins/utils";
+
 export const PLUGIN_TAB_PREFIX = "p/";
 
 /** How long a plugin tab address waits for its plugin before it counts as missing. */
-export const PLUGIN_TAB_WAIT_MS = 10000;
+export const PLUGIN_TAB_WAIT_MS = PLUGIN_WAIT_MS;
 
 export type TProfileTabState =
   | { kind: "tab"; id: string }
@@ -68,8 +70,11 @@ export const resolveProfileTab = (
   tabId: string,
   tabIds: string[],
   arePluginsPending: boolean,
+  pendingTabIds: string[] = [],
 ): TProfileTabState => {
   if (tabIds.includes(tabId)) return { kind: "tab", id: tabId };
+
+  if (pendingTabIds.includes(tabId)) return { kind: "pending" };
 
   if (!tabId.startsWith(PLUGIN_TAB_PREFIX)) {
     return { kind: "tab", id: tabIds[0] };

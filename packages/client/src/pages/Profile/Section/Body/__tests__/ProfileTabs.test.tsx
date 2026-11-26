@@ -130,6 +130,7 @@ type TKeysState = {
   hasPersonalPlugin?: boolean;
   ownPlugins?: { name: string }[];
   fetchPersonalPlugins?: () => Promise<void>;
+  isPersonalLoaded?: boolean;
   pluginTabKeys?: string[];
   arePluginsLoaded?: boolean;
 };
@@ -143,6 +144,7 @@ const renderProfileTabs = ({
   hasPersonalPlugin = false,
   ownPlugins = [],
   fetchPersonalPlugins = vi.fn(async () => {}),
+  isPersonalLoaded = true,
   pluginTabKeys = [],
   arePluginsLoaded = true,
 }: TKeysState = {}) =>
@@ -165,6 +167,7 @@ const renderProfileTabs = ({
         pluginList: hasPersonalPlugin ? [{ name: "own", personal: true }] : [],
         personalPlugins: ownPlugins,
         fetchPersonalPlugins,
+        isPersonalLoaded,
       }}
       peopleStore={{
         targetUserStore: {
@@ -326,6 +329,7 @@ describe("Personal plugins tab", () => {
     });
 
     expect(fetchPersonalPlugins).toHaveBeenCalledTimes(1);
+    expect(fetchPersonalPlugins).toHaveBeenCalledWith(false);
   });
 
   it("does not read the member's own plugins while uploads are on", () => {
@@ -389,6 +393,18 @@ describe("Plugin tabs", () => {
     } finally {
       vi.useRealTimers();
     }
+  });
+
+  it("waits for the member's own plugins on the Plugins tab address while uploads are off", () => {
+    router.pathname = "/profile/plugins";
+    renderProfileTabs({
+      arePersonalPluginsAllowed: true,
+      isUploadAllowed: false,
+      isPersonalLoaded: false,
+    });
+
+    expect(screen.getByTestId("profile-loader")).toBeInTheDocument();
+    expect(screen.queryByTestId("tab-login")).not.toBeInTheDocument();
   });
 
   it("sends a plugin tab address no plugin owns to the login tab once the plugins are loaded", () => {

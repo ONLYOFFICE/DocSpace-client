@@ -111,6 +111,16 @@ describe("resolveProfileTab", () => {
     });
   });
 
+  it("waits for a portal tab that may still appear", () => {
+    expect(resolveProfileTab("plugins", tabIds, false, ["plugins"])).toEqual({
+      kind: "pending",
+    });
+    expect(resolveProfileTab("plugins", tabIds, false)).toEqual({
+      kind: "tab",
+      id: "login",
+    });
+  });
+
   it("waits for the plugins before deciding a plugin tab is missing", () => {
     expect(resolveProfileTab("p/crm", tabIds, true)).toEqual({ kind: "pending" });
     expect(resolveProfileTab("p/crm", tabIds, false)).toEqual({ kind: "missing" });

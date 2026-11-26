@@ -33,9 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { Provider } from "mobx-react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+const upload = vi.hoisted(() => ({
+  addPlugin: (async () => undefined) as (data: FormData) => Promise<unknown>,
+}));
 
 vi.mock("react-router", () => ({ useNavigate: () => vi.fn() }));
 
@@ -64,15 +68,29 @@ vi.mock(
   () => ({
     default: ({
       dataTestId,
+      name,
+      enabled,
       isNotLoaded,
+      updatePlugin,
     }: {
       dataTestId?: string;
+      name: string;
+      enabled: boolean;
       isNotLoaded?: boolean;
+      updatePlugin?: (name: string, status: boolean) => Promise<unknown>;
     }) => (
       <div
         data-testid={dataTestId}
         data-not-loaded={String(!!isNotLoaded)}
-      />
+      >
+        {updatePlugin ? (
+          <button
+            type="button"
+            data-testid={`${dataTestId}_switch`}
+            onClick={() => updatePlugin(name, !enabled)}
+          />
+        ) : null}
+      </div>
     ),
   }),
 );
@@ -80,11 +98,19 @@ vi.mock(
 vi.mock(
   "SRC_DIR/pages/PortalSettings/categories/integration/Plugins/hooks/usePluginUpload",
   () => ({
-    default: () => ({
-      onDrop: vi.fn(),
-      showCacheWarning: false,
-      handleCloseCacheWarning: vi.fn(),
-    }),
+    default: ({
+      addPlugin,
+    }: {
+      addPlugin: (data: FormData) => Promise<unknown>;
+    }) => {
+      upload.addPlugin = addPlugin;
+
+      return {
+        onDrop: vi.fn(),
+        showCacheWarning: false,
+        handleCloseCacheWarning: vi.fn(),
+      };
+    },
   }),
 );
 
@@ -107,6 +133,9 @@ const loadedPlugin = (name: string, personal: boolean) => ({
 
 type TTabState = {
   isAdmin?: boolean;
+  isUploadAllowed?: boolean;
+  addPlugin?: (data: FormData, personal: boolean) => Promise<unknown>;
+  updatePlugin?: (name: string, status: boolean) => Promise<unknown>;
   fetchPersonalPlugins?: () => Promise<unknown>;
   isPersonalLoaded?: boolean;
   personalPlugins?: ReturnType<typeof ownPlugin>[];
@@ -116,6 +145,9 @@ type TTabState = {
 
 const renderTab = ({
   isAdmin = false,
+  isUploadAllowed = true,
+  addPlugin = vi.fn(async () => undefined),
+  updatePlugin = vi.fn(async () => undefined),
   fetchPersonalPlugins = vi.fn(async () => true),
   isPersonalLoaded = true,
   personalPlugins = [],
@@ -129,8 +161,8 @@ const renderTab = ({
         pluginList,
         reloadRequiredPlugins,
         fetchPersonalPlugins,
-        addPlugin: vi.fn(),
-        updatePlugin: vi.fn(),
+        addPlugin,
+        updatePlugin,
         setSettingsPluginDialogVisible: vi.fn(),
         setCurrentSettingsDialogPlugin: vi.fn(),
         setDeletePluginDialogVisible: vi.fn(),
@@ -141,7 +173,7 @@ const renderTab = ({
       }}
       userStore={{ user: { isAdmin, isOwner: false } }}
       settingsStore={{
-        pluginOptions: { upload: true },
+        pluginOptions: { upload: isUploadAllowed },
         theme: {},
         culture: "en",
       }}
@@ -235,5 +267,132 @@ describe("Personal plugins tab", () => {
       await screen.findByText("WebPlugins:PersonalPluginsDescription"),
     ).toBeInTheDocument();
     expect(screen.queryByText("PersonalPluginsAdminDescription")).toBeNull();
+  });
+});
+
+describe("Personal plugins tab, reading the list", () => {
+  it("leaves reading the list to the profile while uploads are off", () => {
+    const fetchPersonalPlugins = vi.fn(async () => true);
+
+    renderTab({ isUploadAllowed: false, fetchPersonalPlugins });
+
+    expect(fetchPersonalPlugins).not.toHaveBeenCalled();
+  });
+});
+
+describe("Personal plugins tab, page reload for new domains", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const stubReload = () => {
+    const reload = vi.fn();
+
+    vi.stubGlobal("location", { ...window.location, reload });
+
+    return reload;
+  };
+
+  it("reloads the page once the member leaves the tab after an upload that needs it", async () => {
+    const reload = stubReload();
+    const { unmount } = renderTab({
+      addPlugin: vi.fn(async () => ({ needsReload: true })),
+      reloadRequiredPlugins: ["own"],
+    });
+
+    await act(() => upload.addPlugin(new FormData()));
+
+    expect(reload).not.toHaveBeenCalled();
+
+    unmount();
+
+    expect(reload).toHaveBeenCalledTimes(1);
+  });
+
+  it("reloads at once when such an upload ends after the member left the tab", async () => {
+    const reload = stubReload();
+    let finish: (result: unknown) => void = () => {};
+    const { unmount } = renderTab({
+      addPlugin: vi.fn(
+        () =>
+          new Promise((resolve) => {
+            finish = resolve;
+          }),
+      ),
+    });
+
+    const adding = upload.addPlugin(new FormData());
+
+    unmount();
+
+    expect(reload).not.toHaveBeenCalled();
+
+    finish({ needsReload: true });
+    await adding;
+
+    expect(reload).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not reload for an upload that needs no reload", async () => {
+    const reload = stubReload();
+    const { unmount } = renderTab({
+      addPlugin: vi.fn(async () => ({ needsReload: false })),
+      reloadRequiredPlugins: ["other"],
+    });
+
+    await act(() => upload.addPlugin(new FormData()));
+
+    unmount();
+
+    expect(reload).not.toHaveBeenCalled();
+  });
+});
+
+describe("Personal plugins tab, switching a plugin on", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const stubReload = () => {
+    const reload = vi.fn();
+
+    vi.stubGlobal("location", { ...window.location, reload });
+
+    return reload;
+  };
+
+  const ownOff = { ...ownPlugin("own"), enabled: false };
+  const loadedOff = { ...loadedPlugin("own", true), enabled: false };
+
+  it("reloads the page once the member leaves after switching on a plugin with domains", async () => {
+    const reload = stubReload();
+    const { unmount } = renderTab({
+      personalPlugins: [ownOff],
+      pluginList: [loadedOff],
+      reloadRequiredPlugins: ["own"],
+    });
+
+    await act(async () => {
+      screen.getByTestId("personal_plugin_own_switch").click();
+    });
+
+    expect(reload).not.toHaveBeenCalled();
+
+    unmount();
+
+    expect(reload).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not reload after switching a plugin off", async () => {
+    const reload = stubReload();
+    const { unmount } = renderTab({
+      personalPlugins: [ownPlugin("own")],
+      pluginList: [loadedPlugin("own", true)],
+      reloadRequiredPlugins: ["own"],
+    });
+
+    await act(async () => {
+      screen.getByTestId("personal_plugin_own_switch").click();
+    });
+
+    unmount();
+
+    expect(reload).not.toHaveBeenCalled();
   });
 });

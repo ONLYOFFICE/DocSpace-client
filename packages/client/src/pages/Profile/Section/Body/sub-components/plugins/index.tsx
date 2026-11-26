@@ -123,8 +123,8 @@ const PersonalPlugins = () => {
   );
 
   useEffect(() => {
-    fetchPersonalPlugins();
-  }, [fetchPersonalPlugins]);
+    if (pluginOptions.upload) fetchPersonalPlugins();
+  }, [fetchPersonalPlugins, pluginOptions.upload]);
 
   useEffect(() => {
     isMounted.current = true;

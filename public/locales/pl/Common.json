@@ -985,7 +985,6 @@
   "EnabledApps": "Aktywne aplikacje",
   "EnableNotifications": "Włącz powiadomienia",
   "EnableThirdPartyIntegration": "Poproś właściciela lub superadministratora o włączenie odpowiedniej usługi w sekcji Integracja w ustawieniach przestrzeni roboczej.",
-  "EnableWebSearchInBilling": "Włącz wyszukiwanie w sieci w sekcji Rozliczenia",
   "EncryptedAccessChangeRefused": "Dostęp nie został zmieniony: członek nie ma kluczy szyfrowania.",
   "EncryptedAccessPending": "Oczekiwanie na dostęp",
   "EncryptedAccessRestored": "Użytkownik {{user}} ma teraz dostęp do wszystkich zaszyfrowanych plików w pokoju.",

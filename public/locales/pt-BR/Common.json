@@ -985,7 +985,6 @@
   "EnabledApps": "Aplicativos habilitados",
   "EnableNotifications": "Ativar notificações",
   "EnableThirdPartyIntegration": "Peça ao proprietário ou ao superadministrador para ativar o serviço correspondente na seção Integração das configurações do do espaço de trabalho.",
-  "EnableWebSearchInBilling": "Ative a busca na Web em Cobrança",
   "EncryptedAccessChangeRefused": "Acesso não alterado: o membro não tem chaves de criptografia.",
   "EncryptedAccessPending": "Acesso pendente",
   "EncryptedAccessRestored": "{{user}} agora tem acesso a todos os arquivos criptografados da sala.",

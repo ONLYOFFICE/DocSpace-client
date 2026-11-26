@@ -43,12 +43,34 @@
   list-style: none;
 }
 
+// An agent as one row, a button that opens its page.
 .item {
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
   min-width: 0;
   height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:not(:disabled) .name {
+    text-decoration: underline dashed;
+  }
+
+  // A click focuses it; only keyboard focus gets the ring.
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 // The initials of an agent without a logo, sized for the small square.

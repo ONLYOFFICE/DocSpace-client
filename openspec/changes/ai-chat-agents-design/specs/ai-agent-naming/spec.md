@@ -35,11 +35,15 @@ The dialogs of an agent SHALL use agent wording: the form asks for the "Agent na
 - **THEN** the confirmation asks whether they really want to leave this agent and says that their conversations with it will be deleted
 
 ### Requirement: Agent role names
-The roles of an agent SHALL be named "Agent owner" (`Common:AgentOwner`), "Agent manager" (`Common:AgentManager`) and "Member" wherever a role is shown or chosen: the invite panel, Contacts, the role descriptions and the change-owner dialog. "Project manager" and "Project owner" SHALL NOT be shown.
+The roles of an agent SHALL be named "Agent owner" (`Common:AgentOwner`), "Agent manager" (`Common:AgentManager`) and "Member" wherever a role is shown or chosen: the invite panel, the Members tab of the Info panel, the role descriptions and the change-owner dialog. Member is the only one of them that is chosen (`ai-agent-access`, "Roles of an agent"); Agent owner and Agent manager are shown for those who hold them. "Project manager" and "Project owner" SHALL NOT be shown.
 
-#### Scenario: Role menu on Contacts
-- **WHEN** the Agent owner opens the role menu of a member on Contacts
-- **THEN** it offers "Agent manager" and "Member"
+#### Scenario: Role menu on the Members tab
+- **WHEN** the Agent owner opens the role menu of a member on the Members tab
+- **THEN** it offers "Member" and removal, and no "Agent manager"
+
+#### Scenario: Agent manager from before
+- **WHEN** the Members tab lists a member who is an Agent manager already
+- **THEN** the member's role reads "Agent manager"
 
 ### Requirement: Skill sets and knowledge bases of an agent
 In the chat, the sidebar, the Skill sets and Knowledge bases lists and the Info panel of their rooms and files, and an agent's form, card and Info panel, an Instructions room SHALL be called a skill set and a Knowledge room a knowledge base. The room types SHALL keep the names "Instructions room" and "Knowledge room" in the create dialog and in the type filter.

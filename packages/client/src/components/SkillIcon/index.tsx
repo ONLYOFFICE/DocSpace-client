@@ -51,6 +51,8 @@ type SkillIconProps = {
   kind: TSkillIconKind;
   /** The side of the icon's box, in pixels. */
   size?: number;
+  /** A skill set or a knowledge base without its tinted square: the glyph alone, as a skill is drawn. */
+  isPlain?: boolean;
   className?: string;
   dataTestId?: string;
 };
@@ -123,9 +125,9 @@ const PATHS: Record<TSkillIconKind, React.ReactNode> = {
  * or initials, as rooms are, and a skill is not shown as the Markdown file
  * that holds it.
  */
-const SkillIcon = ({ kind, size = 32, className, dataTestId }: SkillIconProps) => {
+const SkillIcon = ({ kind, size = 32, isPlain = false, className, dataTestId }: SkillIconProps) => {
   // A skill set and a knowledge base sit on a tinted square; a skill does not.
-  const onSquare = kind !== "skill";
+  const onSquare = kind !== "skill" && !isPlain;
   // The book and the page take half of their square; the scroll, with no
   // square behind it, three quarters of a large box and half of a row's one.
   const glyph = onSquare || size <= 32 ? size / 2 : size * 0.75;

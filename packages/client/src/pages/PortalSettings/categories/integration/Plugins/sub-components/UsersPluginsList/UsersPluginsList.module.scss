@@ -81,8 +81,25 @@
 }
 
 .meLabel {
-  padding-inline-start: 4px;
+  flex-shrink: 0;
+  margin-inline-start: -4px;
   color: var(--info-panel-me-label-color);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.nameTitle {
+  min-width: 0;
 }
 
 .nameTooltip {

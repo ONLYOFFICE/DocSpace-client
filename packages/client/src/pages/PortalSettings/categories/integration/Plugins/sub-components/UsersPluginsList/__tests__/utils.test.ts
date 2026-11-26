@@ -40,6 +40,8 @@ import type { TMemberPlugin } from "@docspace/shared/api/plugins/types";
 
 import {
   getMemberAvatarRole,
+  getMemberName,
+  getMemberPluginKey,
   readHiddenColumns,
   saveHiddenColumns,
   sortUsersPlugins,
@@ -89,17 +91,17 @@ describe("sortUsersPlugins", () => {
   });
 
   it("falls back to the manifest name when there is no translation", () => {
-    const untranslated = plugin("alpha", "", "Борис", "2026-11-25T11:00:00Z");
+    const untranslated = plugin("zulu", "", "Anna", "2026-11-25T11:00:00Z");
 
     expect(
       names(
         sortUsersPlugins(
-          [items[0], untranslated],
+          [untranslated, items[0]],
           { sortBy: "plugin", descending: false },
           "en-US",
         ),
       ),
-    ).toEqual(["alpha", "weather-now"]);
+    ).toEqual(["weather-now", "zulu"]);
   });
 
   it("leaves the list it was given untouched", () => {
@@ -111,7 +113,7 @@ describe("sortUsersPlugins", () => {
 });
 
 describe("getMemberAvatarRole", () => {
-  it("marks the owner, admins only, and nobody else", () => {
+  it("marks the owner, admins and room admins, and nobody else", () => {
     expect(
       getMemberAvatarRole({ createByType: "DocSpaceAdmin", createByIsOwner: true }),
     ).toBe(AvatarRole.owner);
@@ -119,11 +121,24 @@ describe("getMemberAvatarRole", () => {
       getMemberAvatarRole({ createByType: "DocSpaceAdmin", createByIsOwner: false }),
     ).toBe(AvatarRole.admin);
     expect(
+      getMemberAvatarRole({ createByType: "RoomAdmin", createByIsOwner: false }),
+    ).toBe(AvatarRole.manager);
+    expect(
       getMemberAvatarRole({ createByType: "User", createByIsOwner: false }),
     ).toBe(AvatarRole.user);
     expect(
       getMemberAvatarRole({ createByType: "Guest", createByIsOwner: false }),
     ).toBe(AvatarRole.user);
+  });
+});
+
+describe("getMemberPluginKey", () => {
+  it("tells apart the same plugin of two users", () => {
+    expect(
+      getMemberPluginKey({ name: "hello", createBy: { id: "u1" } } as TMemberPlugin),
+    ).not.toBe(
+      getMemberPluginKey({ name: "hello", createBy: { id: "u2" } } as TMemberPlugin),
+    );
   });
 });
 
@@ -141,5 +156,15 @@ describe("hidden columns", () => {
 
     expect(readHiddenColumns("missing")).toEqual([]);
     expect(readHiddenColumns("garbage")).toEqual([]);
+  });
+});
+
+describe("getMemberName", () => {
+  it("decodes the name the server sends HTML-encoded", () => {
+    const member = {
+      createBy: { displayName: "O&#39;Brien &amp; Co" },
+    } as unknown as TMemberPlugin;
+
+    expect(getMemberName(member)).toBe("O'Brien & Co");
   });
 });

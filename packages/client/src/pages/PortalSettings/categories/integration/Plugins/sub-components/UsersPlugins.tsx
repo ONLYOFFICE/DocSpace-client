@@ -33,12 +33,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
-import { Loader, LoaderTypes } from "@onlyoffice/apps-ui-kit/components/loader";
+import { RowsSkeleton } from "@onlyoffice/apps-ui-kit/components/rows";
+import { TableSkeleton } from "@docspace/shared/skeletons/table";
 import { EmptyScreenContainer } from "@onlyoffice/apps-ui-kit/components/empty-screen-container";
 import { useTheme } from "@onlyoffice/apps-ui-kit/context/ThemeContext";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
@@ -53,6 +54,7 @@ import { useStore } from "SRC_DIR/store/useStore";
 
 import PersonalPluginsSwitch from "./PersonalPluginsSwitch";
 import UsersPluginsList from "./UsersPluginsList";
+import { getMemberName, getMemberPluginKey } from "./UsersPluginsList/utils";
 
 import styles from "../Plugins.module.scss";
 
@@ -60,55 +62,93 @@ const UsersPlugins = () => {
   const { t } = useTranslation(["WebPlugins", "Common"]);
   const { isBase } = useTheme();
 
-  const { pluginOptions } = useStore("settingsStore");
+  const { pluginOptions, culture } = useStore("settingsStore");
+  const { viewAs } = useStore("setup");
+  const pluginStore = useStore("pluginStore");
   const {
     usersPlugins,
     isUsersPluginsLoaded,
+    isUsersPluginsFailed,
     fetchUsersPlugins,
+    setIsUsersPluginsLoaded,
     switchPersonalPlugins,
     updateUserPlugin,
     setDeletePluginDialogProps,
     setDeletePluginDialogVisible,
-  } = useStore("pluginStore");
+  } = pluginStore;
 
-  const language = getCookie(LANGUAGE) || "en";
+  const language = (getCookie(LANGUAGE) || culture) as string;
+
+  const [switching, setSwitching] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchUsersPlugins();
-  }, [fetchUsersPlugins]);
+    if (!pluginStore.isUsersPluginsLoaded) fetchUsersPlugins();
 
-  const onSwitch = (plugin: TMemberPlugin, enabled: boolean) =>
-    updateUserPlugin(plugin.createBy.id, plugin.name, enabled);
+    return () => setIsUsersPluginsLoaded(false);
+  }, [pluginStore, fetchUsersPlugins, setIsUsersPluginsLoaded]);
+
+  const isSwitching = (plugin: TMemberPlugin) =>
+    switching.includes(getMemberPluginKey(plugin));
+
+  const onSwitch = async (plugin: TMemberPlugin, enabled: boolean) => {
+    const key = getMemberPluginKey(plugin);
+
+    if (switching.includes(key)) return;
+
+    setSwitching((keys) => [...keys, key]);
+
+    try {
+      await updateUserPlugin(plugin.createBy.id, plugin.name, enabled);
+    } finally {
+      setSwitching((keys) => keys.filter((k) => k !== key));
+    }
+  };
 
   const onDelete = (plugin: TMemberPlugin) => {
     setDeletePluginDialogProps({
       pluginName: plugin.name,
+      member: true,
       userId: plugin.createBy?.id,
-      userName: plugin.createBy?.displayName,
+      userName: getMemberName(plugin),
       pluginTitle: getLocalizedText(plugin.nameLocale, language, plugin.name),
     });
     setDeletePluginDialogVisible(true);
   };
 
-  const list = !isUsersPluginsLoaded ? (
-    <Loader type={LoaderTypes.track} size="20px" />
-  ) : usersPlugins.length === 0 ? (
-    <EmptyScreenContainer
-      className={styles.emptyScreen}
-      imageSrc={isBase ? EmptyScreenPluginsUrl : EmptyScreenPluginsDarkUrl}
-      imageAlt={t("NoUsersPlugins")}
-      headerText={t("NoUsersPlugins")}
-      descriptionText={t("NoUsersPluginsDescription")}
-      style={{ gridColumnGap: "39px" }}
-    />
-  ) : (
-    <UsersPluginsList
-      items={usersPlugins}
-      language={language}
-      onSwitch={onSwitch}
-      onDelete={onDelete}
-    />
-  );
+  const renderList = () => {
+    if (!isUsersPluginsLoaded) {
+      return viewAs === "table" ? (
+        <TableSkeleton count={5} />
+      ) : (
+        <RowsSkeleton count={5} />
+      );
+    }
+
+    if (usersPlugins.length) {
+      return (
+        <UsersPluginsList
+          items={usersPlugins}
+          language={language}
+          isSwitching={isSwitching}
+          onSwitch={onSwitch}
+          onDelete={onDelete}
+        />
+      );
+    }
+
+    if (isUsersPluginsFailed) return null;
+
+    return (
+      <EmptyScreenContainer
+        className={styles.emptyScreen}
+        imageSrc={isBase ? EmptyScreenPluginsUrl : EmptyScreenPluginsDarkUrl}
+        imageAlt={t("NoUsersPlugins")}
+        headerText={t("NoUsersPlugins")}
+        descriptionText={t("NoUsersPluginsDescription")}
+        style={{ gridColumnGap: "39px" }}
+      />
+    );
+  };
 
   return (
     <div className={styles.usersPlugins}>
@@ -119,7 +159,7 @@ const UsersPlugins = () => {
       <Text className={styles.usersPluginsDescription} lineHeight="20px">
         {t("UsersPluginsDescription")}
       </Text>
-      {list}
+      {renderList()}
     </div>
   );
 };

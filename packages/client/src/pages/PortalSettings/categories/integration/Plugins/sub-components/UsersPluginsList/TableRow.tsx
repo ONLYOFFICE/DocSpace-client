@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useState } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
@@ -45,7 +46,6 @@ import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 import { Tooltip } from "@onlyoffice/apps-ui-kit/components/tooltip";
 import { Avatar, AvatarSize } from "@onlyoffice/apps-ui-kit/components/avatar";
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
-import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
@@ -53,7 +53,12 @@ import { getLocalizedText } from "SRC_DIR/helpers/plugins/locale";
 
 import { UsersPluginsItemProps } from "../../Plugins.types";
 import { getContextOptions } from "./getContextOptions";
-import { getMemberAvatarRole, type THideableColumn } from "./utils";
+import {
+  getMemberAvatarRole,
+  getMemberName,
+  getMemberPluginKey,
+  type THideableColumn,
+} from "./utils";
 import styles from "./UsersPluginsList.module.scss";
 
 const TableRow = ({
@@ -62,6 +67,7 @@ const TableRow = ({
   isMe,
   hideColumns,
   hiddenColumns,
+  isSwitching,
   onSwitch,
   onDelete,
 }: UsersPluginsItemProps & {
@@ -69,15 +75,21 @@ const TableRow = ({
   hiddenColumns: THideableColumn[];
 }) => {
   const { t } = useTranslation(["Common"]);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
-  const userName = Encoder.htmlDecode(plugin.createBy?.displayName ?? "");
+  const userName = getMemberName(plugin);
+  const role = getMemberAvatarRole(plugin);
   const title = getLocalizedText(plugin.nameLocale, language, plugin.name);
   const description = getLocalizedText(
     plugin.descriptionLocale,
     language,
     plugin.description,
   );
-  const tooltipId = `users-plugin-tooltip-${plugin.createBy?.id}-${plugin.name}`;
+  const key = getMemberPluginKey(plugin);
+  const tooltipId = `users-plugin-tooltip-${key}`;
+  const toggleId = `users-plugin-toggle-${key}`;
+  const switching = isSwitching(plugin);
+  const onToggle = () => onSwitch(plugin, !plugin.enabled);
 
   const cell = (key: THideableColumn, content: React.ReactNode) =>
     hiddenColumns.includes(key) ? <div /> : content;
@@ -87,17 +99,34 @@ const TableRow = ({
       className={classNames(styles.tableRow, {
         [styles.hideColumns]: hideColumns,
       })}
-      contextOptions={getContextOptions(t, () => onDelete(plugin))}
+      contextOptions={getContextOptions(
+        t,
+        plugin.enabled,
+        switching,
+        onToggle,
+        () => onDelete(plugin),
+      )}
       hideColumns={hideColumns}
       dataTestId={`user_plugin_${plugin.createBy?.id}_${plugin.name}`}
     >
       <TableCell className={styles.nameCell}>
         <img className={styles.pluginLogo} src={PluginDefaultLogoUrl} alt="" />
-        <Text fontWeight={600} truncate data-tooltip-id={tooltipId}>
-          {title}
-        </Text>
+        <div
+          className={styles.nameTitle}
+          tabIndex={0}
+          data-tooltip-id={tooltipId}
+          data-testid={`plugin_title_${plugin.createBy?.id}_${plugin.name}`}
+          onFocus={() => setIsTooltipOpen(true)}
+          onBlur={() => setIsTooltipOpen(false)}
+        >
+          <Text fontWeight={600} truncate>
+            {title}
+          </Text>
+        </div>
         <Tooltip
           id={tooltipId}
+          isOpen={isTooltipOpen}
+          setIsOpen={setIsTooltipOpen}
           place="bottom"
           maxWidth="300px"
           getContent={() => (
@@ -119,17 +148,23 @@ const TableRow = ({
         <TableCell className={styles.userCell}>
           <Avatar
             size={AvatarSize.min}
-            role={getMemberAvatarRole(plugin)}
+            role={role}
+            dataTestId={`member_avatar_${role}`}
             userName={userName}
             source={plugin.createBy?.avatarSmall ?? ""}
             noClick
           />
           <Text className={styles.secondaryText} fontWeight={600} truncate>
             {userName}
-            {isMe ? (
-              <span className={styles.meLabel}>({t("Common:MeLabel")})</span>
-            ) : null}
           </Text>
+          {isMe ? (
+            <Text
+              className={classNames(styles.secondaryText, styles.meLabel)}
+              fontWeight={600}
+            >
+              ({t("Common:MeLabel")})
+            </Text>
+          ) : null}
         </TableCell>,
       )}
       {cell(
@@ -164,11 +199,16 @@ const TableRow = ({
       {cell(
         "Enabled",
         <TableCell>
+          <label className={styles.visuallyHidden} htmlFor={toggleId}>
+            {`${title}, ${userName}`}
+          </label>
           <ToggleButton
             className={classNames(styles.toggleButton, "toggleButton")}
+            inputId={toggleId}
             isChecked={plugin.enabled}
-            onChange={() => onSwitch(plugin, !plugin.enabled)}
-            dataTestId={`user_plugin_${plugin.name}_toggle_button`}
+            isLoading={switching}
+            onChange={onToggle}
+            dataTestId={`user_plugin_${plugin.createBy?.id}_${plugin.name}_toggle_button`}
           />
         </TableCell>,
       )}

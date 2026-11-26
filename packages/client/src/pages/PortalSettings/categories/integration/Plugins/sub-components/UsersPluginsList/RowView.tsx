@@ -37,7 +37,7 @@ import { RowContainer } from "@onlyoffice/apps-ui-kit/components/rows";
 
 import { UsersPluginsViewProps } from "../../Plugins.types";
 import RowItem from "./RowItem";
-import styles from "./UsersPluginsList.module.scss";
+import { getMemberPluginKey } from "./utils";
 
 const RowView = ({
   items,
@@ -45,10 +45,10 @@ const RowView = ({
   currentUserId,
   ...actions
 }: UsersPluginsViewProps) => (
-  <RowContainer className={styles.rowContainer} useReactWindow={false}>
+  <RowContainer useReactWindow={false}>
     {items.map((plugin) => (
       <RowItem
-        key={`${plugin.createBy?.id}-${plugin.name}`}
+        key={getMemberPluginKey(plugin)}
         plugin={plugin}
         sectionWidth={sectionWidth}
         isMe={plugin.createBy?.id === currentUserId}

@@ -45,6 +45,7 @@ import { UsersPluginsViewProps } from "../../Plugins.types";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 import {
+  getMemberPluginKey,
   readHiddenColumns,
   saveHiddenColumns,
   type THideableColumn,
@@ -121,7 +122,7 @@ const TableView = ({
       >
         {items.map((plugin) => (
           <TableRow
-            key={`${plugin.createBy?.id}-${plugin.name}`}
+            key={getMemberPluginKey(plugin)}
             plugin={plugin}
             hideColumns={hideColumns}
             hiddenColumns={hiddenColumns}

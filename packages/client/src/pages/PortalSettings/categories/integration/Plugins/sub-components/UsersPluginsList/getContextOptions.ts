@@ -34,6 +34,8 @@
  */
 
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
+import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 
 import type { TFunction } from "i18next";
 
@@ -41,8 +43,18 @@ import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/contex
 
 export const getContextOptions = (
   t: TFunction,
+  enabled: boolean,
+  isSwitching: boolean,
+  onSwitch: () => void,
   onDelete: () => void,
 ): ContextMenuModel[] => [
+  {
+    key: enabled ? "user-plugin_disable" : "user-plugin_enable",
+    label: enabled ? t("Common:Disable") : t("Common:Enable"),
+    icon: enabled ? DisableReactSvgUrl : EnableReactSvgUrl,
+    disabled: isSwitching,
+    onClick: onSwitch,
+  },
   {
     key: "user-plugin_delete",
     label: t("Common:Delete"),

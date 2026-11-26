@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 import { EmployeeType } from "@docspace/shared/enums";
 import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 import type { TMemberPlugin } from "@docspace/shared/api/plugins/types";
@@ -77,6 +78,13 @@ export const getMemberAvatarRole = (
       : (MEMBER_TYPES[plugin.createByType] ?? EmployeeType.Guest),
   );
 
+export const getMemberName = (plugin: TMemberPlugin) =>
+  Encoder.htmlDecode(plugin.createBy?.displayName ?? "");
+
+export const getMemberPluginKey = (
+  plugin: Pick<TMemberPlugin, "name" | "createBy">,
+) => `${plugin.createBy?.id}-${plugin.name}`;
+
 export const sortUsersPlugins = (
   items: TMemberPlugin[],
   { sortBy, descending }: TUsersPluginsSort,
@@ -89,7 +97,7 @@ export const sortUsersPlugins = (
 
   const title = (plugin: TMemberPlugin) =>
     getLocalizedText(plugin.nameLocale, language, plugin.name);
-  const user = (plugin: TMemberPlugin) => plugin.createBy?.displayName ?? "";
+  const user = getMemberName;
   const uploaded = (plugin: TMemberPlugin) =>
     new Date(plugin.createOn).getTime() || 0;
 

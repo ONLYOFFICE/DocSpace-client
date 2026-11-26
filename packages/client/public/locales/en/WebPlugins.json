@@ -39,5 +39,5 @@
   "UploadDescription": "Add plugins to extend your workspace with extra features. Enable one from the list below, or click \"Upload plugin\" (or drop a ZIP file) to add your own.",
   "Uploaded": "Uploaded",
   "UsersPlugins": "Users' plugins",
-  "UsersPluginsDescription": "Here are the plugins that users added just for themselves. Only the owner sees a plugin's settings. If you turn a plugin off, its user can turn it back on. To remove a plugin for good, delete it."
+  "UsersPluginsDescription": "Here are the plugins that users added just for themselves. Only the user who added a plugin sees its settings. If you turn a plugin off, its user can turn it back on. To remove a plugin for good, delete it."
 }

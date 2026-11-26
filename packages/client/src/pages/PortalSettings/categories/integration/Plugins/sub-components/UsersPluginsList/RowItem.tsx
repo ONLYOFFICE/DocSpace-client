@@ -38,12 +38,12 @@ import { useTranslation } from "react-i18next";
 import { Row, RowContent } from "@onlyoffice/apps-ui-kit/components/rows";
 import { Text } from "@onlyoffice/apps-ui-kit/components/text";
 import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
-import { Encoder } from "@onlyoffice/apps-ui-kit/utils/encoder";
 
 import { getLocalizedText } from "SRC_DIR/helpers/plugins/locale";
 
 import { UsersPluginsItemProps } from "../../Plugins.types";
 import { getContextOptions } from "./getContextOptions";
+import { getMemberName, getMemberPluginKey } from "./utils";
 import styles from "./UsersPluginsList.module.scss";
 
 const RowItem = ({
@@ -51,12 +51,22 @@ const RowItem = ({
   language,
   sectionWidth,
   isMe,
+  isSwitching,
   onSwitch,
   onDelete,
 }: UsersPluginsItemProps & { sectionWidth: number }) => {
   const { t } = useTranslation(["Common"]);
 
-  const userName = Encoder.htmlDecode(plugin.createBy?.displayName ?? "");
+  const userName = getMemberName(plugin);
+  const title = getLocalizedText(plugin.nameLocale, language, plugin.name);
+  const description = getLocalizedText(
+    plugin.descriptionLocale,
+    language,
+    plugin.description,
+  );
+  const toggleId = `users-plugin-toggle-${getMemberPluginKey(plugin)}`;
+  const switching = isSwitching(plugin);
+  const onToggle = () => onSwitch(plugin, !plugin.enabled);
 
   const details = [
     isMe ? `${userName} (${t("Common:MeLabel")})` : userName,
@@ -66,13 +76,19 @@ const RowItem = ({
 
   return (
     <Row
-      contextOptions={getContextOptions(t, () => onDelete(plugin))}
+      contextOptions={getContextOptions(
+        t,
+        plugin.enabled,
+        switching,
+        onToggle,
+        () => onDelete(plugin),
+      )}
       dataTestId={`user_plugin_${plugin.createBy?.id}_${plugin.name}`}
     >
       <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
         <div>
           <Text fontSize="14px" fontWeight={600} truncate>
-            {getLocalizedText(plugin.nameLocale, language, plugin.name)}
+            {title}
           </Text>
           <Text
             className="row-content_text"
@@ -82,14 +98,29 @@ const RowItem = ({
           >
             {details.join(" | ")}
           </Text>
+          {description ? (
+            <Text
+              className="row-content_text"
+              fontSize="12px"
+              fontWeight={400}
+              truncate
+            >
+              {description}
+            </Text>
+          ) : null}
         </div>
 
         <div className={styles.toggleButtonWrapper}>
+          <label className={styles.visuallyHidden} htmlFor={toggleId}>
+            {`${title}, ${userName}`}
+          </label>
           <ToggleButton
             className="toggleButton"
+            inputId={toggleId}
             isChecked={plugin.enabled}
-            onChange={() => onSwitch(plugin, !plugin.enabled)}
-            dataTestId={`user_plugin_${plugin.name}_toggle_button`}
+            isLoading={switching}
+            onChange={onToggle}
+            dataTestId={`user_plugin_${plugin.createBy?.id}_${plugin.name}_toggle_button`}
           />
         </div>
       </RowContent>

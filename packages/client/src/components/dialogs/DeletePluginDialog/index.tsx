@@ -45,6 +45,7 @@ import { TTranslation } from "@docspace/shared/types";
 type Props = {
   isVisible: boolean;
   personal?: boolean;
+  member?: boolean;
   userName?: string;
   pluginTitle?: string;
   onClose?: () => void;
@@ -53,8 +54,15 @@ type Props = {
 
 const DeletePluginDialog = (props: Props) => {
   const { t, ready } = useTranslation(["WebPlugins", "Common"]);
-  const { isVisible, personal, userName, pluginTitle, onClose, onDelete } =
-    props;
+  const {
+    isVisible,
+    personal,
+    member,
+    userName,
+    pluginTitle,
+    onClose,
+    onDelete,
+  } = props;
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
@@ -75,9 +83,9 @@ const DeletePluginDialog = (props: Props) => {
     <ModalDialog isLoading={!ready} visible={isVisible} onClose={onClose}>
       <ModalDialog.Header>{t("DeletePluginTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {userName
+        {member
           ? t("DeleteUserPluginDescription", {
-              userName,
+              userName: userName || t("Common:Unknown"),
               pluginName: pluginTitle,
             })
           : personal
@@ -125,15 +133,15 @@ export default inject<TStore>(({ pluginStore }) => {
     setDeletePluginDialogProps(null);
   };
 
-  const { pluginName, personal, userId, userName, pluginTitle } =
+  const { pluginName, personal, member, userId, userName, pluginTitle } =
     deletePluginDialogProps || {};
 
   const onDelete = async (t: TTranslation) => {
     if (!pluginName) return;
 
-    if (userId) await deleteUserPlugin(userId, pluginName, t);
-    else await uninstallPlugin(pluginName, t, personal);
+    if (!member) await uninstallPlugin(pluginName, t, personal);
+    else if (userId) await deleteUserPlugin(userId, pluginName, t);
   };
 
-  return { personal, userName, pluginTitle, onClose, onDelete };
+  return { personal, member, userName, pluginTitle, onClose, onDelete };
 })(observer(DeletePluginDialog));

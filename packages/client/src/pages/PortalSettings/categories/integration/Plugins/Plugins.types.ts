@@ -135,6 +135,7 @@ export interface PersonalPluginsSwitchProps {
 export interface UsersPluginsListProps {
   items: TMemberPlugin[];
   language: string;
+  isSwitching: (plugin: TMemberPlugin) => boolean;
   onSwitch: (plugin: TMemberPlugin, enabled: boolean) => Promise<void>;
   onDelete: (plugin: TMemberPlugin) => void;
 }

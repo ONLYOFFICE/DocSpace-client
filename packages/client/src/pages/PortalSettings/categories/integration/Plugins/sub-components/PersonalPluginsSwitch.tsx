@@ -53,6 +53,8 @@ const PersonalPluginsSwitch = ({
   const [isSaving, setIsSaving] = useState(false);
 
   const onChange = async () => {
+    if (isSaving) return;
+
     setIsSaving(true);
 
     try {
@@ -67,13 +69,13 @@ const PersonalPluginsSwitch = ({
       <ToggleButton
         className={styles.personalSwitchToggle}
         isChecked={isEnabled}
-        isDisabled={isSaving}
+        isLoading={isSaving}
         onChange={onChange}
         inputId={toggleId}
         dataTestId="personal_plugins_toggle_button"
       />
       <div className={styles.personalSwitchCaption}>
-        <ControlCaption htmlFor={toggleId} isDisabled={isSaving}>
+        <ControlCaption htmlFor={toggleId}>
           <Text fontWeight={600} lineHeight="20px" noSelect>
             {t("PersonalPluginsSwitch")}
           </Text>

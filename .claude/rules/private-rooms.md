@@ -22,6 +22,7 @@ paths:
   - "packages/sdk/src/app/(private)/**"
   - "openspec/specs/private-rooms/**"
   - "openspec/changes/*private-rooms*/**"
+  - "openspec/changes/archive/*private-rooms*/**"
 ---
 
 # Private rooms are developed spec-first (OpenSpec)

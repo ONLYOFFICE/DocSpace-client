@@ -99,6 +99,16 @@ vi.mock("@docspace/shared/services/private-room/room-member-keys", () => ({
   loadFileSenderKeysSafe: vi.fn(async () => []),
 }));
 
+const visitor = vi.hoisted(() => ({
+  openVisitorLink: vi.fn(),
+  readVisitorFileDek: vi.fn(),
+}));
+
+vi.mock(
+  "@docspace/shared/services/private-room/private-link-visitor",
+  async (io) => ({ ...((await io()) as Record<string, unknown>), ...visitor }),
+);
+
 vi.mock("@/components/EncryptionProviderWrapper", () => ({
   useEncryptionKeysReady: () => keysLoad.ready,
   useLoadedEncryptionKeys: () => keysLoad.loaded,
@@ -190,6 +200,68 @@ describe("useFileEncryptionKeys", () => {
 
     expect(await settledAt("unlock-cancelled")).toBe("unlock-cancelled");
     expect(state?.encryptionKeys).toBeUndefined();
+  });
+
+  describe("a visitor of an external link", () => {
+    // 43 characters of the alphabet, ending as a secret ends.
+    const SECRET = `${"a".repeat(42)}A`;
+    const link = { key: "k", linkId: "l", identity: {} };
+
+    afterEach(() => {
+      window.history.replaceState({}, "", "/");
+      visitor.openVisitorLink.mockReset();
+      visitor.readVisitorFileDek.mockReset();
+    });
+
+    it("Document opened through a link", async () => {
+      window.history.replaceState(
+        {},
+        "",
+        `/doceditor?fileid=${FILE_ID}&share=k#${SECRET}`,
+      );
+      visitor.openVisitorLink.mockResolvedValue({ state: "open", link });
+      visitor.readVisitorFileDek.mockResolvedValue(Uint8Array.from(DEK));
+      const askForOwnKey = vi.fn(async () => null);
+      encryptionContext.requireIdentity = askForOwnKey;
+      render(config([]));
+
+      expect((await settled())?.status).toBe("ready");
+      expect(visitor.openVisitorLink).toHaveBeenCalledWith("k", SECRET);
+      expect(visitor.readVisitorFileDek).toHaveBeenCalledWith(link, FILE_ID);
+      expect(state?.encryptionKeys).toEqual({
+        dek: arrayBufferToBase64(DEK),
+        contractVersion: EDITOR_CONTRACT_VERSION,
+      });
+      // The key of the link opens the file: no key of a user is asked for.
+      expect(askForOwnKey).not.toHaveBeenCalled();
+      expect(getFileEncryptionAccess).not.toHaveBeenCalled();
+    });
+
+    it("File the link has no key for", async () => {
+      window.history.replaceState({}, "", `/doceditor?share=k#${SECRET}`);
+      visitor.openVisitorLink.mockResolvedValue({ state: "open", link });
+      visitor.readVisitorFileDek.mockResolvedValue("not-ready");
+      render(config([]));
+
+      expect(await settledAt("no-access")).toBe("no-access");
+    });
+
+    it("Revoked or expired link", async () => {
+      window.history.replaceState({}, "", `/doceditor?share=k#${SECRET}`);
+      visitor.openVisitorLink.mockResolvedValue({ state: "invalid" });
+      render(config([]));
+
+      expect(await settledAt("no-access")).toBe("no-access");
+      expect(visitor.readVisitorFileDek).not.toHaveBeenCalled();
+    });
+
+    it("leaves a member who opens a shared address without the secret to their own key", async () => {
+      window.history.replaceState({}, "", "/doceditor?share=k");
+      render(config([{ userId: USER_ID }]));
+
+      expect((await settled())?.status).toBe("ready");
+      expect(visitor.openVisitorLink).not.toHaveBeenCalled();
+    });
   });
 
   it("User cancels unlock: stays unlocking while the key list is loading", async () => {

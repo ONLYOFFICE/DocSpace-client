@@ -54,6 +54,11 @@ import {
   parseDSE3Header,
 } from "@docspace/shared/services/encryption/streaming-encryption";
 import { loadFileSenderKeysSafe } from "@docspace/shared/services/private-room/room-member-keys";
+import {
+  openVisitorLink,
+  readLinkSecret,
+  readVisitorFileDek,
+} from "@docspace/shared/services/private-room/private-link-visitor";
 import type { TUser } from "@docspace/shared/api/people/types";
 import { selectUserKey } from "@docspace/shared/services/encryption/select-user-key";
 
@@ -200,7 +205,55 @@ const useFileEncryptionKeys = (
     let cancelled = false;
     let dek: Uint8Array | null = null;
 
+    // A visitor of an external link: the address carries the key of the
+    // link and, after #, its secret. The file key is opened with the key of
+    // the link, and no key of a user is asked for.
+    // Spec: private-rooms/file-operations, "What a visitor of an external link can do"
+    const acquireAsVisitor = async (share: string, secret: string) => {
+      try {
+        const numericFileId =
+          typeof fileId === "number" ? fileId : Number(fileId);
+        setState({ status: "loading" });
+
+        const opened = await openVisitorLink(share, secret);
+        if (opened.state !== "open") {
+          if (!cancelled) setState({ status: "no-access" });
+          return;
+        }
+        const key = await readVisitorFileDek(opened.link, numericFileId);
+        if (key === "not-ready") {
+          if (!cancelled) setState({ status: "no-access" });
+          return;
+        }
+        dek = key;
+        await recoverFilenameWithDek(numericFileId, fileViewUrl, dek);
+        if (cancelled) return;
+        setState({
+          status: "ready",
+          encryptionKeys: {
+            dek: arrayBufferToBase64(dek),
+            contractVersion: EDITOR_CONTRACT_VERSION,
+          },
+        });
+      } catch (error) {
+        console.error("[ENCRYPTION] editor key of a link failed:", error);
+        if (!cancelled) setState({ status: "error" });
+      } finally {
+        if (dek) {
+          wipeDek(dek);
+          dek = null;
+        }
+      }
+    };
+
     const acquire = async () => {
+      const share = new URLSearchParams(window.location.search).get("share");
+      const secret = share ? readLinkSecret(window.location.hash) : null;
+      if (share && secret) {
+        await acquireAsVisitor(share, secret);
+        return;
+      }
+
       try {
         const currentUserId = userId ? String(userId) : "";
         const numericFileId =

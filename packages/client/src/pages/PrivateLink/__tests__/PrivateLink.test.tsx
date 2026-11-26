@@ -136,6 +136,20 @@ describe("A visitor opens an external link without an account", () => {
     await waitFor(() => expect(triggerFileDownload).toHaveBeenCalled());
   });
 
+  it("Document opened through a link", async () => {
+    const open = vi.spyOn(window, "open").mockImplementation(() => null);
+    renderAt(`/share/private?key=k#${SECRET}`);
+
+    await userEvent.click(await screen.findByTestId("private_link_open_21"));
+
+    // The editor gets the key of the link in its address; the secret stays
+    // after #, as on this page (the test router keeps no real location).
+    expect(open.mock.calls[0][0]).toContain(
+      "/doceditor?fileid=21&share=k&action=view",
+    );
+    open.mockRestore();
+  });
+
   it("Wrong password", async () => {
     validatePublicRoomKey.mockResolvedValue(status({ passwordRequired: true }));
     visitor.openVisitorLink.mockResolvedValue({ state: "wrong-proof" });

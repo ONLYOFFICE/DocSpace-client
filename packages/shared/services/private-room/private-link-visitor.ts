@@ -180,6 +180,26 @@ async function readVisitorFileKeys(
   };
 }
 
+/**
+ * The key of a file reached through a link, opened with the key of the link,
+ * for the editor that shows the document. `not-ready` when the link has no
+ * key of the file yet. The caller wipes the key after use.
+ */
+export async function readVisitorFileDek(
+  link: TVisitorLink,
+  fileId: number,
+): Promise<Uint8Array | "not-ready"> {
+  const keys = await readVisitorFileKeys(link, fileId);
+  if (!keys) return "not-ready";
+  return unwrapDekForCurrentUser({
+    ...keys,
+    currentUserId: link.linkId,
+    currentIdentity: link.identity,
+    fileId,
+    onKeyChange: async () => "refuse",
+  });
+}
+
 export type TVisitorFile = {
   id: number;
   title: string;

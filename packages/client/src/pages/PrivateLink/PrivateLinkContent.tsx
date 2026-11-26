@@ -44,6 +44,7 @@ import { getFileInfo, getFolder } from "@docspace/shared/api/files";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import { triggerFileDownload } from "@docspace/shared/services/private-room/encrypted-download";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   decryptVisitorFile,
   readVisitorFileName,
@@ -52,8 +53,20 @@ import {
 
 import styles from "./PrivateLink.module.scss";
 
-// shortcut: only raster images are shown in the page, anything else is downloaded; other previews come with the editor for a visitor (private-rooms-external-links 5.1).
+// shortcut: only raster images are shown in the page; a document opens in the editor, anything else is downloaded.
 const IMAGE_NAME = /\.(png|jpe?g|gif|webp|bmp)$/i;
+const DOCUMENT_NAME = /\.(docx?|xlsx?|pptx?|pdf|odt|ods|odp|rtf|txt|csv)$/i;
+
+/**
+ * The address of the editor for a document reached through a link. The part
+ * after # goes with it, as on this page: the editor opens the key of the
+ * file with it.
+ */
+const getEditorAddress = (link: TVisitorLink, fileId: number) =>
+  `${combineUrl(
+    window.ClientConfig?.proxy?.url,
+    `/doceditor?fileid=${fileId}&share=${encodeURIComponent(link.key)}&action=view`,
+  )}${window.location.hash}`;
 
 type TName = string | null | "not-ready";
 
@@ -149,6 +162,17 @@ export const VisitorFile = ({ t, link, file }: FileProps) => {
                 onClick={onPreview}
                 isDisabled={isBusy}
                 testId={`private_link_preview_${file.id}`}
+              />
+            ) : null}
+            {DOCUMENT_NAME.test(title) ? (
+              <Button
+                size={ButtonSize.small}
+                label={t("Common:Preview")}
+                onClick={() =>
+                  window.open(getEditorAddress(link, file.id), "_blank")
+                }
+                isDisabled={isBusy}
+                testId={`private_link_open_${file.id}`}
               />
             ) : null}
             <Button

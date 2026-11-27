@@ -56,11 +56,11 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | **Filling access for a form outside the rooms** | | |
 | Filling outside the rooms opens the form sharing panel; the change runs on its confirmation | `useShare:335-348`; `packages/client/src/components/panels/ShareFormPanel/index.js:52-76` | CODE-ONLY |
 | **A current access that is no longer available** | | |
-| Kept selected and disabled in the row | `share-link-revoked-access.spec.ts:231-275`; `helpers:245-283`; `Share.helpers.test.ts:92, 104, 116, 132, 160` | E2E-CONFIRMED |
+| Kept selected and disabled in the row | `share-link-revoked-access.spec.ts:231-275`; `helpers:245-283`; `packages/shared/components/share/Share.helpers.test.ts:92, 104, 116, 132, 160` | E2E-CONFIRMED |
 | Settings panel: selected and disabled, `Common:RoleForLinkNotAvailable`, Save disabled | `share-link-revoked-access.spec.ts:146-200`; `packages/shared/dialogs/EditLinkPanel/EditLinkPanel.test.tsx:208, 227, 243` | E2E-CONFIRMED |
-| Picking an available role enables Save | `share-link-revoked-access.spec.ts:202-229`; `EditLinkPanel.test.tsx:262` | E2E-CONFIRMED |
+| Picking an available role enables Save | `share-link-revoked-access.spec.ts:202-229`; `packages/shared/dialogs/EditLinkPanel/EditLinkPanel.test.tsx:262` | E2E-CONFIRMED |
 | **Link expiration in the row** | | |
-| Menu 12 hours / 1 day / 7 days / Unlimited / Custom; `Common:NoTimeLimit` without `canEditExpirationDate` | `packages/shared/components/share/sub-components/LinkExpiration.tsx:68-79`; `ExpiredComboBox.tsx:75-171`; `helpers:331-381`; `Share.helpers.test.ts:50` (digits of the period labels) | CODE-ONLY |
+| Menu 12 hours / 1 day / 7 days / Unlimited / Custom; `Common:NoTimeLimit` without `canEditExpirationDate` | `packages/shared/components/share/sub-components/LinkExpiration.tsx:68-79`; `ExpiredComboBox.tsx:75-171`; `helpers:331-381`; `packages/shared/components/share/Share.helpers.test.ts:50` (digits of the period labels) | CODE-ONLY |
 | Primary Public room link has no expiration | `../server/openspec/specs/shared-links/spec.md`, scenario "Primary room link does not expire" | SERVER-SPEC |
 | Expired: `Common:LinkExpired` + `Common:ReactivateLink`, re-saved with now + 7 days | `ExpiredComboBox.tsx:106-108, 175-193`; `useShare:353-386`; `MembersLinkRow:250-276` | CODE-ONLY |
 | **Copying a link** | | |
@@ -80,13 +80,13 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | Room links ask in the delete-link dialog first | `MembersLinkRow:123-130` | CODE-ONLY |
 | A revoked primary link is not recreated on read | `../server/openspec/specs/files-settings/spec.md`, "Revoked primary link stays revoked on read" | SERVER-SPEC |
 | **Link settings panel** | | |
-| Role block only with several options (or an unavailable current one) | `EditLinkPanel.test.tsx:188, 198`; `EditLinkPanel:553-566` | UNIT-CONFIRMED |
+| Role block only with several options (or an unavailable current one) | `packages/shared/dialogs/EditLinkPanel/EditLinkPanel.test.tsx:188, 198`; `EditLinkPanel:553-566` | UNIT-CONFIRMED |
 | Name, audience (`canEditInternal`), password, download restriction (not in FFR; locked when `canEditDenyDownload` false), time limit (`canEditExpirationDate`, otherwise a room note) | `EditLinkPanel:426-449, 503-618` | CODE-ONLY |
 | **Saving the link settings** | | |
 | Save needs changes, a name, an available role, a future date; password checked | `EditLinkPanel:282-310, 488-501` | CODE-ONLY |
-| Save closes the panel | `EditLinkPanel.test.tsx:274` | UNIT-CONFIRMED |
-| Failure keeps the panel open with the error | `EditLinkPanel.test.tsx:322` | UNIT-CONFIRMED |
-| Enter on a control stays with the control; Enter with nothing focused saves | `EditLinkPanel.test.tsx:292, 307` | UNIT-CONFIRMED |
+| Save closes the panel | `packages/shared/dialogs/EditLinkPanel/EditLinkPanel.test.tsx:274` | UNIT-CONFIRMED |
+| Failure keeps the panel open with the error | `packages/shared/dialogs/EditLinkPanel/EditLinkPanel.test.tsx:322` | UNIT-CONFIRMED |
+| Enter on a control stays with the control; Enter with nothing focused saves | `packages/shared/dialogs/EditLinkPanel/EditLinkPanel.test.tsx:292, 307` | UNIT-CONFIRMED |
 | **External links blocked by the administrator** | | |
 | Restricted area: rooms for items under Rooms, documents otherwise | `packages/client/src/store/FilesSettingsStore.ts:276-304` | CODE-ONLY |
 | `Common:BlockedByAdmin`, no expiration line, static access, menu Copy link + Delete/Revoke | `external-sharing-share-panel.spec.ts:222-291`; `external-sharing-rooms.spec.ts:293-327`; `LinkRow:166-229`; `useShare:473-496` | E2E-CONFIRMED |

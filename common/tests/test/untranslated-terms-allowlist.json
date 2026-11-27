@@ -1,6 +1,8 @@
 [
+  "Common:ArbiterTitle",
   "Common:AskAI",
   "Common:BusinessPlan",
+  "Common:DashboardAIArbiterTitle",
   "Common:DeveloperLicense",
   "Common:EnterpriseLicense",
   "Common:OAuthOpenidName",

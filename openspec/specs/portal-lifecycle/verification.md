@@ -42,7 +42,8 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Unblock | `packages/login/src/app/(root)/confirm/PortalUnblock/` | CODE-ONLY |
 | **Deactivated or blocked portal** | | |
 | Unavailable and blocked messages | `packages/shared/components/errors/Errors.test.tsx:157, 162` | UNIT-CONFIRMED |
-| Every page and a signed-out visitor sent there | `route:86-105, 211-217, 345-352` | CODE-ONLY |
+| Blocked portal: a signed-out visitor and a signed-in user of a private or public page sent to the unavailable page, which they both see | `packages/shared/routes/Route.portalBlocked.test.tsx:113, 125, 140, 157` | UNIT-CONFIRMED |
+| Deactivated portal: every page and a signed-out visitor sent there | `route:86-105, 211-217, 345-352` | CODE-ONLY |
 | Statuses on the server | `server`, "Status values of a portal" | SERVER-SPEC |
 | **Restore and encryption in progress** | | |
 | Restore and encryption progress pages | `route:269-299` | CODE-ONLY |

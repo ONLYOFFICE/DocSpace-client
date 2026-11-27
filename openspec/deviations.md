@@ -39,8 +39,8 @@ listed here: they are tracked privately until a released version fixes them.
 | # | Where | What | Status |
 |---|-------|------|--------|
 | C2 | shared-links | A link for anyone keeps the "Blocked by admin" label and the reduced actions menu while the administrator allows existing links; only copying is unaffected (`external-sharing-share-panel.spec.ts:297-333`). | NOT A DEFECT (design decision) |
-| C6 | access-settings | Brute force protection marked an empty or zero blocking time but still saved it, and the server refused it (`bruteForceProtection.js`). | FIXED |
-| C7 | access-settings | A brute force protection save the server refused left the fields disabled until the page was reopened (`bruteForceProtection.js`). | FIXED |
-| C8 | access-settings | With group membership on, LDAP marked the empty group fields but still saved, and the server's check failed on the group DN (`LdapFormStore.ts`). | FIXED |
-| C9 | access-settings | Invitation settings and the administrator message reported a save as successful before the server answered, whatever it answered (`invitationSettings.tsx`, `adminMessage.js`). | FIXED |
-| C10 | access-settings | On the desktop Access portal page six sections shared one radio group name, so only one choice across them showed marked (`tfa.js`, `trustedMail.js`, `devToolsAccess.tsx`, `ipSecurity.js`, `adminMessage.js`, `sessionLifetime.js`). | FIXED |
+| C6 | access-settings | Brute force protection marked an empty or zero blocking time but still saved it, and the server refused it (`bruteForceProtection.js`). | FIXED (`4fcc1589394`) |
+| C7 | access-settings | A brute force protection save the server refused left the fields disabled until the page was reopened (`bruteForceProtection.js`). | FIXED (`4fcc1589394`) |
+| C8 | access-settings | With group membership on, LDAP marked the empty group fields but still saved, and the server's check failed on the group DN (`LdapFormStore.ts`). | FIXED (`deebcade699`) |
+| C9 | access-settings | Invitation settings and the administrator message reported a save as successful before the server answered, whatever it answered (`invitationSettings.tsx`, `adminMessage.js`). | FIXED (`deebcade699`) |
+| C10 | access-settings | On the desktop Access portal page six sections shared one radio group name, so only one choice across them showed marked (`tfa.js`, `trustedMail.js`, `devToolsAccess.tsx`, `ipSecurity.js`, `adminMessage.js`, `sessionLifetime.js`). | FIXED (`deebcade699`) |

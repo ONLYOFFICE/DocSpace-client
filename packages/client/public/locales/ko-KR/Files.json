@@ -61,7 +61,6 @@
   "FileRenamed": "'{{oldTitle}}' 문서 이름이 '{{newTitle}}'으로 변경되었습니다",
   "FilesMovedToTrashNotice": "파일들이 {{sectionName}}으로 이동될 것입니다.",
   "FillMetadata": "메타데이터 채우기",
-  "FinalizeVersion": "Finalize version",
   "FolderRenamed": "'{{folderTitle}}' 폴더 이름이 '{{newFoldedTitle}}'으로 변경되었습니다",
   "FolderSuccessfullyCreated": "<1>{{folderTitle}}</1> 폴더가 생성되었습니다",
   "FormRoomCreationLimit": "여러 파일 및 폴더를 기반으로 한 생성은 이 유형의 공간에서는 사용할 수 없습니다. 이러한 유형의 공간을 만들려면 {{sectionName}} 섹션으로 이동하거나 PDF 양식 중 하나를 사용하십시오.",

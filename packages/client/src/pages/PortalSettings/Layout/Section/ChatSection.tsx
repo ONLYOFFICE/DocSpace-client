@@ -40,6 +40,7 @@ import Section, {
   type SectionProps,
 } from "@onlyoffice/apps-ui-kit/components/section";
 import { useAiChatPanel } from "@onlyoffice/apps-ui-kit/ai-agent/ai-chat-panel";
+import { useAiChatStore } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 import { useIsDesktop } from "@onlyoffice/apps-ui-kit/hooks/use-is-desktop";
 
 import SectionWrapper from "SRC_DIR/components/Section";
@@ -83,6 +84,25 @@ const ChatSection = ({
   const isFullscreen =
     !!chatPanel?.isChatPanelVisible &&
     (chatPanel.isChatPanelFullscreen || !isDesktop);
+
+  // A chat that covers the page is closed when the page is left, for a
+  // settings page without the chat or for another section: nothing draws
+  // the panel on the former, where it would stay open unseen (the tab's
+  // title and the fullscreen memory follow it), and it would cover the
+  // latter as it opens. Home closes it so on its own navigation; a chat
+  // docked beside the list stays open, as it does there.
+  const aiChatStore = useAiChatStore();
+  const isDesktopRef = React.useRef(isDesktop);
+  isDesktopRef.current = isDesktop;
+  React.useEffect(() => {
+    if (!withChat) return undefined;
+
+    return () => {
+      if (!aiChatStore.isVisible) return;
+      if (aiChatStore.effectiveFullscreen || !isDesktopRef.current)
+        aiChatStore.close();
+    };
+  }, [withChat, aiChatStore]);
 
   const chatProps = chatPanel
     ? {

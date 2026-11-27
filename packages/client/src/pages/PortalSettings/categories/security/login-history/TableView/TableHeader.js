@@ -112,12 +112,8 @@ class PeopleTableHeader extends React.Component {
 
   render() {
     const { columns } = this.state;
-    const {
-      containerRef,
-      sectionWidth,
-      columnStorageName,
-      columnInfoPanelStorageName,
-    } = this.props;
+    const { containerRef, columnStorageName, columnInfoPanelStorageName } =
+      this.props;
 
     return (
       <TableHeader
@@ -126,7 +122,6 @@ class PeopleTableHeader extends React.Component {
         columns={columns}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        sectionWidth={sectionWidth}
         checkboxMargin="12px"
         showSettings={false}
       />

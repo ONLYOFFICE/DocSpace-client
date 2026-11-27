@@ -78,7 +78,6 @@ const RoleLinkBlock = ({
 				directionX={directionX}
 				isDefaultMode={isMobileView}
 				isMobileView={isMobileView}
-				withBlur={isMobileView}
 				isAside={isMobileView}
 				withBackground={!isMobileView}
 				selectedOption={selectedOption}

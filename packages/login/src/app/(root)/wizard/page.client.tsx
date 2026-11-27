@@ -480,11 +480,9 @@ function WizardForm(props: WizardFormProps) {
             scaled={isMobileView}
             scaledOptions={false}
             size={ComboBoxSize.content}
-            showDisabledItems
             dropDownMaxHeight={364}
             manualWidth="250px"
             isDefaultMode={!isMobileView}
-            withBlur={isMobileView}
             fillIcon={false}
             modernView
             dataTestId="wizard_language_combobox"
@@ -519,11 +517,9 @@ function WizardForm(props: WizardFormProps) {
           scaled={isMobileView}
           scaledOptions={false}
           size={ComboBoxSize.content}
-          showDisabledItems
           dropDownMaxHeight={364}
           manualWidth="350px"
           isDefaultMode={!isMobileView}
-          withBlur={isMobileView}
           fillIcon={false}
           modernView
           dataTestId="timezone_combobox"

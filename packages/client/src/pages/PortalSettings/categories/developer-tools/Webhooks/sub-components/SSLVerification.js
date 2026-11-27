@@ -58,7 +58,6 @@ export const SSLVerification = ({ onChange, value, isDisabled }) => {
         {t("SSLVerification")}{" "}
         <HelpButton
           className="verificationHelpButton"
-          iconName={InfoReactSvgUrl}
           tooltipContent={<Text fontSize="12px">{t("SSLHint")}</Text>}
           place="bottom"
           dataTestId="ssl_verification_help_button"

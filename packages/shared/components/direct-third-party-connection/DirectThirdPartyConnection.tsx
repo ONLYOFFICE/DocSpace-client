@@ -333,7 +333,6 @@ const DirectThirdPartyConnection = ({
           scaledOptions
           isDefaultMode
           noBorder={false}
-          showDisabledItems
           directionY="both"
           manualWidth="auto"
           onSelect={() => {}}

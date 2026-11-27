@@ -122,7 +122,7 @@ const FileTile = (props) => {
   const tileRef = useRef(null);
   const [isDragActive, setIsDragActive] = useState(false);
 
-  const { columnCount, thumbSize } = use(FileTileContext);
+  const { columnCount } = use(FileTileContext);
 
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
@@ -242,7 +242,6 @@ const FileTile = (props) => {
           {...commonProps}
           key={item.id}
           badgeUrl={badgeUrl}
-          thumbnailClick={onFilesClick}
           openUser={onOpenUser}
           showStorageInfo={showStorageInfo}
           SpaceQuotaComponent={SpaceQuota}
@@ -333,7 +332,6 @@ const FileTile = (props) => {
           key={item.id}
           temporaryIcon={<SkillTilePreview file={item} />}
           thumbnail=""
-          thumbSize={thumbSize}
           badges={
             <div className={styles.skillCorner}>
               {badgesComponent}
@@ -350,7 +348,6 @@ const FileTile = (props) => {
         key={item.id}
         temporaryIcon={temporaryIcon}
         thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
-        thumbSize={thumbSize}
         contentElement={quickButtonsComponent}
         thumbnailClick={onFilesClick}
       />

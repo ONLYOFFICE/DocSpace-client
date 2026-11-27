@@ -47,7 +47,6 @@ import styles from "../../active-sessions.module.scss";
 const SessionsTableRow = (props) => {
   const {
     item,
-    hideColumns,
     currentSession,
     setPlatformModalData,
     setLogoutDialogVisible,
@@ -69,11 +68,7 @@ const SessionsTableRow = (props) => {
   };
 
   return (
-    <TableRow
-      key={item.id}
-      hideColumns={hideColumns}
-      dataTestId={`session_row_${item.id}`}
-    >
+    <TableRow key={item.id} dataTestId={`session_row_${item.id}`}>
       <TableCell>
         <Text className={styles.sessionPlatform} dataTestId="session_platform">
           {platform}

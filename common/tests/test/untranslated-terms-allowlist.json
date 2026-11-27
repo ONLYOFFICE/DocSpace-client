@@ -1,0 +1,19 @@
+[
+  "Common:ArbiterTitle",
+  "Common:AskAI",
+  "Common:BusinessPlan",
+  "Common:DashboardAIArbiterTitle",
+  "Common:DeveloperLicense",
+  "Common:EnterpriseLicense",
+  "Common:OAuthOpenidName",
+  "Common:StartupPlan",
+  "DocsConnect:AutomationApi",
+  "DocsConnect:ChipAutomationApi",
+  "DocsConnect:ChipWhiteLabel",
+  "DocsConnect:DevPack",
+  "DocsConnect:DocsConnect",
+  "Ldap:LdapConnectionTypeStartTls",
+  "OAuth:OAuth",
+  "WebPlugins:PluginSDK",
+  "Webhooks:Webhooks"
+]

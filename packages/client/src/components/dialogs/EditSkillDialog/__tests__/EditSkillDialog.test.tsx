@@ -39,6 +39,12 @@ vi.mock("SRC_DIR/components/CreateEditDialogParams/InputParam", () => ({
     <input data-testid={dataTestId} value={value} onChange={onChange} />
   ),
 }));
+// ui-kit's Markdown view lays the text out; here it only shows what it was given.
+vi.mock("@onlyoffice/apps-ui-kit/ai-agent/markdown", () => ({
+  default: ({ chatMessage }: { chatMessage: string }) => (
+    <div data-testid="markdown">{chatMessage}</div>
+  ),
+}));
 vi.mock("../../GenerateSkillDialog/SkillEditor", () => ({
   default: ({ value, onChange }: { value: string; onChange: (value: string) => void }) => (
     <textarea data-testid="editor" value={value} onChange={(e) => onChange(e.target.value)} />
@@ -158,29 +164,33 @@ describe("EditSkillDialog", () => {
   it("shows only the instructions for View instructions, and edits them on Edit", async () => {
     const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
     render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
-    expect(((await screen.findByTestId("editor")) as HTMLTextAreaElement).value).toBe("# Steps");
+    // The instructions alone, without the frontmatter, go to the Markdown
+    // view, which lays them out; no editor shows their source.
+    const preview = await screen.findByTestId("view-skill-preview");
+    expect(preview.querySelector('[data-testid="markdown"]')?.textContent).toBe("# Steps");
+    expect(screen.queryByTestId("editor")).toBeNull();
     expect(screen.queryByTestId("edit-skill-name")).toBeNull();
     fireEvent.click(screen.getByTestId("view-skill-edit"));
     expect((screen.getByTestId("edit-skill-name") as HTMLInputElement).value).toBe("Clause check");
   });
 
-  it("opens the instructions as a modal dialog and the form as a side panel", async () => {
+  it("opens the instructions and the form as a modal dialog", async () => {
     const editable = { ...(file as object), security: { Edit: true, Rename: true } } as never;
     render(<EditSkillDialog file={editable} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
-    await screen.findByTestId("editor");
+    await screen.findByTestId("view-skill-preview");
     expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
     fireEvent.click(screen.getByTestId("view-skill-edit"));
-    expect(screen.getByTestId("form").dataset.displayType).toBe("aside");
+    expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
   });
 
-  it("opens a new skill as a side panel", () => {
+  it("opens a new skill as a modal dialog", () => {
     render(<EditSkillDialog folderId={7} onClose={onClose} refreshFiles={refreshFiles} />);
-    expect(screen.getByTestId("form").dataset.displayType).toBe("aside");
+    expect(screen.getByTestId("form").dataset.displayType).toBe("modal");
   });
 
   it("offers no Edit in the instructions view to those who may not edit the skill", async () => {
     render(<EditSkillDialog file={file} readOnly onClose={onClose} refreshFiles={refreshFiles} />);
-    await screen.findByTestId("editor");
+    await screen.findByTestId("view-skill-preview");
     expect(screen.queryByTestId("view-skill-edit")).toBeNull();
   });
 

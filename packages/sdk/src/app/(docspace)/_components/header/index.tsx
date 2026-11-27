@@ -97,8 +97,9 @@ const Header = ({
   const roomActionsOverride = React.useContext(RoomActionsOverrideContext);
   const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
 
-  const { getContextOptionsFolder, isRoom, changeOwner, user } =
-    useHeaderContextMenu(filesListStore.currentFolder ?? current);
+  const { getContextOptionsFolder, changeOwner, user } = useHeaderContextMenu(
+    filesListStore.currentFolder ?? current,
+  );
 
   const { getHeaderContextMenuModel } = useContextMenuModel({
     onDeleteClick: deleteCtx?.deleteItem,
@@ -260,7 +261,6 @@ const Header = ({
         ) : (
           <div className="header-container" style={innerOffsetStyle}>
             <Navigation
-              showText
               isRootFolder={currentNavigationItems.length === 0}
               canCreate={false}
               title={navigationStore.currentTitle ?? title}
@@ -280,8 +280,6 @@ const Header = ({
               }}
               isTrashFolder={isTrashSection}
               titles={navigationTitles}
-              isEmptyPage={isEmptyList}
-              isEmptyFilesList={isEmptyList}
               onBackToParentFolder={onBackToParentFolder}
               showRootFolderTitle={false}
               withMenu={isHeaderMenuVisible}
@@ -289,16 +287,12 @@ const Header = ({
               titleIcon={titleIcon}
               titleIconTooltip={titleIconTooltip}
               showNavigationButton={false}
-              isCurrentFolderInfo={false}
               showTitle={showTitle}
-              isRoom={isRoom}
               isInfoPanelVisible={isInfoPanelVisible}
               toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
               withLogo=""
               burgerLogo=""
               onLogoClick={onBurgerClick ?? (() => {})}
-              clearTrash={() => {}}
-              showFolderInfo={() => {}}
               isContextButtonVisible={isHeaderMenuVisible}
             />
           </div>

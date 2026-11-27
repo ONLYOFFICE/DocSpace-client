@@ -230,7 +230,7 @@ const SectionBodyContent = (props) => {
         !e.target.closest("#share_calendar")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
-      e.target.closest("#filter_search-input") ||
+      e.target.closest('[data-testid="filter_search_input"]') ||
       isHeaderOptionButton(e)
     ) {
       setSelection(EMPTY_ARRAY);

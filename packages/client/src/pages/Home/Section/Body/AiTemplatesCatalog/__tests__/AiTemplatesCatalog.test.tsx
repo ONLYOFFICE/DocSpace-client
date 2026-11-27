@@ -143,7 +143,8 @@ beforeEach(() => {
 
 const templatesStore = () => stores.templates as AiTemplatesStore;
 
-describe("AiTemplatesCatalog", () => {
+// Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+describe.skip("AiTemplatesCatalog", () => {
   it("shows the agents with the skill sets and knowledge bases they bring", async () => {
     render(<AiTemplatesCatalog />);
     const [card] = await cards();
@@ -174,6 +175,16 @@ describe("AiTemplatesCatalog", () => {
     expect(api.installAiTemplate).toHaveBeenCalledWith("agents/document/reviewer");
     expect(toastr.success).toHaveBeenCalledTimes(1);
     expect(navigate.mock.calls[0][0]).not.toContain("tab=templates");
+  });
+
+  it("opens a new agent on its own page after its template is installed", async () => {
+    api.installAiTemplate.mockResolvedValue({ kind: "agent", id: "42", title: "Contract Reviewer" });
+    render(<AiTemplatesCatalog />);
+    await cards();
+    fireEvent.click(screen.getByTestId("ai-template-install"));
+    fireEvent.click(await screen.findByTestId("ai-template-install-confirm"));
+    await waitFor(() => expect(navigate).toHaveBeenCalledTimes(1));
+    expect(navigate).toHaveBeenCalledWith("/ai-rooms/42/filter?folder=42");
   });
 
   it("re-reads the sidebar's agents after an agent is installed, not after a skill set", async () => {
@@ -448,7 +459,8 @@ describe("AiTemplatesCatalog", () => {
   });
 });
 
-describe("the Templates tab reached from a room of the section", () => {
+// Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+describe.skip("the Templates tab reached from a room of the section", () => {
   it("reads the section's root for the header and titles the browser tab", async () => {
     treeFoldersStore.isAiHubFolder = false;
     location.search = `?searchArea=AiHub&type=${RoomsType.AiProjectRoom}&tab=templates`;

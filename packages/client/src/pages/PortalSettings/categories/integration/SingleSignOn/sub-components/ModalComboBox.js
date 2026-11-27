@@ -62,7 +62,6 @@ const ModalComboBox = (props) => {
         scaled
         scaledOptions
         selectedOption={currentOption}
-        showDisabledItems
         isDisabled={isDisabled}
         directionY="both"
       />

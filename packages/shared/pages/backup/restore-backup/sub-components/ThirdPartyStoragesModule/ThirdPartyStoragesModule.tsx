@@ -185,7 +185,6 @@ const ThirdPartyStoragesModule = ({
         hideMobileView={false}
         forceCloseClickOutside
         scaledOptions
-        showDisabledItems
         displayArrow
         className={classNames(styles.backupCombo, "backup_combo")}
         dataTestId="restore_storage_combobox"

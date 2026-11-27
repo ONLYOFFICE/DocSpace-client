@@ -43,6 +43,7 @@ import type RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import AiCategoryTabs from "SRC_DIR/components/AiCategoryTabs";
 import {
+  AI_TEMPLATES_ENABLED,
   getAgentCategories,
   getAgentCategory,
   getAgentCategoryUrl,
@@ -99,7 +100,7 @@ export const AgentCategories = ({
   }, [listed, cacheKey]);
 
   React.useEffect(() => {
-    if (!isNarrowed) return undefined;
+    if (!AI_TEMPLATES_ENABLED || !isNarrowed) return undefined;
     const controller = new AbortController();
     getRooms(getVisibleAgentsFilter(), controller.signal)
       .then((res) => {
@@ -111,7 +112,8 @@ export const AgentCategories = ({
     return () => controller.abort();
   }, [isNarrowed, cacheKey]);
 
-  if (!roomsFilter) return null;
+  // Hidden with the Templates tab, whose categories it mirrors.
+  if (!AI_TEMPLATES_ENABLED || !roomsFilter) return null;
 
   const selected = getAgentCategory(roomsFilter);
   const known = listed ?? read ?? lastCategories.get(cacheKey) ?? [];

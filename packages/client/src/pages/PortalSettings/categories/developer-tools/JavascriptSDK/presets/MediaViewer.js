@@ -220,7 +220,6 @@ const MediaViewer = (props) => {
               <LabelGroup>
                 <Label className="label" text={t("Common:SelectFolder")} />
                 <HelpButton
-                  offsetRight={0}
                   size={12}
                   place="right-end"
                   tooltipContent={

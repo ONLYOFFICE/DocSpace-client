@@ -90,7 +90,6 @@ export const WhiteLabelHeader = ({
               <Text fontSize="12px">{t("Common:WhiteLabelTooltip")}</Text>
             }
             place="right"
-            offsetRight={0}
             dataTestId="white_label_helper_button"
           />
         </Text>

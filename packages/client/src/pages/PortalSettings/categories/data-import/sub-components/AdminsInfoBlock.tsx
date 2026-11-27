@@ -70,7 +70,6 @@ const AdminsInfoBlock = ({
         <HelpButton
           dataTestId="license_limit_help_button"
           place="right"
-          offsetRight={0}
           tooltipContent={
             <Text fontSize="12px">
               {t("LicenseLimitDescription", {

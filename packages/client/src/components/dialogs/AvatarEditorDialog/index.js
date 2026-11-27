@@ -59,7 +59,6 @@ const AvatarEditorDialog = (props) => {
     profile,
     updateCreatedAvatar,
     setHasAvatar,
-    maxImageUploadSize,
     onChangeImage,
     image,
     onChangeFile,
@@ -126,7 +125,6 @@ const AvatarEditorDialog = (props) => {
       image={image}
       isLoading={isLoading}
       editorBorderRadius={editorBorderRadius}
-      maxImageSize={maxImageUploadSize}
       dataTestId={dataTestId}
       onClose={onCloseModal}
       onSave={isProfileUpload ? onSaveClick : onSaveAction}

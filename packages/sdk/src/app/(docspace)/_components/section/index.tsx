@@ -97,7 +97,6 @@ export const SectionWrapper = observer(
     chatPanelContent,
     isChatPanelVisible,
     setIsChatPanelVisible,
-    isEmptyPage,
     filesFilter,
     showFilter = true,
     viewAs,
@@ -109,8 +108,6 @@ export const SectionWrapper = observer(
     const settingsStore = useSettingsStore();
     const { currentDeviceType } = useDeviceType();
 
-    const isEmptyList = settingsStore.isEmptyList || isEmptyPage;
-
     const showInfoPanel = !!(infoPanelHeaderContent || infoPanelBodyContent);
     const showChatPanel = !!chatPanelContent;
 
@@ -119,7 +116,6 @@ export const SectionWrapper = observer(
         withBodyScroll
         settingsStudio={false}
         viewAs={viewAs ?? settingsStore.filesViewAs ?? "row"}
-        isEmptyPage={isEmptyList}
         currentDeviceType={currentDeviceType}
         isInfoPanelAvailable={showInfoPanel}
         isInfoPanelVisible={isInfoPanelVisible}

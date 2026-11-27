@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Bu alan, bağlantıya sahip herkes tarafından kullanılabilir. Harici kullanıcılar tüm formlar için form doldurucu iznine sahip olur.",
   "GoToIntegrations": "Entegrasyonlara Git",
   "Horizontal": "Yatay",
-  "Icon": "Simge",
   "NeedMoreIntegrations": "Daha fazla entegrasyona ihtiyacınız var mı?",
   "NeedMoreIntegrationsDescription": "Web kancaları kullanarak verileri kendi sisteminize gönderebilir veya Zapier aracılığıyla binlerce hizmete formu bağlayabilirsiniz.",
   "NoDatabaseConnections": "Veritabanı bağlantısı yapılandırılmadı",

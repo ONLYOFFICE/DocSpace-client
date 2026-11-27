@@ -291,7 +291,6 @@ const ThirdPartyComboBox = ({
 					hideMobileView={false}
 					forceCloseClickOutside
 					scaledOptions
-					showDisabledItems
 					displayArrow
 					dataTestId="create_edit_room_thirdparty_combobox"
 				/>

@@ -75,7 +75,6 @@ const TableRow = ({
           [styles.hideColumns]: hideColumns,
         })}
         contextOptions={contextOptions}
-        hideColumns={hideColumns}
         dataTestId={`metadata_template_row_${item.id}`}
       >
         <TableCell>

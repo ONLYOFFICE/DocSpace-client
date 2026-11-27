@@ -140,7 +140,7 @@ const collapseSidebar = (page: Page) =>
 
 const slot = (page: Page) => page.getByTestId("article-plugin-widget");
 const searchInput = (page: Page, name: string) =>
-  page.locator(`#${name}-input input`);
+  page.locator(`input#${name}-input`);
 const collapsedIcon = (page: Page) =>
   slot(page).locator('[data-item-id="article-plugin-widget"]');
 const dropdown = (page: Page) =>

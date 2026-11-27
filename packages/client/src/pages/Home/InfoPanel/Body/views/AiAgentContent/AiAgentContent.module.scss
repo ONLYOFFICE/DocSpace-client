@@ -52,12 +52,15 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-block-end: 4px;
+  margin-block-end: 8px;
 }
 
+// A caption as the Info panel writes them over a group of members
+// ("Administration").
 .heading {
   margin: 0;
-  color: var(--text-secondary);
+  line-height: 20px;
+  color: var(--info-panel-subtitle-color);
 }
 
 .row {
@@ -80,7 +83,6 @@
 }
 
 .details,
-.empty,
 .message {
   color: var(--text-secondary);
 }
@@ -90,4 +92,25 @@
   flex: 0 0 auto;
   align-items: center;
   gap: 12px;
+}
+
+// The empty screen as the Info panel draws it for a list with no selection:
+// its illustration, a heading and a line under it.
+.emptyScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block-start: 80px;
+  padding-inline: 16px;
+}
+
+.emptyImage {
+  width: 150px;
+  height: 105px;
+  margin-block-end: 32px;
+}
+
+.emptyDescription {
+  margin-block-start: 8px;
+  color: var(--text-secondary);
 }

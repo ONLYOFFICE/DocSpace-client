@@ -54,8 +54,8 @@ import SkillForm from "./SkillForm";
 
 import styles from "./EditSkillDialog.module.scss";
 
-// CodeMirror is loaded with the dialog, not with the panels.
-const SkillEditor = React.lazy(() => import("../GenerateSkillDialog/SkillEditor"));
+// The Markdown renderer is loaded with the dialog, not with the panels.
+const SkillPreview = React.lazy(() => import("./SkillPreview"));
 
 /** The file's title without its extension: what the skill is named in the list. */
 const titleOf = (file: Pick<TFile, "title">) =>
@@ -74,7 +74,7 @@ type EditSkillDialogProps = {
   file?: TFile | null;
   /** The skill set a new skill is created in: the dialog opens empty. */
   folderId?: number | string | null;
-  /** Opened by "View instructions": the instructions alone, not to be changed. */
+  /** Opened by "View instructions": the instructions alone, laid out as they read, not to be changed. */
   readOnly?: boolean;
   onClose?: () => void;
   refreshFiles?: () => Promise<unknown>;
@@ -170,15 +170,7 @@ const EditSkillDialog = ({
             <div className={styles.body}>
               {isLoading ? null : (
                 <React.Suspense fallback={null}>
-                  <SkillEditor
-                    value={body}
-                    isDisabled
-                    onChange={setBody}
-                    minHeight="0"
-                    height="100%"
-                    className={styles.editorFill}
-                    withLineNumbers={false}
-                  />
+                  <SkillPreview value={body} />
                 </React.Suspense>
               )}
             </div>
@@ -190,7 +182,6 @@ const EditSkillDialog = ({
               label={t("Common:EditButton")}
               size={ButtonSize.normal}
               primary
-              scale
               onClick={() => setIsViewing(false)}
               isDisabled={isLoading}
               testId="view-skill-edit"
@@ -199,7 +190,6 @@ const EditSkillDialog = ({
           <Button
             label={t("Common:CloseButton")}
             size={ButtonSize.normal}
-            scale
             onClick={onClose}
             testId="view-skill-close"
           />
@@ -234,12 +224,14 @@ const EditSkillDialog = ({
     }
   };
 
-  // A skill is written and edited in a side panel, as one made with AI is;
-  // its instructions alone are read in a modal.
+  // A skill is written and edited in the modal its instructions are read
+  // in: one that takes most of the window, so the instructions have room.
   return (
     <ModalDialog
       visible
-      displayType={ModalDialogType.aside}
+      displayType={ModalDialogType.modal}
+      autoMaxHeight
+      className={styles.dialog}
       withForm
       onSubmit={(e) => {
         e.preventDefault();
@@ -277,7 +269,6 @@ const EditSkillDialog = ({
           label={t("Common:SaveButton")}
           size={ButtonSize.normal}
           primary
-          scale
           type="submit"
           isLoading={isSaving}
           isDisabled={!canSave}
@@ -286,7 +277,6 @@ const EditSkillDialog = ({
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
-          scale
           onClick={onClose}
           isDisabled={isSaving}
           testId="edit-skill-cancel"

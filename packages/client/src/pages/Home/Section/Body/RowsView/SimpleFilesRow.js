@@ -68,6 +68,7 @@ const SimpleFilesRow = React.memo((props) => {
     onMouseDown,
     className,
     isDragging,
+    value,
     quickButtonsComponent,
     displayShareButton,
     isPrivacy,
@@ -225,6 +226,7 @@ const SimpleFilesRow = React.memo((props) => {
     >
       <DragAndDrop
         data-document-title={item.title}
+        value={value}
         className={classNames("files-item", className, idWithFileExst)}
         onDrop={onDrop}
         onDropCapture={onDropCapture}

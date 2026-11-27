@@ -63,6 +63,7 @@ import { InfoContext } from "@/app/(docspace)/_contexts/InfoContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
 import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
+import { generateFilesItemValue } from "../../utils";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "../RowView.types";
@@ -175,6 +176,8 @@ const Row = observer(
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const inProgress = isItemActive(item);
 
+    const value = generateFilesItemValue(item, false, index);
+
     return (
       <FilesRowWrapper
         isActive={false}
@@ -187,7 +190,11 @@ const Row = observer(
         isHighlight={false}
         className={classNames(styles.rowWrapper, "row-wrapper")}
       >
-        <DragAndDrop data-title={item.title} className="files-item">
+        <DragAndDrop
+          data-title={item.title}
+          className="files-item"
+          value={value}
+        >
           <FilesRow
             key={item.id}
             checked={isChecked}

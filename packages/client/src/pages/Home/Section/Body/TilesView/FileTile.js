@@ -76,6 +76,7 @@ const FileTile = (props) => {
     onMouseDown,
     className,
     isDragging,
+    value,
     checkedProps,
     getIcon,
     onFilesClick,
@@ -369,6 +370,7 @@ const FileTile = (props) => {
     <div ref={selectableRef} id={id}>
       <DragAndDrop
         data-title={item.title}
+        value={value}
         className={classNames(styles.dragAndDrop, classNameMemo)}
         onDrop={onDrop}
         onDropCapture={onDropCapture}

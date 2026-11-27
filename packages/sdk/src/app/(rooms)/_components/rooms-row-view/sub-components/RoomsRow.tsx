@@ -83,6 +83,7 @@ import { toastr } from "@onlyoffice/apps-ui-kit/components/toast";
 import { useFilesSelectionStore } from "@/app/(docspace)/_store/FilesSelectionStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
+import { generateFilesItemValue } from "@/app/(docspace)/(files)/_utils";
 
 import useRoomContextMenuModel from "../../../_hooks/useRoomContextMenuModel";
 import useCopyRoomPrimaryLink from "../../../_hooks/useCopyRoomPrimaryLink";
@@ -233,6 +234,8 @@ const RoomsRow = observer(
     const isChecked = filesSelectionStore.isCheckedItem(item);
     const inProgress = isItemActive(item);
 
+    const value = generateFilesItemValue(item, false, index);
+
     return (
       <FilesRowWrapper
         isActive={false}
@@ -245,7 +248,11 @@ const RoomsRow = observer(
         isHighlight={false}
         className={classNames(styles.rowWrapper, "row-wrapper")}
       >
-        <DragAndDrop data-title={item.title} className="files-item">
+        <DragAndDrop
+          data-title={item.title}
+          className="files-item"
+          value={value}
+        >
           <FilesRow
             key={item.id}
             checked={isChecked}

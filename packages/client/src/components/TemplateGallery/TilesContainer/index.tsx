@@ -143,7 +143,6 @@ const TilesContainer: FC<TilesContainerProps> = (props) => {
             isHovered
             type={LinkType.action}
             fontWeight="600"
-            display="flex"
           >
             {t("Common:ClearFilter")}
           </Link>

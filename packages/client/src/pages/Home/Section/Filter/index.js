@@ -1773,7 +1773,7 @@ const SectionFilterContent = ({
 
   const onSortButtonClick = (isOpen) => {
     if (currentDeviceType === DeviceType.mobile) {
-      setMainButtonMobileVisible(isOpen);
+      setMainButtonMobileVisible(!isOpen);
     }
   };
 

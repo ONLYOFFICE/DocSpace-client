@@ -889,7 +889,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_mark-read",
       key: "mark-read",
-      label: t("MarkRead"),
+      label: t("Common:MarkRead"),
       icon: TickRoundedSvgUrl,
       onClick: () => self.onClickMarkRead(item),
       disabled: false,

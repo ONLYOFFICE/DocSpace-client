@@ -179,7 +179,6 @@ const Table = ({
         filesLength={peopleList!.length}
         itemHeight={48}
         useReactWindow
-        isIndexEditingMode={false}
       >
         {peopleList!.map((item, index) => (
           <TableRow

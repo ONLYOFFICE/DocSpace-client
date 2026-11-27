@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "このスペースはリンクがあれば誰でも利用できます。外部ユーザーには、すべてのフォームに対してフォーム入力者の権限が付与されます。",
   "GoToIntegrations": "インテグレーションへ移動",
   "Horizontal": "横方向",
-  "Icon": "アイコン",
   "NeedMoreIntegrations": "その他の統合が必要ですか？",
   "NeedMoreIntegrationsDescription": "Webhookを使用してデータを独自のシステムに送信するか、Zapier経由で数千のサービスにフォームを接続します。",
   "NoDatabaseConnections": "データベース接続が設定されていません",

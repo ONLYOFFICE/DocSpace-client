@@ -77,7 +77,6 @@
   "MarkAsRevision": "标记为修订",
   "MarkAsVersion": "标记为版本",
   "MarkingRead": "标记为已读",
-  "MarkRead": "标记为已读",
   "MeAndGroups": "我和群组({{ groupsCount }})",
   "MeAndMembers": "我和成员({{ membersCount }})",
   "MeAndMembersAndGroups": "我、成员({{ membersCount }})和群组({{ groupsCount }})",

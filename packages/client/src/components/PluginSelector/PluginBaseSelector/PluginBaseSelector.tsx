@@ -247,7 +247,6 @@ const PluginBaseSelector = ({
         breadCrumbs: selectorProps.breadCrumbs ?? [],
         onSelectBreadCrumb,
         isBreadCrumbsLoading: selectorProps.isBreadCrumbsLoading ?? false,
-        bodyIsLoading: false,
         breadCrumbsLoader: <BreadCrumbsLoader />,
       }
     : {};

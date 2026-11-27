@@ -62,7 +62,6 @@ import styles from "../../../../StyledDataImport.module.scss";
 const UsersRowContent = (props: AddEmailRowContentProps) => {
 	const {
 		id,
-		sectionWidth,
 		displayName,
 		email,
 		emailInputRef,
@@ -171,7 +170,7 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
 	if (!ready) return;
 
 	return (
-		<RowContent className={styles.styledRowContentEmail} sectionWidth={sectionWidth}>
+		<RowContent className={styles.styledRowContentEmail}>
 			<div className="import-accounts-name">
 				<Text id={nameId} fontWeight={600} fontSize="14px">
 					{displayName}

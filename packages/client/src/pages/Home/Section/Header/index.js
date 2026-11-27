@@ -141,9 +141,6 @@ const SectionHeaderContent = (props) => {
     isIndexEditingMode,
     isHeaderChecked,
     isHeaderIndeterminate,
-    showText,
-
-    isEmptyArchive,
 
     isRoom,
     roomType,
@@ -196,7 +193,6 @@ const SectionHeaderContent = (props) => {
     getFolderModel,
     contactsCanCreate,
     onCreateRoom,
-    onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
     setReorderDialogVisible,
@@ -1060,7 +1056,6 @@ const SectionHeaderContent = (props) => {
           <div className="header-container">
             <Navigation
               sectionWidth={sectionWidth}
-              showText={showText}
               isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
               canCreate={
                 (currentCanCreate ||
@@ -1089,10 +1084,6 @@ const SectionHeaderContent = (props) => {
               onClose={onClose}
               onClickFolder={onClickFolder}
               isTrashFolder={isRecycleBinFolder}
-              isEmptyFilesList={
-                isArchiveFolder ? isEmptyArchive : isEmptyFilesList
-              }
-              clearTrash={onEmptyTrashAction}
               onBackToParentFolder={
                 isProfile ? onClickBackProfile : onClickBack
               }
@@ -1126,8 +1117,6 @@ const SectionHeaderContent = (props) => {
               }}
               withMenu={withMenu}
               onPlusClick={onPlusClick}
-              isEmptyPage={isEmptyPage}
-              isRoom={isCurrentRoom || isContactsPage || isProfile}
               hideInfoPanel={
                 hideInfoPanel || isSettingsPage || isPublicRoom || isProfile
               }

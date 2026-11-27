@@ -47,14 +47,8 @@ import { getStatusByDate } from "../../utils";
 import styles from "./RowView.module.scss";
 
 const RowItem = (props: RowItemType) => {
-  const {
-    item,
-    culture,
-    sectionWidth,
-    onChangeApiKeyParams,
-    onDeleteApiKey,
-    onEditApiKey,
-  } = props;
+  const { item, culture, onChangeApiKeyParams, onDeleteApiKey, onEditApiKey } =
+    props;
 
   const { t } = useTranslation(["Common"]);
   const { contextOptions } = useContextOptions(
@@ -70,7 +64,7 @@ const RowItem = (props: RowItemType) => {
 
   return (
     <Row contextOptions={contextOptions}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
+      <RowContent className={styles.rowContent}>
         <div>
           <div className="api-keys_name">
             <Text fontWeight={600} fontSize="14px">

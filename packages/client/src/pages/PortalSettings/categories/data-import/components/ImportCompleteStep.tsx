@@ -150,7 +150,6 @@ const ImportCompleteStep = (props: ImportCompleteStepProps) => {
 				/>
 				<HelpButton
 					place="right"
-					offsetRight={0}
 					style={{ margin: "0px 5px" }}
 					tooltipContent={
 						<Text fontSize="12px">{t("Settings:InviteLetterTooltip")}</Text>

@@ -151,8 +151,6 @@ const ActiveSessions = ({
 					{t("Profile:TerminateAllSessions")}
 				</Link>
 				<HelpButton
-					offsetRight={0}
-					iconName={InfoReactSvgUrl}
 					tooltipContent={tooltipContent}
 					dataTestId="terminate_all_sessions_help_button"
 				/>

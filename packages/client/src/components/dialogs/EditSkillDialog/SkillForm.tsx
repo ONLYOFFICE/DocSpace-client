@@ -143,7 +143,6 @@ const SkillForm = ({
         <Label
           htmlFor="edit-skill-description"
           text={t("Common:DescriptionLabel")}
-          display="display"
         />
         <Textarea
           id="edit-skill-description"
@@ -160,7 +159,7 @@ const SkillForm = ({
         </Text>
       </div>
       <div className={`${styles.field} ${styles.fieldFill}`}>
-        <Label text={t("Common:SkillInstructions")} display="display" />
+        <Label text={t("Common:SkillInstructions")} />
         <div className={styles.instructions}>
           <MarkdownToolbar
             isDisabled={isLoading || isSaving}

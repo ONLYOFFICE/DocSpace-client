@@ -65,7 +65,6 @@ export const ItemsCountBlock = ({ t, count, setConfig }) => {
 			<LabelGroup>
 				<Label className="label" text={t("ItemsCount")} />
 				<HelpButton
-					offsetRight={0}
 					size={12}
 					tooltipContent={
 						<Text fontSize="12px">{t("ItemsCountDescription")}</Text>

@@ -93,7 +93,6 @@ export const RowContent = ({
 
   return (
     <RowContentComponents
-      sectionWidth={620}
       sideColor={isBase ? globalColors.gray : globalColors.grayDark}
       className={styles.rowContent}
     >

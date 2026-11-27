@@ -60,6 +60,79 @@ const duplicateValuesAllowlist = new Set(
   ),
 );
 
+// Locales written in a non-Latin script. A short value there that is
+// byte-identical to English and still carries ordinary Latin words cannot be a
+// translation — it is the English source copied in when the key was added
+// (Common:CopyToClipboard and five siblings shipped like that in 30 locales).
+// Latin-script locales are not judged: "Business" or "Favicon" may well be the
+// German word too, so only these scripts give a reliable signal.
+const NON_LATIN_SCRIPT_LANGUAGES = new Set([
+  "ar-SA",
+  "bg",
+  "el-GR",
+  "hy-AM",
+  "ja-JP",
+  "ko-KR",
+  "lo-LA",
+  "ru",
+  "si",
+  "sr-Cyrl-RS",
+  "uk-UA",
+  "zh-CN",
+]);
+
+// Keys whose English value is a deliberate term kept as-is in every script —
+// plan and edition names, product names, protocol names. An entry is
+// "Namespace:Key" and exempts that key in every language. It is not a debt
+// baseline: a missing translation is fixed (or its copy deleted), never added
+// here. StaleShortUntranslatedAllowlist fails on entries that no longer match.
+const shortUntranslatedAllowlist = new Set(
+  JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, "untranslated-terms-allowlist.json"),
+      "utf8",
+    ),
+  ),
+);
+
+const stripTranslationMarkup = (text) =>
+  text
+    .replace(/\{\{[^}]+\}\}/g, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&[a-zA-Z]+;/g, "")
+    .trim();
+
+// Short (<= 40 chars after markup) non-Latin-script values identical to
+// English that contain a lowercase Latin letter. Longer copies are already
+// UntranslatedKeysTest's job; values without a lowercase Latin letter are
+// acronyms, numbers or bare placeholders ("PDF", "API", "{{count}}") that
+// legitimately stay the same.
+const collectShortEnIdenticalValues = (files) => {
+  const enByNsKey = new Map();
+  files
+    .filter((file) => file.language === "en")
+    .forEach((file) => {
+      file.translations.forEach((t) => {
+        enByNsKey.set(`${file.namespace}:${t.key}`, t.value);
+      });
+    });
+
+  const hits = [];
+  files
+    .filter((file) => NON_LATIN_SCRIPT_LANGUAGES.has(file.language))
+    .forEach((file) => {
+      file.translations.forEach((t) => {
+        if (!t.value || t.key.startsWith("Culture_")) return;
+        const key = `${file.namespace}:${t.key}`;
+        if (t.value !== enByNsKey.get(key)) return;
+        const clean = stripTranslationMarkup(t.value);
+        if (clean.length > 40 || !/[a-z]/.test(clean)) return;
+        hits.push({ language: file.language, key, value: t.value });
+      });
+    });
+  return hits;
+};
+
 // Two keys in one namespace holding the same English text mean the UI offers
 // the same wording under two names and every translator pays for it twice.
 const collectEnValueCollisions = (files) => {
@@ -2845,6 +2918,59 @@ describe("Locales Tests", () => {
     );
 
     expect(errorsCount, message).toBe(0);
+  });
+
+  it("ShortUntranslatedKeysTest: Verify that non-Latin-script locales do not hold short English copies instead of a translation.", () => {
+    const offenders = collectShortEnIdenticalValues(translationFiles).filter(
+      (hit) => !shortUntranslatedAllowlist.has(hit.key),
+    );
+
+    clearWrongKeys(
+      resolveTranslationEntries(offenders),
+      "short untranslated (EN-identical) keys",
+    );
+
+    const byKey = new Map();
+    offenders.forEach((hit) => {
+      if (!byKey.has(hit.key)) byKey.set(hit.key, { value: hit.value, languages: [] });
+      byKey.get(hit.key).languages.push(hit.language);
+    });
+
+    const message =
+      `These values are the English source copied into a locale written in ` +
+      `another script, so the key counts as translated and never reaches the ` +
+      `translators while users read English. Delete the copy (the key then ` +
+      `falls back to English and shows up as missing) or translate it; the ` +
+      `same key is usually an English copy in the Latin-script locales too. ` +
+      `Run with CLEAR_WRONG_VALUES=true to delete them. Only a deliberate ` +
+      `term (plan, edition or product name) goes into ` +
+      `untranslated-terms-allowlist.json.\r\n\r\n` +
+      `${[...byKey.entries()]
+        .map(
+          ([key, { value, languages }], i) =>
+            `${i + 1}. ${key} = "${value}"\r\n     ${languages.join(", ")}`,
+        )
+        .join("\r\n")}`;
+
+    expect(offenders.length, message).toBe(0);
+  });
+
+  it("StaleShortUntranslatedAllowlist: the untranslated-terms allowlist only lists keys that are still kept in English.", () => {
+    const current = new Set(
+      collectShortEnIdenticalValues(translationFiles).map((hit) => hit.key),
+    );
+    const stale = [...shortUntranslatedAllowlist].filter(
+      (key) => !current.has(key),
+    );
+
+    const message =
+      `These entries in untranslated-terms-allowlist.json no longer match ` +
+      `an English-identical value in any non-Latin-script locale — the key ` +
+      `was translated, reworded or deleted. Remove them from the ` +
+      `allowlist.\r\n\r\n` +
+      `${stale.map((key, i) => `${i + 1}. ${key}`).join("\r\n")}`;
+
+    expect(stale.length, message).toBe(0);
   });
 
   it("SuspiciouslyShortTranslationTest: Verify that translations are not dramatically shorter than their English source.", () => {

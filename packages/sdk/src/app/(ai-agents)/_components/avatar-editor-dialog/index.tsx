@@ -191,7 +191,6 @@ const AvatarEditorDialog = ({
             setPreview={setPreview ?? (() => {})}
             onChangeImage={onChangeImage}
             onChangeFile={(e) => onChangeFile(e, t)}
-            maxImageSize={maxImageSize}
             disableImageRescaling={disableImageRescaling}
             editorBorderRadius={editorBorderRadius}
             isDisabled={!!isDisabled}

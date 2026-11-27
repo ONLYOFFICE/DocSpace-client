@@ -91,7 +91,6 @@ const InputParam = ({
         <Label
           title={title}
           className="input-label"
-          display="display"
           htmlFor={id}
           text={title}
         />

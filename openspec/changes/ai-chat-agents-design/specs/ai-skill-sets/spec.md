@@ -26,6 +26,13 @@ The Details tab of a skill set SHALL show its owner, its content as the number o
 - **WHEN** a user selects "Document assistant", which holds three skills, with the Info panel open on Details
 - **THEN** the properties read "Skills: 3" and the panel lists the three skills with their commands, "/document-summary" among them
 
+### Requirement: Skills opened from a skill set's Details
+A click on a skill listed on the Details tab of its skill set SHALL open the dialog of "View instructions".
+
+#### Scenario: Skill opened from the Info panel
+- **WHEN** a user clicks "Document summary" in the skills listed on Details of its set
+- **THEN** its instructions are shown read-only in the skill dialog
+
 ### Requirement: Used by of a skill set
 Used by SHALL tell how many agents use the set, counting every such agent, readable by the user or not: "1 agent" (`Common:OneAgent`), "N agents" (`Common:AgentsNumber`), and a dash for a set no agent uses. The table column and the tile of a set SHALL tell it under the same label; the compact row SHALL tell it after the label and leave it out for a set no agent uses. It SHALL follow a change without a reload.
 
@@ -38,11 +45,15 @@ Used by SHALL tell how many agents use the set, counting every such agent, reada
 - **THEN** its Used by reads "1 agent" without a reload
 
 ### Requirement: Agents that use a skill set
-The Details tab of a skill set SHALL list, under "Used by agents" (`Common:UsedByAgents`), the agents that use the set, each by its logo and its name, sorted by name, and only those the user may read. Agents past the first hundred SHALL be told by their number ("+N"). A set with no agent to list SHALL show no such list. The list SHALL be read again when the set's Used by number changes.
+The Details tab of a skill set SHALL list, under "Used by agents" (`Common:UsedByAgents`), the agents that use the set, each by its logo and its name, sorted by name, and only those the user may read. Agents past the first hundred SHALL be told by their number ("+N"). A click on an agent SHALL open the agent's own page. A set with no agent to list SHALL show no such list. The list SHALL be read again when the set's Used by number changes.
 
 #### Scenario: Set used by two agents
 - **WHEN** a user selects "Document assistant", which "Contract reviewer" and "Sales desk" use, with the Info panel open on Details
 - **THEN** "Used by agents" lists "Contract reviewer" and "Sales desk"
+
+#### Scenario: Agent opened from Used by agents
+- **WHEN** a user clicks "Contract reviewer" under "Used by agents"
+- **THEN** the agent's own page opens
 
 #### Scenario: Agents the user may not read
 - **WHEN** a user selects a set used by two agents, neither of which the user is a member of
@@ -86,6 +97,13 @@ The Details tab of a skill SHALL show its description first, when the file gives
 #### Scenario: Editor
 - **WHEN** a user who may edit the skill chooses Edit in that dialog
 - **THEN** the dialog shows the Edit skill form on the same skill
+
+### Requirement: Formatted instructions
+The dialog of "View instructions" SHALL show the instructions laid out as formatted text: the Markdown rendered with its headings, lists, tables and code, not shown as its source and not in an editor.
+
+#### Scenario: Heading and list
+- **WHEN** a user opens the instructions of a skill whose text has "## Steps" and a numbered list under it
+- **THEN** the dialog shows the heading "Steps" and the numbered list, with no "##" and no editor
 
 ### Requirement: Opening a skill
 A click on a skill in the list of its set and Preview (`Common:Preview`) in the skill's menu SHALL open the dialog of "View instructions", for those who may edit the skill too. A skill SHALL NOT be opened in the document editor.

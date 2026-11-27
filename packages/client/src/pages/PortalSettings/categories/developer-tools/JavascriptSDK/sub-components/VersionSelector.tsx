@@ -102,7 +102,6 @@ export const VersionSelector = (props: TVersionSelector) => {
         <Label className="label" text={t("Common:Version")} />
         {disabled ? (
           <HelpButton
-            offsetRight={0}
             size={12}
             tooltipContent={
               <Text fontSize="12px">{t("SdkPackageVersionInfo")}</Text>

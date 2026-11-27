@@ -350,7 +350,6 @@ const SimpleRoom = (props) => {
               <LabelGroup>
                 <Label className="label" text={t("Common:Room")} />
                 <HelpButton
-                  offsetRight={0}
                   size={12}
                   tooltipContent={
                     <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
@@ -375,7 +374,6 @@ const SimpleRoom = (props) => {
                 <LabelGroup>
                   <Label className="label" text={t("Common:ExternalLink")} />
                   <HelpButton
-                    offsetRight={0}
                     size={12}
                     tooltipContent={
                       <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>
@@ -439,7 +437,6 @@ const SimpleRoom = (props) => {
                 />
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   dataTestId="title_help_button"
                   tooltipContent={
@@ -461,7 +458,6 @@ const SimpleRoom = (props) => {
                 />
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   dataTestId="filter_help_button"
                   tooltipContent={

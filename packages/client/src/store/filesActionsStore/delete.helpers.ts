@@ -734,7 +734,7 @@ self: FilesActionStore,
     if (presets?.presets.some((preset) => deleted.has(preset.id)))
       void presets.fetchPresets();
     for (const deletedId of deleted)
-      self.treeFoldersStore.removePinnedAiProject(deletedId);
+      self.treeFoldersStore.removeAiHubRootProject(deletedId);
   } catch (err) {
     setSecondaryProgressBarData({
       completed: true,

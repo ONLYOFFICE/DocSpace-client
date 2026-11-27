@@ -745,8 +745,10 @@ class AiProjectsStore {
   createProject = async (data: TAiProjectRequest) => {
     const project = await createAiProject(data);
     showWarnings(project);
-    // The chat's agents menu offers the new project.
+    // The chat's agents menu offers the new project, and the sidebar lists
+    // it under Agents while it has room for it.
     void this.aiPresetsStore.fetchPresets();
+    this.treeFoldersStore?.syncAiHubRootProject(project);
     return project;
   };
 
@@ -767,10 +769,10 @@ class AiProjectsStore {
       if (this.formProject(id)) this.projectDialog = { mode: "edit", project };
     });
     if (this.isChatOn(id)) this.syncPreset(project);
-    // A rename shows in the chat's agents menu and, for a pinned project,
-    // under Agents in the sidebar.
+    // A rename shows in the chat's agents menu and, for a project the
+    // sidebar lists, under Agents.
     void this.aiPresetsStore.fetchPresets();
-    this.treeFoldersStore?.syncPinnedAiProject(project);
+    this.treeFoldersStore?.syncAiHubRootProject(project);
     return project;
   };
 
@@ -781,7 +783,7 @@ class AiProjectsStore {
     if (this.activeProject?.id === project.id) this.closeProject();
     // A left project leaves the sidebar and the chat's agents menu.
     void this.aiPresetsStore.fetchPresets();
-    this.treeFoldersStore?.removePinnedAiProject(project.id);
+    this.treeFoldersStore?.removeAiHubRootProject(project.id);
   };
 
   /** The owner hands the project over from the project form or its intro. */

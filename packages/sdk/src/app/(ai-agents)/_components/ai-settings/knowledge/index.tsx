@@ -321,7 +321,6 @@ const KnowledgeComponent = () => {
           >
             <ComboBox
               options={items}
-              showDisabledItems
               scaledOptions={hasSystemProvider}
               selectedOption={
                 selectedItem ?? ({ label: t("Common:SelectAction") } as TOption)

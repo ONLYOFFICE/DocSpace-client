@@ -44,10 +44,7 @@ const SecondaryInfoButton = ({ content }) => {
     <HelpButton
       displayType="auto"
       className="set_room_params-info-title-help"
-      iconName={InfoReactSvgUrl}
-      tooltipProps={{ globalEventOff: "click" }}
       tooltipContent={content}
-      offsetRight={0}
       size={12}
     />
   );

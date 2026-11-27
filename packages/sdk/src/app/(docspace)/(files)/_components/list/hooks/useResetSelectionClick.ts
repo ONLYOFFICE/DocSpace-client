@@ -60,7 +60,7 @@ export default function useResetSelectionClick({
           !e.target.closest(".document-catalog")) ||
         e.target.closest(".files-main-button") ||
         e.target.closest(".add-button") ||
-        e.target.closest("#filter_search-input")
+        e.target.closest('[data-testid="filter_search_input"]')
       ) {
         setSelection([]);
         setBufferSelection(null);

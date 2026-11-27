@@ -69,7 +69,6 @@ const SelectGroupManagerPanel = ({
             onParentPanelClose();
           }}
           withoutBackground
-          withBlur={false}
           withHeader
           headerProps={{
             // Todo: Update groups empty screen texts when they are ready

@@ -51,7 +51,7 @@ const targets = (flags: TourStepFlags) =>
 
 const titles = (flags: TourStepFlags) => steps(flags).map((step) => step.title);
 
-const SEARCH_TARGET = "#filter_search-input .search-input-block";
+const SEARCH_TARGET = '[data-testid="filter_search_input"] .search-input-block';
 
 const FILTER_BUTTON_TARGET = "#filter-button";
 
@@ -66,7 +66,7 @@ const TABLE_HEADER_TARGET = '[data-testid="table-header"]';
 
 // The whole "+ New" pill, not just MainButton's own box (see the step file).
 const NEW_BUTTON_TARGET =
-  '#filter_search-input > div:has(> [data-testid="main-button"])';
+  '[data-testid="filter_search_input"] > div:has(> [data-testid="main-button"])';
 
 /**
  * A guest on the Files section: no personal space and no Trash, so the sidebar
@@ -238,9 +238,7 @@ describe("getTourSteps — owner", () => {
     );
     await create?.before?.({} as TourData);
 
-    expect(scrollTo).toHaveBeenCalledWith(
-      expect.objectContaining({ left: 0 }),
-    );
+    expect(scrollTo).toHaveBeenCalledWith(expect.objectContaining({ left: 0 }));
     expect(scrollTo.mock.instances[0]).toBe(
       document.querySelector('[data-testid="quick-actions-track"]'),
     );
@@ -395,7 +393,9 @@ describe("getTourSteps — guest on Shared with me", () => {
 
   it("opens a stood-in Shared with me on the sample notice", () => {
     expect(titles(sharedDemoFlags)[0]).toBe("RoomsTour:RoomsDemoPreviewTitle");
-    expect(titles(sharedFlags)).not.toContain("RoomsTour:RoomsDemoPreviewTitle");
+    expect(titles(sharedFlags)).not.toContain(
+      "RoomsTour:RoomsDemoPreviewTitle",
+    );
   });
 
   it("closes on the empty screen only when the list was stood in for", () => {

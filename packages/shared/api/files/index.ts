@@ -272,15 +272,15 @@ export async function getFoldersTree() {
       newItems: newCount,
       security,
       new: newCount,
-      // The AI rooms section lists the AI projects the caller pinned,
-      // whatever `count` asks for. A server older than that listing answers
-      // the first room of the section instead, of any type and pinned or
-      // not, so only the pinned projects are kept.
+      // The AI rooms section lists up to five AI projects the caller
+      // created or was invited to, whatever `count` asks for: the pinned
+      // ones first, then the others, each group newest first. A server
+      // older than that listing answers the first room of the section
+      // instead, of any type, so only the projects are kept.
       ...(type === FolderType.AiHub
         ? {
-            pinnedAiProjects: (data.folders ?? []).filter(
-              (room) =>
-                room.roomType === RoomsType.AiProjectRoom && !!room.pinned,
+            aiHubRootProjects: (data.folders ?? []).filter(
+              (room) => room.roomType === RoomsType.AiProjectRoom,
             ),
           }
         : {}),

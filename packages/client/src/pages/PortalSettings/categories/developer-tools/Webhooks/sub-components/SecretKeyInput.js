@@ -102,7 +102,6 @@ const SecretKeyInput = (props) => {
         {t("SecretKey")}
         <HelpButton
           className="secretKeyHelpButton"
-          iconName={InfoReactSvgUrl}
           tooltipContent={
             <Text fontSize="12px">
               {t("SecretKeyHint")} <br /> <br />

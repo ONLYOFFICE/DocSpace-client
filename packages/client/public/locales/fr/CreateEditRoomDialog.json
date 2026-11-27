@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Cet espace est accessible à toute personne disposant du lien. Les utilisateurs externes disposeront de l'autorisation Remplisseur de formulaires pour tous les formulaires.",
   "GoToIntegrations": "Aller à Intégrations",
   "Horizontal": "Horizontalement",
-  "Icon": "Icône",
   "NeedMoreIntegrations": "Besoin de plus d'intégrations ?",
   "NeedMoreIntegrationsDescription": "Utilisez des webhooks pour envoyer des données à votre propre système, ou connectez des formulaires à des milliers de services via Zapier.",
   "NoDatabaseConnections": "Aucune connexion à la base de données configurée",

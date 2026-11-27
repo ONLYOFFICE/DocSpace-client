@@ -228,7 +228,6 @@ const ProfileCardComponent = ({
                 <HelpButton
                   className={styles.profileCardHelp}
                   size={12}
-                  offsetRight={0}
                   place={isRTL ? "left" : "right"}
                   tooltipContent={getUserTypeDescription(
                     isAdmin,

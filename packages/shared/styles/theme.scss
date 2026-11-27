@@ -141,7 +141,6 @@
 
   --aside-header-custom-height: 53px;
 
-  --avatar-edit-container-background: #{$blue-light-mid};
   --avatar-edit-container-fill: #{$white};
   --avatar-edit-container-fill-hover: var(--accent-button,
     #{$light-blue-main-hover});
@@ -225,7 +224,6 @@
 
   --error-container-background: #{$white};
   --error-container-body-text: #{$gray};
-  --error-container-link-color: #{$link};
 
   --filter-button-border: 1px solid #{$gray-strong};
   --filter-button-hover-border: 1px solid #{$gray};
@@ -320,7 +318,6 @@
   --selector-add-button-box-sizing: border-box;
   --selector-add-button-border-radius: 3px;
   --selector-add-button-height: 32px;
-  --selector-add-button-width: 32px;
   --selector-add-button-padding: 10px;
 
   --app-loader-background-color: #{$black};
@@ -362,7 +359,6 @@
   --aside-header-text-color: #{$white};
   --aside-header-border-color: #{$gray-dark-strong};
 
-  --avatar-edit-container-background: rgba(255, 255, 255, 0.64);
   --avatar-edit-container-fill: #{$white};
   --avatar-edit-container-fill-hover: var(--accent-button,
     #{$light-blue-main-hover});
@@ -436,7 +432,6 @@
 
   --error-container-background: #{$black};
   --error-container-body-text: #{$gray-dark};
-  --error-container-link-color: #{$dark-link};
 
   --filter-button-border: 1px solid #{$gray-dark-strong};
   --filter-button-hover-border: 1px solid #{$gray-dark};
@@ -560,12 +555,9 @@
 
 .light {
   --status-warning: #{$light-status-warning};
-  --main-button-mobile-text-color: #{$light-gray-dark};
   --main-button-mobile-button-color: var(--accent-main, #{$light-blue-main});
   --main-button-mobile-icon-fill: #{$white};
   --main-button-mobile-circle-background: #{$white};
-  --main-button-mobile-mobile-progress-bar-background: #{$gray-strong};
-  --main-button-mobile-bar-icon: #{$gray};
   --main-button-mobile-button-wrapper-background: #{$white};
   --main-button-mobile-button-wrapper-uploading-background: #{$gray-light-mid};
   --main-button-mobile-button-options-background-color: color-mix(
@@ -591,17 +583,13 @@
     black
   );
   --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-  --main-button-mobile-progress-bar-color: var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
   --status-warning: #{$dark-status-warning};
-  --main-button-mobile-text-color: #{$dark-gray-dark};
   --main-button-mobile-button-color: var(--accent-main, #{$light-blue-main});
   --main-button-mobile-icon-fill: #{$black};
   --main-button-mobile-circle-background: #{$black};
-  --main-button-mobile-mobile-progress-bar-background: #{$gray-dark-strong};
-  --main-button-mobile-bar-icon: #{$gray-dark};
   --main-button-mobile-button-wrapper-background: #{$black};
   --main-button-mobile-button-wrapper-uploading-background: #{$gray-dark-mid};
   --main-button-mobile-button-options-background-color: #{$gray-dark-mid};
@@ -611,7 +599,6 @@
   --main-button-mobile-dropdown-button-color: #{$white};
   --main-button-mobile-dropdown-hover-button-color: #{$black};
   --main-button-mobile-dropdown-background-action-mobile: #{$blue-light-mid};
-  --main-button-mobile-progress-bar-color: var(--accent-main, #{$light-blue-main});
 }
 
 .dark {
@@ -857,7 +844,6 @@
   --selector-add-button-box-sizing: border-box;
   --selector-add-button-border-radius: 3px;
   --selector-add-button-height: 32px;
-  --selector-add-button-width: 32px;
   --selector-add-button-padding: 10px;
   --selector-add-button-color: #{$light-gray-dark};
   --selector-add-button-hover-color: #{$black};
@@ -1223,9 +1209,6 @@
   --icon-cropper-zoom-button-icon-color: #{$gray};
   --icon-cropper-zoom-button-hover-icon-color: #{$light-gray-dark};
 
-  --preview-tile-background: #{$white};
-  --preview-tile-border: 1px solid #{$gray-strong};
-  --preview-tile-icon-border: 1px solid #{$gray-light-mid};
 
   --button-delete-bg: #{$gray-light};
   --button-delete-bg-hover: #{$light-gray-hover};
@@ -1244,9 +1227,6 @@
   --icon-cropper-zoom-button-icon-color: #{$gray-dark};
   --icon-cropper-zoom-button-hover-icon-color: #{$dark-gray-dark};
 
-  --preview-tile-background: #{$black};
-  --preview-tile-border: 1px solid #{$gray-dark-strong};
-  --preview-tile-icon-border: 1px solid #{$gray-light-mid};
 
   --button-delete-bg: #{$gray-dark-mid};
   --button-delete-bg-hover: #{$gray-dark-strong};
@@ -1290,11 +1270,7 @@
 
   --tile-tag-checked-background: #{$white};
 
-  --tile-container-sort-fill: #{$black};
-  --tile-container-sort-text: #{$black};
 
-  --tile-container-sort: #{$light-gray-dark};
-  --tile-container-hover-background: #{$gray-light};
 
   --tile-show-hotkey-border: #{$light-second-main};
   --tile-border-radius: 12px;
@@ -1324,11 +1300,7 @@
 
   --tile-tag-checked-background: #{$light-dark-gray-hover};
 
-  --tile-container-sort-fill: #{$white};
-  --tile-container-sort-text: #{$white};
 
-  --tile-container-sort: #{$dark-gray-dark};
-  --tile-container-hover-background: #{$black};
 
   --tile-show-hotkey-border: #{$light-second-main};
   --tile-border-radius: 12px;
@@ -1564,8 +1536,6 @@
   --selector-item-input-button-border-hover: #{$light-gray-dark};
 
   --selector-empty-screen-pressed-button-color: #{$gray-text};
-  --selector-empty-screen-button-color: #{$light-gray-dark};
-  --selector-empty-screen-hover-button-color: #{$black};
   --selector-empty-screen-description-color: #{$gray-text};
 }
 
@@ -1585,8 +1555,6 @@
   --selector-item-input-button-border-hover: #{$white};
 
   --selector-empty-screen-pressed-button-color: #{$gray-dark-text};
-  --selector-empty-screen-button-color: #{$dark-gray-dark};
-  --selector-empty-screen-hover-button-color: #{$white};
   --selector-empty-screen-description-color: #{$dark-gray-dark};
 }
 

@@ -77,6 +77,11 @@ export const resolve: UserConfig["resolve"] = {
     PACKAGE_FILE: path.resolve(rootDir, "package.json"),
     COMMON_DIR: path.resolve(rootDir, "../common"),
     "@docspace/shared": path.resolve(rootDir, "../shared"),
+    // The Mistral SDK, a peer of @onlyoffice/ai-chat, imports its voice
+    // agents' Node transport from its root entry, and that transport imports
+    // this optional peer. Nothing in the browser runs it, and it is not
+    // installed; without the stub the build fails on its named imports.
+    "@livekit/rtc-node": path.resolve(rootDir, "./config/empty-module.cjs"),
     ...uiKitAlias,
   },
   extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],

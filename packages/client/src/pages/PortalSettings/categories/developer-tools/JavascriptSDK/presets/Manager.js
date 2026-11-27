@@ -593,7 +593,6 @@ const Manager = (props) => {
                 />
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   tooltipContent={
                     <TooltipContent
@@ -616,7 +615,6 @@ const Manager = (props) => {
                 />
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   tooltipContent={
                     <TooltipContent
@@ -638,7 +636,6 @@ const Manager = (props) => {
                 />
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   tooltipContent={
                     <TooltipContent
@@ -660,7 +657,6 @@ const Manager = (props) => {
                 />
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   tooltipContent={
                     <TooltipContent
@@ -682,7 +678,6 @@ const Manager = (props) => {
                 />
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   tooltipContent={
                     <TooltipContent
@@ -705,7 +700,6 @@ const Manager = (props) => {
                 <Text color="gray">{`(${t("MobileOnly")})`}</Text>
                 <HelpButton
                   place="right"
-                  offsetRight={4}
                   size={12}
                   tooltipContent={
                     <TooltipContent
@@ -740,7 +734,6 @@ const Manager = (props) => {
               <LabelGroup>
                 <Label className="label" text={t("RoomOrFolder")} />
                 <HelpButton
-                  offsetRight={0}
                   size={12}
                   tooltipContent={
                     <Text fontSize="12px">{t("RoomOrFolderDescription")}</Text>
@@ -774,7 +767,6 @@ const Manager = (props) => {
                 <LabelGroup>
                   <Label className="label" text={t("Common:ExternalLink")} />
                   <HelpButton
-                    offsetRight={0}
                     size={12}
                     tooltipContent={
                       <Text fontSize="12px">{t("Common:PublicRoomInfo")}</Text>

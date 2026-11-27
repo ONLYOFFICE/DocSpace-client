@@ -54,8 +54,8 @@ import SkillForm from "./SkillForm";
 
 import styles from "./EditSkillDialog.module.scss";
 
-// CodeMirror is loaded with the dialog, not with the panels.
-const SkillEditor = React.lazy(() => import("../GenerateSkillDialog/SkillEditor"));
+// The Markdown renderer is loaded with the dialog, not with the panels.
+const SkillPreview = React.lazy(() => import("./SkillPreview"));
 
 /** The file's title without its extension: what the skill is named in the list. */
 const titleOf = (file: Pick<TFile, "title">) =>
@@ -74,7 +74,7 @@ type EditSkillDialogProps = {
   file?: TFile | null;
   /** The skill set a new skill is created in: the dialog opens empty. */
   folderId?: number | string | null;
-  /** Opened by "View instructions": the instructions alone, not to be changed. */
+  /** Opened by "View instructions": the instructions alone, laid out as they read, not to be changed. */
   readOnly?: boolean;
   onClose?: () => void;
   refreshFiles?: () => Promise<unknown>;
@@ -170,15 +170,7 @@ const EditSkillDialog = ({
             <div className={styles.body}>
               {isLoading ? null : (
                 <React.Suspense fallback={null}>
-                  <SkillEditor
-                    value={body}
-                    isDisabled
-                    onChange={setBody}
-                    minHeight="0"
-                    height="100%"
-                    className={styles.editorFill}
-                    withLineNumbers={false}
-                  />
+                  <SkillPreview value={body} />
                 </React.Suspense>
               )}
             </div>

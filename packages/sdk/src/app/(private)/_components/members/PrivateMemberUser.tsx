@@ -320,7 +320,6 @@ const PrivateMemberUser: React.FC<PrivateMemberUserProps> = ({
               scaled={false}
               scaledOptions={false}
               isAside={isMobile}
-              withBlur={isMobile}
               isLoading={isRoleChanging}
               isMobileView={isMobileOnly}
               shouldShowBackdrop={isMobile}

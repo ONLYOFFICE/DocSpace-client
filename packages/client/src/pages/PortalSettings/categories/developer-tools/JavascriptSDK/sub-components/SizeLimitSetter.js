@@ -151,7 +151,6 @@ export const SizeLimitSetter = (props) => {
       <LabelGroup>
         <Label className="label" text={labelText} />
         <HelpButton
-          offsetRight={0}
           size={12}
           place="right"
           tooltipContent={<Text fontSize="12px">{tooltipText}</Text>}

@@ -144,7 +144,6 @@ const GroupsTableView = ({
         filesLength={groups.length}
         itemHeight={48}
         useReactWindow
-        isIndexEditingMode={false}
       >
         {groups.map((item, index) => (
           <GroupsTableItem

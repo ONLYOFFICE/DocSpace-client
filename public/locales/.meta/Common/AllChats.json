@@ -1,0 +1,29 @@
+{
+  "key_path": "AllChats",
+  "content": "All chats",
+  "content_en_sha1_hash": "398e5b9e3d2bc06ddc28ea492fb26f74732c5111",
+  "created_at": "2026-11-26T13:19:27.572Z",
+  "updated_at": "2026-11-26T13:21:39.757Z",
+  "comment": {
+    "text": "Link in the left sidebar that closes the short list of the user's latest AI chats shown under the AI Chat item; it opens the full history of the user's AI chats. A short noun phrase (all of the chats), not a command.",
+    "is_auto": true,
+    "updated_at": "2026-11-26T13:21:39.757Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 863,
+      "context": "// The rest, and the search over them, are in the chat's history.\n ...(recentAiChats.length > 0 || hasMoreAiChats\n ? [\n {\n id: AI_ALL_CHATS_ID,\n label: t(\"Common:AllChats\"),\n onClick: openAiChatPage(\"history\"),\n },\n ]\n : []),\n {",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

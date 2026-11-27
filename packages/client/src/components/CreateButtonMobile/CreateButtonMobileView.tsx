@@ -78,7 +78,7 @@ const CreateButtonMobileView = ({
 }: CreateButtonMobileViewProps) => {
   if (!visible || !mainButtonProps) return null;
 
-  const { text, isDropdown, model, onAction } = mainButtonProps;
+  const { isDropdown, model, onAction } = mainButtonProps;
 
   const items = isDropdown ? (model as unknown as ModelItem[]) : [];
   const { actionOptions, buttonOptions, hasUpload } = splitItems(items);
@@ -86,7 +86,6 @@ const CreateButtonMobileView = ({
   return (
     <MainButtonMobile
       className={styles.createButtonMobile}
-      title={text}
       withMenu={isDropdown}
       withoutButton={!hasUpload}
       actionOptions={actionOptions as unknown as ActionOption[]}

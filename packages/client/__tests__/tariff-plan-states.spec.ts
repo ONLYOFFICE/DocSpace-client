@@ -972,6 +972,40 @@ test.describe("Migration to wallet billing", () => {
     ]);
   });
 
+  test("a card charge below a cent is shown as <$0.01 with the exact amount in a tooltip", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    mockRequest.use(
+      subscriptionBalanceHandler({
+        remainingBalance: 6989.9921875,
+        remainingBalanceInWalletCurrency: 6989.9921875,
+      }),
+    );
+
+    const dialog = await openMigrationDialog(page, baseUrl);
+
+    await expect(dialog).toContainText("+ $6,989.99");
+    await expect(dialog).toContainText("- $7,039.99");
+    await expect(dialog).toContainText("Due on your card today");
+    await expect(dialog).toContainText("<$0.01");
+    await expect(
+      dialog.getByTestId("migrate_to_wallet_confirm_button"),
+    ).toContainText("Pay <$0.01");
+
+    await dialog.getByText("<$0.01", { exact: true }).hover();
+    await expect(page.getByTestId("migrate_card_charge_tooltip")).toContainText(
+      "$0.0078125",
+    );
+
+    await expectScreenshot(page, [
+      "desktop",
+      "tariff-plan",
+      "migrate-card-charge-sub-cent.png",
+    ]);
+  });
+
   test("confirming sends the new admin count and closes the dialog", async ({
     page,
     baseUrl,

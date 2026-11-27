@@ -48,7 +48,7 @@ date. Columns SHALL be turned on and off from the table settings, and lists SHAL
 ### Requirement: Sorting the lists
 
 Members SHALL sort by name, type, group, email and, where storage is shown, storage; guests by name, email, inviter and
-registration date; groups by title, number of members and head of group.
+registration date, a Room admin's guests without the inviter; groups by title, number of members and head of group.
 
 #### Scenario: Sort guests
 
@@ -59,8 +59,9 @@ registration date; groups by title, number of members and head of group.
 
 The members filter SHALL offer group (without a group, other, a chosen group), status (active, pending, disabled),
 type, paid or free account on SaaS, login type (SSO, LDAP, standard) and, with a default quota, storage. The guests
-filter SHALL offer inviter (me, other, a chosen person), status and login type. The groups filter SHALL offer member
-(me, other, a chosen person) and a head-of-group search.
+filter SHALL offer inviter (me, other, a chosen person), status and login type. A Room admin SHALL NOT be offered the
+inviter or the disabled status. The groups filter SHALL offer member (me, other, a chosen person) and a head-of-group
+search.
 
 #### Scenario: Pick a group in the filter
 
@@ -112,8 +113,9 @@ the account's menu, delete the account once the transfer finishes. For a User or
 
 ### Requirement: Editing another account
 
-For an account that is neither SSO nor LDAP, the client SHALL let those entitled change its name, send an email change
-to a new address (validated before sending) and send password change instructions to its email.
+For another account that is neither SSO nor LDAP, the client SHALL let those entitled send an email change to a new
+address (validated before sending) and password change instructions to its email; its name SHALL NOT be changed from
+Accounts, where only one's own row offers `PeopleTranslations:NameChangeButton`.
 
 #### Scenario: Change another account's email
 

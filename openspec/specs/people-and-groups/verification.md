@@ -12,8 +12,8 @@ paths omit `packages/client/__tests__/`. Shorthands: `dialogs/` = `packages/clie
 `packages/client/src/pages/Home/Section/Filter/useContacts.tsx`, `server` =
 `../server/openspec/specs/people-and-groups/spec.md`.
 
-Status: **E2E-CONFIRMED** (a Playwright test asserts it, partly by screenshot), **CODE-ONLY** (read from the code, no
-test), **SERVER-SPEC** (the server decides it; cited from `../server/openspec/specs`).
+Status: **E2E-CONFIRMED** (a Playwright test asserts it, partly by screenshot), **UNIT-CONFIRMED** (a Vitest test
+asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the server decides it; cited from `../server/openspec/specs`).
 
 ## Requirement rows
 
@@ -24,15 +24,15 @@ test), **SERVER-SPEC** (the server decides it; cited from `../server/openspec/sp
 | Opening a group | `packages/client/src/store/contacts/GroupsStore.ts:600-620` | CODE-ONLY |
 | **Columns of the account lists** | | |
 | Members and guests columns; inviter and date not for a Room admin | `packages/client/src/pages/Home/Section/ContactsBody/Users/TableView/TableHeader.tsx:80-170` | CODE-ONLY |
-| Load more on scroll | `users:899-924` | CODE-ONLY |
+| Next page asked for and appended; nothing once all are listed or while loading | `packages/client/src/store/contacts/__tests__/UsersStore.loadMore.test.ts:104, 115, 123` | UNIT-CONFIRMED |
 | **Sorting the lists** | | |
-| Sort options per tab | `filter:761-854` | CODE-ONLY |
+| Members, with storage where shown; guests, without inviter for a Room admin; groups | `packages/client/src/pages/Home/Section/Filter/__tests__/useContacts.options.test.tsx:110, 114, 118, 127, 135` | UNIT-CONFIRMED |
 | **Filtering the lists** | | |
-| Filter groups per tab | `filter:524-748` | CODE-ONLY |
+| Members on SaaS and on a server installation, storage with a default quota; guests; no inviter or disabled status for a Room admin; groups | `packages/client/src/pages/Home/Section/Filter/__tests__/useContacts.options.test.tsx:145, 155, 159, 168, 176, 186` | UNIT-CONFIRMED |
 | Groups selector opens from Group → Other, picks by keyboard, Escape returns, cross clears | `people-filter-groups-selector.spec.ts:113, 142, 182, 196, 222` | E2E-CONFIRMED |
 | Filtered lists on the server | `server`, "Filtered people lists"; "Listing and filtering groups" | SERVER-SPEC |
 | **Changing an account's type** | | |
-| Confirmation; reassignment check before lowering; same type ignored | `users:1427-1504` | CODE-ONLY |
+| Same type ignored; raising confirmed without asking the server; lowering to User or Guest asks it and runs as a reassignment; several accounts; no reassignment from Guest | `packages/client/src/store/contacts/__tests__/UsersStore.changeType.test.ts:99, 109, 127, 147, 155, 171` | UNIT-CONFIRMED |
 | Type change as a queued job with progress | `server`, "Watching a type conversion"; "Cancelling a type conversion" | SERVER-SPEC |
 | **Disabling and enabling accounts** | | |
 | Dialog worded for users or guests, success toast | `dialogs/ChangeUserStatusDialog/index.tsx:94-105` | CODE-ONLY |
@@ -45,14 +45,15 @@ test), **SERVER-SPEC** (the server decides it; cited from `../server/openspec/sp
 | Progress, abort, start again, delete when finished; rooms only for a User or a Guest | `dialogs/DataReassignmentDialog/sub-components/Body/index.js:50-69`; `Body/Progress.js:54-154`; `Body/Description.js:47-51`; `Footer/index.js:49-87` | CODE-ONLY |
 | Reassignment on the server | `server`, "Starting a data reassignment"; "Watching a data reassignment"; "Cancelling a data reassignment" | SERVER-SPEC |
 | **Editing another account** | | |
-| Name, email, password actions, not for SSO or LDAP | `users:744-773`; `ctx:192-215` | CODE-ONLY |
+| Email and password actions on another account, not its name, not for SSO or LDAP or another admin; the name on one's own row | `packages/client/src/store/contacts/__tests__/UsersStore.contextOptions.test.ts:103, 112, 118, 128, 134` | UNIT-CONFIRMED |
 | Email validated and instructions sent; password instructions sent | `dialogs/ChangeEmailDialog/index.js:100, 197`; `dialogs/ChangePasswordDialog/index.js:75` | CODE-ONLY |
 | Email change rules | `server`, "Validation of an email change"; "Immediate change versus instructions" | SERVER-SPEC |
 | **Repeating invitations** | | |
-| Single and multiple, toast | `packages/client/src/helpers/contacts/utils.ts:267-283`; `dialogs/SendInviteDialog/index.js:67`; `ctx:283-292, 494-500` | CODE-ONLY |
+| Offered for a pending account; single resent with the email toast, error shown; several resent with one toast | `packages/client/src/store/contacts/__tests__/UsersStore.contextOptions.test.ts:143`; `packages/client/src/helpers/contacts/__tests__/utils.invites.test.ts:83, 94, 104` | UNIT-CONFIRMED |
+| Confirmation before inviting several again | `dialogs/SendInviteDialog/index.js:67`; `ctx:283-292, 494-500` | CODE-ONLY |
 | **Sharing a guest and an account's rooms** | | |
-| Guest link copied with a toast | `packages/client/src/helpers/contacts/utils.ts:285-293` | CODE-ONLY |
-| Rooms filtered by member in a new tab | `ctx:549-565` | CODE-ONLY |
+| Guest link copied with a toast; offered for an administrator's guest and a Room admin's own | `packages/client/src/helpers/contacts/__tests__/utils.invites.test.ts:116`; `packages/client/src/store/contacts/__tests__/UsersStore.contextOptions.test.ts:149, 155` | UNIT-CONFIRMED |
+| Rooms filtered by member in a new tab, the same window in the desktop app; offered to administrators | `packages/client/src/store/contacts/__tests__/ContactsContextOptionsStore.roomList.test.ts:92, 101`; `packages/client/src/store/contacts/__tests__/UsersStore.contextOptions.test.ts:168` | UNIT-CONFIRMED |
 | **Creating and editing groups** | | |
 | Create needs a name and a head; edit needs a change and a name with head or members | `dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx:198`; `dialogs/CreateEditGroupDialog/EditGroupDialog.tsx:191, 251` | CODE-ONLY |
 | Member selector without guests | `dialogs/CreateEditGroupDialog/sub-components/MembersSelector/MembersSelector.tsx:72`; `.claude/rules/access-matrix.md`, "Adding guests to groups" | CODE-ONLY |

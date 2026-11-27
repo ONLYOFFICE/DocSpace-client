@@ -89,9 +89,10 @@ an item is picked, and report the picked item or the cancel to the host.
 
 ### Requirement: Custom actions of a frame
 
-A Personal or Forms frame SHALL add the host's custom actions — file actions to the context menu of the files they
-apply to, create items to the New button — replace them on `setCustomActions`, and report the clicked action with its
-item to the host; a Forms frame SHALL report its room as the folder.
+A Manager, Personal or Forms frame SHALL add the host's custom actions — file and room actions to the context menu of
+the items and sections they apply to, group actions for a selection, create items to the New button — replace them on
+`setCustomActions`, and report the clicked action with its item or selection and the open folder to the host; a Forms
+frame SHALL report its room as the folder. A page outside a frame SHALL add none.
 
 #### Scenario: Action by extension
 

@@ -44,6 +44,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | **Custom actions of a frame** | | |
 | File actions by extension, the click reported with the item; create items in New; replaced by `setCustomActions`; shown in the context menu | `packages/sdk/__tests__/e2e/personal.spec.tsx:115, 141, 154, 166` | E2E-CONFIRMED |
 | Forms frame: the custom file action offered where it applies, the room reported as the folder | `packages/sdk/__tests__/e2e/forms.spec.tsx:158` | E2E-CONFIRMED |
+| Manager frame: file action by extension with the click and folder reported, room action by section, none outside a frame, the whole selection for a group action, create items with the open folder | `packages/client/src/store/contextOptionsStore/__tests__/frameActions.helpers.test.ts:74, 88, 94, 99, 115` | UNIT-CONFIRMED |
 | **Frame targets** | | |
 | Not found, no access, refused link first, unknown error header ignored, public room links | `sdk/app/media-viewer/page.test.tsx:66-249` | UNIT-CONFIRMED |
 | Password page for a link with a password; refused link named; client header dropped | `sdk/proxy.test.ts:55, 73, 86, 99` | UNIT-CONFIRMED |

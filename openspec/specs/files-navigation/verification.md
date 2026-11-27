@@ -7,8 +7,8 @@
 > (submodule `ce37da4`) by the route each client call uses.
 
 Every requirement and scenario of `spec.md`, with where it is shown. Paths are relative to the repository root; E2E
-paths omit `packages/client/__tests__/`. Shorthands: `fs/` = `packages/client/src/store/filesStore/__tests__/FilesStore.`,
-`helpers/` = `packages/client/src/helpers/__tests__/`.
+paths omit `packages/client/__tests__/`. Shorthand: `helpers/` =
+`packages/client/src/helpers/__tests__/`.
 
 Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a Vitest test asserts it),
 **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the server decides it).
@@ -35,24 +35,24 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | **Files being edited** | | |
 | Editing icon; hover list with an anonymous editor; scroll past the maximum height; no photo for an anonymous editor; phone modal closed by the backdrop | `editors-tooltip.spec.ts:62, 72, 102, 123, 165, 172, 195, 213` | E2E-CONFIRMED |
 | **Sorting and filtering** | | |
-| Filter resets paging; sort saved per user; Rooms loaded 100 per page | `fs/filter.test.ts:63, 76, 95` | UNIT-CONFIRMED |
+| Filter resets paging; sort saved per user; Rooms loaded 100 per page | `packages/client/src/store/filesStore/__tests__/FilesStore.filter.test.ts:63, 76, 95` | UNIT-CONFIRMED |
 | The server stores `sortBy` as the account's default rooms sort | yaml `getRoomsFolder` description | SERVER-SPEC |
 | **Loading a list in pages** | | |
-| Next page on scroll until no more | `fs/filesList.test.ts`; `fs/fetchFiles.test.ts` | CODE-ONLY |
+| Next page on scroll until no more | `packages/client/src/store/filesStore/__tests__/FilesStore.filesList.test.ts`; `packages/client/src/store/filesStore/__tests__/FilesStore.fetchFiles.test.ts` | CODE-ONLY |
 | **Search in a list** | | |
 | Debounced search keeps the caret and the typing through an empty result | `search-input-caret.spec.ts:79` | E2E-CONFIRMED |
 | **Selecting entries** | | |
-| Toggle and Shift range | `fs/selectionActions.test.ts:61, 105` | UNIT-CONFIRMED |
-| Select all or by kind; active entries left out | `fs/selection.test.ts:52-144` | UNIT-CONFIRMED |
+| Toggle and Shift range | `packages/client/src/store/filesStore/__tests__/FilesStore.selectionActions.test.ts:61, 105` | UNIT-CONFIRMED |
+| Select all or by kind; active entries left out | `packages/client/src/store/filesStore/__tests__/FilesStore.selection.test.ts:52-144` | UNIT-CONFIRMED |
 | Group menu checkbox options walked by the arrows | `files-list-keyboard.spec.ts:465` | E2E-CONFIRMED |
 | **Following changes made elsewhere** | | |
-| New file in the open folder appears; duplicates and other folders ignored | `fs/socketHandlers.test.ts:66-90` | UNIT-CONFIRMED |
-| Deleted entry removed unless an own operation moves it in | `fs/socket.test.ts:57-124` | UNIT-CONFIRMED |
-| Updated entry re-read | `fs/socketHandlers.test.ts:105, 120` | UNIT-CONFIRMED |
-| Rooms created elsewhere go to Rooms or Forms by type | `fs/socketCreate.test.ts:159-219, 303-326` | UNIT-CONFIRMED |
-| Counts taken from the server, kept on failure | `fs/socketCreate.test.ts:478-535` | UNIT-CONFIRMED |
-| Removed template returns to the templates listing | `fs/socketCreate.test.ts:336-370` | UNIT-CONFIRMED |
-| Own access changed reloads the folder | `fs/socketHandlers.test.ts:171, 194` | UNIT-CONFIRMED |
+| New file in the open folder appears; duplicates and other folders ignored | `packages/client/src/store/filesStore/__tests__/FilesStore.socketHandlers.test.ts:66-90` | UNIT-CONFIRMED |
+| Deleted entry removed unless an own operation moves it in | `packages/client/src/store/filesStore/__tests__/FilesStore.socket.test.ts:57-124` | UNIT-CONFIRMED |
+| Updated entry re-read | `packages/client/src/store/filesStore/__tests__/FilesStore.socketHandlers.test.ts:105, 120` | UNIT-CONFIRMED |
+| Rooms created elsewhere go to Rooms or Forms by type | `packages/client/src/store/filesStore/__tests__/FilesStore.socketCreate.test.ts:159-219, 303-326` | UNIT-CONFIRMED |
+| Counts taken from the server, kept on failure | `packages/client/src/store/filesStore/__tests__/FilesStore.socketCreate.test.ts:478-535` | UNIT-CONFIRMED |
+| Removed template returns to the templates listing | `packages/client/src/store/filesStore/__tests__/FilesStore.socketCreate.test.ts:336-370` | UNIT-CONFIRMED |
+| Own access changed reloads the folder | `packages/client/src/store/filesStore/__tests__/FilesStore.socketHandlers.test.ts:171, 194` | UNIT-CONFIRMED |
 | **Losing access inside a room** | | |
 | Refused request: room kept, one toast | `rooms-forbidden.spec.ts:148-184` | E2E-CONFIRMED |
 | Lowered type: reload bar, stays in the room; bar dismissible | `rooms-forbidden.spec.ts:206, 257, 314, 344` | E2E-CONFIRMED |
@@ -66,7 +66,7 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 
 | What | Why | Where |
 |---|---|---|
-| Client-side search of encrypted names | Owned by `private-rooms` | `fs/clientSearch.test.ts` |
+| Client-side search of encrypted names | Owned by `private-rooms` | `packages/client/src/store/filesStore/__tests__/FilesStore.clientSearch.test.ts` |
 | Keyboard focus and hotkeys of the list | Owned by `keyboard-and-hotkeys` | `files-list-keyboard.spec.ts` |
 | Room groups in the Rooms list | Owned by `room-types` | `room-grouping.spec.ts` |
 | Fitting the top row (sidebar button, AI chat button) | Owned by `app-shell` | `top-row-fit.spec.ts` |

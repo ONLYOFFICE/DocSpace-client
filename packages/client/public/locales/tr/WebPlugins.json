@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "AI ile oluştur",
+  "CreateWithAIPrompt": "Bu çalışma alanı için bir eklenti oluşturmak istiyorum. Ne yapması gerektiğini bana sorun, ardından eklentiyi derleyin.",
   "DeletePlugin": "Eklentiyi sil",
   "DeletePluginDescription": "Bu eklenti artık çalışma alanı kullanıcıları tarafından kullanılamayacak. Devam etmek istediğinize emin misiniz?",
   "DeletePluginTitle": "Eklenti silinsin mi?",

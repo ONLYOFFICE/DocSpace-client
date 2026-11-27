@@ -390,6 +390,12 @@ export const messageActions = ({
   });
 };
 
+/** The page of the settings that lists the plugins: the one settings page with an AI chat. */
+export const PLUGINS_SETTINGS_PATH = "/portal-settings/integration/plugins";
+
+export const isPluginsSettingsPath = (pathname: string): boolean =>
+  pathname.includes(PLUGINS_SETTINGS_PATH);
+
 export const isPluginPage = (): boolean =>
   isPluginSectionPath(window.location.pathname);
 

@@ -57,7 +57,8 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | **Deleting rooms** | | |
 | Operation with progress | `actions/archiveDelete.test.ts:38` | UNIT-CONFIRMED |
 | **Leaving a room** | | |
-| Confirmation; owner offered Assign owner; form filler warning | `packages/client/src/components/dialogs/LeaveRoomDialog/index.js:66-141` | CODE-ONLY |
+| Confirmation of a plain room | `packages/client/src/components/dialogs/LeaveRoomDialog/__tests__/LeaveRoomDialog.test.tsx:154` | UNIT-CONFIRMED |
+| Owner offered Assign owner; form filler warning | `packages/client/src/components/dialogs/LeaveRoomDialog/index.js:66-141` | CODE-ONLY |
 | Leave succeeds, refused, fails | `packages/client/src/store/filesActionsStore/__tests__/FilesActionsStore.leaveRoom.test.ts:64-145` | UNIT-CONFIRMED |
 | Administrator leaving from the list or from inside the room | `FilesActionsStore.leaveRoom.test.ts:228-277` | UNIT-CONFIRMED |
 | **Changing the room owner** | | |

@@ -166,6 +166,7 @@ export const useSaasBilling = (
     plan = "business",
     card = "active",
     isDelayedPaymentMethod = false,
+    year = false,
   }: {
     user?: UserKind;
     payer?: PayerKind;
@@ -174,6 +175,7 @@ export const useSaasBilling = (
     card?: CardKind;
     /** the deposit is accepted at once, the funds reach the wallet later */
     isDelayedPaymentMethod?: boolean;
+    year?: boolean;
   } = {},
 ) => {
   mockRequest.use(
@@ -190,7 +192,7 @@ export const useSaasBilling = (
     tariffHandlerFor(tariff),
     plan === "startup"
       ? freeQuotaHandler(TEST_PORT)
-      : quotaHandler(TEST_PORT, false, false, false, true),
+      : quotaHandler(TEST_PORT, false, false, false, true, year),
     balanceHandler(),
   );
 };

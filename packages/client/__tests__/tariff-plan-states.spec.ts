@@ -145,6 +145,55 @@ test.describe("Tariff plan recalculation", () => {
     ]);
   });
 
+  test("a yearly wallet tariff is recalculated through adminwalletyear", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      year: true,
+    });
+    mockRequest.use(walletTariffHandler(), balanceHandler(500));
+
+    const payloads: string[] = [];
+    page.on("request", (request) => {
+      if (
+        request.method() === "PUT" &&
+        request.url().includes("portal/payment/calculatewallet")
+      )
+        payloads.push(request.postData() ?? "");
+    });
+
+    await page.goto(`${baseUrl}/billing/tariff-plan`);
+
+    await expect(page.getByTestId("quantity_picker_input")).toBeVisible();
+    await expect(page.getByText(/per admin\/year/).first()).toBeVisible();
+
+    await page.getByTestId("quantity_picker_plus_icon").click();
+
+    await expect(page.getByText("Total due today")).toBeVisible();
+    await expect(
+      page.getByText("$93.50", { exact: true }),
+    ).toBeVisible(AFTER_ESTIMATE);
+    await expect(page.getByText("$7,040").first()).toBeVisible();
+    await expect(page.getByText("/year", { exact: true })).toBeVisible();
+    await expect(planButton(page)).toContainText(
+      "Pay $93.50 & Upgrade",
+      AFTER_ESTIMATE,
+    );
+
+    expect(payloads).toHaveLength(1);
+    expect(payloads[0]).toContain('"adminwalletyear":1');
+
+    await expectScreenshot(page, [
+      "desktop",
+      "tariff-plan",
+      "upgrade-due-today-yearly.png",
+    ]);
+  });
+
   test("a short balance turns the upgrade into a top-up", async ({
     page,
     baseUrl,
@@ -949,6 +998,84 @@ test.describe("Migration to wallet billing", () => {
     expect(payloads).toHaveLength(1);
     // The migration sends the absolute count; the ordinary upgrade sends the difference.
     expect(payloads[0]).toContain('"adminwallet":32');
+  });
+
+  test("a yearly tariff is priced per year from the yearly wallet quota", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      year: true,
+    });
+    mockRequest.use(
+      subscriptionBalanceHandler({
+        remainingBalance: 6727,
+        remainingBalanceInWalletCurrency: 6727,
+      }),
+    );
+
+    const dialog = await openMigrationDialog(page, baseUrl);
+
+    await expect(dialog).toContainText("Current tariff");
+    await expect(dialog).toContainText("$6,820 /year");
+    await expect(dialog).toContainText("Refund to wallet");
+    await expect(dialog).toContainText("+ $6,727.00");
+
+    await expect(dialog).toContainText("Admins: 32 × $240");
+    await expect(dialog).toContainText("$7,680 /year");
+    await expect(dialog).toContainText("- $6,777.00");
+    await expect(dialog).toContainText("Due on your card today");
+    await expect(dialog).toContainText("$903.00");
+    await expect(dialog).toContainText("Then $7,680/year auto-renews");
+    await expect(dialog).not.toContainText("/mo");
+
+    const confirmButton = dialog.getByTestId("migrate_to_wallet_confirm_button");
+    await expect(confirmButton).toContainText("Pay $903.00");
+
+    await dialog.getByTestId("migrate_to_wallet_agree_checkbox").click();
+    await expect(confirmButton).toBeEnabled();
+
+    await expectScreenshot(page, [
+      "desktop",
+      "tariff-plan",
+      "migrate-yearly.png",
+    ]);
+  });
+
+  test("confirming a yearly migration sends adminwalletyear", async ({
+    page,
+    baseUrl,
+    mockRequest,
+  }) => {
+    useSaasBilling(mockRequest, {
+      user: "owner",
+      payer: "self-owner",
+      year: true,
+    });
+    mockRequest.use(subscriptionBalanceHandler());
+
+    const payloads: string[] = [];
+    page.on("request", (request) => {
+      if (
+        request.method() === "POST" &&
+        request.url().includes("subscription/movetowallet")
+      )
+        payloads.push(request.postData() ?? "");
+    });
+
+    const dialog = await openMigrationDialog(page, baseUrl);
+
+    await dialog.getByTestId("migrate_to_wallet_agree_checkbox").click();
+    await dialog.getByTestId("migrate_to_wallet_confirm_button").click();
+
+    await expect(dialog).toHaveCount(0);
+
+    expect(payloads).toHaveLength(1);
+    expect(payloads[0]).toContain('"adminwalletyear":32');
+    expect(payloads[0]).not.toContain('"adminwallet":');
   });
 });
 

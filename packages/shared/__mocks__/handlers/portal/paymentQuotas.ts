@@ -41,6 +41,8 @@ export const PATH_PORTAL_PAYMENT_QUOTAS = "portal/payment/quotas";
 
 // The tariff the subscription renews into (ui-kit FUTURE_TARIFF_QUOTA_ID); without it renewal prices fall back to USD.
 const FUTURE_TARIFF_QUOTA_ID = -14;
+const WALLET_YEAR_TARIFF_QUOTA_ID = -19;
+const WALLET_YEAR_TARIFF_PRICE = 240;
 
 const purchasableQuotas = () => {
   return {
@@ -355,7 +357,15 @@ export type TQuotaCurrency = {
 export const portalPaymentQuotasSuccess = (currency?: TQuotaCurrency) => {
   const body = purchasableQuotas();
   const paidTariff = body.response[1];
-  const quotas = [...body.response, { ...paidTariff, id: FUTURE_TARIFF_QUOTA_ID }];
+  const quotas = [
+    ...body.response,
+    {
+      ...paidTariff,
+      id: WALLET_YEAR_TARIFF_QUOTA_ID,
+      price: { ...paidTariff.price, value: WALLET_YEAR_TARIFF_PRICE },
+    },
+    { ...paidTariff, id: FUTURE_TARIFF_QUOTA_ID },
+  ];
 
   return {
     ...body,

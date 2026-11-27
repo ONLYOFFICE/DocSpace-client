@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useEffect } from "react";
 import { observer } from "mobx-react";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
@@ -55,15 +56,22 @@ import styles from "../Plugins.module.scss";
  * with its plugin tools, which the server offers to the owner and DocSpace
  * admins only.
  *
- * Shown where the chat is available on this page (Shell's
- * `isAiChatAvailable`). Whether the installation runs a plugin agent is not
- * something the client is told.
+ * Shown where the server offers the user its plugin agent, which the page
+ * asks about when it opens: the chat is then available on this page (Shell's
+ * `isAiChatAvailable`). Without a plugin agent the chat's model has no tool
+ * to build with, and the page looks as it did.
  */
 const CreateWithAiButton = ({ t }: { t: TTranslation }) => {
   const isAiChatAvailable = useIsAiChatAvailable();
   const aiChatStore = useAiChatStore();
   const setCurrentPage = useAiChatStores().useRouter((s) => s.setCurrentPage);
   const aiPresetsStore = useStore("aiPresetsStore");
+  const { aiServicesEnabled } = useStore("settingsStore");
+  const { checkAiPluginAgent } = useStore("pluginStore");
+
+  useEffect(() => {
+    if (aiServicesEnabled) void checkAiPluginAgent();
+  }, [aiServicesEnabled, checkAiPluginAgent]);
 
   if (!isAiChatAvailable) return null;
 

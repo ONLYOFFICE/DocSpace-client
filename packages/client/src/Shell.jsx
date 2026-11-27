@@ -178,6 +178,7 @@ const Shell = ({ page = "home", ...rest }) => {
     getAIConfig,
     fetchTreeFolders,
     aiServicesEnabled,
+    aiPluginAgentAvailable,
     setAiServicesEnabled,
     fetchWalletBalance,
     setWalletLowBalance,
@@ -855,8 +856,10 @@ const Shell = ({ page = "home", ...rest }) => {
     !location.pathname.includes("settings/plugins");
 
   // One settings page has the chat: the plugins list, whose "Create with
-  // AI" opens it beside the list to build a plugin.
-  const isPluginsSettings = isPluginsSettingsPath(location.pathname);
+  // AI" opens it beside the list to build a plugin - where the server
+  // offers the user its plugin agent, which that page asks about.
+  const isPluginsSettings =
+    aiPluginAgentAvailable && isPluginsSettingsPath(location.pathname);
 
   const isAiChatAvailable =
     aiServicesEnabled &&
@@ -1180,6 +1183,7 @@ const ShellWrapper = inject(
     peopleStore,
     filesStore,
     appsStore,
+    pluginStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -1309,6 +1313,7 @@ const ShellWrapper = inject(
       setLogoText,
       standalone,
       setSocialAuthWelcomeDialogVisible,
+      aiPluginAgentAvailable: pluginStore.aiPluginAgentAvailable,
       getAIConfig,
       fetchTreeFolders: treeFoldersStore.fetchTreeFolders,
       aiServicesEnabled: settingsStore.aiServicesEnabled,

@@ -177,12 +177,18 @@ paid badge.
 
 ### Requirement: Third-party services
 
-Third-party services SHALL list the services whose keys the portal may hold, each switched on by entering its keys in
-a dialog, and offer a request for a missing integration. A service backed by an external database SHALL show the
-fields its chosen options need and offer Test connection. Without the feature the services SHALL be
-marked as included in the Business plan (`IncludedInBusiness`).
+Third-party services SHALL list the services whose keys the portal may hold, a service fixed by the installation shown
+on and locked, and offer a request for a missing integration. A service SHALL be switched on by entering all its keys
+in a dialog, off by clearing them. An external database SHALL show the fields of its type and be saved only after
+Test connection succeeds. Without the feature the paid services SHALL follow `IncludedInBusiness` with the paid badge
+and, in the cloud, stay off.
 
 #### Scenario: Enabling a service
 
 - **WHEN** an administrator enters the keys of a service and saves
 - **THEN** the service is shown as enabled
+
+#### Scenario: Paid service in the cloud without the feature
+
+- **WHEN** an administrator of a cloud portal without third-party services opens the page
+- **THEN** the paid services follow the Business plan heading with the paid badge and cannot be switched on

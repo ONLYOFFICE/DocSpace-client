@@ -61,9 +61,10 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Group membership makes its fields editable, marks them when empty and sends them; authentication blocks saving without the login and password, then sends them; a certificate to confirm shows its details and errors, and confirming saves again with the certificate and its hash accepted | `packages/client/__tests__/ldap-settings.spec.ts:301, 349, 386` | E2E-CONFIRMED |
 | Disabled with the paid badge without the feature | `packages/client/__tests__/ldap-settings.spec.ts:185` | E2E-CONFIRMED |
 | **Third-party services** | | |
-| Services with keys, request block, Business plan badge | `int/ThirdPartyServicesSettings/index.js:160-250` | CODE-ONLY |
+| A service with keys and one fixed by the installation shown on, the fixed one locked; switching on waits for every key and sends them without spaces; switching off clears the keys; without the feature the paid services follow the Business plan heading with the paid badge and stay off in the cloud, while a server installation can still switch them on | `packages/client/__tests__/third-party-services.spec.ts:196, 223, 252, 273, 317` | E2E-CONFIRMED |
+| Request for a missing integration mails the support address | `int/ThirdPartyServicesSettings/index.js:156, 198` | CODE-ONLY |
 | External database: fields shown by the chosen options | `int/ThirdPartyServicesSettings/sub-components/ExternalDbModal/__tests__/ExternalDbField.utils.test.ts` | UNIT-CONFIRMED |
-| Test connection of an external database | `int/ThirdPartyServicesSettings/sub-components/ExternalDbModal/ExternalDbModal.tsx` | CODE-ONLY |
+| External database: the fields of its type; a failed Test connection reported and blocking Enable; saved after a successful test, with only the fields of its type | `packages/client/__tests__/third-party-services.spec.ts:354, 427` | E2E-CONFIRMED |
 | Keys on the server; external database test | `server`, "Third-party service keys"; "Testing an external database connection" | SERVER-SPEC |
 
 ## Left out of the spec

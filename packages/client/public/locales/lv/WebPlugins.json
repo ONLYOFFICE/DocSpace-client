@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Izveidot ar MI",
+  "CreateWithAIPrompt": "Es vēlos izveidot spraudni šai darbvietai. Pajautājiet man, kas tam jādara, un pēc tam izveidojiet to.",
   "DeletePlugin": "Izdzēst pielikni",
   "DeletePluginDescription": "Šis spraudnis vairs nebūs pieejams darbvietas lietotājiem. Vai tiešām vēlaties turpināt?",
   "DeletePluginTitle": "Vai izdzēst pielikni?",

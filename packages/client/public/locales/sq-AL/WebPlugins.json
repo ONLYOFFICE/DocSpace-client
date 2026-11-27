@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Krijoni me AI",
+  "CreateWithAIPrompt": "Dua të krijoj një shtojcë për këtë hapësirë pune. Pyetni mua se çfarë duhet të bëjë, pastaj ndërtojeni.",
   "DeletePlugin": "Fshini shtojcën",
   "DeletePluginDescription": "Kjo shtojcë nuk do të jetë më e disponueshme për përdoruesit e hapësirës së punës. Je i sigurt që dëshiron të vazhdosh?",
   "DeletePluginTitle": "Fshini shtojcën?",

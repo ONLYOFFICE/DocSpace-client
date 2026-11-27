@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Créer avec l'IA",
+  "CreateWithAIPrompt": "Je souhaite créer un module complémentaire pour cet espace de travail. Demandez-moi ce qu'il doit faire, puis créez-le.",
   "DeletePlugin": "Supprimer le module complémentaire",
   "DeletePluginDescription": "Ce module complémentaire ne sera plus disponible pour les utilisateurs de l'espace de travail. Etes-vous sûr de vouloir continuer ?",
   "DeletePluginTitle": "Supprimer le module complémentaire ?",

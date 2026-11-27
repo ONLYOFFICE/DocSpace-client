@@ -1,0 +1,29 @@
+{
+  "key_path": "CreateWithAIPrompt",
+  "content": "I want to create a plugin for this workspace. Ask me what it should do, then build it.",
+  "content_en_sha1_hash": "3bf6524567c4def49d5e834fcb34309dea03ecd2",
+  "created_at": "2026-11-27T07:54:41.556Z",
+  "updated_at": "2026-11-27T07:55:09.550Z",
+  "comment": {
+    "text": "Text put into the AI chat's message field when the Create with AI button on the Plugins settings page is clicked; the user sends it to the AI assistant as their own message. Written in the first person, addressed to the assistant; plugin means an extension of the workspace.",
+    "is_auto": true,
+    "updated_at": "2026-11-27T07:55:09.550Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/sub-components/CreateWithAiButton.tsx",
+      "line_number": 80,
+      "context": "aiChatStore.openPreset({\n profileId: null,\n profileName: null,\n contextRooms: [],\n knowledgeRooms: [],\n draft: t(\"WebPlugins:CreateWithAIPrompt\"),\n });\n // Beside the list, whatever size the chat was left at.\n aiChatStore.setFullscreen(false);\n // The chat may have been left on its history or settings.\n setCurrentPage(\"chat\");",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

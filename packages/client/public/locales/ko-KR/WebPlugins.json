@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "AI로 만들기",
+  "CreateWithAIPrompt": "이 워크스페이스용 플러그인을 만들고 싶습니다. 플러그인이 무엇을 해야 하는지 저에게 물어본 다음 빌드해 주세요.",
   "DeletePlugin": "플러그인 삭제",
   "DeletePluginDescription": "워크스페이스 사용자는 더 이상 이 플러그인을 사용할 수 없게 됩니다. 계속하시겠습니까?",
   "DeletePluginTitle": "플러그인을 삭제하시겠습니까?",

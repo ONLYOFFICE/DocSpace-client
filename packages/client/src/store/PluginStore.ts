@@ -34,6 +34,8 @@
  */
 
 import { makeAutoObservable, observable, runInAction } from "mobx";
+
+import { getAiPluginAgentAvailable } from "@docspace/shared/api/ai/pluginAgent";
 import axios from "axios";
 import cloneDeep from "lodash/cloneDeep";
 
@@ -238,6 +240,12 @@ class PluginStore {
 
   isEmptyList = false;
 
+  /**
+   * The AI chat can build a plugin for the user (the server's plugin agent
+   * is set up and offered to them); false until the plugins page has asked.
+   */
+  aiPluginAgentAvailable = false;
+
   needPageReload = false;
 
   pluginMediaViewerVisible = false;
@@ -374,6 +382,14 @@ class PluginStore {
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
+  };
+
+  /** Asks the AI service whether it offers the user its plugin agent. */
+  checkAiPluginAgent = async () => {
+    const available = await getAiPluginAgentAvailable();
+    runInAction(() => {
+      this.aiPluginAgentAvailable = available;
+    });
   };
 
   setIsEmptyList = (value: boolean) => {

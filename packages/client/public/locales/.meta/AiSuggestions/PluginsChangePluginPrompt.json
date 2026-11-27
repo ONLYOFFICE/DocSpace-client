@@ -1,0 +1,29 @@
+{
+  "key_path": "PluginsChangePluginPrompt",
+  "content": "I want to change a plugin you built earlier. Ask me which one it is and what to change, then build it again from its sources archive.",
+  "content_en_sha1_hash": "ff80ecc488c83d509f0bf22a5bbf7cc88dae235f",
+  "created_at": "2026-11-27T07:54:49.940Z",
+  "updated_at": "2026-11-27T07:55:09.550Z",
+  "comment": {
+    "text": "Message sent to the AI assistant when the chip about changing a plugin is picked in the chat on the Plugins settings page. Written in the first person, addressed to the assistant; sources archive is the ZIP file with the plugin's source code that the assistant saved earlier.",
+    "is_auto": true,
+    "updated_at": "2026-11-27T07:55:09.550Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 1034,
+      "context": "name: t(\"AiSuggestions:PluginsExternalService\"),\n prompt: t(\"AiSuggestions:PluginsExternalServicePrompt\"),\n },\n {\n name: t(\"AiSuggestions:PluginsChangePlugin\"),\n prompt: t(\"AiSuggestions:PluginsChangePluginPrompt\"),\n },\n ],\n });",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

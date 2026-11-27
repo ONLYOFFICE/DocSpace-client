@@ -72,12 +72,14 @@ vi.mock(
       enabled,
       isNotLoaded,
       updatePlugin,
+      openSettingsDialog,
     }: {
       dataTestId?: string;
       name: string;
       enabled: boolean;
       isNotLoaded?: boolean;
       updatePlugin?: (name: string, status: boolean) => Promise<unknown>;
+      openSettingsDialog?: (name: string) => void;
     }) => (
       <div
         data-testid={dataTestId}
@@ -88,6 +90,13 @@ vi.mock(
             type="button"
             data-testid={`${dataTestId}_switch`}
             onClick={() => updatePlugin(name, !enabled)}
+          />
+        ) : null}
+        {openSettingsDialog ? (
+          <button
+            type="button"
+            data-testid={`${dataTestId}_settings`}
+            onClick={() => openSettingsDialog(name)}
           />
         ) : null}
       </div>
@@ -153,34 +162,38 @@ const renderTab = ({
   personalPlugins = [],
   pluginList = [],
   reloadRequiredPlugins = [],
-}: TTabState = {}) =>
-  render(
-    <Provider
-      pluginStore={{
-        personalPlugins,
-        pluginList,
-        reloadRequiredPlugins,
-        fetchPersonalPlugins,
-        addPlugin,
-        updatePlugin,
-        setSettingsPluginDialogVisible: vi.fn(),
-        setCurrentSettingsDialogPlugin: vi.fn(),
-        setDeletePluginDialogVisible: vi.fn(),
-        setDeletePluginDialogProps: vi.fn(),
-        checkPluginCompatibility: () => true,
-        isLoaded: true,
-        isPersonalLoaded,
-      }}
-      userStore={{ user: { isAdmin, isOwner: false } }}
-      settingsStore={{
-        pluginOptions: { upload: isUploadAllowed },
-        theme: {},
-        culture: "en",
-      }}
-    >
-      <PersonalPlugins />
-    </Provider>,
-  );
+}: TTabState = {}) => {
+  const pluginStore = {
+    personalPlugins,
+    pluginList,
+    reloadRequiredPlugins,
+    fetchPersonalPlugins,
+    addPlugin,
+    updatePlugin,
+    setSettingsPluginDialogVisible: vi.fn(),
+    setCurrentSettingsDialogPlugin: vi.fn(),
+    checkPluginCompatibility: () => true,
+    isLoaded: true,
+    isPersonalLoaded,
+  };
+
+  return {
+    pluginStore,
+    ...render(
+      <Provider
+        pluginStore={pluginStore}
+        userStore={{ user: { isAdmin, isOwner: false } }}
+        settingsStore={{
+          pluginOptions: { upload: isUploadAllowed },
+          theme: {},
+          culture: "en",
+        }}
+      >
+        <PersonalPlugins />
+      </Provider>,
+    ),
+  };
+};
 
 describe("Personal plugins tab", () => {
   it("shows the skeleton until the member's plugins are first read", () => {
@@ -247,6 +260,37 @@ describe("Personal plugins tab", () => {
       "data-not-loaded",
       "false",
     );
+  });
+
+  it("opens the settings of one's own plugin a portal plugin shadows, marked personal", async () => {
+    const { pluginStore } = renderTab({
+      personalPlugins: [ownPlugin("shared")],
+      pluginList: [loadedPlugin("shared", false)],
+    });
+
+    (await screen.findByTestId("personal_plugin_shared_settings")).click();
+
+    expect(pluginStore.setSettingsPluginDialogVisible).toHaveBeenCalledWith(
+      true,
+    );
+    expect(pluginStore.setCurrentSettingsDialogPlugin).toHaveBeenCalledWith({
+      pluginName: "shared",
+      personal: true,
+    });
+  });
+
+  it("opens the settings of one's own loaded plugin, marked personal", async () => {
+    const { pluginStore } = renderTab({
+      personalPlugins: [ownPlugin("own")],
+      pluginList: [loadedPlugin("own", true)],
+    });
+
+    (await screen.findByTestId("personal_plugin_own_settings")).click();
+
+    expect(pluginStore.setCurrentSettingsDialogPlugin).toHaveBeenCalledWith({
+      pluginName: "own",
+      personal: true,
+    });
   });
 
   it("points an administrator to the plugins of the whole workspace", async () => {

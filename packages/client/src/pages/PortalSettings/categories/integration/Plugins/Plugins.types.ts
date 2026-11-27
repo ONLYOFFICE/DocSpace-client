@@ -39,6 +39,7 @@ import { TTranslation } from "@docspace/shared/types";
 
 import type { TMemberPlugin } from "@docspace/shared/api/plugins/types";
 import { TPlugin } from "SRC_DIR/helpers/plugins/types";
+import type { TShadowingPlugin } from "SRC_DIR/helpers/plugins/personal";
 import PluginStore from "SRC_DIR/store/PluginStore";
 
 export interface PluginDropzoneProps {
@@ -83,9 +84,8 @@ export interface PluginItemProps
 
   theme: TTheme;
   dataTestId?: string;
-  shadowedBy?: Pick<TPlugin, "nameLocale" | "version" | "enabled">;
+  shadowedBy?: TShadowingPlugin;
   isNotLoaded?: boolean;
-  onDelete?: () => void;
 }
 
 export interface ListLoaderProps {

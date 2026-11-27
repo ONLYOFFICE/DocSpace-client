@@ -51,6 +51,7 @@ import PluginDefaultLogoUrl from "PUBLIC_DIR/images/plugin.default-logo.png";
 
 import { getPluginUrl } from "SRC_DIR/helpers/plugins/utils";
 import { getPluginErrorText } from "SRC_DIR/helpers/plugins/errors";
+import { getShadowedNote } from "SRC_DIR/helpers/plugins/personal";
 
 import styles from "../Plugins.module.scss";
 import { PluginItemProps } from "../Plugins.types";
@@ -77,7 +78,6 @@ const PluginItem = ({
   theme,
   shadowedBy,
   isNotLoaded,
-  onDelete,
 }: PluginItemProps) => {
   const { t } = useTranslation(["Common", "WebPlugins"]);
   const pluginToggleId = useId();
@@ -236,28 +236,8 @@ const PluginItem = ({
             lineHeight="20px"
             dataTestId={`plugin_shadowed_${name}_text`}
           >
-            {shadowedBy.enabled
-              ? t("WebPlugins:PersonalPluginShadowed", {
-                  pluginName: shadowedBy.nameLocale,
-                  version: shadowedBy.version,
-                })
-              : t("WebPlugins:PersonalPluginShadowedDisabled", {
-                  pluginName: shadowedBy.nameLocale,
-                })}
+            {getShadowedNote(t, shadowedBy)}
           </Text>
-        ) : null}
-
-        {onDelete ? (
-          <Link
-            as="button"
-            className={styles.pluginDeleteLink}
-            type={LinkType.action}
-            isHovered
-            onClick={onDelete}
-            dataTestId={`delete_plugin_${name}_link`}
-          >
-            {t("Common:Delete")}
-          </Link>
         ) : null}
 
         {descriptionLocale ? (

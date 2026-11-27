@@ -36,7 +36,28 @@
 import { TTranslation } from "@docspace/shared/types";
 import { Dispatch, SetStateAction } from "react";
 import { TButtonGroup, TPlugin } from "SRC_DIR/helpers/plugins/types";
+import type { TShadowingPlugin } from "SRC_DIR/helpers/plugins/personal";
 import type PluginStore from "SRC_DIR/store/PluginStore";
+
+export type TSettingsDialogPlugin = Pick<
+  TPlugin,
+  | "name"
+  | "nameLocale"
+  | "descriptionLocale"
+  | "version"
+  | "compatible"
+  | "author"
+  | "homePage"
+  | "system"
+  | "createBy"
+  | "createOn"
+> &
+  Partial<
+    Pick<
+      TPlugin,
+      "personal" | "loadError" | "initError" | "status" | "getAdminPluginSettings"
+    >
+  >;
 
 export type HeaderProps = {
   t: TTranslation;
@@ -54,13 +75,16 @@ export type FooterProps = {
 
 export type InfoProps = {
   t: TTranslation;
-  plugin: TPlugin;
+  plugin: TSettingsDialogPlugin;
   withDelete: boolean;
   withSeparator: boolean;
+  statusText?: string;
 };
 
 export type SettingsPluginDialogProps = {
-  plugin: TPlugin;
+  plugin?: TSettingsDialogPlugin;
+  shadowedBy?: TShadowingPlugin;
+  isNotLoaded: boolean;
   withDelete: boolean;
   settingsPluginDialogVisible: boolean;
   reactSettingsSaveButtonState: PluginStore["reactSettingsSaveButtonState"];

@@ -36,12 +36,16 @@
 import { describe, it, expect } from "vitest";
 
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import type { TTranslation } from "@docspace/shared/types";
 
 import {
   clashesWith,
   hasCspDomains,
   isUserPlugin,
   getPersonalPluginRows,
+  findSettingsDialogPlugin,
+  getOwnPluginInfo,
+  getShadowedNote,
 } from "SRC_DIR/helpers/plugins/personal";
 
 const apiPlugin = (name: string, pluginName: string): TAPIPlugin =>
@@ -144,5 +148,90 @@ describe("isUserPlugin", () => {
 
   it("does not match the plugin of the same name of another user", () => {
     expect(isUserPlugin(plugin, "u2", "hello")).toBe(false);
+  });
+});
+
+describe("findSettingsDialogPlugin", () => {
+  const portal = { name: "hello", pluginName: "Hello", personal: false };
+  const own = apiPlugin("hello", "Hello");
+
+  it("opens a workspace plugin by its name", () => {
+    expect(
+      findSettingsDialogPlugin({ pluginName: "hello" }, [own], [portal]),
+    ).toEqual({ loaded: portal });
+  });
+
+  it("opens one's own copy, not the workspace plugin that shadows it", () => {
+    const row = findSettingsDialogPlugin(
+      { pluginName: "hello", personal: true },
+      [own],
+      [portal],
+    );
+
+    expect(row.own).toBe(own);
+    expect(row.loaded).toBeUndefined();
+    expect(row.shadowedBy).toBe(portal);
+  });
+
+  it("opens one's own loaded plugin", () => {
+    const loaded = { name: "hello", pluginName: "Hello", personal: true };
+
+    const row = findSettingsDialogPlugin(
+      { pluginName: "HELLO", personal: true },
+      [own],
+      [loaded],
+    );
+
+    expect(row.loaded).toBe(loaded);
+  });
+
+  it("finds nothing for a plugin one does not have", () => {
+    expect(
+      findSettingsDialogPlugin({ pluginName: "other", personal: true }, [own], []),
+    ).toEqual({});
+  });
+});
+
+describe("getOwnPluginInfo", () => {
+  it("takes the texts in the member's language and marks the plugin personal", () => {
+    const info = getOwnPluginInfo(
+      {
+        ...apiPlugin("hello", "Hello"),
+        nameLocale: { en: "Hello", ru: "Privet" },
+        description: "Greets",
+        descriptionLocale: { ru: "Privetstvuet" },
+        system: true,
+      },
+      "ru",
+      false,
+    );
+
+    expect(info).toMatchObject({
+      name: "hello",
+      nameLocale: "Privet",
+      descriptionLocale: "Privetstvuet",
+      compatible: false,
+      system: false,
+      personal: true,
+    });
+  });
+});
+
+describe("getShadowedNote", () => {
+  const t = ((key: string, options?: Record<string, string>) =>
+    `${key} ${JSON.stringify(options)}`) as unknown as TTranslation;
+
+  it("names the version of a workspace plugin that is on", () => {
+    expect(
+      getShadowedNote(t, { nameLocale: "Hello", version: "2.0.0", enabled: true }),
+    ).toBe(
+      'WebPlugins:PersonalPluginShadowed {"pluginName":"Hello","version":"2.0.0"}',
+    );
+  });
+
+  it("says that the workspace plugin is off", () => {
+    expect(
+      getShadowedNote(t, { nameLocale: "Hello", version: "2.0.0", enabled: false }),
+    ).toBe('WebPlugins:PersonalPluginShadowedDisabled {"pluginName":"Hello"}');
   });
 });

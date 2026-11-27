@@ -34,10 +34,18 @@
  */
 
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
+import type { TTranslation } from "@docspace/shared/types";
+
+import { getLocalizedText } from "./locale";
+import type { TPlugin } from "./types";
 
 type TPluginIdentity = Pick<TAPIPlugin, "name" | "pluginName"> & {
   personal?: boolean;
 };
+
+export type TShadowingPlugin = Pick<TPlugin, "nameLocale" | "version" | "enabled">;
+
+export type TSettingsDialogRequest = { pluginName: string; personal?: boolean };
 
 export type TPersonalPluginRow<TLoaded extends TPluginIdentity> = {
   own: TAPIPlugin;
@@ -69,3 +77,54 @@ export const getPersonalPluginRows = <TLoaded extends TPluginIdentity>(
     loaded: loaded.find((p) => p.personal && isSameName(p.name, plugin.name)),
     shadowedBy: loaded.find((p) => !p.personal && clashesWith(plugin, p)),
   }));
+
+export const findSettingsDialogPlugin = <TLoaded extends TPluginIdentity>(
+  request: TSettingsDialogRequest,
+  own: TAPIPlugin[],
+  loaded: TLoaded[],
+): Partial<TPersonalPluginRow<TLoaded>> => {
+  if (!request.personal)
+    return { loaded: loaded.find((p) => p.name === request.pluginName) };
+
+  const [row] = getPersonalPluginRows(
+    own.filter((p) => isSameName(p.name, request.pluginName)),
+    loaded,
+  );
+
+  return row ?? {};
+};
+
+export const getOwnPluginInfo = (
+  own: TAPIPlugin,
+  language: string,
+  compatible: boolean,
+) => ({
+  name: own.name,
+  nameLocale: getLocalizedText(own.nameLocale, language, own.name),
+  descriptionLocale: getLocalizedText(
+    own.descriptionLocale,
+    language,
+    own.description,
+  ),
+  version: own.version,
+  compatible,
+  author: own.author,
+  homePage: own.homePage,
+  system: false,
+  createBy: own.createBy,
+  createOn: own.createOn,
+  personal: true,
+});
+
+export const getShadowedNote = (
+  t: TTranslation,
+  shadowedBy: TShadowingPlugin,
+) =>
+  shadowedBy.enabled
+    ? t("WebPlugins:PersonalPluginShadowed", {
+        pluginName: shadowedBy.nameLocale,
+        version: shadowedBy.version,
+      })
+    : t("WebPlugins:PersonalPluginShadowedDisabled", {
+        pluginName: shadowedBy.nameLocale,
+      });

@@ -449,7 +449,8 @@ test.describe("Personal plugins in the profile", () => {
     const card = page.getByTestId(`personal_plugin_${name}`);
     await expect(card.getByTestId(`plugin_shadowed_${name}_text`)).toBeVisible();
 
-    await card.getByTestId(`delete_plugin_${name}_link`).click();
+    await card.getByTestId("open_settings_icon_button").click();
+    await page.getByTestId("settings_delete_plugin_button").click();
 
     const deletion = page.waitForRequest(
       (r) =>

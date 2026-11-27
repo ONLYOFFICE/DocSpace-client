@@ -43,7 +43,15 @@ import {
   ModalDialogType,
 } from "@onlyoffice/apps-ui-kit/components/modal-dialog";
 
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
+
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
+import {
+  findSettingsDialogPlugin,
+  getOwnPluginInfo,
+  getShadowedNote,
+} from "SRC_DIR/helpers/plugins/personal";
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import PluginWrappedComponent from "SRC_DIR/components/plugins/PluginWrappedComponent";
 
@@ -55,6 +63,8 @@ import { BoxGroup } from "@onlyoffice/docspace-plugin-sdk";
 
 const SettingsPluginDialog = ({
   plugin,
+  shadowedBy,
+  isNotLoaded,
   withDelete,
 
   reactSettingsSaveButtonState,
@@ -120,6 +130,12 @@ const SettingsPluginDialog = ({
     onDelete();
   };
 
+  const getStatusText = () => {
+    if (shadowedBy) return getShadowedNote(t, shadowedBy);
+    if (isNotLoaded) return t("WebPlugins:PersonalPluginNotLoaded");
+    return undefined;
+  };
+
   if (!plugin) return null;
 
   return (
@@ -160,6 +176,7 @@ const SettingsPluginDialog = ({
             plugin={plugin}
             withDelete={withDelete}
             withSeparator={!!component || !!customSettingsProps?.children}
+            statusText={getStatusText()}
           />
           {withDelete ? (
             <Button
@@ -189,6 +206,8 @@ const SettingsPluginDialog = ({
 export default inject(({ settingsStore, pluginStore }: TStore) => {
   const {
     pluginList,
+    personalPlugins,
+    checkPluginCompatibility,
     settingsPluginDialogVisible,
     setSettingsPluginDialogVisible,
     currentSettingsDialogPlugin,
@@ -198,15 +217,27 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
     reactSettingsSaveButtonState,
   } = pluginStore;
 
-  const { pluginOptions, standalone } = settingsStore;
+  const { pluginOptions, standalone, culture } = settingsStore;
 
   const currentSettingsDialog = currentSettingsDialogPlugin
     ? { ...currentSettingsDialogPlugin }
     : null;
 
-  const pluginName = currentSettingsDialog?.pluginName;
+  const row = currentSettingsDialog
+    ? findSettingsDialogPlugin(currentSettingsDialog, personalPlugins, pluginList)
+    : {};
 
-  const plugin = pluginList.find((p) => p.name === pluginName);
+  const language = (getCookie(LANGUAGE) || culture) as string;
+
+  const plugin =
+    row.loaded ??
+    (row.own
+      ? getOwnPluginInfo(
+          row.own,
+          language,
+          checkPluginCompatibility(row.own.minDocSpaceVersion),
+        )
+      : undefined);
 
   const withDelete =
     !!plugin?.personal ||
@@ -231,6 +262,8 @@ export default inject(({ settingsStore, pluginStore }: TStore) => {
 
   return {
     plugin,
+    shadowedBy: row.shadowedBy,
+    isNotLoaded: !!row.own && !row.loaded,
     withDelete,
     reactSettingsSaveButtonState,
     settingsPluginDialogVisible,

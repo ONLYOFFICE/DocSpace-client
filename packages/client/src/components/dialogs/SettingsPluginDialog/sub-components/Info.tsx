@@ -48,7 +48,13 @@ import { InfoProps } from "../SettingsPluginDialog.types";
 import styles from "../SettingsPluginDialog.module.scss";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
-const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
+const Info = ({
+  t,
+  plugin,
+  withDelete,
+  withSeparator,
+  statusText,
+}: InfoProps) => {
   const locale = getCookie(LANGUAGE) || "en";
   const uploadDate = plugin.createOn && getCorrectDate(locale, plugin.createOn);
 
@@ -64,7 +70,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
       : t("NeedSettings");
   };
 
-  const pluginStatus = getPluginStatus();
+  const pluginStatus = statusText ?? getPluginStatus();
 
   const incompatibleTooltip = t("WebPlugins:PluginIsNotCompatible", {
     organizationName: getBrandName("OrganizationName"),

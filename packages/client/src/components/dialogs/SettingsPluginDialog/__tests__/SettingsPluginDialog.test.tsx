@@ -52,19 +52,62 @@ vi.mock("@onlyoffice/apps-ui-kit/components/modal-dialog", () => {
   };
 });
 
-vi.mock("../sub-components/Header", () => ({ default: () => null }));
-vi.mock("../sub-components/Info", () => ({ default: () => null }));
+vi.mock("../sub-components/Header", () => ({
+  default: ({ name }: { name: string }) => (
+    <div data-testid="dialog-header">{name}</div>
+  ),
+}));
+vi.mock("../sub-components/Info", () => ({
+  default: ({ statusText }: { statusText?: string }) => (
+    <div data-testid="dialog-status">{statusText}</div>
+  ),
+}));
 vi.mock("../sub-components/Footer", () => ({ default: () => null }));
 
 const SettingsPluginDialog = (await import("../index"))
   .default as unknown as React.ComponentType;
 
-const renderDialog = (personal: boolean) => {
+type TDialogState = {
+  pluginList: object[];
+  personalPlugins?: object[];
+  request: { pluginName: string; personal?: boolean };
+};
+
+const loadedOwn = (personal: boolean): TDialogState => ({
+  pluginList: [{ name: "own", nameLocale: "Own", personal }],
+  request: { pluginName: "own" },
+});
+
+const ownRecord = {
+  name: "own",
+  pluginName: "OWN",
+  nameLocale: { en: "My own" },
+  version: "1.0.0",
+  description: "",
+  createBy: { displayName: "Member" },
+};
+
+const workspaceCopy = {
+  name: "own",
+  pluginName: "OWN",
+  nameLocale: "Workspace own",
+  version: "2.0.0",
+  enabled: true,
+  personal: false,
+};
+
+const renderDialog = ({
+  pluginList,
+  personalPlugins = [],
+  request,
+}: TDialogState) => {
   const pluginStore = {
-    pluginList: [{ name: "own", nameLocale: "Own", personal }],
+    pluginList,
+    personalPlugins,
+    checkPluginCompatibility: () => true,
     settingsPluginDialogVisible: true,
     setSettingsPluginDialogVisible: vi.fn(),
-    currentSettingsDialogPlugin: { pluginName: "own" },
+    currentSettingsDialogPlugin: request,
     setCurrentSettingsDialogPlugin: vi.fn(),
     setDeletePluginDialogVisible: vi.fn(),
     setDeletePluginDialogProps: vi.fn(),
@@ -74,7 +117,11 @@ const renderDialog = (personal: boolean) => {
   render(
     <Provider
       pluginStore={pluginStore}
-      settingsStore={{ pluginOptions: { delete: false }, standalone: false }}
+      settingsStore={{
+        pluginOptions: { delete: false },
+        standalone: false,
+        culture: "en",
+      }}
     >
       <SettingsPluginDialog />
     </Provider>,
@@ -85,7 +132,7 @@ const renderDialog = (personal: boolean) => {
 
 describe("SettingsPluginDialog", () => {
   it("lets the member delete their own plugin while workspace deletion is off", () => {
-    const pluginStore = renderDialog(true);
+    const pluginStore = renderDialog(loadedOwn(true));
 
     fireEvent.click(screen.getByTestId("settings_delete_plugin_button"));
 
@@ -100,8 +147,43 @@ describe("SettingsPluginDialog", () => {
   });
 
   it("offers no deletion of a workspace plugin while deletion is off", () => {
-    renderDialog(false);
+    renderDialog(loadedOwn(false));
 
     expect(screen.queryByTestId("settings_delete_plugin_button")).toBeNull();
+  });
+
+  it("opens one's own copy that a workspace plugin shadows and deletes that copy", () => {
+    const pluginStore = renderDialog({
+      pluginList: [workspaceCopy],
+      personalPlugins: [ownRecord],
+      request: { pluginName: "own", personal: true },
+    });
+
+    expect(screen.getByTestId("dialog-header")).toHaveTextContent("My own");
+    expect(screen.getByTestId("dialog-status")).toHaveTextContent(
+      "WebPlugins:PersonalPluginShadowed",
+    );
+
+    fireEvent.click(screen.getByTestId("settings_delete_plugin_button"));
+
+    expect(pluginStore.setDeletePluginDialogProps).toHaveBeenCalledWith({
+      pluginName: "own",
+      personal: true,
+    });
+  });
+
+  it("opens one's own plugin this page has not loaded and offers to delete it", () => {
+    renderDialog({
+      pluginList: [],
+      personalPlugins: [ownRecord],
+      request: { pluginName: "own", personal: true },
+    });
+
+    expect(screen.getByTestId("dialog-status")).toHaveTextContent(
+      "WebPlugins:PersonalPluginNotLoaded",
+    );
+    expect(
+      screen.getByTestId("settings_delete_plugin_button"),
+    ).toBeInTheDocument();
   });
 });

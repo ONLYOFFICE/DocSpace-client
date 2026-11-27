@@ -75,8 +75,6 @@ const PersonalPlugins = () => {
     fetchPersonalPlugins,
     setSettingsPluginDialogVisible,
     setCurrentSettingsDialogPlugin,
-    setDeletePluginDialogVisible,
-    setDeletePluginDialogProps,
     checkPluginCompatibility,
     isLoaded,
     isPersonalLoaded,
@@ -139,12 +137,7 @@ const PersonalPlugins = () => {
 
   const openSettingsDialog = (pluginName: string) => {
     setSettingsPluginDialogVisible(true);
-    setCurrentSettingsDialogPlugin({ pluginName });
-  };
-
-  const openDeleteDialog = (pluginName: string) => {
-    setDeletePluginDialogVisible(true);
-    setDeletePluginDialogProps({ pluginName, personal: true });
+    setCurrentSettingsDialogPlugin({ pluginName, personal: true });
   };
 
   const rows = getPersonalPluginRows(personalPlugins, pluginList);
@@ -231,7 +224,7 @@ const PersonalPlugins = () => {
               theme={theme}
               shadowedBy={shadowedBy}
               isNotLoaded={!shadowedBy}
-              onDelete={() => openDeleteDialog(own.name)}
+              openSettingsDialog={openSettingsDialog}
               dataTestId={`personal_plugin_${own.name}`}
             />
           ),

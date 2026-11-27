@@ -125,6 +125,7 @@ import {
   clashesWith,
   hasCspDomains,
   isUserPlugin,
+  type TSettingsDialogRequest,
 } from "../helpers/plugins/personal";
 import { getLocalizedText } from "../helpers/plugins/locale";
 import {
@@ -234,7 +235,7 @@ class PluginStore {
 
   settingsPluginDialogVisible = false;
 
-  currentSettingsDialogPlugin: null | { pluginName: string } = null;
+  currentSettingsDialogPlugin: null | TSettingsDialogRequest = null;
 
   pluginDialogVisible = false;
 
@@ -664,7 +665,7 @@ class PluginStore {
     this.isEmptyList = value;
   };
 
-  setCurrentSettingsDialogPlugin = (value: null | { pluginName: string }) => {
+  setCurrentSettingsDialogPlugin = (value: null | TSettingsDialogRequest) => {
     this.currentSettingsDialogPlugin = value;
     this.reactSettingsSaveButtonState = null;
   };

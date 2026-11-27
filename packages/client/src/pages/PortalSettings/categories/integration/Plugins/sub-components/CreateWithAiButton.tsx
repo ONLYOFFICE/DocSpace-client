@@ -34,12 +34,14 @@
  */
 
 import { observer } from "mobx-react";
-import { useLocation, useNavigate } from "react-router";
 
 import { Button, ButtonSize } from "@onlyoffice/apps-ui-kit/components/button";
+import {
+  useAiChatStore,
+  useIsAiChatAvailable,
+  useStores as useAiChatStores,
+} from "@onlyoffice/apps-ui-kit/ai-agent/providers";
 
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { RoomSearchArea } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 
 import { useStore } from "SRC_DIR/store/useStore";
@@ -47,38 +49,40 @@ import { useStore } from "SRC_DIR/store/useStore";
 import styles from "../Plugins.module.scss";
 
 /**
- * "Create with AI": opens the AI chat fullscreen, over the agents list, in a
- * new conversation whose composer already asks for a plugin. The chat's
- * model then asks what the plugin is to do and builds it with its plugin
- * tools, which the server offers to the owner and DocSpace admins only.
+ * "Create with AI": opens the AI chat beside the plugins list, in a new
+ * conversation on the default agent whose composer already asks for a
+ * plugin. The chat's model then asks what the plugin is to do and builds it
+ * with its plugin tools, which the server offers to the owner and DocSpace
+ * admins only.
  *
- * Shown where AI can be used at all: the services on, the plan paid and AI
- * not known to be unconfigured. Whether the installation runs a plugin agent
- * is not something the client is told.
+ * Shown where the chat is available on this page (Shell's
+ * `isAiChatAvailable`). Whether the installation runs a plugin agent is not
+ * something the client is told.
  */
 const CreateWithAiButton = ({ t }: { t: TTranslation }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const isAiChatAvailable = useIsAiChatAvailable();
+  const aiChatStore = useAiChatStore();
+  const setCurrentPage = useAiChatStores().useRouter((s) => s.setCurrentPage);
+  const aiPresetsStore = useStore("aiPresetsStore");
 
-  const { aiServicesEnabled, aiReady } = useStore("settingsStore");
-  const { isNotPaidPeriod } = useStore("currentTariffStatusStore");
-  const { requestAiChatPage } = useStore("dialogsStore");
-  const userId = useStore("userStore").user?.id;
-
-  if (!aiServicesEnabled || isNotPaidPeriod || aiReady === false || !userId)
-    return null;
+  if (!isAiChatAvailable) return null;
 
   const onClick = () => {
-    // The chat opens once this page is left: the settings have no chat.
-    requestAiChatPage(
-      "chat",
-      location.key,
-      undefined,
-      t("WebPlugins:CreateWithAIPrompt"),
-    );
-    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.AiHub);
-    filter.searchArea = RoomSearchArea.AiHub;
-    navigate(`/ai-rooms/filter?${filter.toUrlParams(userId, false)}`);
+    // The default agent with nothing connected, as "Use in chat" resets it.
+    aiPresetsStore.cancelApply();
+    aiPresetsStore.setActivePreset(null);
+    aiPresetsStore.setChatSkillRooms(null);
+    aiChatStore.openPreset({
+      profileId: null,
+      profileName: null,
+      contextRooms: [],
+      knowledgeRooms: [],
+      draft: t("WebPlugins:CreateWithAIPrompt"),
+    });
+    // Beside the list, whatever size the chat was left at.
+    aiChatStore.setFullscreen(false);
+    // The chat may have been left on its history or settings.
+    setCurrentPage("chat");
   };
 
   return (

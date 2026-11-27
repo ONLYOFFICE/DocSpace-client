@@ -995,3 +995,34 @@ export const getSuggestionSet = (
     analyzableForm: toSuggestions(sections.attachedForm, context),
   };
 };
+
+/**
+ * The chips of the chat opened on the plugins page of the settings: each
+ * asks for a kind of plugin and has the model ask for the rest. The page is
+ * the owner's and the DocSpace admins', the ones the server offers its
+ * plugin tools to, so the chips need no right of their own. With files
+ * attached the chips are those of the files, as anywhere.
+ */
+export const getPluginSuggestionSet = (
+  t: TTranslation,
+): Required<SuggestionSet> => ({
+  ...getSuggestionSet({}, t),
+  default: [
+    {
+      name: t("AiSuggestions:PluginsFileAction"),
+      prompt: t("AiSuggestions:PluginsFileActionPrompt"),
+    },
+    {
+      name: t("AiSuggestions:PluginsInfoPanelTab"),
+      prompt: t("AiSuggestions:PluginsInfoPanelTabPrompt"),
+    },
+    {
+      name: t("AiSuggestions:PluginsExternalService"),
+      prompt: t("AiSuggestions:PluginsExternalServicePrompt"),
+    },
+    {
+      name: t("AiSuggestions:PluginsChangePlugin"),
+      prompt: t("AiSuggestions:PluginsChangePluginPrompt"),
+    },
+  ],
+});

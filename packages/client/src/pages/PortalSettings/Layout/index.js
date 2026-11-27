@@ -41,12 +41,18 @@ import Section from "@onlyoffice/apps-ui-kit/components/section";
 import { DeviceType } from "@docspace/shared/enums";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import { isPluginPage } from "SRC_DIR/helpers/plugins/utils";
+import { useIsAiChatAvailable } from "@onlyoffice/apps-ui-kit/ai-agent/providers";
+
+import {
+  isPluginPage,
+  isPluginsSettingsPath,
+} from "SRC_DIR/helpers/plugins/utils";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import PortalSettingsSidebar from "SRC_DIR/components/PortalSettingsSidebar";
 
 import SectionHeaderContent from "./Section/Header";
+import ChatSection from "./Section/ChatSection";
 import Warning from "./WarningComponent";
 
 const Layout = ({
@@ -88,11 +94,18 @@ const Layout = ({
     if (enablePlugins && !isInitPlugins) initPlugins();
   }, [enablePlugins, isInitPlugins, initPlugins]);
 
+  // The plugins page has the AI chat beside it, where the chat is on at all.
+  const isAiChatAvailable = useIsAiChatAvailable();
+  const SettingsSection =
+    isAiChatAvailable && isPluginsSettingsPath(location.pathname)
+      ? ChatSection
+      : SectionWrapper;
+
   return (
     <>
       <PortalSettingsSidebar />
       {!isGeneralPage ? (
-        <SectionWrapper viewAs="settings" withBodyScroll settingsStudio>
+        <SettingsSection viewAs="settings" withBodyScroll settingsStudio>
           {!isPluginPage() ? (
             <Section.SectionHeader>
               <SectionHeaderContent />
@@ -106,7 +119,7 @@ const Layout = ({
           ) : null}
 
           <Section.SectionBody>{children}</Section.SectionBody>
-        </SectionWrapper>
+        </SettingsSection>
       ) : null}
     </>
   );

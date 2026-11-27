@@ -102,7 +102,11 @@ import ProjectIntro from "SRC_DIR/pages/AiProjects/sub-components/project/Projec
 import { isAgentModelUnavailable } from "SRC_DIR/pages/AiProjects/utils";
 import { useAiChatNotice } from "@docspace/shared/hooks/useAiChatNotice";
 import { PAYMENT_ROUTES } from "SRC_DIR/pages/PortalSettings/categories/payments/utils";
-import { getSuggestionSet } from "SRC_DIR/helpers/aiSuggestions";
+import {
+  getPluginSuggestionSet,
+  getSuggestionSet,
+} from "SRC_DIR/helpers/aiSuggestions";
+import { isPluginsSettingsPath } from "SRC_DIR/helpers/plugins/utils";
 import { AIActivationBanner } from "SRC_DIR/pages/Home/View/AIActivationBanner";
 
 import config from "PACKAGE_FILE";
@@ -850,9 +854,13 @@ const Shell = ({ page = "home", ...rest }) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
+  // One settings page has the chat: the plugins list, whose "Create with
+  // AI" opens it beside the list to build a plugin.
+  const isPluginsSettings = isPluginsSettingsPath(location.pathname);
+
   const isAiChatAvailable =
     aiServicesEnabled &&
-    !isSettingsPage &&
+    (!isSettingsPage || isPluginsSettings) &&
     currentClientView !== "users" &&
     currentClientView !== "groups" &&
     currentClientView !== "profile" &&
@@ -902,6 +910,8 @@ const Shell = ({ page = "home", ...rest }) => {
       </Main>
     </Layout>
   );
+
+  const pluginSuggestions = useMemo(() => getPluginSuggestionSet(t), [t]);
 
   const composerHeader = useMemo(() => <AIActivationBanner />, []);
 
@@ -1109,13 +1119,16 @@ const Shell = ({ page = "home", ...rest }) => {
           composerNotice={aiComposerNotice}
           // A chat inside a project offers the project's own chips. An agent
           // picked in the panel offers its own as well, and the chips of the
-          // section the panel is open in when it has none.
+          // section the panel is open in when it has none; on the plugins
+          // page of the settings those are the plugin chips.
           suggestions={
             isInsideAiProject
               ? (aiActiveProject?.aiProject.suggestions ?? NO_SUGGESTIONS)
               : aiActivePresetSuggestions?.length
                 ? aiActivePresetSuggestions
-                : aiSuggestions
+                : isPluginsSettings
+                  ? pluginSuggestions
+                  : aiSuggestions
           }
           // An empty project chat opens with the project's logo, name and
           // sources instead of the default illustration.

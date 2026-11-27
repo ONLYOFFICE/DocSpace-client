@@ -71,11 +71,6 @@ const DocsMainButton = ({ mode, isDisabled, actions }: DocsMainButtonProps) => {
     privateCreate: resolved.privateCreate,
   });
 
-  const [isOpenButton, setIsOpenButton] = React.useState(false);
-  const toggleOpen = React.useCallback(() => {
-    setIsOpenButton((prev) => !prev);
-  }, []);
-
   const dialog = actions ? null : (
     <CreateFileDialog
       visible={resolved.dialogVisible}
@@ -109,10 +104,6 @@ const DocsMainButton = ({ mode, isDisabled, actions }: DocsMainButtonProps) => {
         className={styles.mobileButton}
         actionOptions={isDisabled ? [] : actionOptions}
         buttonOptions={isDisabled ? [] : buttonOptions}
-        title={t("Common:Upload")}
-        isOpenButton={isOpenButton}
-        onUploadClick={isDisabled ? undefined : toggleOpen}
-        onClose={toggleOpen}
         withMenu
       />
       {dialog}

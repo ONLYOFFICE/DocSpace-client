@@ -78,14 +78,12 @@ const SelectionArea = observer(({ isRooms }: SelectionAreaProps) => {
     {
       type: "file",
       rowGap: 14,
-      itemHeight: 0,
       rowCount: Math.ceil(filesLength / countTilesInRow),
       countOfMissingTiles: getCountOfMissingFilesTiles(filesLength),
     },
     {
       type: "folder",
       rowGap: folderRowGap,
-      itemHeight: 0,
       rowCount: Math.ceil(foldersLength / countTilesInRow),
       countOfMissingTiles: getCountOfMissingFilesTiles(foldersLength),
     },

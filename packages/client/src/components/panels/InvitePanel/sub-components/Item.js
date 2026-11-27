@@ -349,9 +349,7 @@ const Item = ({
         <div className={styles.errorWrapper}>
           <HelpButton
             className={styles.helpButton}
-            iconName={InfoEditReactSvgUrl}
             displayType="auto"
-            offsetRight={0}
             tooltipContent={
               hasNotFoundEmail
                 ? t("Common:EmailErrorMessageUserNotFound")
@@ -394,7 +392,6 @@ const Item = ({
               <HelpButton
                 className={styles.helpButton}
                 tooltipContent={warning}
-                iconName={InfoRoleSvgUrl}
                 size={16}
               />
             </div>

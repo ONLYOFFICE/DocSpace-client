@@ -447,7 +447,7 @@ test.describe("AI chat messages: a generated image", () => {
 
   // Spec: ai-chat-messages, "Generated image without a card"; ai-chat-messages,
   // "Generated files are never shown as unsaved"
-  test("Chart: the picture is drawn in the reply as it is, with no card and no Not saved mark", async ({
+  test("Chart: the picture is drawn in the reply, opens in the viewer and downloads, with no file card and no Not saved mark", async ({
     page,
     baseUrl,
     mockRequest,
@@ -468,10 +468,16 @@ test.describe("AI chat messages: a generated image", () => {
     await send(page, "Draw the revenue by quarter as a chart");
 
     const reply = page.getByTestId("assistant-message");
-    const image = reply.getByTestId("tool-call-generated-image");
+    const image = reply.getByTestId("generated-image-image");
     await expect(image).toBeVisible();
     await expect(image).toHaveAttribute("src", PNG);
-    // No card around the picture: no file name line and no buttons of its own.
+    // The picture's own two controls: a click opens it in the image viewer,
+    // and the button over its corner downloads it.
+    await expect(reply.getByTestId("generated-image-open-button")).toBeVisible();
+    await expect(
+      reply.getByTestId("generated-image-download-button"),
+    ).toBeVisible();
+    // No file card around the picture: no file name line and no save button.
     await expect(page.getByTestId("generated-image-card")).toHaveCount(0);
     await expect(
       reply.getByRole("button", { name: "Save to room..." }),

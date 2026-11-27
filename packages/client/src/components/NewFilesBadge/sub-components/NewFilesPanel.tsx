@@ -263,7 +263,7 @@ export const NewFilesPanelComponent = ({
     <Button
       className="mark-as-read-button"
       scale
-      label={t("MarkRead")}
+      label={t("Common:MarkRead")}
       size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}
       onClick={markAsReadAction}
       isLoading={isMarkAsReadRunning}

@@ -56,7 +56,6 @@ const GroupNameParam = ({
 			<Label
 				title={t("Common:Label")}
 				className="input-label"
-				display="display"
 				htmlFor="create-group-name"
 				text={t("Common:Label")}
 			/>

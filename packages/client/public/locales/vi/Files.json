@@ -77,7 +77,6 @@
   "MarkAsRevision": "Đánh dấu là sửa đổi",
   "MarkAsVersion": "Đánh dấu là phiên bản",
   "MarkingRead": "Đánh dấu đã đọc",
-  "MarkRead": "Đánh dấu là đã đọc",
   "MeAndGroups": "Tôi và nhóm ({{ groupsCount }})",
   "MeAndMembers": "Tôi và các thành viên ({{ membersCount }})",
   "MeAndMembersAndGroups": "Tôi, các thành viên ({{ membersCount }}) và các nhóm ({{ groupsCount }})",

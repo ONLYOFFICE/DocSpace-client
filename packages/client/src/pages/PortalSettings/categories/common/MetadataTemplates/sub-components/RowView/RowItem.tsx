@@ -69,7 +69,7 @@ const RowItem = ({
 
   return (
     <Row contextOptions={contextOptions} onRowClick={onRowClick}>
-      <RowContent className={styles.rowContent} sectionWidth={sectionWidth}>
+      <RowContent className={styles.rowContent}>
         <div>
           <Text fontSize="14px" fontWeight={600} truncate>
             {item.name}

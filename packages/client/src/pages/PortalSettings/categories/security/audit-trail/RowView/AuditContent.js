@@ -61,7 +61,6 @@ const AuditContent = ({
       className={className}
       sideColor={theme.client.settings.security.auditTrail.sideColor}
       nameColor={theme.client.settings.security.auditTrail.nameColor}
-      sectionWidth={sectionWidth}
     >
       <div className="user-container-wrapper">
         <Text fontWeight={600} fontSize="14px" className="settings_unavailable">

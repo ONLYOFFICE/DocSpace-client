@@ -73,7 +73,6 @@ import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import {
   now,
   addToDate,
-  subtractFromDate,
   parseToDateTime,
   isAfter,
 } from "@onlyoffice/apps-ui-kit/utils/date";
@@ -354,7 +353,7 @@ const LinkSettingsPanel = ({
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}
             initialDate={limitDate}
-            minDate={subtractFromDate(now(), 1, "days") ?? undefined}
+            minDate={now()}
             maxDate={maxDate}
             useMaxTime={!activeLink.expirationDate}
             translations={{ AM: t("Common:AM"), PM: getConstName("PM") }}

@@ -72,7 +72,6 @@ const SharedButton = ({
 			fontSize="12px"
 			fontWeight={600}
 			color={color}
-			display="inline-flex"
 			onClick={onClickShare}
 		>
 			<IconButton

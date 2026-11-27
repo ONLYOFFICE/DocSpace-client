@@ -16,7 +16,7 @@ Every place that offers an agent action SHALL decide by the rights the server re
 - **THEN** none of them offers Edit agent (`Common:EditAgent`)
 
 #### Scenario: Role changed while the page is open
-- **WHEN** an Agent manager is changed to Member while the agent's page is open
+- **WHEN** an Agent manager from before stops being one while the agent's page is open
 - **THEN** Edit agent and "Share agent" leave the header and the menus without a reload
 
 ### Requirement: Who may create an agent
@@ -57,14 +57,14 @@ The agent's invite panel SHALL offer portal users only. It SHALL NOT offer guest
 - **THEN** it offers no "Invite via link" section
 
 ### Requirement: What the Agent owner is offered
-The Agent owner SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, the model picker of the agent's chat, pin, notifications, change owner and Delete agent. The Agent owner SHALL NOT be offered leave.
+The Agent owner SHALL be offered: the chat, Agent info, Edit agent, Share agent, removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, the model picker of the agent's chat, pin, notifications, change owner and Delete agent. The Agent owner SHALL NOT be offered leave.
 
 #### Scenario: Owner on the agent's page
 - **WHEN** the Agent owner opens the agent's page
 - **THEN** the header has "Share agent", and the actions menu has change owner and Delete agent (`Common:DeleteAgent`), and neither Edit agent nor leave
 
 ### Requirement: What an Agent manager is offered
-An Agent manager SHALL be offered: the chat, Agent info, Edit agent, Share agent, changing roles and removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, the model picker of the agent's chat, pin, notifications and leave. An Agent manager SHALL NOT be offered Delete agent or change owner.
+An Agent manager SHALL be offered: the chat, Agent info, Edit agent, Share agent, removing members on the Info panel's Members tab, the "Manage ..." rows of the agent's skill sets and knowledge bases, removing a skill set in the slash menu, the model picker of the agent's chat, pin, notifications and leave. An Agent manager SHALL NOT be offered Delete agent or change owner.
 
 #### Scenario: Manager on the agent's page
 - **WHEN** an Agent manager opens the actions menu of the agent

@@ -152,7 +152,6 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
 			disableDisabledUsers
 			useAside
 			filter={filter}
-			withBlur={false}
 			roomId={item.id}
 			withoutBackground={false}
 			onClose={onClose}

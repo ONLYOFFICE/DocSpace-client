@@ -52,7 +52,7 @@ export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
   const formattedDelivery = getCorrectDate(i18n.language, historyItem.delivery);
 
   return (
-    <RowContent className={styles.historyRowContent} sectionWidth={sectionWidth}>
+    <RowContent className={styles.historyRowContent}>
       <div className={styles.historyContentWrapper}>
         <div className={styles.statusHeader}>
           <Text

@@ -182,7 +182,6 @@ class GroupsTableHeader extends React.Component<
     const {
       containerRef,
       filter,
-      sectionWidth,
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
@@ -199,7 +198,6 @@ class GroupsTableHeader extends React.Component<
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
-        sectionWidth={sectionWidth}
         infoPanelVisible={infoPanelVisible}
         useReactWindow
         showSettings

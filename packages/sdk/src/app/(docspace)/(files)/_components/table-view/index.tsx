@@ -211,7 +211,6 @@ const TableView = ({
         columns={columns}
         columnStorageName={COLUMN_STORAGE_NAME}
         columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}
-        sectionWidth={0}
         useReactWindow={!isSSR}
         sortBy={filterSortBy ?? undefined}
         sorted={filterSortOrder === "descending"}

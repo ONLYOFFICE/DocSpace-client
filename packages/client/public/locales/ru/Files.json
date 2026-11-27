@@ -77,7 +77,6 @@
   "MarkAsRevision": "Отметить как ревизию",
   "MarkAsVersion": "Отметить как версию",
   "MarkingRead": "Отметить как прочитанное",
-  "MarkRead": "Отметить как прочитанное",
   "MeAndGroups": "Я и ({{ groupsCount }}) групп",
   "MeAndMembers": "Я и ({{ membersCount }}) участников",
   "MeAndMembersAndGroups": "Я, ({{ membersCount }}) участников и ({{ groupsCount }}) групп",

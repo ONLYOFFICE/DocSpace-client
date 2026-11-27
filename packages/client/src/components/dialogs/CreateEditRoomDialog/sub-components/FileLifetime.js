@@ -163,7 +163,6 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             className="virtual-data-room_file-lifetime_combo-box"
             options={dateOptions}
             isDisabled={isLoading}
-            showDisabledItems
             selectedOption={selectedDate}
             manualWidth="auto"
             style={{ minWidth: "200px" }}
@@ -176,7 +175,6 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
           className="virtual-data-room_file-lifetime_delete-combo-box"
           options={deleteOptions}
           isDisabled={isLoading}
-          showDisabledItems
           selectedOption={selectedDelete}
           scale
           scaledOptions

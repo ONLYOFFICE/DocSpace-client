@@ -139,7 +139,6 @@ const GroupsRowComponent = ({
         >
           <RowContent
             className={classNames(styles.groupsRowContent, "group-row-content")}
-            sectionWidth={sectionWidth}
             sideColor="var(--people-table-row-side-info-color)"
           >
             <Link

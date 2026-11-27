@@ -171,7 +171,6 @@ const FilterPanel: FC<FilterPanelProps> = ({
                 dropDownMaxHeight={300}
                 directionY="bottom"
                 fillIcon={false}
-                showDisabledItems
                 dataTestId="template_gallery_language_combobox"
               />
             </div>

@@ -72,7 +72,6 @@ class ProfileMenu extends React.Component {
         clickOutsideAction={clickOutsideAction}
         forwardedRef={forwardedRef}
         isDefaultMode={false}
-        withBlur
         isBannerVisible={isBannerVisible}
         withPortal
       >

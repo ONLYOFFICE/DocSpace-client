@@ -77,7 +77,6 @@
   "MarkAsRevision": "ප්‍රතිශෝධනයක් ලෙස සලකුණු කරන්න",
   "MarkAsVersion": "අනුවාදයක් ලෙස සලකුණු කරන්න",
   "MarkingRead": "ලකුණු කිරීම කියවනු ලැබේ",
-  "MarkRead": "කියවූ බව යොදන්න",
   "MeAndGroups": "මම සහ කණ්ඩායම් ({{ groupsCount }})",
   "MeAndMembers": "මම සහ සාමාජිකයන් ({{ membersCount }})",
   "MeAndMembersAndGroups": "මම, සාමාජිකයන් ({{ membersCount }}) සහ කණ්ඩායම් ({{ groupsCount }})",

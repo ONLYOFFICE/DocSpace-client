@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "هذه المساحة متاحة لأي شخص لديه الرابط. سيحصل المستخدمون الخارجيون على صلاحية معبّئ النماذج لجميع النماذج.",
   "GoToIntegrations": "الانتقال إلى التكاملات",
   "Horizontal": "أفقي",
-  "Icon": "أيقونة",
   "NeedMoreIntegrations": "هل تحتاج إلى المزيد من التكاملات؟",
   "NeedMoreIntegrationsDescription": "استخدم الـ webhooks لإرسال البيانات إلى نظامك الخاص، أو ربط النماذج بآلاف الخدمات عبر Zapier.",
   "NoDatabaseConnections": "لم يتم تهيئة أي اتصالات بقاعدة البيانات",

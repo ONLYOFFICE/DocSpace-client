@@ -334,6 +334,8 @@ test.describe("AI chat: the agent menu", () => {
     expect(created?.title).toBe("Research");
     // The chat's model went with it.
     expect(created?.aiProject.profile).not.toBeNull();
+    // The new agent opens on its own page.
+    await expect(page).toHaveURL(new RegExp(`/ai-rooms/${CREATED_ID}/filter`));
 
     // The new agent joins the menu.
     await openMenu(page);

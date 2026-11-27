@@ -50,6 +50,8 @@ import styles from "./UsedByAgents.module.scss";
 
 type UsedByAgentsProps = {
   selection: unknown;
+  /** Opens an agent's own page. */
+  onOpenAgent?: (id: number) => void;
 };
 
 type TSourceRoom = {
@@ -67,9 +69,10 @@ const AGENTS_LIMIT = 100;
  * each by its logo and its name, sorted by name. Only the agents the user may
  * read are listed, so the list can be shorter than the room's "Used by"
  * number. It is read when the room is selected and again when that number
- * changes; a room no listed agent uses shows nothing.
+ * changes; a room no listed agent uses shows nothing. A click on an agent
+ * opens its page.
  */
-export const UsedByAgents = ({ selection }: UsedByAgentsProps) => {
+export const UsedByAgents = ({ selection, onOpenAgent }: UsedByAgentsProps) => {
   const { t } = useTranslation(["Common"]);
   const room = selection as TSourceRoom;
   const isSource =
@@ -114,27 +117,32 @@ export const UsedByAgents = ({ selection }: UsedByAgentsProps) => {
       </div>
       <ul className={styles.list} data-testid="used-by-agents">
         {agents.map((agent) => (
-          <li
-            key={agent.id}
-            className={styles.item}
-            data-testid="used-by-agents-item"
-          >
-            <ProjectLogo
-              project={agent}
-              size="16px"
-              radius="4px"
-              className={styles.logo}
-            />
-            <Text
-              fontSize="13px"
-              truncate
-              className={styles.name}
-              title={agent.title}
-              dir="auto"
-              data-testid="used-by-agents-name"
+          <li key={agent.id} data-testid="used-by-agents-item">
+            <button
+              type="button"
+              className={styles.item}
+              onClick={() => onOpenAgent?.(agent.id)}
+              disabled={!onOpenAgent}
+              data-testid="used-by-agents-open"
             >
-              {agent.title}
-            </Text>
+              <ProjectLogo
+                project={agent}
+                size="16px"
+                radius="4px"
+                className={styles.logo}
+              />
+              <Text
+                as="span"
+                fontSize="13px"
+                truncate
+                className={styles.name}
+                title={agent.title}
+                dir="auto"
+                data-testid="used-by-agents-name"
+              >
+                {agent.title}
+              </Text>
+            </button>
           </li>
         ))}
         {rest > 0 ? (

@@ -123,8 +123,14 @@ SHALL block saving. Saving with Disabled SHALL clear the allowed list.
 ### Requirement: Brute force protection
 
 Brute force protection SHALL set the number of failed attempts, the blocking time and the check period as whole
-numbers of up to four digits, marking an empty one (`ErrorMessageBruteForceProtection`). Restore to default
+numbers of up to four digits, marking an empty or zero one (`ErrorMessageBruteForceProtection`) and not saving while
+one is marked. A save the server refuses SHALL show the error and leave the fields editable. Restore to default
 (`RestoreToDefault`) SHALL reset the server's values and SHALL be disabled while they are the defaults.
+
+#### Scenario: Empty blocking time
+
+- **WHEN** an administrator clears the blocking time and saves
+- **THEN** the field is marked and nothing is sent
 
 #### Scenario: Restore to default
 

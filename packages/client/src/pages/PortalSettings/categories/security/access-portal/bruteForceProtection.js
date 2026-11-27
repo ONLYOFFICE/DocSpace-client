@@ -243,7 +243,8 @@ const BruteForceProtection = (props) => {
   };
 
   const onSaveClick = () => {
-    if (hasErrorNumberAttempt || hasErrorCheckPeriod) return;
+    if (hasErrorNumberAttempt || hasErrorBlockingTime || hasErrorCheckPeriod)
+      return;
     setIsLoadingSave(true);
 
     const numberCurrentNumberAttempt = parseInt(currentNumberAttempt, 10);
@@ -269,6 +270,7 @@ const BruteForceProtection = (props) => {
         toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
       })
       .catch((error) => {
+        setIsLoadingSave(false);
         toastr.error(error);
       });
   };

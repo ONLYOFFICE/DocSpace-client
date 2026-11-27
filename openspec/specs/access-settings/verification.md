@@ -45,7 +45,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Warning when enabled; IPv4 check and repeated address block saving; saved with a toast; Disabled saved without the list | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/ipSecurity.test.tsx:97, 107, 118, 129, 147` | UNIT-CONFIRMED |
 | IP restrictions on the server | `server`, "Saving IP restrictions"; "Enforcing IP restrictions" | SERVER-SPEC |
 | **Brute force protection** | | |
-| Whole numbers of up to four digits; an empty attempts count marked and, with an empty check period, blocking saving; saved as numbers; Restore to default, disabled at the defaults | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/bruteForceProtection.test.tsx:124, 134, 148, 158, 175, 191` | UNIT-CONFIRMED |
+| Whole numbers of up to four digits; an empty attempts count, check period or blocking time (or a zero one) marked and blocking saving; a refused save reported with the fields editable again; saved as numbers; Restore to default, disabled at the defaults | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/bruteForceProtection.test.tsx:128, 138, 152, 162, 177, 192, 209, 225` | UNIT-CONFIRMED |
 | Limits on the server | `server`, "Failed sign-in limits"; "Range of the sign-in limits" | SERVER-SPEC |
 | **Administrator message** | | |
 | Enabled saved | `packages/client/__tests__/access-portal-settings.spec.ts:232` | E2E-CONFIRMED |
@@ -77,7 +77,6 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Login history and audit trail | Owned by `history-and-audit` | `packages/client/src/pages/PortalSettings/categories/security/login-history/` |
 | SMTP, Document Server, plugins | Owned by `notifications`, `files-settings`, `plugins` | `int/SMTPSettings/`; `int/DocumentService/`; `int/Plugins/` |
 | Adding and deleting a field from the keyboard in the trusted domains and allowed IP lists | Keyboard of the shared field list, not a setting | `packages/client/src/pages/PortalSettings/categories/security/sub-components/__tests__/user-fields.test.tsx` |
-| An empty blocking time does not block saving; a failed save leaves the brute force page busy | Suspected defects, `deviations.md` C6, C7 | `ap/bruteForceProtection.js:154, 246, 271-273` |
 | Empty group membership fields are marked but do not block saving | Suspected defect, `deviations.md` C8 | `packages/client/src/store/LdapFormStore.ts:625-651` |
 | Invitation settings and the administrator message report success before the server answers, whatever it answers | Suspected defect, `deviations.md` C9 | `ap/invitationSettings.tsx:216, 228`; `ap/adminMessage.js:144-145` |
 | On the desktop page only one choice across all the radio sections shows selected | Suspected defect, `deviations.md` C10 | `ap/tfa.js:267`; `ap/trustedMail.js:297`; `ap/devToolsAccess.tsx:224`; `ap/ipSecurity.js:297`; `ap/adminMessage.js:189`; `ap/sessionLifetime.js:273` |

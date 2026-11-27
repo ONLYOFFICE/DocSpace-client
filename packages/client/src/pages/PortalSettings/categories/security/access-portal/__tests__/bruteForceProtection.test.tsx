@@ -102,6 +102,10 @@ const attempts = () =>
   screen.getByTestId(
     "brute_force_protection_number_attempts_input",
   ) as HTMLInputElement;
+const blockingTime = () =>
+  screen.getByTestId(
+    "brute_force_protection_blocking_time_input",
+  ) as HTMLInputElement;
 const checkPeriod = () =>
   screen.getByTestId(
     "brute_force_protection_check_period_input",
@@ -153,6 +157,36 @@ describe("Brute force protection", () => {
     await save(user);
 
     expect(settingsApi.setBruteForceProtection).not.toHaveBeenCalled();
+  });
+
+  it("an empty or zero blocking time is marked and blocks saving", async () => {
+    const user = userEvent.setup();
+    renderPage();
+
+    await user.clear(blockingTime());
+    expect(blockingTime()).toHaveAttribute("data-error", "true");
+    await save(user);
+
+    await user.type(blockingTime(), "0");
+    expect(blockingTime()).toHaveAttribute("data-error", "true");
+    await save(user);
+
+    expect(settingsApi.setBruteForceProtection).not.toHaveBeenCalled();
+  });
+
+  it("a refused save reports the error and leaves the fields editable", async () => {
+    const user = userEvent.setup();
+    settingsApi.setBruteForceProtection.mockRejectedValue("Out of range");
+    renderPage();
+
+    await user.clear(attempts());
+    await user.type(attempts(), "10");
+    await save(user);
+
+    await waitFor(() => expect(toastr.error).toHaveBeenCalledWith("Out of range"));
+    expect(attempts()).toBeEnabled();
+    expect(blockingTime()).toBeEnabled();
+    expect(checkPeriod()).toBeEnabled();
   });
 
   it("values are saved as numbers with a toast", async () => {

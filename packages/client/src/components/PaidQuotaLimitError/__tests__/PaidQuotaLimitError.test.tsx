@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -42,7 +43,10 @@ vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({
   toastr: { clear: vi.fn(), success: vi.fn(), error: vi.fn() },
 }));
 
-import PaidQuotaLimitError from "..";
+import InjectedPaidQuotaLimitError from "..";
+
+const PaidQuotaLimitError =
+  InjectedPaidQuotaLimitError as unknown as React.ComponentType;
 
 const setInvitePanelOptions = vi.fn();
 const navigate = vi.fn();

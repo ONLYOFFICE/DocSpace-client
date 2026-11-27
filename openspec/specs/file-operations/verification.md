@@ -24,7 +24,8 @@ Status: **E2E-CONFIRMED** (a Playwright test asserts it), **UNIT-CONFIRMED** (a 
 | Empty name replaced by the default, created in the open folder, error toast, 402 marks the portal unpaid | `CreateEvent:132-185` | CODE-ONLY |
 | **Creating a document** | | |
 | Default title for an empty name; the editor's create page with folder and title, new tab per setting | `CreateEvent:139-148, 280-328` | CODE-ONLY |
-| Markdown created here and opened in the plugin, otherwise in the viewer | `CreateEvent:186-222` | CODE-ONLY |
+| Markdown created in the open folder and opened in the plugin, not in the editor | `packages/client/src/components/GlobalEvents/__tests__/CreateEvent.test.tsx:417` | UNIT-CONFIRMED |
+| Markdown opened in the viewer without the plugin | `CreateEvent:186-222` | CODE-ONLY |
 | **Renaming** | | |
 | The renamed item is selected again | `actions/operations.test.ts:42` | UNIT-CONFIRMED |
 | **Uploading files and folders** | | |

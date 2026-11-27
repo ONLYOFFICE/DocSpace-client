@@ -102,7 +102,8 @@ type AiChatPageBridgeProps = {
  *   Chat, a conversation under it and All chats open the chat fullscreen, on
  *   a new conversation, on that conversation or on its history. A
  *   conversation and All chats open on the default agent, whatever agent the
- *   chat ran on;
+ *   chat ran on. A request with a draft opens a new conversation on the
+ *   default agent with that text in the composer;
  * - mirrors the latest conversations and the open one into `dialogsStore`
  *   for Recent's entries. They are read even while the chat is closed, since
  *   the sidebar shows them all the time. Recent lists the conversations of
@@ -360,6 +361,17 @@ const AiChatPageBridgeComponent = ({
         aiChatStore.setFullscreen(true);
         goToChat();
         switchToThread(consumed.threadId);
+        return;
+      }
+      if (consumed.draft && consumed.page === "chat") {
+        // A chat opened for one job: a new conversation on the default
+        // agent, with nothing connected, whose composer holds the draft.
+        aiPresetsStore.cancelApply();
+        aiPresetsStore.setActivePreset(null);
+        aiPresetsStore.setChatSkillRooms(null);
+        aiChatStore.openPreset({ ...DEFAULT_AGENT, draft: consumed.draft });
+        aiChatStore.setFullscreen(true);
+        goToChat();
         return;
       }
       // A closed panel starts a fresh conversation by itself.

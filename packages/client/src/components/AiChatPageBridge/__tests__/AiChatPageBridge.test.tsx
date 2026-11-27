@@ -60,6 +60,7 @@ const chat = vi.hoisted(() => ({
     openNewChat: () => {},
     setFullscreen: () => {},
     applyPreset: (_preset: object) => {},
+    openPreset: (_preset: object) => {},
   },
   openHistory: async () => {},
 }));
@@ -68,6 +69,7 @@ const chat = vi.hoisted(() => ({
 const presets = vi.hoisted(() => ({
   activePreset: null as { id: string } | null,
   cancelApply: () => {},
+  setChatSkillRooms: (_rooms: object[] | null) => {},
   setActivePreset(preset: { id: string } | null) {
     presets.activePreset = preset;
   },
@@ -399,6 +401,32 @@ describe("AiChatPageBridge — a request from Recent", () => {
     expect(openNewChat).not.toHaveBeenCalled();
     act(() => vi.runAllTimers());
     expect(openNewChat).toHaveBeenCalledTimes(1);
+  });
+
+  it("opens a request with a draft as a new conversation on the default agent, the draft in its composer", () => {
+    presets.activePreset = { id: "7" };
+    const openPreset = vi.spyOn(chat.store, "openPreset");
+    const openNewChat = vi.spyOn(chat.store, "openNewChat");
+    const setFullscreen = vi.spyOn(chat.store, "setFullscreen");
+    const clearSkillRooms = vi.spyOn(presets, "setChatSkillRooms");
+    const value = { page: "chat", afterLocationKey: "left-page", draft: "Build a plugin" };
+    (dialogsStore as { aiChatPageRequest: object | null }).aiChatPageRequest = value;
+    dialogsStore.consumeAiChatPageRequest.mockReturnValue(value);
+
+    renderBridge("7");
+    expect(openPreset).not.toHaveBeenCalled();
+    act(() => vi.runAllTimers());
+    expect(openPreset).toHaveBeenCalledWith({
+      profileId: null,
+      profileName: null,
+      contextRooms: [],
+      knowledgeRooms: [],
+      draft: "Build a plugin",
+    });
+    expect(setFullscreen).toHaveBeenCalledWith(true);
+    expect(clearSkillRooms).toHaveBeenCalledWith(null);
+    expect(presets.activePreset).toBeNull();
+    expect(openNewChat).not.toHaveBeenCalled();
   });
 
   it("leaves the agent to a chat opened by AI Chat itself", () => {

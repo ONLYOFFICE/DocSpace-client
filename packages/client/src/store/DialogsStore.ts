@@ -112,6 +112,12 @@ export type TAiChatPageRequest = {
   afterLocationKey: Nullable<string>;
   /** The conversation to show on the chat page; a fresh or the open one without. */
   threadId?: string;
+  /**
+   * The text a new conversation's composer starts with, on the default
+   * agent: an entry point that opens the chat for one job (the plugins
+   * page). Not read with `threadId` or on the history.
+   */
+  draft?: string;
 };
 
 /** A conversation as the sidebar's Recent lists it. */
@@ -618,8 +624,9 @@ class DialogsStore {
     page: TAiChatPageRequest["page"],
     afterLocationKey: Nullable<string> = null,
     threadId?: string,
+    draft?: string,
   ) => {
-    this.aiChatPageRequest = { page, afterLocationKey, threadId };
+    this.aiChatPageRequest = { page, afterLocationKey, threadId, draft };
   };
 
   setAiChatRecentThreads = (

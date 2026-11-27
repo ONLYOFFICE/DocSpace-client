@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Create with AI",
+  "CreateWithAIPrompt": "I want to create a plugin for this workspace. Ask me what it should do, then build it.",
   "DeletePlugin": "Delete plugin",
   "DeletePluginDescription": "This plugin will no longer be available to the workspace users. Are you sure you want to continue?",
   "DeletePluginTitle": "Delete plugin?",

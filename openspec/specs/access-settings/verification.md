@@ -21,23 +21,24 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | **The Access portal page** | | |
 | Desktop sections with descriptions and Learn more; phone list | `ap/index.js:142-373`; `ap/mobileView.js:50-146` | CODE-ONLY |
 | Section page widened to a desktop goes back to the overview | `ap/tfa.js:98-102`; `ap/sessionLifetime.js:92-146` | CODE-ONLY |
-| Save, success toast, unsaved changes reminder | `ap/tfa.js:209-230, 295-305` | CODE-ONLY |
+| A change shows the unsaved changes reminder and Cancel takes it back; Save reports the success message | `packages/client/__tests__/access-portal-settings.spec.ts:117, 140, 174, 195, 232` | E2E-CONFIRMED |
 | **External sharing** | | |
 | Initial state; restricted options appear; save; cancel; documents only; rooms only; default link type back | `packages/client/__tests__/access-control.spec.ts:61, 87, 133, 166, 200, 237, 276` | E2E-CONFIRMED |
 | **Password strength** | | |
 | 8 to 30 characters; upper case, digits, special characters | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/passwordStrength.test.tsx:99, 106` | UNIT-CONFIRMED |
 | Password policy on the server | `server`, "Password policy"; "Changing the password policy" | SERVER-SPEC |
 | **Two-factor authentication** | | |
-| Methods offered by availability; setup page after saving | `ap/tfa.js:209-230, 270-290` | CODE-ONLY |
+| By app saved goes to the server's confirmation link; Disabled saved stays on the page; Cancel restores; an unavailable app method offered disabled | `packages/client/__tests__/access-portal-settings.spec.ts:117, 140` | E2E-CONFIRMED |
+| By SMS not offered | `ap/tfa.js:278` (the option is commented out) | CODE-ONLY |
 | Setup page returned by the server | `server`, "Changing the two-factor policy"; "Policy change with a confirmation link" | SERVER-SPEC |
 | **Trusted mail domains** | | |
 | Three modes; checked on leaving; malformed and repeated domains block saving; well-formed ones saved | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/trustedMail.test.tsx:92, 100, 119, 133, 145` | UNIT-CONFIRMED |
 | Trusted domains on the server | `serverSettings`, "Trusted mail domains" | SERVER-SPEC |
 | **Developer Tools access** | | |
-| Enabled and Disabled; save | `ap/devToolsAccess.tsx:165-240` | CODE-ONLY |
+| Disabled saved as limited access for users | `packages/client/__tests__/access-portal-settings.spec.ts:174` | E2E-CONFIRMED |
 | The rule on the server | `../server/openspec/specs/webhooks-and-api-keys/spec.md`, "Developer Tools access rule" | SERVER-SPEC |
 | **Invitation settings** | | |
-| Contacts and guests checkboxes | `ap/invitationSettings.tsx:215-335` | CODE-ONLY |
+| Contacts and guests checkboxes saved; Cancel restores them | `packages/client/__tests__/access-portal-settings.spec.ts:195` | E2E-CONFIRMED |
 | Invitation settings on the server | `../server/openspec/specs/invitations/spec.md`, "Invitation settings" | SERVER-SPEC |
 | **IP security** | | |
 | Saving with Disabled clears the allowed list | `packages/client/__tests__/ip-security.spec.ts:55` | E2E-CONFIRMED |
@@ -47,7 +48,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Whole numbers of up to four digits; an empty attempts count marked and, with an empty check period, blocking saving; saved as numbers; Restore to default, disabled at the defaults | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/bruteForceProtection.test.tsx:124, 134, 148, 158, 175, 191` | UNIT-CONFIRMED |
 | Limits on the server | `server`, "Failed sign-in limits"; "Range of the sign-in limits" | SERVER-SPEC |
 | **Administrator message** | | |
-| Enabled and Disabled; save | `ap/adminMessage.js:120-205` | CODE-ONLY |
+| Enabled saved | `packages/client/__tests__/access-portal-settings.spec.ts:232` | E2E-CONFIRMED |
 | **Session lifetime** | | |
 | Sign-out warning; positive whole number of at most four digits; empty marked and blocking saving; saved; Disabled keeps the server's minutes | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/sessionLifetime.test.tsx:94, 102, 116, 128, 144` | UNIT-CONFIRMED |
 | Lifetime on the server | `serverSettings`, "Changing the session lifetime"; "Sessions after a lifetime change" | SERVER-SPEC |
@@ -78,3 +79,5 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Adding and deleting a field from the keyboard in the trusted domains and allowed IP lists | Keyboard of the shared field list, not a setting | `packages/client/src/pages/PortalSettings/categories/security/sub-components/__tests__/user-fields.test.tsx` |
 | An empty blocking time does not block saving; a failed save leaves the brute force page busy | Suspected defects, `deviations.md` C6, C7 | `ap/bruteForceProtection.js:154, 246, 271-273` |
 | Empty group membership fields are marked but do not block saving | Suspected defect, `deviations.md` C8 | `packages/client/src/store/LdapFormStore.ts:625-651` |
+| Invitation settings and the administrator message report success before the server answers, whatever it answers | Suspected defect, `deviations.md` C9 | `ap/invitationSettings.tsx:216, 228`; `ap/adminMessage.js:144-145` |
+| On the desktop page only one choice across all the radio sections shows selected | Suspected defect, `deviations.md` C10 | `ap/tfa.js:267`; `ap/trustedMail.js:297`; `ap/devToolsAccess.tsx:224`; `ap/ipSecurity.js:297`; `ap/adminMessage.js:189`; `ap/sessionLifetime.js:273` |

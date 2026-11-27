@@ -64,13 +64,19 @@ letters, digits and special characters.
 
 ### Requirement: Two-factor authentication
 
-Two-factor authentication SHALL offer Disabled, By SMS and By app, the last two only where the portal supports them.
-Saving a method that needs setup SHALL take the administrator to the setup page the server returns.
+Two-factor authentication SHALL offer Disabled and By app, By app only where the portal supports it; By SMS SHALL NOT
+be offered. Saving By app SHALL take the administrator to the setup page the server returns; saving Disabled SHALL
+stay on the page.
 
-#### Scenario: App on an installation without SMS
+#### Scenario: App not available
 
-- **WHEN** an administrator opens two-factor authentication where SMS is not available
-- **THEN** By SMS is offered disabled
+- **WHEN** an administrator opens two-factor authentication where the app method is not available
+- **THEN** By app is offered disabled
+
+#### Scenario: Switching the app method on
+
+- **WHEN** an administrator picks By app and saves
+- **THEN** the browser goes to the confirmation link the server returns
 
 ### Requirement: Trusted mail domains
 

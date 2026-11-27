@@ -77,7 +77,6 @@
   "MarkAsRevision": "리비전으로 표시",
   "MarkAsVersion": "버전으로 표시",
   "MarkingRead": "읽음으로 표시",
-  "MarkRead": "읽은 것으로 표시",
   "MeAndGroups": "나와 그룹({{ groupsCount }})",
   "MeAndMembers": "나와 구성원({{ membersCount }})",
   "MeAndMembersAndGroups": "나와 구성원({{ membersCount }}) 그리고 그룹({{ groupsCount }})",

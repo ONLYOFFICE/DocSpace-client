@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Ovaj prostor je dostupan svakome ko ima link. Spoljni korisnici će imati dozvolu popunjivača obrazaca za sve obrasce.",
   "GoToIntegrations": "Idite na Integracije",
   "Horizontal": "Horizontalno",
-  "Icon": "Ikonica",
   "NeedMoreIntegrations": "Potrebne vam su više integracija?",
   "NeedMoreIntegrationsDescription": "Koristite webhooks za slanje podataka u svoj sistem, ili povežite obrasce sa hiljadama servisa putem Zapiera.",
   "NoDatabaseConnections": "Nije konfigurisano nijedno povezivanje sa bazom podataka",

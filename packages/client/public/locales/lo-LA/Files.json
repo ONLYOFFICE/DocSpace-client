@@ -77,7 +77,6 @@
   "MarkAsRevision": "ໝາຍເປັນການແກ້ໄຂ",
   "MarkAsVersion": "ໝາຍເປັນເວີຊັນ",
   "MarkingRead": "ການກວດກາຖືກອ່ານ",
-  "MarkRead": "ເຮັດເຄື່ອງໝາຍໄວ້ອ່ານ",
   "MeAndGroups": "ຂ້ອຍ ແລະ ກຸ່ມ ({{ groupsCount }})",
   "MeAndMembers": "ຂ້ອຍ ແລະ ສະມາຊິກ ({{ membersCount }})",
   "MeAndMembersAndGroups": "ຂ້ອຍ, ສະມາຊິກ ({{ membersCount }}) ແລະ ກຸ່ມ ({{ groupsCount }})",

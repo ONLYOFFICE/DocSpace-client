@@ -1,0 +1,28 @@
+{
+  "key_path": "GracePeriodAwaitingPaymentNotice",
+  "content": "<1>Grace period: {{fromDate}} – {{byDate}} ({{delayDaysCount}} days remaining).</1> Awaiting payment. Once the funds reach your wallet, pay for the plan to renew it. All features remain available until {{byDate}}.",
+  "content_en_sha1_hash": "64da405f5186441f077be61c6d0a84ac79645fc6",
+  "created_at": "2026-11-27T15:00:58.282Z",
+  "updated_at": "2026-11-27T15:00:58.282Z",
+  "comment": {
+    "text": "Notice in the plan payment container on the billing page, shown during an unrestricted grace period while a bank transfer (e.g. SEPA) is pending. The <1>…</1> part is bold and states the grace period dates ({{fromDate}} start, {{byDate}} end) and days left ({{delayDaysCount}}). The rest says the payment is awaited, that once the funds reach the wallet the admin should pay for the plan to renew it, and that all features stay available until {{byDate}}. Counterpart of GracePeriodActivatedNotice, which describes the restricted grace period.",
+    "is_auto": false,
+    "updated_at": "2026-11-27T15:02:13.381Z"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 221,
+      "context": "{isGracePeriodUnrestricted ? (\n <CommonTrans\n i18nKey=\"GracePeriodAwaitingPaymentNotice\"\n values={gracePeriodValues}\n components={gracePeriodComponents}\n />\n ) : (\n <CommonTrans i18nKey=\"GracePeriodActivatedNotice\" ... />",
+      "module": "@onlyoffice/apps-ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

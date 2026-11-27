@@ -3,7 +3,7 @@
   "content": "Skill sets",
   "content_en_sha1_hash": "e9dcfc1ec8dd6fd273e0d9dd474d687a4bef2571",
   "created_at": "2026-11-18T08:36:18.687Z",
-  "updated_at": "2026-11-18T08:38:08.350Z",
+  "updated_at": "2026-11-27T15:01:39.623Z",
   "comment": {
     "text": "Title of the list of skill sets (rooms whose Markdown files are AI skills): the sidebar item under AI Chat, the list header, a field of the agent form and a row of the agent tile. Plural noun, the same term as Skill set.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 825,
+      "line_number": 904,
       "context": "},\n ]\n : []),\n {\n id: \"ai-rooms-skills\",\n label: t(\"Common:SkillSets\"),\n icon: CatalogSkillSetsReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),\n },\n {\n id: \"ai-rooms-knowledge\",",
       "module": "/packages/client"
     },
@@ -24,27 +24,27 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 476,
-      "context": "isRoomDisabled={(room) => getRoomDisabledReason(room) !== null}\n getRoomDisabledText={(room) => getRoomDisabledReason(room) ?? undefined}\n withSearch\n withHeader\n headerProps={{\n headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t(\"Common:SkillSets\") : t(\"Common:AIProjectKnowledgeRooms\"),\n onCloseClick: () => setSelector(null),\n onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/AgentRoomsSelector.tsx",
+      "line_number": 131,
+      "context": "default:\n return null;\n }\n };\n \n const headerLabel = isKnowledge ? t(\"Common:AIProjectKnowledgeRooms\") : t(\"Common:SkillSets\");\n const common = {\n isMultiSelect: true,\n // Room rows come with `disableMultiSelect`; this overrules it, as the\n // \"add rooms to a group\" dialog does.\n forceIsMultiSelect: true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 476,
-      "context": "isRoomDisabled={(room) => getRoomDisabledReason(room) !== null}\n getRoomDisabledText={(room) => getRoomDisabledReason(room) ?? undefined}\n withSearch\n withHeader\n headerProps={{\n headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t(\"Common:SkillSets\") : t(\"Common:AIProjectKnowledgeRooms\"),\n onCloseClick: () => setSelector(null),\n onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}",
+      "line_number": 490,
+      "context": "/>\n <Text className={styles.hint} fontSize=\"12px\" lineHeight=\"16px\" noSelect>\n {t(\"Common:AIProjectModelHint\")}\n </Text>\n </div>\n {roomsBlock(t(\"Common:SkillSets\"), t(\"Common:AIProjectInstructionsHint\"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}\n {roomsBlock(t(\"Common:AIProjectKnowledgeRooms\"), t(\"Common:AIProjectKnowledgeHint\"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}\n {project?.createdBy ? (\n <div className={styles.owner}>\n <ChangeRoomOwner\n roomOwner={project.createdBy as never}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
-      "line_number": 169,
+      "line_number": 170,
       "context": "</Text>\n )}\n {instructionsRooms.length > 0 || knowledgeRooms.length > 0 ? (\n <div className={styles.sources}>\n {instructionsRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:SkillSets\")} rooms={instructionsRooms} kind=\"instructions\" />\n ) : null}\n {knowledgeRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:AIProjectKnowledgeRooms\")} rooms={knowledgeRooms} kind=\"knowledge\" />\n ) : null}\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContext/index.tsx",
-      "line_number": 181,
-      "context": "return (\n <div className={styles.context} data-testid=\"ai-agent-context\">\n {section(\n \"ai-agent-context-skills\",\n t(\"Common:SkillSets\"),\n context.skillSets,\n (room) => {\n const skills = context.skills[room.id] ?? [];\n const isExpanded = !!expanded[room.id];\n return (",
+      "line_number": 363,
+      "context": "return (\n <div className={styles.context} data-testid=\"ai-agent-context\">\n {section(\n \"ai-agent-context-skills\",\n t(\"Common:SkillSets\"),\n chatT(\"SkillSetsHint\"),\n context.skillSets,\n (room) => {\n const skills = context.skills[room.id] ?? [];\n const isExpanded = skills.length > 0 && !collapsed[room.id];",
       "module": "/packages/client"
     },
     {
@@ -55,13 +55,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
-      "line_number": 242,
-      "context": ");\n \n if (!catalog) return null;\n \n const labels = {\n skills: t(\"Common:SkillSets\"),\n knowledge: t(\"Common:AIProjectKnowledgeRooms\"),\n files: t(\"Common:Files\"),\n };\n const installLabel = t(\"Common:Install\");",
+      "line_number": 276,
+      "context": "setSearch(\"\");\n setCategory(null);\n };\n \n const labels = {\n skills: t(\"Common:SkillSets\"),\n knowledge: t(\"Common:AIProjectKnowledgeRooms\"),\n files: t(\"Common:Files\"),\n };\n const installLabel = t(\"Common:Install\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/AiProjectTile.tsx",
-      "line_number": 174,
+      "line_number": 180,
       "context": "};\n \n const rows = [\n ...(category ? [{ key: \"category\", label: t(\"Common:Category\"), value: text(\"category\", category) }] : []),\n { key: \"model\", label: t(\"Common:AIAgentModel\"), value: text(\"model\", model) },\n { key: \"skills\", label: t(\"Common:SkillSets\"), value: sources(\"skills\", SkillSetReactSvgUrl, summary?.skills) },\n {\n key: \"knowledge\",\n label: t(\"Common:AIProjectKnowledgeRooms\"),\n value: sources(\"knowledge\", KnowledgeReactSvgUrl, summary?.knowledge),\n },",
       "module": "/packages/client"
     }

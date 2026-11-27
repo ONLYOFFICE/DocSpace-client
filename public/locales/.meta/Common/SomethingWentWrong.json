@@ -3,7 +3,7 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-11-19T16:14:53.937Z",
+  "updated_at": "2026-11-27T15:01:39.628Z",
   "comment": {
     "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
@@ -12,9 +12,21 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/index.tsx",
       "line_number": 167,
-      "context": "case 503:\n return t(\"Common:CreateSkillWithAINoModel\");\n case 504:\n return t(\"Metadata:AITimeout\");\n default:\n return t(\"Common:SomethingWentWrong\");\n }\n };\n \n /**\n * \"Create skill with AI\" in an Instructions room, laid out as the metadata AI",
+      "context": ">\n <ModalDialog.Header>{titleOf(file)}</ModalDialog.Header>\n <ModalDialog.Body>\n {isFailed ? (\n <Text className={styles.message} data-testid=\"edit-skill-error\">\n {t(\"Common:SomethingWentWrong\")}\n </Text>\n ) : (\n <div className={styles.body}>\n {isLoading ? null : (\n <React.Suspense fallback={null}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/index.tsx",
+      "line_number": 167,
+      "context": ">\n <ModalDialog.Header>{titleOf(file)}</ModalDialog.Header>\n <ModalDialog.Body>\n {isFailed ? (\n <Text className={styles.message} data-testid=\"edit-skill-error\">\n {t(\"Common:SomethingWentWrong\")}\n </Text>\n ) : (\n <div className={styles.body}>\n {isLoading ? null : (\n <React.Suspense fallback={null}>",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
+      "line_number": 118,
+      "context": "case 503:\n return t(\"Common:CreateSkillWithAINoModel\");\n case 504:\n return t(\"Metadata:AITimeout\");\n default:\n return t(\"Common:SomethingWentWrong\");\n }\n };\n \n /**\n * \"Create skill with AI\" in an Instructions room, in the modal of New skill",
       "module": "/packages/client"
     },
     {
@@ -84,9 +96,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContent/index.tsx",
+      "line_number": 290,
+      "context": "!files.artifacts &&\n !files.attachments\n )\n return (\n <Text className={styles.message} data-testid=\"ai-agent-content-error\">\n {t(\"Common:SomethingWentWrong\")}\n </Text>\n );\n \n if (!artifacts && !attachments) return null;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContext/index.tsx",
+      "line_number": 312,
+      "context": "};\n \n if (failed)\n return (\n <Text className={styles.empty} data-testid=\"ai-agent-context-error\">\n {t(\"Common:SomethingWentWrong\")}\n </Text>\n );\n \n if (!context) return null;",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Metadata/index.tsx",
       "line_number": 108,
       "context": "if (showLoading) return <InfoPanelViewLoader view=\"metadata\" />;\n if (isLoading) return null;\n \n if (!metadata) {\n return (\n <Text className={styles.error}>{t(\"Common:SomethingWentWrong\")}</Text>\n );\n }\n \n const addActions: TAddMetadataActions | undefined = canEdit\n ? {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
+      "line_number": 261,
+      "context": "}, [isSelectionHidden, aiTemplatesStore]);\n \n if (failed)\n return (\n <Text className={styles.message} data-testid=\"ai-templates-error\">\n {t(\"Common:SomethingWentWrong\")}\n </Text>\n );\n \n if (!catalog) return null;",
       "module": "/packages/client"
     },
     {
@@ -109,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/apps/index.tsx",
-      "line_number": 85,
+      "line_number": 87,
       "context": "setPendingId(id);\n try {\n await enable?.(id, next);\n } catch (err) {\n console.error(`Failed to ${next ? \"enable\" : \"disable\"} app ${id}`, err);\n toastr.error(t(\"Common:SomethingWentWrong\"));\n } finally {\n setPendingId(null);\n }\n };",
       "module": "/packages/client"
     },
@@ -169,14 +199,14 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 89,
-      "context": "message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };\n \n // Spec: private-rooms/editor-integration, \"Editor not mounted until keys are ready\"",
+      "line_number": 90,
+      "context": "| \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptedFileKeyReplaced\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };\n \n // Spec: private-rooms/editor-integration, \"Editor not mounted until keys are ready\"",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 89,
-      "context": "message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };\n \n // Spec: private-rooms/editor-integration, \"Editor not mounted until keys are ready\"",
+      "line_number": 90,
+      "context": "| \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptedFileKeyReplaced\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };\n \n // Spec: private-rooms/editor-integration, \"Editor not mounted until keys are ready\"",
       "module": "/packages/doceditor"
     },
     {
@@ -211,19 +241,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 129,
+      "line_number": 131,
       "context": "const newValue = !store.collectXlsx;\n store.setCollectXlsx(newValue);\n try {\n await setRoomFormSettings(roomId, { saveFormAsXLSX: newValue });\n } catch {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n store.setCollectXlsx(!newValue);\n }\n }, [store, roomId, t]);\n \n const onToggleSendToDb = React.useCallback(async () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 129,
+      "line_number": 131,
       "context": "const newValue = !store.collectXlsx;\n store.setCollectXlsx(newValue);\n try {\n await setRoomFormSettings(roomId, { saveFormAsXLSX: newValue });\n } catch {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n store.setCollectXlsx(!newValue);\n }\n }, [store, roomId, t]);\n \n const onToggleSendToDb = React.useCallback(async () => {",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 129,
+      "line_number": 131,
       "context": "const newValue = !store.collectXlsx;\n store.setCollectXlsx(newValue);\n try {\n await setRoomFormSettings(roomId, { saveFormAsXLSX: newValue });\n } catch {\n toastr.error(t(\"Common:SomethingWentWrong\"));\n store.setCollectXlsx(!newValue);\n }\n }, [store, roomId, t]);\n \n const onToggleSendToDb = React.useCallback(async () => {",
       "module": "/packages/sdk"
     },

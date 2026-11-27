@@ -3,7 +3,7 @@
   "content": "A skill set holds skills: instructions that tell the assistant how to do a task. Connect it to a chat or an agent.",
   "content_en_sha1_hash": "bc1c8f62b467a7386605b4a63d5b9fb6ea5e7a34",
   "created_at": "2026-11-20T10:53:41.493Z",
-  "updated_at": "2026-11-20T10:54:39.928Z",
+  "updated_at": "2026-11-27T15:01:39.775Z",
   "comment": {
     "text": "Description on the empty screen of the Skill sets list in the AI Chat section for a user who may create one: what a skill set is and why to create it. Terms: agent = an AI assistant set up with a model, skill sets and knowledge bases; skill set = a room of skills (Markdown instructions); knowledge base = a room of files the assistant searches. Match Common:Agents, Common:SkillSets, Common:AIProjectKnowledgeRooms.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
-      "line_number": 135,
-      "context": "): TAiListEmptyTexts => {\n switch (type) {\n case RoomsType.InstructionsRoom:\n return {\n title: t(\"EmptyView:SkillSetsEmptyTitle\"),\n description: t(\"EmptyView:SkillSetsEmptyDescription\"),\n userTitle: t(\"EmptyView:SkillSetsEmptyUserTitle\"),\n userDescription: t(\"EmptyView:SkillSetsEmptyUserDescription\"),\n createDescription: t(\"EmptyView:SkillSetsCreateDescription\"),\n };\n case RoomsType.KnowledgeRoom:",
+      "line_number": 136,
+      "context": "): TAiListEmptyTexts => {\n switch (type) {\n case RoomsType.InstructionsRoom:\n return {\n title: t(\"EmptyView:SkillSetsEmptyTitle\"),\n description: t(\"EmptyView:SkillSetsEmptyDescription\"),\n userTitle: t(\"EmptyView:SkillSetsEmptyUserTitle\"),\n userDescription: t(\"EmptyView:SkillSetsEmptyUserDescription\"),\n createTitle: t(\"EmptyView:SkillSetsCreateTitle\"),\n createDescription: t(\"EmptyView:SkillSetsCreateDescription\"),\n };",
       "module": "/packages/client"
     }
   ],

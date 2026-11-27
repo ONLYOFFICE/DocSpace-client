@@ -3,7 +3,7 @@
   "content": "You have left the agent",
   "content_en_sha1_hash": "9046d9c834b4b78bdceb1017ec100bcfc353675a",
   "created_at": "2026-11-18T08:06:41.458Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.988Z",
   "comment": {
     "text": "Success toast after the user leaves an agent they were a member of, through the Leave agent action. The agent counterpart of You have left the room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 609,
-      "context": "const isRoot = self.selectedFolderStore.isRootFolder;\n \n const successText = isOwner\n ? t(\"Common:LeftAndAppointNewOwner\")\n : isAgent(room)\n ? t(\"Common:YouLeftTheAgent\")\n : t(\"Common:YouLeftTheRoom\");\n \n const leave = () =>\n (\n api.rooms.updateRoomMemberRole(roomId, {",
+      "line_number": 615,
+      "context": "const isRoot = self.selectedFolderStore.isRootFolder;\n \n const successText = isOwner\n ? t(\"Common:LeftAndAppointNewOwner\")\n : isAgent(room)\n ? t(\"Common:YouLeftTheAgent\")\n : room.roomType === RoomsType.KnowledgeRoom\n ? t(\"Common:YouLeftTheKnowledgeBase\")\n : room.roomType === RoomsType.InstructionsRoom\n ? t(\"Common:YouLeftTheSkillSet\")\n : t(\"Common:YouLeftTheRoom\");",
       "module": "/packages/client"
     }
   ],

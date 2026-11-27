@@ -3,7 +3,7 @@
   "content": "First, you need to specify your current IP or the IP range your current IP address belongs to, otherwise your workspace access will be blocked right after you save the settings. The owner will have the workspace access from any IP address.",
   "content_en_sha1_hash": "f079ee6cf4d94d57a5141eab2e17920579f6d6e1",
   "created_at": "2026-08-13T14:37:16.121Z",
-  "updated_at": "2026-08-13T15:17:16.328Z",
+  "updated_at": "2026-11-27T15:01:39.909Z",
   "comment": {
     "text": "Instructional warning text in the IP security settings that cautions users about potential workspace lockout if they fail to include their current IP or range before saving changes.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 340,
+      "line_number": 345,
       "context": "<>\n <Text fontSize=\"16px\" fontWeight=\"700\" className={styles.warningText}>\n {t(\"Common:Warning\")}\n </Text>\n <Text className={styles.ipSecurityWarning}>\n {t(\"IPSecurityWarningHelper\")}\n </Text>\n </>\n ) : null}\n \n <SaveCancelButtons",
       "module": "/packages/client"
     }

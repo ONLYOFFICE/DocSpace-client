@@ -3,7 +3,7 @@
   "content": "Restrict login access to specific IP addresses. You can enter exact IPv4 addresses, IP ranges, or CIDR notation. Note: owners can always access the workspace from any IP address, regardless of these restrictions.",
   "content_en_sha1_hash": "f1c205166530ac597b8528f8571ab1fbcecfd057",
   "created_at": "2026-08-31T18:23:41.491Z",
-  "updated_at": "2026-08-31T20:30:56.274Z",
+  "updated_at": "2026-11-27T15:01:39.909Z",
   "comment": {
     "text": "A descriptive subtitle for the IP security setting in the Portal Settings, explaining how to configure IP restrictions and noting that owners are exempt.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 272,
+      "line_number": 277,
       "context": "return (\n <div className={styles.container}>\n <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>\n <Text className={styles.pageSubtitle}>\n {t(\"IPSecuritySettingDescription\")}\n </Text>\n {ipSettingsUrl ? (\n <Link\n className=\"link-learn-more\"\n dataTestId=\"ip_security_component_learn_more\"",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "The recovery phrase is incorrect. Check the words and their order.",
   "content_en_sha1_hash": "1dcecc7c9b93530f8163825376c07b5c7d877c25",
   "created_at": "2026-11-17T08:59:52.310Z",
-  "updated_at": "2026-11-19T16:14:54.183Z",
+  "updated_at": "2026-11-27T15:01:40.032Z",
   "comment": {
     "text": "Error under the recovery phrase field of the Recover key dialog when every typed word is a recovery word but the 24 words together are not a valid phrase or do not open the user's key; it asks the user to check the words and the order they are in. Do not name any word-list standard or other cryptographic term.",
     "is_auto": true,
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 74,
+      "line_number": 75,
       "context": "}\n if (error instanceof InvalidPassphraseError) {\n return t(\"Common:InvalidPassphrase\");\n }\n if (error instanceof InvalidRecoveryPhraseError) {\n return t(\"Common:InvalidRecoveryPhrase\");\n }\n if (error instanceof InvalidFormatError) {\n return t(\"Common:EncryptionInvalidKeyFile\");\n }\n if (",
       "module": "/packages/shared"
     }

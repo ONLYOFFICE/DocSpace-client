@@ -3,7 +3,7 @@
   "content": "A skill set with skills, a knowledge base the chat searches or an agent that brings them together",
   "content_en_sha1_hash": "07f6be1ebde6fe09e939833a65e1a3a61d64a98f",
   "created_at": "2026-11-18T08:05:12.657Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.792Z",
   "comment": {
     "text": "Description under the create option on the empty screens of the AI Chat lists, and of the AI Chat card on the Overview page. Names the three kinds: a skill set (room of AI skills), a knowledge base (room of files the chat searches) and an agent combining them; a noun phrase with no final period.",
     "is_auto": true,
@@ -12,14 +12,8 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
-      "line_number": 177,
-      "context": "const options: EmptyViewOptionsType = canManage && !isCreateRefused\n ? [\n {\n key: \"create-ai-room\",\n title: getAiWorkspaceCreateLabel(t, location.search),\n description: t(\"Common:AiRoomsCreateDescription\"),\n icon: <CreateRoomIcon />,\n onClick: onCreate,\n },\n ]\n : [];",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/Dashboard/hooks/useModuleItems.tsx",
-      "line_number": 237,
+      "line_number": 286,
       "context": "if (isAiHubAvailable) {\n items.push({\n id: \"ai-hub\",\n icon: <CatalogRoomsIcon />,\n title: t(\"Common:AIChat\"),\n description: t(\"Common:AiRoomsCreateDescription\"),\n installed: true,\n href: AI_HUB_PATH,\n buttonLabel: t(\"Common:Open\"),\n onAction: () => navigate(AI_HUB_PATH),\n noTour: true,",
       "module": "/packages/client"
     }

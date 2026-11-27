@@ -3,7 +3,7 @@
   "content": "Don't ask for the file name again when creating a file.",
   "content_en_sha1_hash": "cd947c9fb1357ee03ea6de40d2e9268262a173c5",
   "created_at": "2026-08-31T18:23:01.409Z",
-  "updated_at": "2026-11-05T16:49:39.830Z",
+  "updated_at": "2026-11-27T15:01:39.653Z",
   "comment": {
     "text": "Label for a checkbox or toggle button in file management settings and dialogs, used to disable the file name prompt during file creation.",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
-      "line_number": 150,
-      "context": "className={classNames(\"ask-again\", styles.toggleBtn)}\n onChange={onChangeKeepNewFileName}\n isChecked={keepNewFileName}\n dataTestId=\"ask_again_toggle_button\"\n />\n <Text>{t(\"Common:DontAskAgain\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\"save-copy-original \", styles.toggleBtn)}",
+      "line_number": 154,
+      "context": "isChecked={keepNewFileName}\n inputId={`${captionId}-ask-again`}\n dataTestId=\"ask_again_toggle_button\"\n />\n <ControlCaption htmlFor={`${captionId}-ask-again`}>\n <Text>{t(\"Common:DontAskAgain\")}</Text>\n </ControlCaption>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
-      "line_number": 132,
-      "context": "<ToggleButton\n className={styles.toggleBtn}\n onChange={onChangeKeepNewFileName}\n isChecked={settings.keepNewFileName}\n />\n <Text>{t(\"Common:DontAskAgain\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={styles.toggleBtn}",
+      "line_number": 136,
+      "context": "inputId={`${captionId}-ask-again`}\n onChange={onChangeKeepNewFileName}\n isChecked={settings.keepNewFileName}\n />\n <ControlCaption htmlFor={`${captionId}-ask-again`}>\n <Text>{t(\"Common:DontAskAgain\")}</Text>\n </ControlCaption>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton",
       "module": "/packages/sdk"
     }
   ],

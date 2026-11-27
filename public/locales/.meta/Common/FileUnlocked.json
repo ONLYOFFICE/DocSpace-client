@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2026-11-05T16:49:39.794Z",
+  "updated_at": "2026-11-27T15:01:39.600Z",
   "comment": {
     "text": "A toast message confirming that a file has been successfully unlocked.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/HOCs/withQuickButtons.js",
-      "line_number": 72,
+      "line_number": 74,
       "context": "const { locked, id, security } = item;\n const { isLoading } = this.state;\n if (!security?.Lock || isLoading) return;\n this.setState({ isLoading: true });\n return lockFileAction(id, !locked)\n .then(() => toastr.success(t(\"Common:FileUnlocked\")))\n .catch((err) => toastr.error(err))\n .finally(() => this.setState({ isLoading: false }));\n };\n \n onClickDownload = () => {",
       "module": "/packages/client"
     },

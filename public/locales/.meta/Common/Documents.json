@@ -3,7 +3,7 @@
   "content": "Documents",
   "content_en_sha1_hash": "687c82861c956e47456186f6522cfc8dbadb8ef6",
   "created_at": "2025-05-19T21:30:44.581Z",
-  "updated_at": "2026-11-17T13:13:27.031Z",
+  "updated_at": "2026-11-27T15:01:39.669Z",
   "comment": {
     "text": "This is a label for a category of files, referring to text documents. It appears in progress dialogs, template galleries, and file filters.",
     "is_auto": true,
@@ -31,19 +31,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 833,
+      "line_number": 845,
       "context": "if (filter.filterType) {\n let label = \"\";\n \n switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 833,
+      "line_number": 845,
       "context": "if (filter.filterType) {\n let label = \"\";\n \n switch (filter.filterType.toString()) {\n case FilterType.DocumentsOnly.toString():\n label = t(\"Common:Documents\");\n break;\n case FilterType.FoldersOnly.toString():\n label = t(\"Common:Folders\");\n break;\n case FilterType.SpreadsheetsOnly.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/constants/index.ts",
-      "line_number": 67,
+      "line_number": 68,
       "context": "export type FileTypeCategory =\n | { key: string; labelKey: string; constLabelKey?: never }\n | { key: string; labelKey?: never; constLabelKey: string };\n \n export const FILE_TYPE_CATEGORIES: FileTypeCategory[] = [\n { key: \"document\", labelKey: \"Common:Documents\" },\n { key: \"spreadsheet\", labelKey: \"Common:Spreadsheets\" },\n { key: \"presentation\", labelKey: \"Common:Presentations\" },\n { key: \"image\", labelKey: \"Common:Images\" },\n { key: \"video\", labelKey: \"Common:Video\" },\n { key: \"audio\", labelKey: \"Common:Audio\" },",
       "module": "/packages/client"
     },

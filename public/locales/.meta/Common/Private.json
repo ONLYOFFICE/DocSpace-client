@@ -3,7 +3,7 @@
   "content": "Private rooms",
   "content_en_sha1_hash": "9a2ea678656f317a4c8a199c21fa0c78c7870d16",
   "created_at": "2026-11-13T13:23:52.459Z",
-  "updated_at": "2026-11-19T16:14:53.930Z",
+  "updated_at": "2026-11-27T15:01:39.622Z",
   "comment": {
     "text": "Name of the left sidebar section that lists end-to-end encrypted private rooms, placed after Rooms and Forms and holding an Archive sub-item. Also the header and browser-tab title of that list, the root of its breadcrumbs, the section name inside Go to {{sectionName}}, an option of the default start page setting and the title of the E2E rooms app in the apps catalog. Plural section name (private rooms as a group), not a property of one item; keep it short, the sidebar is narrow.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 572,
+      "line_number": 802,
       "context": "/>\n );\n \n mainItems.push({\n id: \"private-rooms\",\n label: t(\"Common:Private\"),\n icon: CatalogPrivateReactSvgUrl,\n ...nav(searchAreaUrl(\"/private/filter\", RoomSearchArea.PrivateRooms)),\n ...(privateRoomsFolder && privateNewCount > 0\n ? {\n showBadge: true,",
       "module": "/packages/client"
     },
@@ -31,7 +31,7 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 593,
+      "line_number": 607,
       "context": ".with([FolderType.Archive, ShareAccessRights.None, P._], () => [\n {\n ...(isPrivateScope ? actions.onGoToPrivate() : actions.onGoToShared()),\n icon: <FolderIcon />,\n description: isPrivateScope\n ? t(\"Common:GoToSection\", { sectionName: t(\"Common:Private\") })\n : t(\"Common:GoToMyRooms\"),\n key: \"empty-view-goto-shared\",\n },\n ])\n .with([FolderType.TRASH, P._, P.when((item) => !item)], () => {",
       "module": "/packages/client"
     },
@@ -55,32 +55,32 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 782,
+      "line_number": 791,
       "context": "return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isPrivateRoomsListRoot(location, isRoomsFolder))\n return t(\"Common:Private\");\n \n // The AI root is titled by the client, after what its list holds.\n if (getCategoryType(location) === CategoryType.AiHub)\n return getAiWorkspaceTitle(t, location.search);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 90,
-      "context": "{\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n {\n label: t(\"Common:Private\"),\n key: FolderType.PrivateRooms,\n },\n {\n label: t(\"Common:AiWorkspace\"),\n key: FolderType.AiHub,",
+      "line_number": 94,
+      "context": "{\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n {\n label: t(\"Common:Private\"),\n key: FolderType.PrivateRooms,\n },\n {\n label: t(\"Common:AIChat\"),\n key: FolderType.AiHub,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
-      "line_number": 415,
-      "context": "isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
+      "line_number": 429,
+      "context": ": isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
-      "line_number": 415,
-      "context": "isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
+      "line_number": 429,
+      "context": ": isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;\n \n let shared: boolean | undefined;\n let quotaLimit: number | undefined;\n let usedSpace: number | undefined;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
-      "line_number": 129,
-      "context": "break;\n case FolderType.AiHub:\n folder.title = i18n.t(\"Common:AiWorkspace\");\n break;\n case FolderType.PrivateRooms:\n folder.title = i18n.t(\"Common:Private\");\n break;\n default:\n break;\n }\n });",
+      "line_number": 179,
+      "context": "break;\n case FolderType.AiHub:\n folder.title = i18n.t(\"Common:AIChat\");\n break;\n case FolderType.PrivateRooms:\n folder.title = i18n.t(\"Common:Private\");\n break;\n default:\n break;\n }\n });",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "AI isn’t available yet",
   "content_en_sha1_hash": "ab4fff9b5a30d7edfb22c36fa5df33d8111d42c1",
   "created_at": "2026-11-01T08:11:31.728Z",
-  "updated_at": "2026-11-17T13:13:26.996Z",
+  "updated_at": "2026-11-27T15:01:39.634Z",
   "comment": {
     "text": "Title of the AI rooms section placeholder shown to a non-admin user while AI is not set up on the portal; there is no action button.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 260,
+      "line_number": 275,
       "context": "export const getAiRoomsAIOffTitle = (\n t: TTranslation,\n standalone: boolean,\n isPortalAdmin: boolean,\n ) => {\n if (!isPortalAdmin) return t(\"Common:AiRoomsAIOffUserTitle\");\n return standalone\n ? t(\"Common:EmptyAIAgentsAIDisabledStandaloneAdminTitle\", {\n aiProvider: t(\"Common:AIProvider\"),\n })\n : t(\"Common:AiRoomsAIOffTitle\");",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Everyone who chats with this agent uses this model. Members cannot change it from the chat.",
   "content_en_sha1_hash": "e91f9760e7265244277a4b3c50cf063a740a02f3",
   "created_at": "2026-11-18T08:05:12.065Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.787Z",
   "comment": {
     "text": "Hint under the model selector in the agent form: everyone who chats with the agent uses the chosen model, and members cannot switch it from the chat.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 553,
+      "line_number": 487,
       "context": "displaySelectedOption\n isDisabled={isSaving}\n dataTestId=\"ai-project-profile-combobox\"\n />\n <Text className={styles.hint} fontSize=\"12px\" lineHeight=\"16px\" noSelect>\n {t(\"Common:AIProjectModelHint\")}\n </Text>\n </div>\n {roomsBlock(t(\"Common:SkillSets\"), t(\"Common:AIProjectInstructionsHint\"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}\n {roomsBlock(t(\"Common:AIProjectKnowledgeRooms\"), t(\"Common:AIProjectKnowledgeHint\"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}\n {project?.createdBy ? (",
       "module": "/packages/client"
     }

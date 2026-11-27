@@ -3,7 +3,7 @@
   "content": "Change agent owner",
   "content_en_sha1_hash": "dc70b4db1673fde262aaa7a41c374822129cad45",
   "created_at": "2026-11-18T08:05:11.531Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.744Z",
   "comment": {
     "text": "Title of the side panel that hands an agent over to another owner, and the label of the agent's context menu item that opens it. Imperative phrase; Agent owner is the role name used elsewhere.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 144,
-      "context": "});\n \n const ownerIsCurrentUser = roomOwnerId === userId;\n \n const headerLabel = isAIProject\n ? t(\"Common:AIProjectChangeOwner\")\n : t(\"Common:ChangeTheRoomOwner\");\n \n const infoText = isAIProject\n ? t(\"Common:AIProjectChangeOwnerInfo\")\n : t(\"Common:PeopleSelectorInfo\");",
+      "line_number": 149,
+      "context": "const ownerIsCurrentUser = roomOwnerId === userId;\n \n // A knowledge base and a skill set are named as such, not as a room.\n const headerLabel = isAIProject\n ? t(\"Common:AIProjectChangeOwner\")\n : isKnowledgeBase\n ? t(\"Common:ChangeKnowledgeBaseOwner\")\n : isSkillSet\n ? t(\"Common:ChangeSkillSetOwner\")\n : t(\"Common:ChangeTheRoomOwner\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 810,
-      "context": "},\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: isAgent\n ? t(\"Common:AIProjectChangeOwner\")\n : isFormSpace\n ? t(\"Common:ChangeFormSpaceOwner\")\n : t(\"Common:ChangeRoomOwner\"),\n icon: ReconnectSvgUrl,\n onClick: self.onChangeRoomOwner,",
+      "line_number": 833,
+      "context": "},\n {\n id: \"option_change-room-owner\",\n key: \"change-room-owner\",\n label: isAgent\n ? t(\"Common:AIProjectChangeOwner\")\n : isKnowledgeBase\n ? t(\"Common:ChangeKnowledgeBaseOwner\")\n : isSkillSet\n ? t(\"Common:ChangeSkillSetOwner\")\n : isFormSpace",
       "module": "/packages/client"
     }
   ],

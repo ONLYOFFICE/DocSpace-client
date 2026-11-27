@@ -3,7 +3,7 @@
   "content": "Files is your place to create, upload and organize documents. Open a file to work on it in your browser, or share it when someone else needs access.",
   "content_en_sha1_hash": "b12daa7e4a1641e6aa791f7fb999c1848ece2fb6",
   "created_at": "2026-10-16T12:15:09.407Z",
-  "updated_at": "2026-10-16T12:17:13.826Z",
+  "updated_at": "2026-11-27T15:01:39.648Z",
   "comment": {
     "text": "Body of the first Files onboarding tour step, anchored on the Files (My documents) item in the left sidebar. Files here is the section name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 233,
+      "line_number": 234,
       "context": "audience !== \"guest\" &&\n sectionId &&\n navItemStep(\n sidebarSelector(sectionId),\n t(\"FilesTour:TourFilesOverviewTitle\"),\n t(\"FilesTour:TourFilesOverview\"),\n callbacks,\n FILES_TOUR_LABEL,\n ),\n \n // 1. Create tiles. Rewind the carousel: stepping back from the AI chat tile",
       "module": "/packages/client"
     }

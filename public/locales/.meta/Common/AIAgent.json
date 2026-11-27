@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2026-10-22T16:09:36.995Z",
+  "updated_at": "2026-11-27T15:01:39.781Z",
   "comment": {
     "text": "This string refers to an AI agent, likely a feature or service within the application. It appears as a label in various contexts, including a selector and an empty screen description.",
     "is_auto": true,
@@ -36,10 +36,22 @@
       "module": "@onlyoffice/apps-ui-kit"
     },
     {
+      "file_path": "/packages/client/src/helpers/filesUtils.js",
+      "line_number": 82,
+      "context": "case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRooms\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRooms\");\n case RoomsType.AiProjectRoom:\n return t(\"Common:AIAgent\");\n default:\n break;\n }\n };",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_store/AgentsListStore.tsx",
       "line_number": 233,
       "context": ");\n });\n \n try {\n await muteRoomNotification(id, muteStatus);\n const aiAgent = t(\"Common:AIAgent\", { defaultValue: \"AI agent\" });\n // Two literal keys instead of a dynamic ternary so the i18n usage\n // scanner can see both at static analysis time.\n const message = muteStatus\n ? t(\"Common:AIAgentNotificationsDisabled\", {\n aiAgent,",
       "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
+      "line_number": 70,
+      "context": "case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomTitle\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRoomTitle\");\n case RoomsType.AiProjectRoom:\n return t(\"Common:AIAgent\");\n default:\n return \"\";\n }\n };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

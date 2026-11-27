@@ -3,7 +3,7 @@
   "content": "This file was encrypted for an encryption key you no longer have. Your current key cannot open it.",
   "content_en_sha1_hash": "7527b9f1054c459a1307cd00d42165ac8e19ce00",
   "created_at": "2026-11-23T15:42:10.202Z",
-  "updated_at": "2026-11-23T15:43:51.963Z",
+  "updated_at": "2026-11-27T15:01:39.981Z",
   "comment": {
     "text": "Error message shown as a toast, in the media viewer or in place of the document editor when the user downloads, copies, moves or opens an encrypted file of a private room that was encrypted for an encryption key the user has since deleted and replaced. Two full sentences stating a fact with no remedy; key means the user's personal encryption key, not a keyboard key or a password.",
     "is_auto": true,
@@ -11,6 +11,24 @@
     "model": "claude-fable-5-2"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/copyMove.helpers.ts",
+      "line_number": 412,
+      "context": "self.uploadDataStore.startUpload(filesToUpload, target, i18n.t);\n }\n \n // Spec: private-rooms/file-operations, \"A file wrapped for a key the user no longer holds is reported as such\"\n if (items.length === 1 && keyReplaced) {\n toastr.error(i18n.t(\"Common:EncryptedFileKeyReplaced\"));\n return;\n }\n \n if (failed.length > 0) {\n if (deleteSourceOnSuccess) {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
+      "line_number": 424,
+      "context": "if (result.success && result.file) {\n triggerFileDownload(result.file);\n } else {\n // Spec: private-rooms/file-operations, \"A file wrapped for a key the user no longer holds is reported as such\"\n if (result.keyReplaced) {\n toastr.error(i18n.t(\"Common:EncryptedFileKeyReplaced\"));\n } else {\n if (result.error) {\n console.error(\"[ENCRYPTION] downloadEncryptedFile:\", result.error);\n }\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/doceditor/src/components/Editor.tsx",
+      "line_number": 87,
+      "context": "type TKeyFlowEnd = {\n /** i18n key of the message. */\n message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptedFileKeyReplaced\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";",
+      "module": "/packages/doceditor"
+    },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
       "line_number": 91,

@@ -3,7 +3,7 @@
   "content": "Leave agent",
   "content_en_sha1_hash": "9923909f26b0352a8fd0d58d8a7c07d0d615967d",
   "created_at": "2026-08-31T18:23:13.455Z",
-  "updated_at": "2026-10-31T12:58:29.616Z",
+  "updated_at": "2026-11-27T15:01:39.728Z",
   "comment": {
     "text": "Dialog title, checkbox label, and menu item label used when exiting an AI Agent's space.",
     "is_auto": true,
@@ -11,6 +11,24 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 98,
+      "context": "};\n }, []);\n \n // A knowledge base and a skill set are named as such, not as a room.\n const titleText = isAgentRoom\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 168,
+      "context": ": isSkillSet\n ? t(\"Common:SkillSetOwnerSelectorInfo\")\n : t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIProject\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 983,
+      "context": "},\n {\n id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAgent\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
       "line_number": 301,

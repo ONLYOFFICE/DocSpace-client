@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-11-17T13:13:27.030Z",
+  "updated_at": "2026-11-27T15:01:39.669Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/ItemTitle/RoomsItemTitle.tsx",
-      "line_number": 286,
+      "line_number": 312,
       "context": "<div className=\"info_title-icons\">\n {isRoomMembersPanel ? (\n <IconButton\n id=\"info_search\"\n className=\"icon\"\n title={t(\"Common:Search\")}\n iconName={SearchIconReactSvgUrl}\n onClick={onSearchClick}\n size={16}\n />\n ) : null}",
       "module": "/packages/client"
     },
@@ -60,8 +60,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
+      "line_number": 411,
+      "context": "<div className={styles.wrapper} data-testid=\"ai-templates-catalog\">\n <SearchInput\n className={styles.search}\n scale\n size={InputSize.base}\n placeholder={t(\"Common:Search\")}\n value={search}\n onChange={setSearch}\n onClearSearch={() => setSearch(\"\")}\n />\n <AiCategoryTabs",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1838,
+      "line_number": 1852,
       "context": "getViewSettingsData={getViewSettingsData}\n onSearch={onSearch}\n onClearFilter={onClearFilter}\n getSelectedInputValue={getSelectedInputValue}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n isFavoritesFolder={isFavoritesFolder}\n isPersonalRoom={isPersonalRoom}\n isRooms={isRooms}\n removeSelectedItem={removeSelectedItem}",
       "module": "/packages/client"
     },
@@ -85,13 +91,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 433,
+      "line_number": 432,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n dataTestId=\"search_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector.js",
-      "line_number": 433,
+      "line_number": 432,
       "context": "/>\n </LabelGroup>\n <LabelGroup>\n <Checkbox\n className=\"checkbox\"\n label={t(\"Common:Search\")}\n onChange={toggleWithSearch}\n isChecked={config.withSearch}\n dataTestId=\"search_checkbox\"\n />\n <HelpButton",
       "module": "/packages/client"
     },

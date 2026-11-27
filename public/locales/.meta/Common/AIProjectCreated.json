@@ -3,7 +3,7 @@
   "content": "Agent \"{{name}}\" created",
   "content_en_sha1_hash": "bffda267b73d76656a58326afa84691f54e4d5c1",
   "created_at": "2026-11-18T08:05:11.605Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.786Z",
   "comment": {
     "text": "Success toast after a new agent is created from the agent form. {{name}} is the agent name; keep the quotes around it.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 324,
+      "line_number": 317,
       "context": "const removeLogo = imageRemoved && !image && !!uploadedLogo(project.logo);\n await store.updateProject(project.id, data, { removeLogo });\n store.closeProjectDialog();\n } else {\n const created = await store.createProject(data);\n toastr.success(t(\"Common:AIProjectCreated\", { name: created.title }));\n store.closeProjectDialog();\n // A new project opens, as a new room does.\n onCreated?.(created);\n }\n } catch (e) {",
       "module": "/packages/client"
     }

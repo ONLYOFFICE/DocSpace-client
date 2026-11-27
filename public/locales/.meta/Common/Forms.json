@@ -3,7 +3,7 @@
   "content": "Forms",
   "content_en_sha1_hash": "4bec9575721b2739ed1e7c56eb6c8471084fcbcf",
   "created_at": "2025-05-19T21:30:45.530Z",
-  "updated_at": "2026-11-19T16:14:53.929Z",
+  "updated_at": "2026-11-27T15:01:39.622Z",
   "comment": {
     "text": "This is a label for a section in a download dialog, indicating that the files being downloaded are forms. It also appears as part of a generated PDF filename.",
     "is_auto": true,
@@ -37,25 +37,25 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 495,
+      "line_number": 725,
       "context": "// Active rooms listing), so the item points at the dedicated /forms route\n // scoped to that search area.\n if (roomsFolder && formsInstalled) {\n mainItems.push({\n id: \"forms\",\n label: t(\"Common:Forms\"),\n icon: getCatalogIconUrlByType(FolderType.FormRoom),\n ...nav(searchAreaUrl(\"/forms/filter\", RoomSearchArea.Forms)),\n ...(formsFolder\n ? sectionBadge(panelFolderId(formsFolder), newCount(formsFolder))\n : {}),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/EditRoomGroupsDialog/index.tsx",
-      "line_number": 533,
+      "line_number": 538,
       "context": "<RoomListPanel\n visible={isOpenRoomList}\n onClose={onCloseRoomList}\n onSubmit={onSubmitRoom}\n headerLabel={\n isFormsSection ? t(\"Common:Forms\") : t(\"Common:RoomList\")\n }\n withSearch\n disableSubmitUntilChanged\n withoutBackdropBackground\n isFormsSection={isFormsSection}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 608,
+      "line_number": 622,
       "context": "sectionName: t(\"Common:Rooms\"),\n },\n forms: {\n link: actions.onGoToForms(),\n icon: <FolderIcon />,\n sectionName: t(\"Common:Forms\"),\n },\n personal: {\n link: actions.onGoToPersonal(),\n icon: <PersonIcon />,\n sectionName: t(\"Common:Files\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 197,
+      "line_number": 199,
       "context": "*/\n export const getSectionAppName = (\n t: TTranslation,\n filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };",
       "module": "/packages/client"
     },
@@ -97,38 +97,38 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 779,
+      "line_number": 788,
       "context": "if (isSettingsPage) return t(\"Common:Settings\");\n \n if (getCategoryType(location) === CategoryType.Forms)\n return selectedFolder?.rootFolderType === FolderType.RoomTemplates\n ? t(\"Common:Templates\")\n : t(\"Common:Forms\");\n \n if (isPrivateRoomsListRoot(location, isRoomsFolder))\n return t(\"Common:Private\");\n \n // The AI root is titled by the client, after what its list holds.",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 86,
+      "line_number": 90,
       "context": "{\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,\n },\n {\n label: t(\"Common:Forms\"),\n key: FolderType.Forms,\n },\n {\n label: t(\"Common:Private\"),\n key: FolderType.PrivateRooms,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
-      "line_number": 98,
+      "line_number": 105,
       "context": "</div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n </div>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 80,
-      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "line_number": 85,
+      "context": "<ControlCaption htmlFor={inputId}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n </ControlCaption>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 80,
-      "context": "<div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"\n onChange={onChangeEmailSubscription}",
+      "line_number": 85,
+      "context": "<ControlCaption htmlFor={inputId}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n </ControlCaption>\n <ToggleButton\n className=\"rooms-activity toggle-btn\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesStore/fetch.helpers.ts",
-      "line_number": 411,
-      "context": "// root path part \"Rooms\". On the /forms route that crumb already\n // navigates to the Forms list (see onClickFolder -> moveToRoomsPage),\n // so it must be labelled Forms to match where it leads.\n const crumbTitle =\n isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;",
+      "line_number": 425,
+      "context": "// The server names the AI Chat section's root \"AI rooms\"; the crumb\n // is the list the room is in, as the sidebar names it.\n const crumbTitle = isAiListRoot\n ? getAiListTitle(i18n.t, aiRoomListType)\n : isRootRoom && window.location.pathname.startsWith(\"/forms\")\n ? i18n.t(\"Common:Forms\")\n : isRootRoom &&\n folderType === Rooms &&\n isPrivateRoomsRoute(address.pathname)\n ? i18n.t(\"Common:Private\")\n : title;",
       "module": "/packages/client"
     },
     {
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/forms-header/index.tsx",
-      "line_number": 135,
+      "line_number": 133,
       "context": "const activeSubfolder = completedFolder ?? inProgressFolder;\n \n const getSectionTitle = React.useCallback(() => {\n switch (activeSection) {\n case FormsSection.MyForms:\n return t(\"Common:Forms\");\n case FormsSection.Library:\n return t(\"Common:Library\");\n case FormsSection.InProgress:\n return t(\"Common:InProgress\");\n case FormsSection.CompletedForms:",
       "module": "/packages/sdk"
     },

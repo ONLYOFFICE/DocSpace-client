@@ -3,7 +3,7 @@
   "content": "Invitation results",
   "content_en_sha1_hash": "dad5df5465569c53524df73e4b4bdbf710c1eb67",
   "created_at": "2026-10-28T11:11:47.013Z",
-  "updated_at": "2026-11-19T16:14:54.006Z",
+  "updated_at": "2026-11-27T15:01:39.755Z",
   "comment": {
     "text": "Title of the invite panel of a private room once the invitation has been sent, when the panel lists who was invited, who still waits for access to the encrypted files and who was skipped; short heading, noun phrase.",
     "is_auto": true,
@@ -13,19 +13,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1101,
+      "line_number": 1138,
       "context": "withBodyScroll\n isInvitePanelLoader\n id=\"invite_panel_modal\"\n aria-label={\n inviteOutcome\n ? t(\"Common:EncryptedInviteResultTitle\")\n : t(\"Common:Invite\")\n }\n >\n {!hideSelector && addUsersPanelVisible ? (\n <ModalDialog.Container>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 1101,
+      "line_number": 1138,
       "context": "withBodyScroll\n isInvitePanelLoader\n id=\"invite_panel_modal\"\n aria-label={\n inviteOutcome\n ? t(\"Common:EncryptedInviteResultTitle\")\n : t(\"Common:Invite\")\n }\n >\n {!hideSelector && addUsersPanelVisible ? (\n <ModalDialog.Container>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js",
-      "line_number": 89,
+      "line_number": 94,
       "context": "return (\n <div\n data-testid=\"invite_panel_result\"\n ref={regionRef}\n role=\"region\"\n aria-label={t(\"Common:EncryptedInviteResultTitle\")}\n tabIndex={-1}\n className={styles.inviteResult}\n >\n {granted.length ? (\n <section",
       "module": "/packages/client"
     },
@@ -43,7 +43,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteResult.tsx",
-      "line_number": 98,
+      "line_number": 103,
       "context": "return (\n <div\n data-testid=\"invite_panel_result\"\n ref={regionRef}\n role=\"region\"\n aria-label={t(\"Common:EncryptedInviteResultTitle\")}\n tabIndex={-1}\n className={styles.inviteResult}\n >\n {granted.length ? (\n <section",
       "module": "/packages/sdk"
     }

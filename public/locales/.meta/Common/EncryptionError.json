@@ -3,7 +3,7 @@
   "content": "An error occurred during the encryption operation",
   "content_en_sha1_hash": "93be28f85a3f4aa60d311ecf038b72f78e1b4a4b",
   "created_at": "2026-05-24T17:27:26.478Z",
-  "updated_at": "2026-11-19T16:14:54.183Z",
+  "updated_at": "2026-11-27T15:01:40.031Z",
   "comment": {
     "text": "Error message displayed in a toast notification when an encryption, decryption, or authentication process fails.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 103,
+      "line_number": 107,
       "context": "export function getEncryptionErrorMessage(\n t: TFunction,\n error: unknown,\n ): string {\n return (\n getSpecificEncryptionErrorMessage(t, error) ?? t(\"Common:EncryptionError\")\n );\n }\n \n /**\n * The message of a failed encrypted copy, download or open: the key of an",
       "module": "/packages/shared"
     }

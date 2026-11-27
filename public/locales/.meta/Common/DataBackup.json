@@ -3,7 +3,7 @@
   "content": "Data backup",
   "content_en_sha1_hash": "557da1f0ef4a81b758b4c447e2a745dbf3a4b0fe",
   "created_at": "2025-05-26T07:15:42.350Z",
-  "updated_at": "2026-10-31T12:58:29.256Z",
+  "updated_at": "2026-11-27T15:01:39.859Z",
   "comment": {
     "text": "This is a page title and a navigation item label within the \"Data Management\" section of the portal settings. It refers to the functionality for backing up data.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-management/index.js",
-      "line_number": 146,
+      "line_number": 144,
       "context": "};\n \n const data = [\n {\n id: \"data-backup\",\n name: t(\"Common:DataBackup\"),\n content: (\n <ManualBackup buttonSize={buttonSize} renderTooltip={renderTooltip} />\n ),\n onClick: async () => {\n clearAbortControllerArr();",
       "module": "/packages/client"
     },

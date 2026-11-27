@@ -3,7 +3,7 @@
   "content": "Encryption locked",
   "content_en_sha1_hash": "2e9eac60525096ce4913373dd9bbf6d4fcf1b400",
   "created_at": "2026-05-24T17:27:26.647Z",
-  "updated_at": "2026-11-19T16:14:54.064Z",
+  "updated_at": "2026-11-27T15:01:39.835Z",
   "comment": {
     "text": "Success toast message appearing after the user manually locks encryption keys.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 480,
+      "line_number": 491,
       "context": "isHovered\n onClick={() => {\n if (busy) return;\n lock();\n setRememberedUntil(null);\n toastr.success(t(\"Common:EncryptionLocked\"));\n }}\n role=\"button\"\n tabIndex={0}\n onKeyDown={activateAsButton}\n dataTestId=\"lock_now_link\"",
       "module": "/packages/client"
     }

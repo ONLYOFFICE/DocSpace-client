@@ -3,7 +3,7 @@
   "content": "Install",
   "content_en_sha1_hash": "fd6c3ebf7befca9f8208f86c76e4d4180303745c",
   "created_at": "2026-05-19T19:03:18.014Z",
-  "updated_at": "2026-07-07T08:59:21.782Z",
+  "updated_at": "2026-11-27T15:01:39.789Z",
   "comment": {
     "text": "Button label used to initiate module installation, appearing on module cards and within the installation dialog.",
     "is_auto": true,
@@ -21,6 +21,18 @@
       "file_path": "/packages/client/src/pages/Dashboard/InstallModuleDialog/InstallModuleDialog.tsx",
       "line_number": 255,
       "context": "<>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Install\")}\n onClick={handleInstallClick}\n />\n <Button\n scale\n size={ButtonSize.normal}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
+      "line_number": 280,
+      "context": "const labels = {\n skills: t(\"Common:SkillSets\"),\n knowledge: t(\"Common:AIProjectKnowledgeRooms\"),\n files: t(\"Common:Files\"),\n };\n const installLabel = t(\"Common:Install\");\n \n const row = (label: string, value: React.ReactNode, key: string) => (\n <React.Fragment key={key}>\n <Text fontSize=\"13px\" className={styles.label} truncate>\n {label}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/useInstallAiTemplate.ts",
+      "line_number": 58,
+      "context": "/** The label of a template's install action: an agent is added to the user's agents. */\n export const getInstallLabel = (\n t: (key: string) => string,\n template: TAiTemplate,\n ) =>\n template.kind === \"agent\" ? t(\"Common:AddToMyAgents\") : t(\"Common:Install\");\n \n /**\n * The steps an installation skipped (`warnings` of the install answer), each\n * told in a sentence naming the new room: the agent's instructions, which the\n * portal has no route to store yet, and its model, which the portal could not",
       "module": "/packages/client"
     }
   ],

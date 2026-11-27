@@ -3,7 +3,7 @@
   "content": "Connection failed",
   "content_en_sha1_hash": "202caaa87055b40a1dfd11ac8219f77640725ea4",
   "created_at": "2026-03-20T09:07:38.593Z",
-  "updated_at": "2026-05-15T14:00:06.862Z",
+  "updated_at": "2026-11-27T15:01:39.905Z",
   "comment": {
     "text": "Error text displayed when a connection attempt, such as to an external database, fails.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 114,
+      "line_number": 116,
       "context": "try {\n const result = await testDbConnection(store.formData);\n if (result?.success) {\n toastr.success(t(\"Common:ConnectionSuccessful\"));\n } else {\n toastr.error(result?.error || t(\"Common:ConnectionFailed\"));\n }\n } catch {\n toastr.error(t(\"Common:ConnectionFailed\"));\n } finally {\n store.setIsTesting(false);",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 114,
+      "line_number": 116,
       "context": "try {\n const result = await testDbConnection(store.formData);\n if (result?.success) {\n toastr.success(t(\"Common:ConnectionSuccessful\"));\n } else {\n toastr.error(result?.error || t(\"Common:ConnectionFailed\"));\n }\n } catch {\n toastr.error(t(\"Common:ConnectionFailed\"));\n } finally {\n store.setIsTesting(false);",
       "module": "/packages/sdk"
     }

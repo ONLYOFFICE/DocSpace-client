@@ -3,7 +3,7 @@
   "content": "You don't have an encryption key yet. Set it up in your profile to work with encrypted files.",
   "content_en_sha1_hash": "c5b0fd7b50af10337243e4b02b147374a9221685",
   "created_at": "2026-11-11T18:49:05.009Z",
-  "updated_at": "2026-11-19T16:14:54.024Z",
+  "updated_at": "2026-11-27T15:01:39.783Z",
   "comment": {
     "text": "Warning shown when a user who has no encryption key enters a private room or tries to download, copy, upload or open an encrypted file. Two sentences; the pronoun it refers to the encryption key.",
     "is_auto": true,
@@ -25,31 +25,31 @@
     },
     {
       "file_path": "/packages/doceditor/src/components/Editor.tsx",
-      "line_number": 87,
-      "context": "type TKeyFlowEnd = {\n /** i18n key of the message. */\n message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };",
+      "line_number": 88,
+      "context": "/** i18n key of the message. */\n message:\n | \"Common:EncryptedFileUnlockToOpen\"\n | \"Common:EncryptedFileNoAccessYet\"\n | \"Common:EncryptedFileKeyReplaced\"\n | \"Common:EncryptionKeysNotConfigured\"\n | \"Common:EncryptionKeysLoadFailed\"\n | \"Common:SomethingWentWrong\";\n /** i18n key of the button that repeats the step, where it can be repeated. */\n action?: \"Common:UnlockKey\" | \"Common:TryAgain\";\n };",
       "module": "/packages/doceditor"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
       "line_number": 104,
-      "context": "const duplicateFile = React.useCallback(\n async ({ item, roomId, folderId }: DuplicateArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));",
+      "context": "const duplicateFile = React.useCallback(\n async ({ item, roomId, folderId }: DuplicateArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedCopy\"));",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedCopyMove.ts",
       "line_number": 104,
-      "context": "const duplicateFile = React.useCallback(\n async ({ item, roomId, folderId }: DuplicateArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedAddMembers\"));",
+      "context": "const duplicateFile = React.useCallback(\n async ({ item, roomId, folderId }: DuplicateArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) {\n toastr.error(t(\"Common:EncryptionLockedCopy\"));",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
-      "line_number": 97,
+      "line_number": 98,
       "context": "originalFileName,\n originalFileType,\n }: DownloadFileArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
-      "line_number": 97,
+      "line_number": 98,
       "context": "originalFileName,\n originalFileType,\n }: DownloadFileArgs) => {\n const userId = identityStore.userKeys?.userId;\n if (!userId) {\n toastr.error(t(\"Common:EncryptionKeysNotConfigured\"));\n return;\n }\n const identity = await requireIdentity();\n if (!identity) return;",
       "module": "/packages/sdk"
     },
@@ -79,13 +79,13 @@
     },
     {
       "file_path": "/packages/shared/context/encryption/EncryptionContext.tsx",
-      "line_number": 289,
+      "line_number": 288,
       "context": "}, [showPassphraseDialog]);\n \n const unlock = useCallback(\n async (passphrase: string, rememberDevice?: boolean): Promise<boolean> => {\n if (!userKeys?.privateKeyEnc || !userKeys?.userId) {\n setUnlockError(t(\"Common:EncryptionKeysNotConfigured\"));\n return false;\n }\n setIsUnlocking(true);\n setUnlockError(null);\n try {",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 65,
+      "line_number": 66,
       "context": "if (error instanceof EncryptedCreateError) {\n return error.code === \"UNSUPPORTED_EXTENSION\"\n ? t(\"Common:PrivateRoomCreateNotSupported\", {\n extension: error.extension,\n })\n : t(\"Common:EncryptionKeysNotConfigured\");\n }\n if (error instanceof WebCryptoUnavailableError) {\n return t(\"Common:EncryptionRequiresHttps\");\n }\n if (error instanceof InvalidPassphraseError) {",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "No encryption key configured. Create or import a key to enable file encryption.",
   "content_en_sha1_hash": "02cf5711fe934d2f9a9403bb9845b14c6b41f7bd",
   "created_at": "2026-11-13T06:50:58.240Z",
-  "updated_at": "2026-11-19T16:14:54.119Z",
+  "updated_at": "2026-11-27T15:01:39.916Z",
   "comment": {
     "text": "Description next to the No key badge on the Keys management tab of the profile, also used as an error message when an encrypted file action needs a key the user does not have. Two sentences; create and import are the two actions offered below it.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 90,
-      "context": "// Spec: private-rooms/file-operations, \"A file without a wrap for the user is reported as no access\"\n if (error instanceof NoAccessError) {\n return t(\"Common:EncryptedFileNoAccessYet\");\n }\n if (error instanceof KeyNotFoundError) {\n return t(\"Common:NoEncryptionKey\");\n }\n if (error instanceof KeyCheckUnavailableError) {\n return t(\"Common:EncryptedKeyCheckFailed\");\n }\n return null;",
+      "line_number": 94,
+      "context": "}\n if (error instanceof KeyReplacedError) {\n return t(\"Common:EncryptedFileKeyReplaced\");\n }\n if (error instanceof KeyNotFoundError) {\n return t(\"Common:NoEncryptionKey\");\n }\n if (error instanceof KeyCheckUnavailableError) {\n return t(\"Common:EncryptedKeyCheckFailed\");\n }\n return null;",
       "module": "/packages/shared"
     }
   ],

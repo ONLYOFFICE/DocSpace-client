@@ -3,7 +3,7 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2026-11-19T16:14:53.920Z",
+  "updated_at": "2026-11-27T15:01:39.607Z",
   "comment": {
     "text": "This is a label for a section or item, referring to the users associated with a particular account or room.",
     "is_auto": true,
@@ -48,6 +48,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
+      "line_number": 129,
+      "context": ".with(InfoPanelView.infoMembers, () =>\n isTemplate\n ? t(\"Common:Accesses\")\n : // An agent's members, as its invite panel and roles call them.\n isAgent(selection)\n ? t(\"Common:Members\")\n : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
       "line_number": 840,
       "context": "};\n \n const people = {\n id: \"sort-by_people\",\n key: \"membersCount\",\n label: t(\"Common:Members\"),\n default: true,\n };\n \n const manager = {\n id: \"sort-by_manager\",",
@@ -55,13 +61,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 791,
+      "line_number": 800,
       "context": "return getAiWorkspaceTitle(t, location.search);\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 791,
+      "line_number": 800,
       "context": "return getAiWorkspaceTitle(t, location.search);\n \n if (isContactsPage) {\n switch (contactsTab) {\n case \"people\":\n return t(\"Common:Members\");\n case \"groups\":\n return t(\"Common:Groups\");\n case \"inside_group\": {\n return isLoading && insideGroupTempTitle\n ? insideGroupTempTitle",
       "module": "/packages/client"
     },

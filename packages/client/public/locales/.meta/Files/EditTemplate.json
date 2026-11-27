@@ -3,7 +3,7 @@
   "content": "Edit template",
   "content_en_sha1_hash": "8ebcef59970bb87d7ed8dd90149d3a44e736afba",
   "created_at": "2025-05-19T21:30:55.523Z",
-  "updated_at": "2026-11-03T13:10:45.720Z",
+  "updated_at": "2026-11-27T15:01:39.690Z",
   "comment": {
     "text": "This is a dialog title and a button label. It appears when editing a template, either as the title of the editing dialog or as an option in a context menu.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/EditRoomDialog.js",
       "line_number": 319,
-      "context": "</ModalDialog.Container>\n )}\n \n <ModalDialog.Header>\n {isTemplate\n ? t(\"Files:EditTemplate\")\n : t(\"CreateEditRoomDialog:RoomEditing\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetRoomParams",
+      "context": "</ModalDialog.Container>\n )}\n \n <ModalDialog.Header>\n {isTemplate\n ? t(\"Files:EditTemplate\")\n : item?.roomType === RoomsType.KnowledgeRoom\n ? t(\"Common:EditKnowledgeBase\")\n : item?.roomType === RoomsType.InstructionsRoom\n ? t(\"Common:EditSkillSet\")\n : t(\"CreateEditRoomDialog:RoomEditing\")}",
       "module": "/packages/client"
     },
     {
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 596,
+      "line_number": 622,
       "context": "disabled: false,\n },\n {\n id: \"option_edit-room\",\n key: \"edit-template\",\n label: t(\"EditTemplate\"),\n icon: SettingsReactSvgUrl,\n onClick: () => onEditRoomTemplate(item),\n disabled: !isTemplateOwner,\n },\n {",
       "module": "/packages/client"
     }

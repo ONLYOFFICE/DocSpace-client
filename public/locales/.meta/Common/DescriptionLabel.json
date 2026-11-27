@@ -3,7 +3,7 @@
   "content": "Description",
   "content_en_sha1_hash": "55f8ebc805e65b5b71ddafdae390e3be2bcd69af",
   "created_at": "2025-05-19T21:30:44.499Z",
-  "updated_at": "2026-11-05T16:49:39.881Z",
+  "updated_at": "2026-11-27T15:01:39.712Z",
   "comment": {
     "text": "This is a label for a text field or section that provides additional information about an item, such as a plugin or a gallery item.",
     "is_auto": true,
@@ -12,9 +12,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/SkillForm.tsx",
+      "line_number": 145,
+      "context": ") : null}\n </div>\n <div className={styles.field}>\n <Label\n htmlFor=\"edit-skill-description\"\n text={t(\"Common:DescriptionLabel\")}\n />\n <Textarea\n id=\"edit-skill-description\"\n value={description}\n onChange={(e) => onDescriptionChange(e.target.value)}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
-      "line_number": 372,
-      "context": "dataTestId=\"generate-skill-title\"\n />\n <div className={styles.field}>\n <Label\n htmlFor=\"generate-skill-description\"\n text={`${t(\"Common:DescriptionLabel\")}:`}\n display=\"display\"\n />\n <Textarea\n id=\"generate-skill-description\"\n value={description}",
+      "line_number": 348,
+      "context": "dataTestId=\"generate-skill-title\"\n />\n <div className={styles.field}>\n <Label\n htmlFor=\"generate-skill-description\"\n text={t(\"Common:DescriptionLabel\")}\n />\n <Textarea\n id=\"generate-skill-description\"\n value={description}\n onChange={(e) => setDescription(e.target.value)}",
       "module": "/packages/client"
     },
     {
@@ -24,9 +30,27 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiTemplate/index.tsx",
+      "line_number": 152,
+      "context": "</div>\n {template.description ? (\n <>\n <div className={commonStyles.subtitle}>\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Common:DescriptionLabel\")}\n </Text>\n </div>\n <Text\n fontSize=\"13px\"\n className={styles.description}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
+      "line_number": 495,
+      "context": ") : null}\n {skill?.description ? (\n <>\n <div className={commonStyles.subtitle}>\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Common:DescriptionLabel\")}\n </Text>\n </div>\n <Text\n fontSize=\"13px\"\n className={styles.skillDescription}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Gallery/index.tsx",
       "line_number": 110,
       "context": "<div\n className={classNames(styles.select, commonStyles.subtitle)}\n data-testid=\"info_panel_gallery_description_header\"\n >\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Common:DescriptionLabel\")}\n </Text>\n </div>\n <Text\n className={styles.galleryFormDescription}\n fontSize=\"13px\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 426,
+      "context": "minWidth: 210,\n onClick: this.onFilter,\n },\n {\n key: \"DescriptionSkill\",\n title: t(\"Common:DescriptionLabel\"),\n enable: descriptionSkillColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {

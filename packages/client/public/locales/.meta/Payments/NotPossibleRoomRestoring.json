@@ -3,7 +3,7 @@
   "content": "Restoring this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "content_en_sha1_hash": "e5523aeaf0421937a5b76919eb1ee7bf877a3947",
   "created_at": "2025-05-19T21:30:53.708Z",
-  "updated_at": "2026-08-26T14:08:33.009Z",
+  "updated_at": "2026-11-27T15:01:39.726Z",
   "comment": {
     "text": "This is an error message displayed in a dialog when a user attempts to restore a room but has already reached the maximum number of rooms allowed by their current subscription plan.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/sub-components/RoomsContent.tsx",
       "line_number": 84,
-      "context": ": t(\"CannotCreateNewRoom\")}\n </Text>\n <br />\n <Text>\n {isArchiveFolderRoot\n ? t(\"NotPossibleRoomRestoring\")\n : t(\"NewRoomWillExceedLimit\")}\n </Text>\n {chooseNewPlan}\n </>\n );",
+      "context": ": t(\"Common:CannotCreateNewRoom\")}\n </Text>\n <br />\n <Text>\n {isArchiveFolderRoot\n ? t(\"NotPossibleRoomRestoring\")\n : t(\"Common:NewRoomWillExceedLimit\")}\n </Text>\n {chooseNewPlan}\n </>\n );",
       "module": "/packages/client"
     }
   ],

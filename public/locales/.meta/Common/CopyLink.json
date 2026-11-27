@@ -3,7 +3,7 @@
   "content": "Copy link",
   "content_en_sha1_hash": "2f84eea5d45da4f1ce1760b85db18a854f4e1b39",
   "created_at": "2025-05-19T21:30:43.782Z",
-  "updated_at": "2026-11-17T13:13:27.136Z",
+  "updated_at": "2026-11-27T15:01:39.818Z",
   "comment": {
     "text": "Button label. This action copies a shareable link to the clipboard.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 482,
+      "line_number": 508,
       "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => self.onCopyLink(item, t),\n // A shareable file copies its external link instead; the AI rooms\n // have none, so their files keep this one.\n disabled: item.isTemplate",
       "module": "/packages/client"
     },
@@ -52,12 +52,6 @@
       "line_number": 358,
       "context": "? \"option_external-link\"\n : \"option_link-for-room-members\",\n key: canCopyExternalLink ? \"external-link\" : \"link-for-room-members\",\n label: canCopyExternalLink\n ? t(\"Common:CopySharedLink\")\n : t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: async () => {\n try {\n let url: string;\n if (canCopyExternalLink) {",
       "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 95,
-      "context": "disabled: false,\n },\n {\n id: \"option_link-for-room-members\",\n key: \"link-for-room-members\",\n label: t(\"Common:CopyLink\"),\n icon: InvitationLinkReactSvgUrl,\n onClick: () => funcs.onCopyLink?.(item, t),\n disabled: false,\n },\n {",
-      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",

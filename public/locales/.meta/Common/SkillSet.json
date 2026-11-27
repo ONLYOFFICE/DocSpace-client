@@ -3,7 +3,7 @@
   "content": "Skill set",
   "content_en_sha1_hash": "ab7ed5ee888e277985f230667060688bdcceb2dc",
   "created_at": "2026-11-18T08:36:18.650Z",
-  "updated_at": "2026-11-18T08:38:08.350Z",
+  "updated_at": "2026-11-27T15:01:39.804Z",
   "comment": {
     "text": "Name of the AI room type that holds skills (an Instructions room of Markdown files): a row label in a skill's Details and the type name shown for such a room. Singular noun; use the same term as Skill sets.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 374,
+      "line_number": 378,
       "context": "return this.t(\"Common:AIAgentModel\");\n \n case \"Status\":\n return this.t(\"Common:Status\");\n case \"Skill set\":\n return this.t(\"Common:SkillSet\");\n case \"Command\":\n return this.t(\"Common:SkillCommand\");\n \n case \"Storage\":\n if (\"usedSpace\" in this.item && this.item.usedSpace !== undefined) {",
       "module": "/packages/client"
     },

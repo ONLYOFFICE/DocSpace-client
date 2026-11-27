@@ -3,7 +3,7 @@
   "content": "{{sectionName}} — files and folders others shared with you.",
   "content_en_sha1_hash": "63f3e0a69f41971d685c8294f1bcc6d6b078cd1b",
   "created_at": "2026-10-16T12:15:09.420Z",
-  "updated_at": "2026-10-16T12:17:13.826Z",
+  "updated_at": "2026-11-27T15:01:39.646Z",
   "comment": {
     "text": "Bullet in the onboarding tour step that lists the left-sidebar shortcuts under Files. {{sectionName}} is the translated name of the Shared with me section; the text after the dash describes it (noun phrase, not a sentence).",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 176,
+      "line_number": 177,
       "context": "// The collapsed tablet sidebar flattens the sub-items away.\n if (!isDesktop || !sectionId) return null;\n \n const places = [\n sharedId &&\n t(\"FilesTour:TourPlacesShared\", {\n sectionName: t(\"Common:SharedWithMe\"),\n }),\n recentId &&\n t(\"FilesTour:TourPlacesRecent\", { sectionName: t(\"Common:Recent\") }),\n favoritesId &&",
       "module": "/packages/client"
     }

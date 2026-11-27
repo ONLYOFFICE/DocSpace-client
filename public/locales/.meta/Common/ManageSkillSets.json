@@ -3,7 +3,7 @@
   "content": "Manage skill sets...",
   "content_en_sha1_hash": "2446a473d990c6da19e9730b973d8690218bc6c5",
   "created_at": "2026-11-18T08:05:59.425Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.801Z",
   "comment": {
     "text": "Link-style row under the list of skill sets (rooms of AI skills) in an agent's Info panel, shown to those who may edit the agent; opens the agent's form to choose skill sets. Verb phrase ending with an ellipsis because it opens a dialog.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContext/index.tsx",
-      "line_number": 222,
-      "context": "</ul>\n ) : null}\n </React.Fragment>\n );\n },\n manageRow(\"ai-agent-context-manage-skills\", t(\"Common:ManageSkillSets\")),\n )}\n {section(\n \"ai-agent-context-knowledge\",\n t(\"Common:AIProjectKnowledgeRooms\"),\n context.knowledgeBases,",
+      "line_number": 422,
+      "context": "</React.Fragment>\n );\n },\n manageRow(\n \"ai-agent-context-manage-skills\",\n t(\"Common:ManageSkillSets\"),\n \"instructions\",\n ),\n )}\n {section(\n \"ai-agent-context-knowledge\",",
       "module": "/packages/client"
     }
   ],

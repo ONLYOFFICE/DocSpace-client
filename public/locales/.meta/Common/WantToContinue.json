@@ -3,7 +3,7 @@
   "content": "Are you sure you want to continue?",
   "content_en_sha1_hash": "8de6e73ba7b7e7a2c5f18e2bc38d0a44a17be1d3",
   "created_at": "2025-05-19T21:30:49.566Z",
-  "updated_at": "2026-11-09T09:26:33.305Z",
+  "updated_at": "2026-11-27T15:01:39.674Z",
   "comment": {
     "text": "This is a confirmation message displayed in a modal dialog, asking the user if they wish to proceed with an action. It appears in various contexts, such as before deleting a chat or when confirming an action related to AI tools or billing.",
     "is_auto": true,
@@ -25,38 +25,50 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 117,
-      "context": "The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n ) : (\n <>\n <Trans\n i18nKey=\"DeleteRooms\"",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 117,
-      "context": "The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n ) : (\n <>\n <Trans\n i18nKey=\"DeleteRooms\"",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 117,
-      "context": "The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n ) : (\n <>\n <Trans\n i18nKey=\"DeleteRooms\"",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 117,
-      "context": "The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n ) : (\n <>\n <Trans\n i18nKey=\"DeleteRooms\"",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 117,
-      "context": "The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n ) : (\n <>\n <Trans\n i18nKey=\"DeleteRooms\"",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 117,
-      "context": "The room <strong>\\\"{{ roomName: selection[0]?.title }}\\\"</strong>\n will be permanently deleted. All data and user accesses will be\n lost.\n </Trans>\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n ) : (\n <>\n <Trans\n i18nKey=\"DeleteRooms\"",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
+      "line_number": 124,
+      "context": "ns=\"Common\"\n values={{ count: selection.length }}\n components={{ 1: <strong /> }}\n />\n )}{\" \"}\n {t(\"Common:WantToContinue\")}\n </>\n );\n }\n \n // Every room deleted is a knowledge base, or every one a skill set: the",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "See rooms details here",
   "content_en_sha1_hash": "0868f0cffa8c40cb52860e0077cc8801cd13670e",
   "created_at": "2025-05-19T21:30:54.947Z",
-  "updated_at": "2026-05-15T14:00:06.724Z",
+  "updated_at": "2026-11-27T15:01:39.799Z",
   "comment": {
     "text": "This is a text label displayed on an empty \"Rooms\" screen, prompting the user to view room details.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/sub-components/NoItem/NoRoomItem.tsx",
-      "line_number": 66,
-      "context": ">\n <div className=\"no-thumbnail-img-wrapper\">\n <img src={imageSrc} alt=\"No Room\" />\n </div>\n <Text className=\"no-item-text\" textAlign=\"center\">\n {t(\"RoomsEmptyScreenTent\")}\n </Text>\n </div>\n );\n };",
+      "line_number": 61,
+      "context": "// A list of the AI section speaks of what it lists, not of rooms.\n const text =\n getCategoryType(location) === CategoryType.AiHub\n ? getAiWorkspaceInfoPanelHint(t, location.search)\n : t(\"RoomsEmptyScreenTent\");\n \n const imageSrc = isBase\n ? InfoPanelRoomEmptyScreenSvgUrl\n : InfoPanelRoomEmptyScreenDarkSvgUrl;",
       "module": "/packages/client"
     }
   ],

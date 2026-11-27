@@ -3,7 +3,7 @@
   "content": "Private rooms are in beta. Some actions are not available for encrypted files yet, and encrypted files cannot be opened without your key, so keep your recovery phrase safe.",
   "content_en_sha1_hash": "045251236d9b52fc6dad0ec2b3f054a5d1357f10",
   "created_at": "2026-11-03T07:50:34.798Z",
-  "updated_at": "2026-11-19T16:14:53.930Z",
+  "updated_at": "2026-11-27T15:01:39.622Z",
   "comment": {
     "text": "Tooltip text of the BETA badge next to the Private item in the left sidebar and on the Keys management tab of the user profile; a separate sentence with bug-report links follows it. Private rooms are end-to-end encrypted rooms; 'key' is the user's encryption key and 'recovery phrase' the 24-word phrase that restores it.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 565,
+      "line_number": 795,
       "context": "const privateNewCount = newCount(privateRoomsFolder);\n const betaBadge = (\n <BetaBadge\n place=\"right-start\"\n title={t(\"Common:PrivateRoomsBetaTitle\")}\n description={t(\"Common:PrivateRoomsBetaDescription\")}\n dataTestId=\"private_rooms_beta_badge\"\n />\n );\n \n mainItems.push({",
       "module": "/packages/client"
     },
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 211,
+      "line_number": 240,
       "context": "name: t?.(\"Common:KeysManagement\"),\n badge: (\n <BetaBadge\n place=\"bottom\"\n title={t?.(\"Common:PrivateRoomsBetaTitle\")}\n description={t?.(\"Common:PrivateRoomsBetaDescription\")}\n dataTestId=\"keys_management_beta_badge\"\n />\n ),\n content: <KeysManagement />,\n onClick: async () => {",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Chat with <1>{{model}}</1>. Your conversation is yours only.",
   "content_en_sha1_hash": "235a097741d8f7c6ff667f4045d2e481bbab26df",
   "created_at": "2026-10-31T12:56:51.609Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-11-27T15:01:39.788Z",
   "comment": {
     "text": "Line in the intro of an empty AI project chat. <1></1> wraps {{model}}, the AI model name, shown in bold; keep the tags around the variable.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
-      "line_number": 156,
+      "line_number": 161,
       "context": "</div>\n ) : (\n <Text fontSize=\"13px\" lineHeight=\"20px\" className={styles.description}>\n <Trans\n t={t}\n i18nKey=\"Common:AIProjectIntroModel\"\n values={{ model }}\n components={{ 1: <strong className={styles.model} /> }}\n />\n </Text>\n )}",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Plugins",
   "content_en_sha1_hash": "ab2e26dd8b8868a3969cb3321e0c983c0d9d67d4",
   "created_at": "2025-05-19T21:30:47.398Z",
-  "updated_at": "2026-10-21T10:17:45.803Z",
+  "updated_at": "2026-11-27T15:01:39.901Z",
   "comment": {
     "text": "This is a label for a section or category within the portal settings, referring to the functionality for managing plugins.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/Plugins/index.tsx",
-      "line_number": 80,
-      "context": "const { onDrop, showCacheWarning, handleCloseCacheWarning } = usePluginUpload(\n { addPlugin },\n );\n \n useEffect(() => {\n setDocumentTitle(t(\"Common:Plugins\"));\n }, [t]);\n \n return (\n <>\n {showPortalSettingsLoader ||",
+      "line_number": 81,
+      "context": "const { onDrop, showCacheWarning, handleCloseCacheWarning } = usePluginUpload(\n { addPlugin },\n );\n \n useEffect(() => {\n setDocumentTitle(t(\"Common:Plugins\"));\n }, [t]);\n \n return (\n <>\n {showPortalSettingsLoader || !isLoaded || !ready ? (",
       "module": "/packages/client"
     },
     {

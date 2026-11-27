@@ -3,7 +3,7 @@
   "content": "Settings have been successfully updated",
   "content_en_sha1_hash": "a3e0f1940499fb1b34253a9a7b050c2136e1f58b",
   "created_at": "2025-05-26T07:15:48.667Z",
-  "updated_at": "2026-11-17T13:13:27.164Z",
+  "updated_at": "2026-11-27T15:01:39.849Z",
   "comment": {
     "text": "This is a toast message confirming that settings have been successfully saved or updated. It appears briefly after a user makes changes to settings, such as the appearance theme.",
     "is_auto": true,
@@ -139,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/ToggleAutoSync.js",
-      "line_number": 64,
+      "line_number": 66,
       "context": "toggleCron();\n \n if (!e.target.checked) {\n saveCronLdap()\n .then(() =>\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\")),\n )\n .catch((err) => toastr.error(err));\n }\n },\n [toggleCron],",
       "module": "/packages/client"
     },
@@ -181,14 +181,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 226,
+      "line_number": 228,
       "context": "allowInvitingMembers: isCheckedContacts,\n allowInvitingGuests: isCheckedGuests,\n });\n setShowReminder(false);\n \n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error as TData);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 248,
-      "context": "saveToSessionStorage(\"defaultIPSettings\", {\n enable,\n ips,\n });\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
+      "line_number": 253,
+      "context": "saveToSessionStorage(\"defaultIPSettings\", {\n enable,\n ips: ipsToSave,\n });\n setShowReminder(false);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n } catch (error) {\n toastr.error(error);\n }\n \n setIsSaving(false);",
       "module": "/packages/client"
     },
     {
@@ -265,13 +265,13 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 287,
+      "line_number": 289,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 287,
+      "line_number": 289,
       "context": "const handleDeleteSchedule = () => {\n setIsLoadingData(true, () => {\n deleteBackupSchedule(isManagement)\n ?.then(() => {\n deleteSchedule(weekdaysLabelArray);\n toastr.success(t(\"Common:SuccessfullySaveSettingsMessage\"));\n })\n .catch((error) => {\n setErrorInformation(error, t);\n toastr.error(error);\n console.error(error);",
       "module": "/packages/shared"
     }

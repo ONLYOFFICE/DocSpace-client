@@ -3,7 +3,7 @@
   "content": "{{copiesCount}} — maximum number of backup copies",
   "content_en_sha1_hash": "078309a6e946213da31053bea46cd3b7a7fc8043",
   "created_at": "2026-09-04T07:59:16.398Z",
-  "updated_at": "2026-09-04T08:02:52.798Z",
+  "updated_at": "2026-11-27T15:01:40.048Z",
   "comment": {
     "text": "Option label in a ComboBox dropdown menu. The {{copiesCount}} variable represents the number of backup copies.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/sub-components/ScheduleComponent/ScheduleComponent.tsx",
-      "line_number": 230,
+      "line_number": 224,
       "context": "<div className={classNames(styles.maxCopiesOption, \"maxCopiesOption\")}>\n <ComboBox\n options={maxNumberCopiesArray}\n selectedOption={{\n key: 0,\n label: `${t(\"Common:MaxCopies\", {\n copiesCount: selectedMaxCopiesNumber,\n })}`,\n }}\n onSelect={setMaxCopies}\n isDisabled={isLoadingData}",
       "module": "/packages/shared"
     }

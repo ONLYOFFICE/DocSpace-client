@@ -3,7 +3,7 @@
   "content": "Encryption sealing failed for the uploaded file. It may not be openable; please remove it and re-upload.",
   "content_en_sha1_hash": "919d8dc4ecf3817fe7dad6bc0acf21f2c0ae6767",
   "created_at": "2026-05-24T17:27:26.755Z",
-  "updated_at": "2026-11-17T13:13:27.307Z",
+  "updated_at": "2026-11-27T15:01:40.055Z",
   "comment": {
     "text": "Error message appearing in a notification or alert when the encryption process for an uploaded file fails, advising the user to remove and re-upload the file.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/services/private-room/encrypted-upload-orchestrator.ts",
-      "line_number": 367,
-      "context": "}\n if (error instanceof EncryptedUploadNotKeptError) {\n return t(\"Common:EncryptionUploadNotKept\");\n }\n if (error instanceof EncryptedWrapError) {\n return t(\"Common:EncryptionUploadWrapFailed\");\n }\n if (error instanceof CryptoError) return getEncryptionErrorMessage(t, error);\n return t(\"Common:EncryptionPrepareFailed\");\n };",
+      "line_number": 386,
+      "context": "}\n if (error instanceof EncryptedNameCheckError) {\n return t(\"Common:EncryptedNameCheckFailed\");\n }\n if (error instanceof EncryptedWrapError) {\n return t(\"Common:EncryptionUploadWrapFailed\");\n }\n if (error instanceof CryptoError) return getEncryptionErrorMessage(t, error);\n return t(\"Common:EncryptionPrepareFailed\");\n };",
       "module": "/packages/shared"
     }
   ],

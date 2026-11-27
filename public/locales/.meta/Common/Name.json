@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2026-11-06T10:45:53.886Z",
+  "updated_at": "2026-11-27T15:01:39.711Z",
   "comment": {
     "text": "This is a label for a user's name, appearing in a welcome dialog, as a sorting option in a filter, and as a column header in a table.",
     "is_auto": true,
@@ -12,9 +12,15 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/SkillForm.tsx",
+      "line_number": 118,
+      "context": "return (\n <div className={styles.body}>\n <div className={`${styles.field} ${styles.nameField}`}>\n <InputParam\n id=\"edit-skill-name\"\n title={t(\"Common:Name\")}\n placeholder={t(\"Common:EnterName\")}\n value={name}\n onChange={(e) =>\n onNameChange(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH))\n }",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
-      "line_number": 356,
-      "context": "<Text className={styles.description} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:CreateSkillWithAIPanelDescription\")}\n </Text>\n <InputParam\n id=\"generate-skill-title\"\n title={`${t(\"Common:Name\")}:`}\n placeholder={t(\"Common:EnterName\")}\n value={title}\n onChange={(e) => {\n setTitle(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH));\n setIsValidTitle(true);",
+      "line_number": 332,
+      "context": "<Text className={styles.description} fontSize=\"12px\" lineHeight=\"16px\">\n {t(\"Common:CreateSkillWithAIPanelDescription\")}\n </Text>\n <InputParam\n id=\"generate-skill-title\"\n title={t(\"Common:Name\")}\n placeholder={t(\"Common:EnterName\")}\n value={title}\n onChange={(e) => {\n setTitle(e.target.value.slice(0, SKILL_TITLE_MAX_LENGTH));\n setIsValidTitle(true);",
       "module": "/packages/client"
     },
     {
@@ -55,7 +61,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/MetadataTemplates/sub-components/TemplatePanel/TemplateForm.tsx",
-      "line_number": 91,
+      "line_number": 98,
       "context": "<FieldContainer\n labelVisible\n isVertical\n removeMargin\n labelText={t(\"Common:Name\")}\n hasError={!!nameError}\n errorMessage={nameError}\n >\n <TextInput\n type={InputType.text}",
       "module": "/packages/client"
     },
@@ -67,13 +73,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 77,
+      "line_number": 76,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/AddEmailsStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 77,
+      "line_number": 76,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
@@ -85,13 +91,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 76,
+      "line_number": 75,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 76,
+      "line_number": 75,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
@@ -103,31 +109,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 74,
+      "line_number": 73,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/TableView/UsersTableHeader.tsx",
-      "line_number": 74,
+      "line_number": 73,
       "context": "} = props;\n \n const [columns, setColumns] = useState<TTableColumn[]>([\n {\n key: \"Name\",\n title: t(\"Common:Name\"),\n resizable: true,\n enable: true,\n default: true,\n active: true,\n minWidth: 180,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 443,
+      "line_number": 444,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 443,
+      "line_number": 444,
       "context": ") : null}\n </div>\n <div className={styles.infoWrapper}>\n <div className={styles.rowsContainer}>\n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Name\")}\n </Text>\n <div className={styles.profileBlockField}>\n <Text fontWeight={600} truncate title={profile!.displayName}>\n {profile!.displayName}\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/index.tsx",
-      "line_number": 395,
+      "line_number": 373,
       "context": "// Name (avatar + title) | Activity (created date) | Owner (avatar + name).\n // Skipping Tags & Quota columns we don't surface in the SDK.\n const columns: TTableColumn[] = [\n {\n key: \"Name\",\n title: t(\"Common:Name\", { defaultValue: \"Name\" }),\n enable: true,\n default: true,\n resizable: true,\n minWidth: 210,\n },",
       "module": "/packages/sdk"
     }

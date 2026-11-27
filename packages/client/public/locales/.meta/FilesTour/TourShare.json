@@ -3,7 +3,7 @@
   "content": "Hover over a file or folder to see quick actions. Use Share to choose who can access it and what they can do, or create an external link when external sharing is available.",
   "content_en_sha1_hash": "212395a9a51be1acf1034ead4e5e6e4d0e0370d7",
   "created_at": "2026-10-16T12:15:09.425Z",
-  "updated_at": "2026-10-16T12:17:13.826Z",
+  "updated_at": "2026-11-27T15:01:39.649Z",
   "comment": {
     "text": "Body of the Files onboarding tour step that highlights the share icon on a file row, which appears on hover. Share is the action name; external link is a public link for people outside the workspace.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 299,
+      "line_number": 300,
       "context": "// 5. Share badge on a row; the table view shows it only on hover.\n hasItems &&\n hoverRevealStep(\n SHARE_ICON_SELECTOR,\n t(\"FilesTour:TourShareTitle\"),\n t(\"FilesTour:TourShare\"),\n callbacks,\n FILES_TOUR_LABEL,\n 4,\n ),",
       "module": "/packages/client"
     }

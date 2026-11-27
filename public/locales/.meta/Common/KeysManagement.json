@@ -3,7 +3,7 @@
   "content": "Keys management",
   "content_en_sha1_hash": "f4eb58215579c84cf84072221f16ea905c079271",
   "created_at": "2026-05-24T17:27:30.524Z",
-  "updated_at": "2026-11-19T16:14:54.064Z",
+  "updated_at": "2026-11-27T15:01:39.835Z",
   "comment": {
     "text": "Menu item label in the profile section that navigates to the encryption keys management interface.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/index.tsx",
-      "line_number": 206,
+      "line_number": 235,
       "context": "// Spec: private-rooms/key-management, \"Keys management tab follows the Private section\"\n ...(showKeysManagement\n ? [\n {\n id: \"keys-management\",\n name: t?.(\"Common:KeysManagement\"),\n badge: (\n <BetaBadge\n place=\"bottom\"\n title={t?.(\"Common:PrivateRoomsBetaTitle\")}\n description={t?.(\"Common:PrivateRoomsBetaDescription\")}",
       "module": "/packages/client"
     }

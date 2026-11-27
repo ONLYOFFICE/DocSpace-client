@@ -3,7 +3,7 @@
   "content": "Enable single sign-on authentication",
   "content_en_sha1_hash": "73bc7f6b21e2f027ac08df7323d29237d2f66bbb",
   "created_at": "2026-08-31T18:23:40.179Z",
-  "updated_at": "2026-11-06T10:45:54.859Z",
+  "updated_at": "2026-11-27T15:01:39.905Z",
   "comment": {
     "text": "Label for a toggle switch in the Single Sign-On integration settings.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/sub-components/ToggleSSO.js",
-      "line_number": 70,
-      "context": "fontWeight={600}\n lineHeight=\"20px\"\n noSelect\n className=\"settings_unavailable\"\n >\n {t(\"TurnOnSSO\")}\n </Text>\n {!isSSOAvailable ? (\n <PaidBadge\n fontWeight=\"700\"\n className=\"toggle-caption_title_badge\"",
+      "line_number": 74,
+      "context": "fontWeight={600}\n lineHeight=\"20px\"\n noSelect\n className=\"settings_unavailable\"\n >\n {t(\"TurnOnSSO\")}\n </Text>\n </ControlCaption>\n {!isSSOAvailable ? (\n <PaidBadge\n fontWeight=\"700\"",
       "module": "/packages/client"
     }
   ],

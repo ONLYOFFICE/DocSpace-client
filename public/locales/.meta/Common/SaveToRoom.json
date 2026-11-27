@@ -3,7 +3,7 @@
   "content": "Save to room...",
   "content_en_sha1_hash": "19c83eedc387de75bf0b277d30ec06f144f97ddd",
   "created_at": "2026-11-18T08:06:21.947Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.800Z",
   "comment": {
     "text": "Button on the card of a document an AI reply created, and an item in the file menu of an agent's Info panel Content tab; opens a room picker to save a copy of the file to a room. Verb phrase ending with an ellipsis because it opens a dialog.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContent/index.tsx",
-      "line_number": 163,
-      "context": "icon: DownloadReactSvgUrl,\n onClick: () => window.open(file.viewUrl, \"_self\"),\n },\n {\n key: \"ai-agent-content-save-to-room\",\n label: t(\"Common:SaveToRoom\"),\n icon: CopyToReactSvgUrl,\n onClick: () => saveToRoom(file),\n },\n {\n // The folder the file lies in, opened with the file highlighted, as",
+      "line_number": 356,
+      "context": "icon: DownloadReactSvgUrl,\n onClick: () => window.open(file.viewUrl, \"_self\"),\n },\n {\n key: \"ai-agent-content-save-to-room\",\n label: t(\"Common:SaveToRoom\"),\n icon: CopyToReactSvgUrl,\n onClick: () => saveToRoom(file),\n },\n // No \"Open location\": every file listed lies in a folder of the\n // conversation that is internal to the agent and read-only to its",
       "module": "/packages/client"
     }
   ],

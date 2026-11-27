@@ -3,7 +3,7 @@
   "content": "Edit skill set",
   "content_en_sha1_hash": "593257ef2fc1b021ed43cfab094d583a8bb4bc22",
   "created_at": "2026-11-21T13:03:33.211Z",
-  "updated_at": "2026-11-21T13:04:52.624Z",
+  "updated_at": "2026-11-27T15:01:39.690Z",
   "comment": {
     "text": "Item in the actions menu of a skill set (its header and its card in the list) in the AI Chat section; opens the form that edits its name, icon and settings. Verb, imperative or the form the language uses for menu commands. Short menu label, no full stop. Skill set = a room of skills, Markdown instructions the AI assistant follows; never call it a room. Match Common:CreateSkillSet.",
     "is_auto": true,
@@ -12,8 +12,14 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/EditRoomDialog.js",
+      "line_number": 323,
+      "context": "{isTemplate\n ? t(\"Files:EditTemplate\")\n : item?.roomType === RoomsType.KnowledgeRoom\n ? t(\"Common:EditKnowledgeBase\")\n : item?.roomType === RoomsType.InstructionsRoom\n ? t(\"Common:EditSkillSet\")\n : t(\"CreateEditRoomDialog:RoomEditing\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <SetRoomParams",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 479,
+      "line_number": 489,
       "context": "label: isAgent\n ? t(\"Common:EditAgent\")\n : isKnowledgeBase\n ? t(\"Common:EditKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:EditSkillSet\")\n : isFormSpace\n ? t(\"Common:EditFormSpace\")\n : t(\"Common:EditRoom\"),\n icon: SettingsReactSvgUrl,\n onClick: () => self.onClickEditRoom(item),",
       "module": "/packages/client"
     }

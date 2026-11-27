@@ -3,7 +3,7 @@
   "content": "Metadata",
   "content_en_sha1_hash": "251edc0eb5a820646bda4e103f0f007fd55321f3",
   "created_at": "2026-10-21T10:17:32.507Z",
-  "updated_at": "2026-11-17T13:13:27.138Z",
+  "updated_at": "2026-11-27T15:01:39.821Z",
   "comment": {
     "text": "Noun: name of the Metadata tab in the info panel, heading of the metadata section in the files filter and of the metadata conditions panel. Metadata means structured fields (from templates) describing files, folders and rooms.",
     "is_auto": true,
@@ -19,19 +19,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Header/headerGeneral.tsx",
-      "line_number": 123,
-      "context": "isTemplate ? t(\"Common:Accesses\") : t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoMetadata, () => t(\"Common:SubmenuMetadata\"))\n .otherwise(() => {\n const key = id.replace(\"info_plugin-\", \"\");\n return (\n infoPanelItemsList.find((item) => item.key === key)?.value.subMenu\n .name ?? id",
+      "line_number": 135,
+      "context": ": t(\"Common:Contacts\"),\n )\n .with(InfoPanelView.infoShare, () => t(\"Common:Share\"))\n .with(InfoPanelView.infoHistory, () => t(\"Common:SubmenuHistory\"))\n .with(InfoPanelView.infoDetails, () => t(\"Common:SubmenuDetails\"))\n .with(InfoPanelView.infoMetadata, () => t(\"Common:SubmenuMetadata\"))\n .with(InfoPanelView.infoContext, () => t(\"Common:Context\"))\n .with(InfoPanelView.infoContent, () => t(\"Common:Content\"))\n .otherwise(() => {\n const key = id.replace(\"info_plugin-\", \"\");\n return (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1447,
+      "line_number": 1459,
       "context": "showStorageInfo &&\n isDefaultRoomsQuotaSet &&\n filterOptions.push(...quotaFilter);\n \n if (withMetadataFilter) {\n addMetadataGroup(filterOptions, t(\"Common:SubmenuMetadata\"));\n }\n } else {\n // The \"Forms\" section holds PDF forms only, so its Recent/Favorites\n // aggregates give the file-type filter nothing to narrow down.\n const withTypeOptions =",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1447,
+      "line_number": 1459,
       "context": "showStorageInfo &&\n isDefaultRoomsQuotaSet &&\n filterOptions.push(...quotaFilter);\n \n if (withMetadataFilter) {\n addMetadataGroup(filterOptions, t(\"Common:SubmenuMetadata\"));\n }\n } else {\n // The \"Forms\" section holds PDF forms only, so its Recent/Favorites\n // aggregates give the file-type filter nothing to narrow down.\n const withTypeOptions =",
       "module": "/packages/client"
     },

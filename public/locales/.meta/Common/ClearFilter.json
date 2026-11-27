@@ -3,7 +3,7 @@
   "content": "Clear filter",
   "content_en_sha1_hash": "b667d6f9f635decfb59140eb7361aedc90b3b761",
   "created_at": "2025-05-19T21:30:43.475Z",
-  "updated_at": "2026-11-05T16:49:39.811Z",
+  "updated_at": "2026-11-27T15:01:39.626Z",
   "comment": {
     "text": "This is a button label that resets all applied filters to their default state, clearing any search criteria or selections.",
     "is_auto": true,
@@ -25,20 +25,26 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyFilterContainer.js",
-      "line_number": 147,
+      "line_number": 181,
       "context": "const options = [\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onResetFilter,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/TemplateGallery/TilesContainer/index.tsx",
-      "line_number": 148,
-      "context": "isHovered\n type={LinkType.action}\n fontWeight=\"600\"\n display=\"flex\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n );",
+      "line_number": 147,
+      "context": "onClick={() => resetFilters(ext)}\n isHovered\n type={LinkType.action}\n fontWeight=\"600\"\n >\n {t(\"Common:ClearFilter\")}\n </Link>\n </div>\n }\n />\n );",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/History/Toolbar/sub-components/DateFilter/DateFilter.tsx",
       "line_number": 121,
       "context": "</button>\n \n {selectedDate ? (\n <IconButton\n className={styles.reset}\n title={t(\"Common:ClearFilter\")}\n iconName={CrossReactSvgUrl}\n color=\"--info-panel-toolbar-icon-color\"\n size={12}\n onClick={onResetClick}\n dataTestId=\"info_history_calendar_reset\"",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
+      "line_number": 440,
+      "context": "description={t(\"Common:EmptyFilterAIAgentsDescription\")}\n options={[\n {\n key: \"empty-view-filter\",\n to: \"\",\n description: t(\"Common:ClearFilter\"),\n icon: <ClearEmptyFilterSvg />,\n onClick: onClearFilter,\n },\n ]}\n />",
       "module": "/packages/client"
     },
     {

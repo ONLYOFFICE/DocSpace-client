@@ -3,7 +3,7 @@
   "content": "Leave skill set",
   "content_en_sha1_hash": "447ea4562eb3d82f46ef22ea735eed6a514e4964",
   "created_at": "2026-11-21T13:03:53.924Z",
-  "updated_at": "2026-11-21T13:04:52.624Z",
+  "updated_at": "2026-11-27T15:01:39.729Z",
   "comment": {
     "text": "Item in the actions menu of a skill set in the AI Chat section; the current user stops being its member. Verb, imperative or the form the language uses for menu commands. Short menu label, no full stop. Skill set = a room of skills, Markdown instructions the AI assistant follows; never call it a room. Match Common:CreateSkillSet.",
     "is_auto": true,
@@ -12,8 +12,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 102,
+      "context": "const titleText = isAgentRoom\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const descriptionText = isAgentRoom",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 172,
+      "context": "const footerCheckboxLabel = isAIProject\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");\n \n const selectorComponent = excludeFailed ? (",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 977,
+      "line_number": 987,
       "context": "label: isAgent\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),\n icon: LeaveRoomSvgUrl,\n onClick: self.onLeaveRoom,",
       "module": "/packages/client"
     }

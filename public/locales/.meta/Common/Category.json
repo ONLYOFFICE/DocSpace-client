@@ -3,7 +3,7 @@
   "content": "Category",
   "content_en_sha1_hash": "a3c686e711e4720f99b4562bb3dbaae7ab658cf2",
   "created_at": "2026-11-18T08:35:17.187Z",
-  "updated_at": "2026-11-18T08:38:08.350Z",
+  "updated_at": "2026-11-27T15:01:39.801Z",
   "comment": {
     "text": "Label of a template's or an agent's category: a row in the template details, the Info panel and the agent tile, and the accessible name of the category tabs over the agents list. Singular noun, a short label.",
     "is_auto": true,
@@ -19,25 +19,25 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
-      "line_number": 346,
+      "line_number": 380,
       "context": "testId=\"ai-template-menu\"\n />\n </div>\n </div>\n <div className={styles.details}>\n {row(t(\"Common:Category\"), text(template.category), \"category\")}\n {getTemplateDetails(template, catalog).map(({ key, values }) =>\n row(\n labels[key],\n <>\n {DETAIL_ICONS[key] ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
-      "line_number": 346,
+      "line_number": 380,
       "context": "testId=\"ai-template-menu\"\n />\n </div>\n </div>\n <div className={styles.details}>\n {row(t(\"Common:Category\"), text(template.category), \"category\")}\n {getTemplateDetails(template, catalog).map(({ key, values }) =>\n row(\n labels[key],\n <>\n {DETAIL_ICONS[key] ? (",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/AiProjectTile.tsx",
-      "line_number": 172,
+      "line_number": 178,
       "context": "</div>\n );\n };\n \n const rows = [\n ...(category ? [{ key: \"category\", label: t(\"Common:Category\"), value: text(\"category\", category) }] : []),\n { key: \"model\", label: t(\"Common:AIAgentModel\"), value: text(\"model\", model) },\n { key: \"skills\", label: t(\"Common:SkillSets\"), value: sources(\"skills\", SkillSetReactSvgUrl, summary?.skills) },\n {\n key: \"knowledge\",\n label: t(\"Common:AIProjectKnowledgeRooms\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/AgentCategories.tsx",
-      "line_number": 134,
+      "line_number": 136,
       "context": "return (\n <AiCategoryTabs\n categories={categories}\n selected={selected}\n onSelect={onSelect}\n ariaLabel={t(\"Common:Category\")}\n className={styles.row}\n dataTestId=\"ai-agent-categories\"\n itemTestId=\"ai-agent-category\"\n />\n );",
       "module": "/packages/client"
     }

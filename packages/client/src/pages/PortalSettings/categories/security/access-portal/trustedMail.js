@@ -294,7 +294,7 @@ const TrustedMail = (props) => {
         className={styles.box}
         fontSize="13px"
         fontWeight="400"
-        name="group"
+        name="trusted-mail"
         orientation="vertical"
         spacing="8px"
         options={[

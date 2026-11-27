@@ -30,15 +30,26 @@ LDAP and third-party services pages of `categories/integration`.
 
 ### Requirement: The Access portal page
 
-On a desktop, Access portal SHALL show every security section with its description and, where the portal has a help
-address, a Learn more link. On a phone it SHALL list the sections, each opening its own page, and a section page
-widened to a desktop SHALL lead back to the overview. Each section SHALL save with Save, report
-`Common:SuccessfullySaveSettingsMessage`, and remind of unsaved changes (`Common:YouHaveUnsavedChanges`).
+On a desktop, Access portal SHALL show every security section with its description and a Learn more link where the
+portal has a help address. On a phone it SHALL list the sections, each opening its own page, and a section page
+widened to a desktop SHALL lead back to the overview. Each section SHALL keep its own choice marked, remind of unsaved
+changes (`Common:YouHaveUnsavedChanges`) and report `Common:SuccessfullySaveSettingsMessage` once the server accepts
+a save, an error when it refuses it.
 
 #### Scenario: Unsaved change
 
 - **WHEN** an administrator changes a section without saving
 - **THEN** the section reminds that there are unsaved changes
+
+#### Scenario: Refused save
+
+- **WHEN** the server refuses a section's save
+- **THEN** an error is shown instead of the success message and the change stays unsaved
+
+#### Scenario: Choices of several sections
+
+- **WHEN** an administrator picks an option in one section of the desktop page
+- **THEN** the options chosen in the other sections stay marked
 
 ### Requirement: External sharing
 
@@ -181,6 +192,11 @@ paid badge.
 
 - **WHEN** an administrator presses the synchronize button with LDAP on
 - **THEN** a synchronization starts and its progress is shown
+
+#### Scenario: Empty group field
+
+- **WHEN** group membership is on and a group field is empty when the administrator saves
+- **THEN** the field is marked and nothing is sent
 
 #### Scenario: Certificate to confirm
 

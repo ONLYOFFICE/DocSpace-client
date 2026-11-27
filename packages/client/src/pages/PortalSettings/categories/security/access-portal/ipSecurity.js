@@ -294,7 +294,7 @@ const IpSecurity = (props) => {
         className={styles.box}
         fontSize="13px"
         fontWeight="400"
-        name="group"
+        name="ip-security"
         orientation="vertical"
         spacing="8px"
         dataTestId="ip_security_radio_button_group"

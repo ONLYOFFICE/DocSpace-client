@@ -633,6 +633,7 @@ class LdapFormStore {
 
         groupFields.forEach(([key, value]) => {
           if (value.trim() === "") {
+            isErrorExist = true;
             this.errors[key] = true;
           }
         });

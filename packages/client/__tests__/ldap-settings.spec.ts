@@ -298,7 +298,7 @@ test.describe("LDAP", () => {
     ).toBeVisible();
   });
 
-  test("Group membership makes its fields editable and required, and sends them", async ({
+  test("Group membership makes its fields editable and required, blocks saving while one is empty, and sends them", async ({
     page,
     mockRequest,
     baseUrl,
@@ -324,6 +324,7 @@ test.describe("LDAP", () => {
       "data-error",
       "true",
     );
+    expect(calls.saves).toHaveLength(0);
 
     await groupDN.fill("ou=groups,dc=example,dc=com");
     await page.getByTestId("user_attribute_field_input").fill("uid");
@@ -337,6 +338,7 @@ test.describe("LDAP", () => {
     await expect
       .poll(() => calls.saved?.GroupDN)
       .toBe("ou=groups,dc=example,dc=com");
+    expect(calls.saves).toHaveLength(1);
     expect(calls.saved).toMatchObject({
       GroupMembership: true,
       UserAttribute: "uid",

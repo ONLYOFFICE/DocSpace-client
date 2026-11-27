@@ -139,13 +139,18 @@ const AdminMessage = (props) => {
     }
   };
 
-  const onSaveClick = () => {
+  const onSaveClick = async () => {
     const turnOn = type === "enable";
-    setMessageSettings(turnOn);
-    toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
-    saveToSessionStorage("currentAdminMessageSettings", type);
-    saveToSessionStorage("defaultAdminMessageSettings", type);
-    setShowReminder(false);
+
+    try {
+      await setMessageSettings(turnOn);
+      toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
+      saveToSessionStorage("currentAdminMessageSettings", type);
+      saveToSessionStorage("defaultAdminMessageSettings", type);
+      setShowReminder(false);
+    } catch (error) {
+      toastr.error(error);
+    }
   };
 
   const onCancelClick = () => {
@@ -186,7 +191,7 @@ const AdminMessage = (props) => {
         className={styles.box}
         fontSize="13px"
         fontWeight="400"
-        name="group"
+        name="admin-message"
         orientation="vertical"
         spacing="8px"
         dataTestId="administrator_message_radio_button_group"

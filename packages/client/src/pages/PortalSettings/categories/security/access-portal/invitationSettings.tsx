@@ -76,9 +76,9 @@ const InvitationSettings = ({
   t: TTranslation;
 
   setInvitationSettings: (
-    allowInvitingMembers: boolean,
     allowInvitingGuests: boolean,
-  ) => void;
+    allowInvitingMembers: boolean,
+  ) => Promise<void>;
   allowInvitingMembers: boolean;
   allowInvitingGuests: boolean;
   currentDeviceType: DeviceType;
@@ -213,7 +213,7 @@ const InvitationSettings = ({
     setIsSaving(true);
 
     try {
-      setInvitationSettings(isCheckedGuests, isCheckedContacts);
+      await setInvitationSettings(isCheckedGuests, isCheckedContacts);
 
       saveToSessionStorage("currentInvitationSettings", {
         allowInvitingMembers: isCheckedContacts,

@@ -21,7 +21,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | **The Access portal page** | | |
 | Desktop sections with descriptions and Learn more; phone list | `ap/index.js:142-373`; `ap/mobileView.js:50-146` | CODE-ONLY |
 | Section page widened to a desktop goes back to the overview | `ap/tfa.js:98-102`; `ap/sessionLifetime.js:92-146` | CODE-ONLY |
-| A change shows the unsaved changes reminder and Cancel takes it back; Save reports the success message | `packages/client/__tests__/access-portal-settings.spec.ts:117, 140, 174, 195, 232` | E2E-CONFIRMED |
+| A change shows the unsaved changes reminder and Cancel takes it back; Save reports the success message; a refused save reports an error and stays unsaved; each section keeps its own choice marked | `packages/client/__tests__/access-portal-settings.spec.ts:117, 140, 174, 195, 232, 253, 273` | E2E-CONFIRMED |
 | **External sharing** | | |
 | Initial state; restricted options appear; save; cancel; documents only; rooms only; default link type back | `packages/client/__tests__/access-control.spec.ts:61, 87, 133, 166, 200, 237, 276` | E2E-CONFIRMED |
 | **Password strength** | | |
@@ -59,7 +59,7 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Single sign-on on the server | `server`, "Saving single sign-on settings"; "Required single sign-on fields"; "Switching single sign-on off" | SERVER-SPEC |
 | **LDAP** | | |
 | Switching on and saving waits for the server and the user DN, then sends them without the protocol; Sync users shows the progress to the end; Auto sync shows the next run in UTC and saves the schedule | `packages/client/__tests__/ldap-settings.spec.ts:207, 247, 275` | E2E-CONFIRMED |
-| Group membership makes its fields editable, marks them when empty and sends them; authentication blocks saving without the login and password, then sends them; a certificate to confirm shows its details and errors, and confirming saves again with the certificate and its hash accepted | `packages/client/__tests__/ldap-settings.spec.ts:301, 349, 386` | E2E-CONFIRMED |
+| Group membership makes its fields editable, marks them when empty and blocks saving, then sends them; authentication blocks saving without the login and password, then sends them; a certificate to confirm shows its details and errors, and confirming saves again with the certificate and its hash accepted | `packages/client/__tests__/ldap-settings.spec.ts:301, 351, 388` | E2E-CONFIRMED |
 | Disabled with the paid badge without the feature | `packages/client/__tests__/ldap-settings.spec.ts:185` | E2E-CONFIRMED |
 | **Third-party services** | | |
 | A service with keys and one fixed by the installation shown on, the fixed one locked; switching on waits for every key and sends them without spaces; switching off clears the keys; without the feature the paid services follow the Business plan heading with the paid badge and stay off in the cloud, while a server installation can still switch them on | `packages/client/__tests__/third-party-services.spec.ts:196, 223, 252, 273, 317` | E2E-CONFIRMED |
@@ -77,6 +77,3 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Login history and audit trail | Owned by `history-and-audit` | `packages/client/src/pages/PortalSettings/categories/security/login-history/` |
 | SMTP, Document Server, plugins | Owned by `notifications`, `files-settings`, `plugins` | `int/SMTPSettings/`; `int/DocumentService/`; `int/Plugins/` |
 | Adding and deleting a field from the keyboard in the trusted domains and allowed IP lists | Keyboard of the shared field list, not a setting | `packages/client/src/pages/PortalSettings/categories/security/sub-components/__tests__/user-fields.test.tsx` |
-| Empty group membership fields are marked but do not block saving | Suspected defect, `deviations.md` C8 | `packages/client/src/store/LdapFormStore.ts:625-651` |
-| Invitation settings and the administrator message report success before the server answers, whatever it answers | Suspected defect, `deviations.md` C9 | `ap/invitationSettings.tsx:216, 228`; `ap/adminMessage.js:144-145` |
-| On the desktop page only one choice across all the radio sections shows selected | Suspected defect, `deviations.md` C10 | `ap/tfa.js:267`; `ap/trustedMail.js:297`; `ap/devToolsAccess.tsx:224`; `ap/ipSecurity.js:297`; `ap/adminMessage.js:189`; `ap/sessionLifetime.js:273` |

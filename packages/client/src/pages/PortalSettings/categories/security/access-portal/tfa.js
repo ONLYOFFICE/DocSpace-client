@@ -264,7 +264,7 @@ const TwoFactorAuth = (props) => {
         className={styles.box}
         fontSize="13px"
         fontWeight="400"
-        name="group"
+        name="tfa"
         orientation="vertical"
         spacing="8px"
         dataTestId="tfa_radio_button_group"

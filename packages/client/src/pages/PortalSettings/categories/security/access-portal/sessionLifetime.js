@@ -270,7 +270,7 @@ const SessionLifetime = (props) => {
         className="box"
         fontSize="13px"
         fontWeight="400"
-        name="group"
+        name="session-lifetime"
         orientation="vertical"
         spacing="8px"
         dataTestId="session_lifetime_radio_button_group"

@@ -249,4 +249,50 @@ test.describe("Access portal sections", () => {
       page.getByTestId("toast-content").getByText(SAVED),
     ).toBeVisible();
   });
+
+  test("Each section keeps its own choice marked on the page", async ({
+    page,
+    baseUrl,
+  }) => {
+    await openPage(page, baseUrl);
+
+    await expect(radio(page, "tfa_radio_button_disabled")).toBeChecked();
+    await expect(radio(page, "developer_tools_access_enabled")).toBeChecked();
+    await expect(radio(page, "ip_security_disabled")).toBeChecked();
+    await expect(radio(page, "administrator_message_disabled")).toBeChecked();
+
+    await page.getByTestId("developer_tools_access_disabled").click();
+    await page.getByTestId("administrator_message_enabled").click();
+
+    await expect(radio(page, "developer_tools_access_disabled")).toBeChecked();
+    await expect(radio(page, "administrator_message_enabled")).toBeChecked();
+    await expect(radio(page, "tfa_radio_button_disabled")).toBeChecked();
+    await expect(radio(page, "ip_security_disabled")).toBeChecked();
+  });
+
+  test("A save the server refuses is reported as an error and keeps the change unsaved", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    mockRequest.use(
+      http.post(`${SETTINGS_PATH}/messagesettings`, () =>
+        Response.json({ error: { message: "Not allowed" } }, { status: 403 }),
+      ),
+      http.put(`${SETTINGS_PATH}/invitationsettings`, () =>
+        Response.json({ error: { message: "Not allowed" } }, { status: 403 }),
+      ),
+    );
+
+    await openPage(page, baseUrl);
+
+    await page.getByTestId("administrator_message_enabled").click();
+    await page.getByTestId("administrator_message_save_button").click();
+    await page.getByTestId("invitation_settings_guests_checkbox").click();
+    await page.getByTestId("invitation_settings_save_button").click();
+
+    await expect(page.getByTestId("toast-content").first()).toBeVisible();
+    await expect(page.getByText(SAVED)).toHaveCount(0);
+    await expect(page.getByText(UNSAVED)).toHaveCount(2);
+  });
 });

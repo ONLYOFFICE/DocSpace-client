@@ -1092,6 +1092,11 @@ const Shell = ({ page = "home", ...rest }) => {
           // read-only label, unless the user may edit the agent - then a
           // model picked there becomes the agent's.
           formatChatError={formatChatError}
+          // "Set up Web search..." and "Add model..." lead to the portal's
+          // AI settings, which only an admin may open.
+          canManageAiSettings={isAdmin}
+          // The model may pause a round to ask a clarifying question.
+          askUserQuestions
           hideProfilePicker={false}
           profilePickerReadOnly={isAgentModelLocked}
           onProfilePickerSelect={onAgentModelPicked}

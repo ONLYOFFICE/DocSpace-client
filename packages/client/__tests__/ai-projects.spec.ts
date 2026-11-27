@@ -49,7 +49,7 @@ import {
   aiAgentLeaveHandler,
   aiAgentSkillsRefusedHandler,
   aiAgentPinHandlers,
-  aiPinnedProjectRooms,
+  aiHubRootProjectRooms,
   aiProjectMock,
   AiProjectMockAccess,
   AI_HUB_ROOMS,
@@ -93,7 +93,7 @@ const table = (page: Page) => page.getByTestId("table-body");
 
 const sidebar = (page: Page) => page.locator("#article-container");
 
-/** The entry of a pinned agent, listed under Agents in the sidebar. */
+/** The entry of an agent listed under Agents in the sidebar. */
 const sidebarAgent = (page: Page, id: number) =>
   sidebar(page).locator(`[data-item-id="ai-nested-project-${id}"]`);
 
@@ -414,10 +414,12 @@ test.describe("AI Chat section", () => {
     });
   });
 
-  test.describe("the pinned agents of the sidebar", () => {
+  test.describe("the agents of the sidebar", () => {
     const [PINNED_AGENT, UNPINNED_AGENT] = AI_PROJECTS;
+    const sidebarAgents = (page: Page) =>
+      sidebar(page).locator('[data-item-id^="ai-nested-project-"]');
 
-    test("lists the agents the user pinned under Agents, and opens one on its page", async ({
+    test("lists the agents under Agents, the pinned one first, and opens one on its page", async ({
       page,
       mockRequest,
       baseUrl,
@@ -426,7 +428,7 @@ test.describe("AI Chat section", () => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
         rootHandler(TEST_PORT, {
-          pinnedAiProjects: () => aiPinnedProjectRooms(projects),
+          aiHubRootProjects: () => aiHubRootProjectRooms(projects),
         }),
         ...aiSectionsHandlers(TEST_PORT, projects),
       );
@@ -434,13 +436,15 @@ test.describe("AI Chat section", () => {
       await page.goto(`${baseUrl}${AGENTS_URL}`);
       await expect(table(page)).toBeVisible();
 
-      // The pinned agent alone: the others stay on the Agents list.
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toContainText(
+      // Every agent of the list, as it holds fewer than five: the pinned
+      // one first, then the others.
+      await expect(sidebarAgents(page)).toHaveCount(projects.length);
+      await expect(sidebarAgents(page).first()).toContainText(
         PINNED_AGENT.title,
       );
-      await expect(
-        sidebar(page).locator('[data-item-id^="ai-nested-project-"]'),
-      ).toHaveCount(1);
+      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toContainText(
+        UNPINNED_AGENT.title,
+      );
 
       await sidebarAgent(page, PINNED_AGENT.id).click();
 
@@ -450,7 +454,7 @@ test.describe("AI Chat section", () => {
       await expect(page.getByTestId("ai-project-intro")).toBeVisible();
     });
 
-    test("lists no agent while none is pinned", async ({
+    test("lists no agent while the section has none", async ({
       page,
       mockRequest,
       baseUrl,
@@ -466,12 +470,10 @@ test.describe("AI Chat section", () => {
         sidebar(page).getByText("Agents", { exact: true }),
       ).toBeVisible();
 
-      await expect(
-        sidebar(page).locator('[data-item-id^="ai-nested-project-"]'),
-      ).toHaveCount(0);
+      await expect(sidebarAgents(page)).toHaveCount(0);
     });
 
-    test("adds an agent pinned from its menu, and drops one that is unpinned", async ({
+    test("moves an agent pinned from its menu up, and one that is unpinned down", async ({
       page,
       mockRequest,
       baseUrl,
@@ -480,7 +482,7 @@ test.describe("AI Chat section", () => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
         rootHandler(TEST_PORT, {
-          pinnedAiProjects: () => aiPinnedProjectRooms(projects),
+          aiHubRootProjects: () => aiHubRootProjectRooms(projects),
         }),
         ...aiSectionsHandlers(TEST_PORT, projects),
         ...aiAgentPinHandlers(TEST_PORT, projects),
@@ -488,8 +490,10 @@ test.describe("AI Chat section", () => {
 
       await page.goto(`${baseUrl}${AGENTS_URL}`);
       await expect(table(page)).toBeVisible();
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
-      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toHaveCount(0);
+      await expect(sidebarAgents(page)).toHaveCount(projects.length);
+      await expect(sidebarAgents(page).first()).toContainText(
+        PINNED_AGENT.title,
+      );
 
       await rowOf(page, UNPINNED_AGENT.title)
         .getByTestId("context-menu-button")
@@ -497,10 +501,13 @@ test.describe("AI Chat section", () => {
         .click();
       await page.locator("#option_pin-room").click();
 
-      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toContainText(
+      // Both are pinned now, in the order of the list.
+      await expect(sidebarAgents(page).nth(1)).toContainText(
         UNPINNED_AGENT.title,
       );
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
+      await expect(sidebarAgents(page).first()).toContainText(
+        PINNED_AGENT.title,
+      );
 
       await rowOf(page, PINNED_AGENT.title)
         .getByTestId("context-menu-button")
@@ -508,8 +515,12 @@ test.describe("AI Chat section", () => {
         .click();
       await page.locator("#option_unpin-room").click();
 
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toHaveCount(0);
-      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toBeVisible();
+      // The one still pinned leads; the unpinned one stays listed.
+      await expect(sidebarAgents(page).first()).toContainText(
+        UNPINNED_AGENT.title,
+      );
+      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
+      await expect(sidebarAgents(page)).toHaveCount(projects.length);
     });
   });
 
@@ -622,7 +633,8 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agents-list, "Category row"; "Choosing a category"
-    test("narrows the agents to a category from the row under the filter", async ({
+    // Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+    test.skip("narrows the agents to a category from the row under the filter", async ({
       page,
       baseUrl,
     }) => {

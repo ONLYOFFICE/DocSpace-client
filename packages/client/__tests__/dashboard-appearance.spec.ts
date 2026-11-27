@@ -633,8 +633,12 @@ const dashboardCase = (name: string, testCase: DashboardCase) => {
     // The chat is hidden rather than disabled where it cannot be held: a portal
     // with AI services off has no chat to open, and a guest may never issue an
     // AI call at all.
+    // Looked up in the create section: the sidebar has an "AI Chat" section
+    // of its own.
     await expect(
-      page.getByRole("button", { name: "AI Chat", exact: true }),
+      page
+        .locator(CREATE_SECTION)
+        .getByRole("button", { name: "AI Chat", exact: true }),
     ).toHaveCount(ai.enabled && !role.isGuest ? 1 : 0);
 
     // The "AI rooms" card joins the three apps where the sidebar has the

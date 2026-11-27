@@ -56,11 +56,11 @@ Above the cards the catalog SHALL have a search field and, under it, a row of ca
 - **THEN** only the Document templates that match "review" are shown
 
 ### Requirement: Installing a template
-Install SHALL create the template in the portal as new rooms through the AI service: the agent together with the skill sets and knowledge bases it brings, and the agent SHALL carry the template's category as its tag. On success the user SHALL be told (`Common:AiTemplateInstalled`) and returned to the My agents tab, or warned of what was skipped; on a refusal the catalog SHALL stay and the error SHALL be shown.
+Install SHALL create the template in the portal as new rooms through the AI service: the agent together with the skill sets and knowledge bases it brings, and the agent SHALL carry the template's category as its tag. On success the user SHALL be told (`Common:AiTemplateInstalled`), or warned of what was skipped, and the new agent SHALL open on its own page; on a refusal the catalog SHALL stay and the error SHALL be shown.
 
 #### Scenario: Agent
 - **WHEN** the user installs an agent template and confirms it
-- **THEN** the agent, its skill sets and its knowledge bases are created, the agent is tagged with the template's category, a confirmation is shown and the My agents tab is opened
+- **THEN** the agent, its skill sets and its knowledge bases are created, the agent is tagged with the template's category, a confirmation is shown and the new agent opens on its own page
 
 #### Scenario: Installed with warnings
 - **WHEN** the installation answers with `instructionsNotSaved` or `modelNotSaved` in its warnings

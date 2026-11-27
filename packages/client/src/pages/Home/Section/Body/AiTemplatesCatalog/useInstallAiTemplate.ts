@@ -44,6 +44,7 @@ import type {
 
 import { useStore } from "SRC_DIR/store/useStore";
 import {
+  getAgentPageUrl,
   getAiWorkspaceListType,
   getAiWorkspaceTabUrl,
 } from "SRC_DIR/helpers/aiWorkspace";
@@ -87,7 +88,9 @@ export const useCanInstallAiTemplates = () =>
  * Installs a template once the user confirmed it (AiTemplateInstallDialog,
  * opened by the card's Install, its menu and the Info panel's "Add to my
  * agents"): the user is told, or warned of what the installation skipped
- * (the agent's instructions or model), and returned to the list, where the new room is; a refusal is shown and the
+ * (the agent's instructions or model). A new agent opens on its own page;
+ * for a skill set or a knowledge base the user is returned to the list,
+ * where the new room is. A refusal is shown and the
  * catalog stays. Nothing is installed while another installation runs, so a
  * second click does not install the template again.
  */
@@ -111,8 +114,13 @@ export const useInstallAiTemplate = () => {
         toastr.success(
           t("Common:AiTemplateInstalled", { name: installed.title }),
         );
-      // A new agent shows in the sidebar and the chat's agents menu.
-      if (installed.kind === "agent") void aiPresetsStore.fetchPresets();
+      // A new agent shows in the sidebar and the chat's agents menu, and
+      // opens, as an agent made in the create form does.
+      if (installed.kind === "agent") {
+        void aiPresetsStore.fetchPresets();
+        navigate(getAgentPageUrl(installed.id));
+        return;
+      }
       navigate(
         getAiWorkspaceTabUrl(
           false,

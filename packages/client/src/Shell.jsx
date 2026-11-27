@@ -977,8 +977,11 @@ const Shell = ({ page = "home", ...rest }) => {
   // in (the AI service's location line, generated files and uploads follow
   // it). An open project is no location: a project room holds no files, and
   // inside it the context is the folder picked in the project, else My
-  // documents, both resolved by the AI service itself.
-  const chatContextEntityId = isInsideAiProject ? undefined : chatScopeEntityId;
+  // documents, both resolved by the AI service itself. Neither is the
+  // plugins page of the settings: the folder opened before it is not where
+  // the chat is, so a plugin built there is saved in My documents.
+  const chatContextEntityId =
+    isInsideAiProject || isPluginsSettings ? undefined : chatScopeEntityId;
 
   // The note under an interrupted answer (Bug 83207: never the raw provider
   // text). It records what happened, in the past tense, and stays in the

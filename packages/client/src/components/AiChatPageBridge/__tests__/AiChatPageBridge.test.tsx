@@ -410,4 +410,41 @@ describe("AiChatPageBridge — a request from Recent", () => {
     expect(presets.activePreset).toEqual({ id: "7" });
     expect(dialogsStore.consumeAiChatPageRequest).toHaveBeenCalledTimes(1);
   });
+
+  it("starts a new conversation when AI Chat is asked for over an open conversation", () => {
+    chat.store.isVisible = true;
+    chat.threads.threadId = "shown";
+    const startNew = vi.spyOn(chat.threads, "onSwitchToNewThread");
+    request("chat");
+
+    try {
+      renderBridge();
+      expect(startNew).toHaveBeenCalledTimes(1);
+      expect(startNew).toHaveBeenCalledWith({ keepSessionProfile: false });
+    } finally {
+      chat.store.isVisible = false;
+    }
+  });
+
+  it("starts no other conversation over one that is new already, nor for the history or a chosen conversation", () => {
+    chat.store.isVisible = true;
+    const startNew = vi.spyOn(chat.threads, "onSwitchToNewThread");
+
+    try {
+      request("chat");
+      renderBridge();
+      cleanup();
+
+      chat.threads.threadId = "shown";
+      request("history");
+      renderBridge();
+      cleanup();
+
+      request("chat", "plain1");
+      renderBridge();
+      expect(startNew).not.toHaveBeenCalled();
+    } finally {
+      chat.store.isVisible = false;
+    }
+  });
 });

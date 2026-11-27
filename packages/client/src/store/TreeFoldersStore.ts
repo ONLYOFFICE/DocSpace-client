@@ -64,23 +64,42 @@ export type TTreeFolder = TFolder & {
   files?: TFile[];
   folders?: TFolder[] | null;
   newItems?: number;
-  /** On the AI rooms root: the AI projects the user pinned, as `@root` lists them. */
-  pinnedAiProjects?: TFolder[];
+  /** On the AI rooms root: the AI projects `@root` lists - up to five, the pinned ones first. */
+  aiHubRootProjects?: TFolder[];
 };
 
-/** A pinned AI project as the sidebar lists it under Agents. */
-export type TPinnedAiProject = {
+/** An AI project as the sidebar lists it under Agents. */
+export type TAiHubRootProject = {
   id: string;
   name: string;
   logo: TAiProject["logo"];
+  pinned: boolean;
 };
 
-const toPinnedAiProject = (
-  project: Pick<TAiProject, "id" | "title" | "logo">,
-): TPinnedAiProject => ({
+/** How many AI projects `@root` lists in the AI rooms section at most. */
+const AI_HUB_ROOT_PROJECTS_COUNT = 5;
+
+/**
+ * How long a change of an AI project waits before the tree is read again
+ * for the sidebar's list. One change arrives more than once - from the
+ * action and over the socket - and a room's updates come in bursts, while
+ * `@root` is the most expensive listing there is: they are read as one.
+ */
+export const AI_HUB_ROOT_REFRESH_DELAY_MS = 300;
+
+// The pending read of each store, kept out of its observable state.
+const aiHubRootRefreshTimers = new WeakMap<
+  object,
+  ReturnType<typeof setTimeout>
+>();
+
+const toAiHubRootProject = (
+  project: Pick<TAiProject, "id" | "title" | "logo" | "pinned">,
+): TAiHubRootProject => ({
   id: String(project.id),
   name: project.title,
   logo: project.logo,
+  pinned: !!project.pinned,
 });
 
 class TreeFoldersStore {
@@ -99,11 +118,13 @@ class TreeFoldersStore {
   rootFoldersTitles: Partial<Record<FolderType, TTreeFolder>> = {};
 
   /**
-   * The AI projects the user pinned, in the order the Agents list shows
-   * pinned ones: read with the tree, then kept current by what happens to a
-   * project here or over the socket.
+   * The AI projects the sidebar lists under Agents: up to five of those the
+   * user created or was invited to, the pinned ones first, then the others,
+   * each group by the last change, newest first. The server picks and
+   * orders them: they are read with the tree, and read again when what
+   * happens to a project here or over the socket may change the pick.
    */
-  pinnedAiProjects: TPinnedAiProject[] = [];
+  aiHubRootProjects: TAiHubRootProject[] = [];
 
   isLoadingNodes = false;
 
@@ -164,55 +185,79 @@ class TreeFoldersStore {
 
     this.setRootFoldersTitles(treeFolders);
     this.setTreeFolders(treeFolders);
-    this.setPinnedAiProjects(
+    this.setAiHubRootProjects(
       (
         treeFolders.find((f) => f.rootFolderType === FolderType.AiHub)
-          ?.pinnedAiProjects ?? []
+          ?.aiHubRootProjects ?? []
       ).map((room) =>
-        toPinnedAiProject(toAiProject(room as unknown as TAiProjectRoomDto)),
+        toAiHubRootProject(toAiProject(room as unknown as TAiProjectRoomDto)),
       ),
     );
     this.listenTreeFolders(treeFolders);
     return treeFolders;
   };
 
-  setPinnedAiProjects = (projects: TPinnedAiProject[]) => {
-    this.pinnedAiProjects = projects;
+  setAiHubRootProjects = (projects: TAiHubRootProject[]) => {
+    this.aiHubRootProjects = projects;
+  };
+
+  /** Reads the tree again for the sidebar's AI projects, once for a burst of changes. */
+  private refreshAiHubRootProjects = () => {
+    const pending = aiHubRootRefreshTimers.get(this);
+    if (pending) clearTimeout(pending);
+    aiHubRootRefreshTimers.set(
+      this,
+      setTimeout(() => {
+        aiHubRootRefreshTimers.delete(this);
+        // A read that fails keeps the list as it is.
+        this.fetchTreeFolders().catch(() => {});
+      }, AI_HUB_ROOT_REFRESH_DELAY_MS),
+    );
   };
 
   /**
-   * An AI project changed: a listed one takes its new name and logo, or
-   * leaves the list once unpinned. One pinned just now is read with the
-   * tree, which knows where the server puts it among the others.
+   * An AI project was created or changed. A listed one takes its new name
+   * and logo at once. Which projects are listed, and in what order, only the
+   * server tells, so the tree is read again when that may have changed: a
+   * listed project pinned or unpinned, a pinned one that is not listed, or
+   * another one while the list still has room for it - it is short of five,
+   * or holds a project that is not pinned. A list of five pinned projects
+   * takes no other in.
    */
-  syncPinnedAiProject = (
+  syncAiHubRootProject = (
     project: Pick<TAiProject, "id" | "title" | "logo" | "pinned">,
   ) => {
     const id = String(project.id);
-    const listed = this.pinnedAiProjects.some((p) => p.id === id);
+    const pinned = !!project.pinned;
+    const listed = this.aiHubRootProjects.find((p) => p.id === id);
 
-    if (!project.pinned) {
-      if (listed) this.removePinnedAiProject(id);
+    if (listed) {
+      this.aiHubRootProjects = this.aiHubRootProjects.map((p) =>
+        p.id === id ? toAiHubRootProject(project) : p,
+      );
+      if (listed.pinned !== pinned) this.refreshAiHubRootProjects();
       return;
     }
 
-    if (!listed) {
-      void this.fetchTreeFolders();
-      return;
-    }
-
-    this.pinnedAiProjects = this.pinnedAiProjects.map((p) =>
-      p.id === id ? toPinnedAiProject(project) : p,
-    );
+    const hasRoom =
+      this.aiHubRootProjects.length < AI_HUB_ROOT_PROJECTS_COUNT ||
+      this.aiHubRootProjects.some((p) => !p.pinned);
+    if (pinned || hasRoom) this.refreshAiHubRootProjects();
   };
 
-  /** A deleted or left AI project leaves the list. */
-  removePinnedAiProject = (id: string | number) => {
+  /**
+   * A deleted or left AI project leaves the list. A full list may have left
+   * others out: the tree is read again for the one that takes its place.
+   */
+  removeAiHubRootProject = (id: string | number) => {
     const projectId = String(id);
-    if (!this.pinnedAiProjects.some((p) => p.id === projectId)) return;
-    this.pinnedAiProjects = this.pinnedAiProjects.filter(
+    if (!this.aiHubRootProjects.some((p) => p.id === projectId)) return;
+    const wasFull =
+      this.aiHubRootProjects.length >= AI_HUB_ROOT_PROJECTS_COUNT;
+    this.aiHubRootProjects = this.aiHubRootProjects.filter(
       (p) => p.id !== projectId,
     );
+    if (wasFull) this.refreshAiHubRootProjects();
   };
 
   listenTreeFolders = (treeFolders: TTreeFolder[]) => {

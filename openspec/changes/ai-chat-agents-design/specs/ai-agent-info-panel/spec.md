@@ -20,7 +20,7 @@ For an agent, selected in the Agents list or opened from "Agent info", the Info 
 - **THEN** the panel shows Details
 
 ### Requirement: Members of an agent
-For the Agent owner and Agent managers who are members of the agent, the Info panel of the agent SHALL end with a Members tab (`Common:Members`): the room's members list, where a member's role is changed between Agent manager and Member and a member is removed with the confirmation of `ai-agent-access` "Removing a member warns about their conversations". A Member, and a DocSpace admin who is not a member, SHALL NOT be given the tab.
+For the Agent owner and Agent managers who are members of the agent, the Info panel of the agent SHALL end with a Members tab (`Common:Members`): the room's members list, where Member is the only role a member can be given (`ai-agent-access`, "Roles of an agent"), so a member is not re-roled, and a member is removed with the confirmation of `ai-agent-access` "Removing a member warns about their conversations". A Member, and a DocSpace admin who is not a member, SHALL NOT be given the tab.
 
 #### Scenario: Agent manager
 - **WHEN** an Agent manager opens the Info panel on the agent's page
@@ -46,11 +46,15 @@ Context SHALL list what the agent draws on in two sections: Skill sets (`Common:
 - **THEN** it is not listed
 
 ### Requirement: Skills of a skill set
-On Context a skill set that has skills SHALL unfold to the names of its skills. When the skills cannot be read, the skill sets SHALL still be listed, without the unfold control.
+On Context a skill set that has skills SHALL unfold to the names of its skills. A skill SHALL open the dialog of "View instructions" (`ai-skill-sets`) on a click. When the skills cannot be read, the skill sets SHALL still be listed, without the unfold control.
 
 #### Scenario: Unfold a skill set
 - **WHEN** a Member unfolds the skill set "Document assistant"
 - **THEN** its skills are listed under it
+
+#### Scenario: Click on a skill
+- **WHEN** a Member clicks the skill "Document summary" under its skill set
+- **THEN** its instructions are shown read-only in the skill dialog
 
 #### Scenario: Skills unavailable
 - **WHEN** the skills of the agent cannot be read

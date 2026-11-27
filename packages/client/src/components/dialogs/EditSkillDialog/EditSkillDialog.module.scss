@@ -187,3 +187,12 @@
 .message {
   color: var(--text-secondary);
 }
+
+// The instructions as they read, laid out by ui-kit's Markdown view. The
+// dialog's body keeps line breaks (pre-line); here they are only the gaps
+// between the rendered tags, and would show as empty lines.
+.preview {
+  min-width: 0;
+  white-space: normal;
+  user-select: text;
+}

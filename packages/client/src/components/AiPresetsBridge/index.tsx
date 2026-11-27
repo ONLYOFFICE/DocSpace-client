@@ -68,6 +68,7 @@ import {
 } from "SRC_DIR/store/AiProjectsStore";
 import { canManageProjects, hasPortalChatModel } from "SRC_DIR/pages/AiProjects/utils";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
+import { getAgentPageUrl } from "SRC_DIR/helpers/aiWorkspace";
 import { InfoPanelView, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { aiProjectToRoom, getAiProject } from "@docspace/shared/api/ai/projects";
 
@@ -394,7 +395,7 @@ const AiPresetsBridge = ({
         // Already open beside the chat of this agent's own page.
         if (wasVisible && window.location.pathname.includes(`/ai-rooms/${id}/`)) return;
         // No Info panel here: the agent's page has its own chat.
-        navigate(`/ai-rooms/${id}/filter?folder=${id}`);
+        navigate(getAgentPageUrl(id));
         showInfoPanel();
       },
     });
@@ -635,6 +636,8 @@ const AiPresetsBridge = ({
       );
       // A linked room that could not be shared with a member, and the like.
       saved.project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
+      // The new agent opens, as one made in the create form does.
+      navigate(getAgentPageUrl(saved.project.id));
     } catch (e) {
       // An unpaid portal: the warning shown for a new room says why.
       if (isPaymentRequired(e)) showPaymentWarning();

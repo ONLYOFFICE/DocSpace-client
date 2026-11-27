@@ -66,7 +66,8 @@ const cards = (page: Page) => page.getByTestId("ai-template-card");
 
 const toast = (page: Page) => page.getByTestId("toast-content");
 
-test.describe("AI Chat: Templates tab", () => {
+// Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+test.describe.skip("AI Chat: Templates tab", () => {
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),

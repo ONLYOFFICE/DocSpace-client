@@ -86,9 +86,8 @@ import CatalogOverviewReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-setti
 import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
 import CatalogAiChatReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-chat-bubble.react.svg?url";
 import CatalogAgentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents-bot.react.svg?url";
-import CatalogAiRecentReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
-import CatalogSkillSetsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.ai-agents.react.svg?url";
-import CatalogKnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import CatalogSkillSetsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.skill-sets.react.svg?url";
+import CatalogKnowledgeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.knowledge-bases.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 import BetaBadge from "SRC_DIR/components/BetaBadgeWrapper";
@@ -101,7 +100,7 @@ import {
 } from "SRC_DIR/helpers/articleNavigation";
 import { Section } from "SRC_DIR/helpers/plugins/enums";
 import type { TAiChatRecentThread } from "SRC_DIR/store/DialogsStore";
-import type { TPinnedAiProject } from "SRC_DIR/store/TreeFoldersStore";
+import type { TAiHubRootProject } from "SRC_DIR/store/TreeFoldersStore";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
 
 import styles from "./ClientArticleSidebar.module.scss";
@@ -124,17 +123,18 @@ type ClientArticleSidebarProps = FolderIds & {
   aiOpenFolderId?: number | string | null;
   aiOpenRoomType?: RoomsType | null;
   isNavLoading?: boolean;
-  // AI Chat / Recent open the chat fullscreen on one of its pages; the chat
-  // library's router is switched by AiChatPageBridge.
+  // AI Chat, a conversation under it and All chats open the chat fullscreen
+  // on one of its pages; the chat library's router is switched by
+  // AiChatPageBridge.
   requestAiChatPage?: (
     page: "chat" | "history",
     afterLocationKey?: string | null,
     threadId?: string,
   ) => void;
-  // The AI projects the user pinned, listed under Agents in the order the
-  // Agents list shows pinned ones, and the latest conversations under Recent
-  // with the one the chat shows.
-  pinnedAiProjects?: TPinnedAiProject[];
+  // The latest conversations, listed under AI Chat with the one the chat
+  // shows, and the AI projects listed under Agents: up to five, the pinned
+  // ones first, as the server picks them.
+  aiHubRootProjects?: TAiHubRootProject[];
   recentAiChats?: TAiChatRecentThread[];
   hasMoreAiChats?: boolean;
   activeAiChatId?: string;
@@ -174,21 +174,24 @@ const CHAT_CLOSE_TIMEOUT = 10000;
 // bases, which narrow it with `type`.
 const AI_AGENTS_PATH = "/ai-rooms/filter";
 
-// Ids of the entries listed under Agents and Recent, Recent's Show more
+// Ids of the conversations listed under AI Chat and of the agents listed
+// under Agents, the All chats and All agents links that close the two lists
 // included.
-// NavMenu has no third level: they are siblings of those entries, indented
-// and spaced by the `[data-item-id^="ai-nested-"]` rules of the module's
-// stylesheet.
+// NavMenu has no third level: the agents are siblings of the Agents entry,
+// and all of them are indented and spaced by the
+// `[data-item-id^="ai-nested-"]` rules of the module's stylesheet.
 const aiProjectItemId = (id: string | number) => `ai-nested-project-${id}`;
 const aiChatItemId = (id: string) => `ai-nested-chat-${id}`;
+const AI_ALL_CHATS_ID = "ai-nested-chats-more";
+const AI_ALL_AGENTS_ID = "ai-nested-projects-more";
 const isAiNestedItemId = (id: string) => id.startsWith("ai-nested-");
 
 /**
  * The collapsed sidebar draws the entries as icons, one under the other: the
- * agents and conversations listed under Agents and Recent (and their Show
- * more) are left out there, so Skill sets and Knowledge bases stay in reach
- * without scrolling, and an agent or a conversation on screen highlights the
- * entry it is listed under.
+ * conversations listed under AI Chat and the agents listed under Agents (and
+ * their All chats and All agents links) are left out there, so Skill sets
+ * and Knowledge bases stay in reach without scrolling, and a conversation or
+ * an agent on screen highlights the entry it is listed under.
  */
 const toCollapsedGroups = (groups: NavMenuGroup[]): NavMenuGroup[] =>
   groups.map((group) => ({
@@ -205,7 +208,7 @@ const toCollapsedGroups = (groups: NavMenuGroup[]): NavMenuGroup[] =>
 
 const toCollapsedActiveId = (id: string | undefined) => {
   if (id?.startsWith("ai-nested-project-")) return "ai-rooms";
-  if (id?.startsWith("ai-nested-chat-")) return "ai-chat-recent";
+  if (id?.startsWith("ai-nested-chat-")) return "ai-chat";
   return id;
 };
 
@@ -220,7 +223,7 @@ const ClientArticleSidebar = ({
   aiOpenFolderId,
   aiOpenRoomType,
   requestAiChatPage,
-  pinnedAiProjects = EMPTY_LIST,
+  aiHubRootProjects = EMPTY_LIST,
   recentAiChats = EMPTY_LIST,
   hasMoreAiChats = false,
   activeAiChatId,
@@ -372,8 +375,9 @@ const ClientArticleSidebar = ({
     [searchAreaUrl],
   );
 
-  // AI Chat and Recent are the chat itself, not a list: they open it
-  // fullscreen on the conversation or on its history, over the agents list
+  // AI Chat, a conversation and All chats are the chat itself, not a list:
+  // they open it fullscreen on the conversation or on its history, over the
+  // agents list
   // (the section's root), which is what closing the chat goes back to. From
   // anywhere else - another section, a narrowed list - the click opens the
   // chat at once and goes to that list under it, so the list is never seen
@@ -407,8 +411,9 @@ const ClientArticleSidebar = ({
   );
 
   // While the chat covers the page, fullscreen, the entry it was opened as
-  // is the current one: Recent on its history, the conversation when Recent
-  // lists it, AI Chat otherwise. An AI project's own fullscreen chat belongs
+  // is the current one: the conversation when AI Chat lists it, AI Chat
+  // otherwise - on the history too, which All chats opens as a link, with no
+  // row of its own to highlight. An AI project's own fullscreen chat belongs
   // to the project (Agents).
   const getAiChatPageId = () => {
     if (
@@ -417,8 +422,8 @@ const ClientArticleSidebar = ({
       isAiProjectRoomRoot
     )
       return undefined;
-    if (aiChatStore.isOnHistoryPage) return "ai-chat-recent";
     if (
+      !aiChatStore.isOnHistoryPage &&
       activeAiChatId &&
       recentAiChats.some((thread) => thread.id === activeAiChatId)
     )
@@ -431,7 +436,7 @@ const ClientArticleSidebar = ({
   const openProjectId = /^\/ai-rooms\/(\d+)\//.exec(location.pathname)?.[1];
   const aiProjectPageId =
     openProjectId &&
-    pinnedAiProjects.some((project) => project.id === openProjectId)
+    aiHubRootProjects.some((project) => project.id === openProjectId)
       ? aiProjectItemId(openProjectId)
       : undefined;
 
@@ -827,10 +832,11 @@ const ClientArticleSidebar = ({
     // The AI section closes the apps, while the portal has AI switched on
     // (the server only serves its root then). It holds the AI projects,
     // Instructions rooms and Knowledge rooms (`FolderType.AiHub`). The
-    // section itself is AI Chat: the chat, fullscreen. Under it Agents lists
-    // the AI projects (the section's root list; a project opens as its
-    // chat), Recent is the chat's history, and Skill sets and Knowledge bases
-    // are the same list narrowed to Instructions and Knowledge rooms. There
+    // section itself is AI Chat: the chat, fullscreen. Right under it come
+    // the latest conversations, closed by All chats (the chat's history).
+    // Then Agents lists the AI projects (the section's root list; a project
+    // opens as its chat), closed by All agents, and Skill sets and Knowledge
+    // bases are the same list narrowed to Instructions and Knowledge rooms. There
     // is no Trash entry (its `/ai-rooms/trash` route stays) and no Archive
     // one - the server never archives these rooms. The bare `/ai-rooms` is
     // the Rooms app's SDK frame page: the section lives on the nested paths.
@@ -842,6 +848,23 @@ const ClientArticleSidebar = ({
         onClick: openAiChatPage("chat"),
         ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),
         children: [
+          // The conversations have no icon: their titles start under the
+          // section's own name.
+          ...recentAiChats.map((thread) => ({
+            id: aiChatItemId(thread.id),
+            label: thread.title,
+            onClick: openAiChatPage("chat", thread.id),
+          })),
+          // The rest, and the search over them, are in the chat's history.
+          ...(recentAiChats.length > 0 || hasMoreAiChats
+            ? [
+                {
+                  id: AI_ALL_CHATS_ID,
+                  label: t("Common:AllChats"),
+                  onClick: openAiChatPage("history"),
+                },
+              ]
+            : []),
           {
             id: "ai-rooms",
             label: t("Common:Agents"),
@@ -850,7 +873,7 @@ const ClientArticleSidebar = ({
           },
           // A project opens as its room, which shows its chat. Its logo is
           // the one the projects list shows; without one, its initials.
-          ...pinnedAiProjects.map((project) => ({
+          ...aiHubRootProjects.map((project) => ({
             id: aiProjectItemId(project.id),
             label: project.name,
             iconNode: (
@@ -866,24 +889,13 @@ const ClientArticleSidebar = ({
             ),
             ...nav(`/ai-rooms/${project.id}/filter?folder=${project.id}`),
           })),
-          {
-            id: "ai-chat-recent",
-            label: t("Common:AIChatRecent"),
-            icon: CatalogAiRecentReactSvgUrl,
-            onClick: openAiChatPage("history"),
-          },
-          ...recentAiChats.map((thread) => ({
-            id: aiChatItemId(thread.id),
-            label: thread.title,
-            onClick: openAiChatPage("chat", thread.id),
-          })),
-          // The rest are in the chat's history.
-          ...(hasMoreAiChats
+          // A few of them are listed: the rest are in the Agents list.
+          ...(aiHubRootProjects.length > 0
             ? [
                 {
-                  id: "ai-nested-chats-more",
-                  label: t("Common:ShowMore"),
-                  onClick: openAiChatPage("history"),
+                  id: AI_ALL_AGENTS_ID,
+                  label: t("Common:AllAgents"),
+                  ...nav(aiAgentsUrl),
                 },
               ]
             : []),
@@ -927,7 +939,7 @@ const ClientArticleSidebar = ({
     aiHubTypeUrl,
     aiAgentsUrl,
     openAiChatPage,
-    pinnedAiProjects,
+    aiHubRootProjects,
     recentAiChats,
     hasMoreAiChats,
     treeFolders,
@@ -952,7 +964,7 @@ const ClientArticleSidebar = ({
   // menu drew anew has none).
   React.useEffect(() => {
     const titles: [string, string][] = [
-      ...pinnedAiProjects.map(
+      ...aiHubRootProjects.map(
         (project) => [aiProjectItemId(project.id), project.name] as [string, string],
       ),
       ...recentAiChats.map(
@@ -1022,7 +1034,7 @@ const ClientArticleSidebarConnected = inject<TStore>(
         }
       : {}),
     requestAiChatPage: dialogsStore.requestAiChatPage,
-    pinnedAiProjects: treeFoldersStore.pinnedAiProjects,
+    aiHubRootProjects: treeFoldersStore.aiHubRootProjects,
     recentAiChats: dialogsStore.aiChatRecentThreads,
     hasMoreAiChats: dialogsStore.aiChatHasMoreThreads,
     activeAiChatId: dialogsStore.aiChatActiveThreadId,

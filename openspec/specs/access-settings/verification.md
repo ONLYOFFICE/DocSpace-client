@@ -51,12 +51,14 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Sign-out warning; positive whole number of at most four digits; empty marked and blocking saving; saved; Disabled keeps the server's minutes | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/sessionLifetime.test.tsx:94, 102, 116, 128, 144` | UNIT-CONFIRMED |
 | Lifetime on the server | `serverSettings`, "Changing the session lifetime"; "Sessions after a lifetime change" | SERVER-SPEC |
 | **Single sign-on** | | |
-| Provider, certificates, mapping, users type, toggle, save and reset, metadata | `int/SingleSignOn/index.js:84-140`; `int/SingleSignOn/SubmitButton.js:54-80` | CODE-ONLY |
-| Disabled with the paid badge without the feature | `int/SingleSignOn/sub-components/ToggleSSO.js:46-95`; `int/SingleSignOn/ProviderMetadata.js:116` | CODE-ONLY |
+| Switching on opens the provider settings; saving waits for the entity ID and the sign-on and sign-out addresses, then sends them with the field mapping; Default settings resets at once with SSO off and after a confirmation with SSO on, which turns it off | `packages/client/__tests__/sso-settings.spec.ts:158, 209, 227` | E2E-CONFIRMED |
+| Provider from its metadata file or address, certificates, users type, metadata download | `int/SingleSignOn/index.js:84-140`; `int/SingleSignOn/sub-components/UploadXML.js`; `int/SingleSignOn/Certificates.js` | CODE-ONLY |
+| Disabled with the paid badge without the feature | `packages/client/__tests__/sso-settings.spec.ts:131` | E2E-CONFIRMED |
 | Single sign-on on the server | `server`, "Saving single sign-on settings"; "Required single sign-on fields"; "Switching single sign-on off" | SERVER-SPEC |
 | **LDAP** | | |
-| Settings, manual sync with progress, scheduled sync and next run | `int/LDAP/index.js:137-152`; `int/LDAP/sub-components/SyncContainer.js:85-175` | CODE-ONLY |
-| Disabled with the paid badge without the feature | `int/LDAP/sub-components/ToggleLDAP.js:70-100`; `packages/client/src/store/LdapFormStore.ts` (`isUIDisabled`) | CODE-ONLY |
+| Switching on and saving waits for the server and the user DN, then sends them without the protocol; Sync users shows the progress to the end; Auto sync shows the next run in UTC and saves the schedule | `packages/client/__tests__/ldap-settings.spec.ts:167, 207, 235` | E2E-CONFIRMED |
+| Group membership, authentication, certificate confirmation | `int/LDAP/sub-components/GroupMembership.js`; `int/LDAP/sub-components/AuthenticationContainer.js`; `int/LDAP/sub-components/CertificateDialog.js` | CODE-ONLY |
+| Disabled with the paid badge without the feature | `packages/client/__tests__/ldap-settings.spec.ts:145` | E2E-CONFIRMED |
 | **Third-party services** | | |
 | Services with keys, request block, Business plan badge | `int/ThirdPartyServicesSettings/index.js:160-250` | CODE-ONLY |
 | External database: fields shown by the chosen options | `int/ThirdPartyServicesSettings/sub-components/ExternalDbModal/__tests__/ExternalDbField.utils.test.ts` | UNIT-CONFIRMED |

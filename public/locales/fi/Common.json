@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Tämän huoneen luominen ei ole mahdollista, koska huoneiden määrän raja, joka kuuluu tilaukseesi, on saavutettu.",
   "RoomsQuotaAlmostExhausted": "Huoneiden määrän kiintiö on melkein täysi.",
   "NumberOfRoomsAccordingToTariff": "Huoneiden määrä tilauksesi mukaan: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Ota yhteyttä pääjärjestelmänvalvojaan hinnoittelusuunnitelman päivittämiseksi."
+  "ContactToUpgradeTariff": "Ota yhteyttä pääjärjestelmänvalvojaan hinnoittelusuunnitelman päivittämiseksi.",
+  "DropzoneFileArea": "Tiedostojen latausalue",
+  "DropzoneFolderArea": "Kansion latausalue",
+  "DropzoneFileInput": "Tiedoston valintakenttä",
+  "DropzoneFolderInput": "Kansion valintakenttä",
+  "DropzoneFileTypes": "Tuetut tiedostotyypit",
+  "CurrentTimeLabel": "Nykyinen aika: {{time}}"
 }

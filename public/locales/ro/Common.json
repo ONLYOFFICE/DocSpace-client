@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Imposibil de creat această sală deoarece limita maximă de săli permisă de planul dvs. actual a fost atinsă.",
   "RoomsQuotaAlmostExhausted": "Cota spațiului de stocare aproape epuizată.",
   "NumberOfRoomsAccordingToTariff": "Limita de săli permisă conform planului dvs tarifar: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Contactați superadministratorul pentru a face upgrade la planul tarifar."
+  "ContactToUpgradeTariff": "Contactați superadministratorul pentru a face upgrade la planul tarifar.",
+  "DropzoneFileArea": "Zonă de încărcare a fișierelor",
+  "DropzoneFolderArea": "Zonă de încărcare a folderului",
+  "DropzoneFileInput": "Câmp de selectare a fișierului",
+  "DropzoneFolderInput": "Câmp de selectare a folderului",
+  "DropzoneFileTypes": "Tipuri de fișiere acceptate",
+  "CurrentTimeLabel": "Ora curentă: {{time}}"
 }

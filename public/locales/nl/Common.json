@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Deze kamer kan niet worden aangemaakt omdat de limiet is bereikt voor het aantal kamers in uw huidige plan.",
   "RoomsQuotaAlmostExhausted": "Het aantal kamers is bijna opgebruikt.",
   "NumberOfRoomsAccordingToTariff": "Aantal kamers volgens uw tariefplan: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Neem contact op met de superbeheerder om het tariefplan te upgraden."
+  "ContactToUpgradeTariff": "Neem contact op met de superbeheerder om het tariefplan te upgraden.",
+  "DropzoneFileArea": "Uploadgebied voor bestanden",
+  "DropzoneFolderArea": "Uploadgebied voor een map",
+  "DropzoneFileInput": "Bestandskeuzeveld",
+  "DropzoneFolderInput": "Mapkeuzeveld",
+  "DropzoneFileTypes": "Ondersteunde bestandstypen",
+  "CurrentTimeLabel": "Huidige tijd: {{time}}"
 }

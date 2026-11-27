@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "ການສ້າງຫ້ອງນີ້ບໍ່ສາມາດເຮັດໄດ້ເພາະວ່າບັນລຸຂີດຈຳກັດໃນຈຳນວນຫ້ອງທີ່ລວມເຂົ້າໃນແຜນການປັດຈຸບັນຂອງທ່ານແລ້ວ.",
   "RoomsQuotaAlmostExhausted": "ຈຳນວນຫ້ອງເກືອບໝົດແລ້ວ.",
   "NumberOfRoomsAccordingToTariff": "ຈຳນວນຫ້ອງຕາມແຜນລາຄາຂອງທ່ານ: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "ຕິດຕໍ່ຜູ້ດູແລລະບົບສູງສຸດເພື່ອຍົກລະດັບແຜນອັດຕາຄ່າໃຊ້ຈ່າຍ."
+  "ContactToUpgradeTariff": "ຕິດຕໍ່ຜູ້ດູແລລະບົບສູງສຸດເພື່ອຍົກລະດັບແຜນອັດຕາຄ່າໃຊ້ຈ່າຍ.",
+  "DropzoneFileArea": "ພື້ນທີ່ອັບໂຫລດໄຟລ໌",
+  "DropzoneFolderArea": "ພື້ນທີ່ອັບໂຫລດໂຟນເດີ",
+  "DropzoneFileInput": "ຊ່ອງເລືອກໄຟລ໌",
+  "DropzoneFolderInput": "ຊ່ອງເລືອກໂຟນເດີ",
+  "DropzoneFileTypes": "ປະເພດໄຟລ໌ທີ່ຮອງຮັບ",
+  "CurrentTimeLabel": "ເວລາປັດຈຸບັນ: {{time}}"
 }

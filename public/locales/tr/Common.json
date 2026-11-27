@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Mevcut planınıza dahil olan oda sayısı sınırına ulaşıldığı için bu odayı oluşturmak mümkün değil.",
   "RoomsQuotaAlmostExhausted": "Oda kotası neredeyse doldu.",
   "NumberOfRoomsAccordingToTariff": "Tarife planınıza göre oda sayısı: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Tarife planını yükseltmek için süper yöneticiye başvurun."
+  "ContactToUpgradeTariff": "Tarife planını yükseltmek için süper yöneticiye başvurun.",
+  "DropzoneFileArea": "Dosya yükleme alanı",
+  "DropzoneFolderArea": "Klasör yükleme alanı",
+  "DropzoneFileInput": "Dosya seçme alanı",
+  "DropzoneFolderInput": "Klasör seçme alanı",
+  "DropzoneFileTypes": "Desteklenen dosya türleri",
+  "CurrentTimeLabel": "Geçerli saat: {{time}}"
 }

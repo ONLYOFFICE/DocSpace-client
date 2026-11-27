@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Այս սենյակի ստեղծումը հնարավոր չէ, քանի որ ձեր ընթացիկ պլանում ներառված սենյակների քանակի սահմանաչափը սպառվել է:",
   "RoomsQuotaAlmostExhausted": "Սենյակների քվոտան գրեթե սպառվել է։",
   "NumberOfRoomsAccordingToTariff": "Սենյակների քանակն ըստ ձեր սակագնային պլանի՝ {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Դիմեք գերադմինիստրատորին՝ սակագնային պլանը բարելավելու համար։"
+  "ContactToUpgradeTariff": "Դիմեք գերադմինիստրատորին՝ սակագնային պլանը բարելավելու համար։",
+  "DropzoneFileArea": "Ֆայլերի վերբեռնման տարածք",
+  "DropzoneFolderArea": "Պանակի վերբեռնման տարածք",
+  "DropzoneFileInput": "Ֆայլի ընտրության դաշտ",
+  "DropzoneFolderInput": "Պանակի ընտրության դաշտ",
+  "DropzoneFileTypes": "Աջակցվող ֆայլերի տեսակներ",
+  "CurrentTimeLabel": "Ընթացիկ ժամը՝ {{time}}"
 }

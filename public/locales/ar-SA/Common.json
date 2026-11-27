@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "إنشاء هذه الغرفة غير ممكن نظرًا لبلوغ الحد الأقصى لعدد الغرف المضمنة في خطتك الحالية.",
   "RoomsQuotaAlmostExhausted": "تم استنفاد حصة الغرف تقريبًا.",
   "NumberOfRoomsAccordingToTariff": "عدد الغرف وفقًا لخطة التعريف الخاصة بك: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "تواصل مع المسؤول العام لترقية خطة التعرفة."
+  "ContactToUpgradeTariff": "تواصل مع المسؤول العام لترقية خطة التعرفة.",
+  "DropzoneFileArea": "منطقة رفع الملفات",
+  "DropzoneFolderArea": "منطقة رفع المجلد",
+  "DropzoneFileInput": "حقل اختيار الملف",
+  "DropzoneFolderInput": "حقل اختيار المجلد",
+  "DropzoneFileTypes": "أنواع الملفات المدعومة",
+  "CurrentTimeLabel": "الوقت الحالي: {{time}}"
 }

@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Utworzenie tego pokoju jest niemożliwe, ponieważ osiągnięto limit liczby pokoi w bieżącym planie.",
   "RoomsQuotaAlmostExhausted": "Limit pokoi jest prawie wyczerpany.",
   "NumberOfRoomsAccordingToTariff": "Liczba pokoi w Twoim planie cenowym: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Skontaktuj się z superadministratorem, aby ulepszyć plan taryfowy."
+  "ContactToUpgradeTariff": "Skontaktuj się z superadministratorem, aby ulepszyć plan taryfowy.",
+  "DropzoneFileArea": "Obszar wgrywania plików",
+  "DropzoneFolderArea": "Obszar wgrywania folderu",
+  "DropzoneFileInput": "Wybór pliku",
+  "DropzoneFolderInput": "Wybór folderu",
+  "DropzoneFileTypes": "Obsługiwane typy plików",
+  "CurrentTimeLabel": "Bieżąca godzina: {{time}}"
 }

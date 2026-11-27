@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "RoomsQuotaAlmostExhausted": "The quota of rooms is almost exhausted.",
   "NumberOfRoomsAccordingToTariff": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Contact the Full admin to upgrade the tariff plan."
+  "ContactToUpgradeTariff": "Contact the Full admin to upgrade the tariff plan.",
+  "DropzoneFileArea": "File upload area",
+  "DropzoneFolderArea": "Folder upload area",
+  "DropzoneFileInput": "File input",
+  "DropzoneFolderInput": "Folder input",
+  "DropzoneFileTypes": "Supported file types",
+  "CurrentTimeLabel": "Current time: {{time}}"
 }

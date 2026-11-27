@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "현재 사용 중인 요금제에 포함된 룸 수가 한도에 도달했기 때문에 이 룸을 생성할 수 없습니다.",
   "RoomsQuotaAlmostExhausted": "룸 할당량이 거의 소진되었습니다.",
   "NumberOfRoomsAccordingToTariff": "요금제에 따른 룸 수: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "요금제를 업그레이드하려면 슈퍼 관리자에게 문의하세요."
+  "ContactToUpgradeTariff": "요금제를 업그레이드하려면 슈퍼 관리자에게 문의하세요.",
+  "DropzoneFileArea": "파일 업로드 영역",
+  "DropzoneFolderArea": "폴더 업로드 영역",
+  "DropzoneFileInput": "파일 선택 필드",
+  "DropzoneFolderInput": "폴더 선택 필드",
+  "DropzoneFileTypes": "지원되는 파일 형식",
+  "CurrentTimeLabel": "현재 시간: {{time}}"
 }

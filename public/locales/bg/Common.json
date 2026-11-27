@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Създаването на тази стая не е възможно, тъй като лимитът за броя стаи, включени в текущия ви план, е достигнат.",
   "RoomsQuotaAlmostExhausted": "Квотата от стаи е почти изчерпана.",
   "NumberOfRoomsAccordingToTariff": "Брой стаи според тарифния ви план: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Свържете се със суперадминистратора, за да надстроите тарифния план."
+  "ContactToUpgradeTariff": "Свържете се със суперадминистратора, за да надстроите тарифния план.",
+  "DropzoneFileArea": "Област за качване на файлове",
+  "DropzoneFolderArea": "Област за качване на папка",
+  "DropzoneFileInput": "Поле за избор на файл",
+  "DropzoneFolderInput": "Поле за избор на папка",
+  "DropzoneFileTypes": "Поддържани типове файлове",
+  "CurrentTimeLabel": "Текущо време: {{time}}"
 }

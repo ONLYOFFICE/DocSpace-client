@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Nie je možné vytvoriť túto miestnosť, pretože je dosiahnutý limit počtu miestností vo vašom aktuálnom tarifnom pláne.",
   "RoomsQuotaAlmostExhausted": "Kvóta miestností je takmer vyčerpaná.",
   "NumberOfRoomsAccordingToTariff": "Počet miestností podľa vášho tarifného plánu: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Obráťte sa na supersprávcu so žiadosťou o vylepšenie tarifného plánu."
+  "ContactToUpgradeTariff": "Obráťte sa na supersprávcu so žiadosťou o vylepšenie tarifného plánu.",
+  "DropzoneFileArea": "Oblasť na nahrávanie súborov",
+  "DropzoneFolderArea": "Oblasť na nahrávanie priečinka",
+  "DropzoneFileInput": "Pole na výber súboru",
+  "DropzoneFolderInput": "Pole na výber priečinka",
+  "DropzoneFileTypes": "Podporované typy súborov",
+  "CurrentTimeLabel": "Aktuálny čas: {{time}}"
 }

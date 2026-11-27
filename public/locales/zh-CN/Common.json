@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "由于当前费用版本的房间数量已达上限，因此无法创建该房间。",
   "RoomsQuotaAlmostExhausted": "房间配额已几乎用完。",
   "NumberOfRoomsAccordingToTariff": "您的费用版本的房间数量为：{{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "请联系超级管理员升级资费套餐。"
+  "ContactToUpgradeTariff": "请联系超级管理员升级资费套餐。",
+  "DropzoneFileArea": "文件上传区域",
+  "DropzoneFolderArea": "文件夹上传区域",
+  "DropzoneFileInput": "文件选择框",
+  "DropzoneFolderInput": "文件夹选择框",
+  "DropzoneFileTypes": "支持的文件类型",
+  "CurrentTimeLabel": "当前时间：{{time}}"
 }

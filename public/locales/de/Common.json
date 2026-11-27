@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Das Erstellen dieses Raums ist nicht möglich, da das Limit für die Anzahl der in Ihrem aktuellen Plan enthaltenen Räume erreicht ist.",
   "RoomsQuotaAlmostExhausted": "Die Raumquote ist fast erschöpft.",
   "NumberOfRoomsAccordingToTariff": "Anzahl der Räume gemäß Ihrem Tarifplan: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Wenden Sie sich an den Super-Administrator, um den Tarifplan zu erweitern."
+  "ContactToUpgradeTariff": "Wenden Sie sich an den Super-Administrator, um den Tarifplan zu erweitern.",
+  "DropzoneFileArea": "Bereich zum Hochladen von Dateien",
+  "DropzoneFolderArea": "Bereich zum Hochladen von Ordnern",
+  "DropzoneFileInput": "Dateiauswahlfeld",
+  "DropzoneFolderInput": "Ordnerauswahlfeld",
+  "DropzoneFileTypes": "Unterstützte Dateitypen",
+  "CurrentTimeLabel": "Aktuelle Uhrzeit: {{time}}"
 }

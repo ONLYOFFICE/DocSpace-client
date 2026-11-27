@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Krijimi i kësaj dhome nuk është i mundur pasi është arritur kufiri për numrin e dhomave të përfshira në planin tuaj aktual.",
   "RoomsQuotaAlmostExhausted": "Kuota e dhomave është pothuajse e shteruar.",
   "NumberOfRoomsAccordingToTariff": "Numri i dhomave sipas planit tuaj tarifor: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Kontaktoni superadministratorin për të përmirësuar planin tarifor."
+  "ContactToUpgradeTariff": "Kontaktoni superadministratorin për të përmirësuar planin tarifor.",
+  "DropzoneFileArea": "Zona e ngarkimit të skedarëve",
+  "DropzoneFolderArea": "Zona e ngarkimit të dosjes",
+  "DropzoneFileInput": "Fusha e zgjedhjes së skedarit",
+  "DropzoneFolderInput": "Fusha e zgjedhjes së dosjes",
+  "DropzoneFileTypes": "Llojet e mbështetura të skedarëve",
+  "CurrentTimeLabel": "Ora aktuale: {{time}}"
 }

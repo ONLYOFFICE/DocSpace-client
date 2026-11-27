@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Неможливо створити цю кімнату, оскільки досягнуто обмеження кількості кімнат, включених у ваш поточний план.",
   "RoomsQuotaAlmostExhausted": "Квоту кімнат майже вичерпано.",
   "NumberOfRoomsAccordingToTariff": "Кількість кімнат згідно з вашим тарифним планом: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Зверніться до суперадміністратора, щоб підвищити тарифний план."
+  "ContactToUpgradeTariff": "Зверніться до суперадміністратора, щоб підвищити тарифний план.",
+  "DropzoneFileArea": "Область завантаження файлів",
+  "DropzoneFolderArea": "Область завантаження папки",
+  "DropzoneFileInput": "Поле вибору файлу",
+  "DropzoneFolderInput": "Поле вибору папки",
+  "DropzoneFileTypes": "Підтримувані типи файлів",
+  "CurrentTimeLabel": "Поточний час: {{time}}"
 }

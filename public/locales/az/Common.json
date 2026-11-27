@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Bu otağı yaratmaq mümkün deyil, çünki cari planınıza daxil edilmiş otaqların sayı limitə çatıb.",
   "RoomsQuotaAlmostExhausted": "Otaq kvotası dolmaq üzrədir.",
   "NumberOfRoomsAccordingToTariff": "Tarif planınıza uyğun otaqların sayı: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Tarif planını təkmilləşdirmək üçün super administratora müraciət edin."
+  "ContactToUpgradeTariff": "Tarif planını təkmilləşdirmək üçün super administratora müraciət edin.",
+  "DropzoneFileArea": "Fayl yükləmə sahəsi",
+  "DropzoneFolderArea": "Qovluq yükləmə sahəsi",
+  "DropzoneFileInput": "Fayl seçimi sahəsi",
+  "DropzoneFolderInput": "Qovluq seçimi sahəsi",
+  "DropzoneFileTypes": "Dəstəklənən fayl növləri",
+  "CurrentTimeLabel": "Cari vaxt: {{time}}"
 }

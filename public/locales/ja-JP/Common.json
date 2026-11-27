@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "現在のプランではルームの数の上限に達しているため、このルームを作成できません。",
   "RoomsQuotaAlmostExhausted": "ルームのストレージ容量が残りわずかです。",
   "NumberOfRoomsAccordingToTariff": "ご利用の料金プランのルーム数：{{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "料金プランをアップグレードするには、スーパー管理者にお問い合わせください。"
+  "ContactToUpgradeTariff": "料金プランをアップグレードするには、スーパー管理者にお問い合わせください。",
+  "DropzoneFileArea": "ファイルのアップロード領域",
+  "DropzoneFolderArea": "フォルダのアップロード領域",
+  "DropzoneFileInput": "ファイル選択フィールド",
+  "DropzoneFolderInput": "フォルダ選択フィールド",
+  "DropzoneFileTypes": "サポートされているファイル形式",
+  "CurrentTimeLabel": "現在の時刻：{{time}}"
 }

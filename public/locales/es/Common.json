@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "No es posible crear esta sala ya que se ha alcanzado el límite del número de salas que permite su plan actual.",
   "RoomsQuotaAlmostExhausted": "La cuota de salas casi se ha agotado.",
   "NumberOfRoomsAccordingToTariff": "Número de salas según su plan de tarifas: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Póngase en contacto con el superadministrador para mejorar el plan tarifario."
+  "ContactToUpgradeTariff": "Póngase en contacto con el superadministrador para mejorar el plan tarifario.",
+  "DropzoneFileArea": "Área de carga de archivos",
+  "DropzoneFolderArea": "Área de carga de carpetas",
+  "DropzoneFileInput": "Campo de selección de archivo",
+  "DropzoneFolderInput": "Campo de selección de carpeta",
+  "DropzoneFileTypes": "Tipos de archivo admitidos",
+  "CurrentTimeLabel": "Hora actual: {{time}}"
 }

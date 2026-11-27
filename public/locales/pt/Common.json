@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Não é possível criar este quarto porque o limite do número de quartos incluídos no seu plano atual foi atingido.",
   "RoomsQuotaAlmostExhausted": "A quota de quartos está quase esgotada.",
   "NumberOfRoomsAccordingToTariff": "Número de quartos de acordo com o seu plano tarifário: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Contacte o superadministrador para atualizar o plano tarifário."
+  "ContactToUpgradeTariff": "Contacte o superadministrador para atualizar o plano tarifário.",
+  "DropzoneFileArea": "Área de carregamento de ficheiros",
+  "DropzoneFolderArea": "Área de carregamento de pasta",
+  "DropzoneFileInput": "Campo de seleção de ficheiro",
+  "DropzoneFolderInput": "Campo de seleção de pasta",
+  "DropzoneFileTypes": "Tipos de ficheiro suportados",
+  "CurrentTimeLabel": "Hora atual: {{time}}"
 }

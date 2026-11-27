@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Không thể tạo phòng này vì đã đạt đến giới hạn số lượng phòng trong gói dịch vụ hiện tại của bạn.",
   "RoomsQuotaAlmostExhausted": "Gần như đã dùng hết hạn mức phòng.",
   "NumberOfRoomsAccordingToTariff": "Số lượng phòng theo gói dịch vụ của bạn: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Hãy liên hệ với siêu quản trị viên để nâng cấp gói cước."
+  "ContactToUpgradeTariff": "Hãy liên hệ với siêu quản trị viên để nâng cấp gói cước.",
+  "DropzoneFileArea": "Vùng tải tệp lên",
+  "DropzoneFolderArea": "Vùng tải thư mục lên",
+  "DropzoneFileInput": "Trường chọn tệp",
+  "DropzoneFolderInput": "Trường chọn thư mục",
+  "DropzoneFileTypes": "Các loại tệp được hỗ trợ",
+  "CurrentTimeLabel": "Thời gian hiện tại: {{time}}"
 }

@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "ඔබේ වත්මන් සැලැස්මේ ඇතුළත් කර ඇති කාමර සංඛ්‍යාව සඳහා සීමාව ළඟා වී ඇති නිසා මෙම කාමරය නිර්මාණය කිරීමේ හැකියාවක් නැත.",
   "RoomsQuotaAlmostExhausted": "කෙරෙහි කාමර ප්‍රමාණය ඉක්මවා ගොස් ඇත.",
   "NumberOfRoomsAccordingToTariff": "ඔබේ ගාමි සැලැස්මට අනුව කාමර සංඛ්‍යාව: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "ගාස්තු සැලසුම උසස් කිරීමට සුපිරි පරිපාලක අමතන්න."
+  "ContactToUpgradeTariff": "ගාස්තු සැලසුම උසස් කිරීමට සුපිරි පරිපාලක අමතන්න.",
+  "DropzoneFileArea": "ගොනු උඩුගත කිරීමේ ප්‍රදේශය",
+  "DropzoneFolderArea": "ෆෝල්ඩර උඩුගත කිරීමේ ප්‍රදේශය",
+  "DropzoneFileInput": "ගොනු තේරීමේ ක්ෂේත්‍රය",
+  "DropzoneFolderInput": "ෆෝල්ඩර තේරීමේ ක්ෂේත්‍රය",
+  "DropzoneFileTypes": "සහාය දක්වන ගොනු වර්ග",
+  "CurrentTimeLabel": "වත්මන් වේලාව: {{time}}"
 }

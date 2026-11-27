@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Non è possibile creare questa stanza perché è stato raggiunto il limite del numero di stanze incluse nel piano attuale.",
   "RoomsQuotaAlmostExhausted": "La quota di stanze è quasi esaurita.",
   "NumberOfRoomsAccordingToTariff": "Numero di stanze in base al tuo piano tariffario: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Contatta il superamministratore per passare a un piano tariffario superiore."
+  "ContactToUpgradeTariff": "Contatta il superamministratore per passare a un piano tariffario superiore.",
+  "DropzoneFileArea": "Area di caricamento file",
+  "DropzoneFolderArea": "Area di caricamento cartella",
+  "DropzoneFileInput": "Campo di selezione file",
+  "DropzoneFolderInput": "Campo di selezione cartella",
+  "DropzoneFileTypes": "Tipi di file supportati",
+  "CurrentTimeLabel": "Ora attuale: {{time}}"
 }

@@ -1,0 +1,22 @@
+{
+  "key_path": "CurrentTimeLabel",
+  "content": "Current time: {{time}}",
+  "content_en_sha1_hash": "25f4db4f324de8e0af71c74be2acf781beaaccb6",
+  "created_at": "2026-11-27T11:30:45.568Z",
+  "updated_at": "2026-11-27T11:31:12.875Z",
+  "comment": {
+    "text": "Screen-reader name (aria-label, not shown on screen) of the time display button in a date and time picker; activating it opens the time selector. {{time}} is the selected time already formatted, e.g. 02:30 PM or 14:30.",
+    "is_auto": true,
+    "updated_at": "2026-11-27T11:31:12.875Z",
+    "model": "claude-opus-5-5"
+  },
+  "usage": [],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

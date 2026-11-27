@@ -2851,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Креирање ове просторије није могуће јер је достигнут лимит за број просторија укључених у ваш тренутни план.",
   "RoomsQuotaAlmostExhausted": "Квота просторија је скоро исцрпљена.",
   "NumberOfRoomsAccordingToTariff": "Број просторија према вашем тарифном плану: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Обратите се суперадминистратору да надогради тарифни план."
+  "ContactToUpgradeTariff": "Обратите се суперадминистратору да надогради тарифни план.",
+  "DropzoneFileArea": "Област за отпремање датотека",
+  "DropzoneFolderArea": "Област за отпремање фолдера",
+  "DropzoneFileInput": "Поље за избор датотеке",
+  "DropzoneFolderInput": "Поље за избор фолдера",
+  "DropzoneFileTypes": "Подржани типови датотека",
+  "CurrentTimeLabel": "Тренутно време: {{time}}"
 }

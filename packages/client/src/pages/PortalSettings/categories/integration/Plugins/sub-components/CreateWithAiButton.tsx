@@ -98,6 +98,7 @@ const CreateWithAiButton = ({ t }: { t: TTranslation }) => {
       className={styles.createWithAiButton}
       label={t("WebPlugins:CreateWithAI")}
       size={ButtonSize.small}
+      primary
       onClick={onClick}
       testId="create_plugin_with_ai_button"
     />

@@ -998,7 +998,8 @@ export const getSuggestionSet = (
 
 /**
  * The chips of the chat opened on the plugins page of the settings: each
- * asks for a kind of plugin and has the model ask for the rest. The page is
+ * asks for a kind of plugin - the entry points the server's `plugin_agent`
+ * names to the model - and has the model ask for the rest. The page is
  * the owner's and the DocSpace admins', the ones the server offers its
  * plugin tools to, so the chips need no right of their own. With files
  * attached the chips are those of the files, as anywhere.
@@ -1015,6 +1016,14 @@ export const getPluginSuggestionSet = (
     {
       name: t("AiSuggestions:PluginsInfoPanelTab"),
       prompt: t("AiSuggestions:PluginsInfoPanelTabPrompt"),
+    },
+    {
+      name: t("AiSuggestions:PluginsSidebarPage"),
+      prompt: t("AiSuggestions:PluginsSidebarPagePrompt"),
+    },
+    {
+      name: t("AiSuggestions:PluginsFileType"),
+      prompt: t("AiSuggestions:PluginsFileTypePrompt"),
     },
     {
       name: t("AiSuggestions:PluginsExternalService"),

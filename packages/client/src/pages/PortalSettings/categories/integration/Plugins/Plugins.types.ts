@@ -96,6 +96,7 @@ export interface PluginsProps {
 
   isLoading: boolean;
   isEmptyList: boolean;
+  isLoaded: boolean;
 
   pluginsSdkUrl: string | undefined;
 

@@ -53,7 +53,7 @@ export const SelectIcon = ({
 
   return (
     <div>
-      <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
+      <div className="color-name">{t("Common:Icon")}</div>
 
       <div className="cover-icon-container">
         {covers?.map((icon) => {

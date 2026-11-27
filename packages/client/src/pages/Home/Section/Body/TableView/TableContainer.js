@@ -229,7 +229,6 @@ const Table = ({
         itemCount={filterTotal}
         useReactWindow
         infoPanelVisible={infoPanelVisible}
-        isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         itemHeight={48}
       >

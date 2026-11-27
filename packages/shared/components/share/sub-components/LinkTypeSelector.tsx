@@ -98,7 +98,6 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
         size={ComboBoxSize.content}
         selectedOption={selectedOption}
         onSelect={onSelect}
-        showDisabledItems
         isDisabled={isLoaded}
         useImageIcon
       />

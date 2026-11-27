@@ -105,7 +105,6 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
         usePortalBackdrop
         manualWidth="300px"
         isAside={isMobileViewLink}
-        withBlur={isMobileViewLink}
         isMobileView={isMobileViewLink}
         fixedDirection={isMobileViewLink}
         shouldShowBackdrop={isMobileViewLink}
@@ -125,7 +124,6 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
       type="onlyIcon"
       noSelect={false}
       directionY="both"
-      showDisabledItems
       manualWidth="auto"
       withBackdrop={false}
       scaledOptions={false}

@@ -140,7 +140,6 @@ const Uploader = (props) => {
         <LabelGroup>
           {t("Common:Files")}
           <HelpButton
-            offsetRight={0}
             size={12}
             place="right"
             tooltipContent={
@@ -157,7 +156,6 @@ const Uploader = (props) => {
         <LabelGroup>
           {t("Common:Folders")}
           <HelpButton
-            offsetRight={0}
             size={12}
             place="right"
             tooltipContent={
@@ -179,7 +177,6 @@ const Uploader = (props) => {
         <LabelGroup>
           {isFolderMode ? t("SingleFolder") : t("SingleFile")}
           <HelpButton
-            offsetRight={0}
             size={12}
             place="right"
             tooltipContent={
@@ -200,7 +197,6 @@ const Uploader = (props) => {
         <LabelGroup>
           {isFolderMode ? t("MultipleFolders") : t("MultipleFiles")}
           <HelpButton
-            offsetRight={0}
             size={12}
             place="right"
             tooltipContent={
@@ -446,7 +442,6 @@ const Uploader = (props) => {
               <LabelGroup>
                 <Label className="label" text={t("Common:SelectFolder")} />
                 <HelpButton
-                  offsetRight={0}
                   size={12}
                   place="right-end"
                   tooltipContent={

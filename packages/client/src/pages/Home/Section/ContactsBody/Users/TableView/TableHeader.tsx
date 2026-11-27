@@ -234,7 +234,6 @@ class PeopleTableHeader extends React.Component<
     const {
       containerRef,
       filter,
-      sectionWidth,
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
@@ -253,7 +252,6 @@ class PeopleTableHeader extends React.Component<
         columns={columns as TTableColumn[]}
         columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName!}
-        sectionWidth={sectionWidth}
         resetColumnsSize={resetColumnsSize}
         infoPanelVisible={infoPanelVisible}
         useReactWindow

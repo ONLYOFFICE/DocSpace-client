@@ -61,7 +61,6 @@ const WebhooksTableRow = (props) => {
     openSettingsModal,
     openDeleteModal,
     setCurrentWebhook,
-    hideColumns,
     isAdmin,
   } = props;
   const navigate = useNavigate();
@@ -146,7 +145,6 @@ const WebhooksTableRow = (props) => {
       <TableRow
         className={styles.styledTableRow}
         contextOptions={contextOptions}
-        hideColumns={hideColumns}
         contextMenuTestId="webhook_table_contextmenu"
       >
         <TableCell>

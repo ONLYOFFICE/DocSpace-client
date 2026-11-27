@@ -50,7 +50,6 @@ const HistoryContent = ({ sectionWidth, item, locale, theme }) => {
       className={styles["row-content"]}
       sideColor={theme.client.settings.security.loginHistory.sideColor}
       nameColor={theme.client.settings.security.loginHistory.nameColor}
-      sectionWidth={sectionWidth}
     >
       <div className="user-container-wrapper">
         <Text fontWeight={600} fontSize="14px" className="settings_unavailable">

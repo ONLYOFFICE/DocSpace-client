@@ -110,8 +110,10 @@ const CreateButtonMobile = ({
     createGroup,
   });
 
-  const isDesktopView = currentDeviceType === DeviceType.desktop;
-  const isCreateFabVisible = showMainButton && !isDesktopView && !showBodyLoader;
+  // The floating Create button is for phones only; a tablet keeps the button
+  // in the filter row in both orientations, like the desktop.
+  const isMobileView = currentDeviceType === DeviceType.mobile;
+  const isCreateFabVisible = showMainButton && isMobileView && !showBodyLoader;
 
   React.useEffect(() => {
     setMainButtonVisible?.(isCreateFabVisible);

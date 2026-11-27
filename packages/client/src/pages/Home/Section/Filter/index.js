@@ -272,7 +272,10 @@ const SectionFilterContent = ({
     createGroup,
   });
 
-  const isDesktopView = currentDeviceType === DeviceType.desktop;
+  // A tablet keeps the Create button in the filter row in both orientations
+  // (portrait used to switch to the floating button). Only a phone gets the
+  // floating button.
+  const isMainButtonInFilter = currentDeviceType !== DeviceType.mobile;
 
   const isMetadataFilterAvailable =
     !isPublicRoom &&
@@ -1885,7 +1888,7 @@ const SectionFilterContent = ({
       isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
-      showMainButton={showMainButton && isDesktopView}
+      showMainButton={showMainButton && isMainButtonInFilter}
       mainButtonProps={mainButtonProps}
     />
   );

@@ -861,16 +861,21 @@ const Shell = ({ page = "home", ...rest }) => {
   const isPluginsSettings =
     aiPluginAgentAvailable && isPluginsSettingsPath(location.pathname);
 
+  // The view and the folder are those of the Files pages and keep the value
+  // of the page left for the settings (nothing there sets them), so they do
+  // not decide for the plugins page: reached from Contacts, the profile or a
+  // private room, it would have no chat.
   const isAiChatAvailable =
     aiServicesEnabled &&
-    (!isSettingsPage || isPluginsSettings) &&
-    currentClientView !== "users" &&
-    currentClientView !== "groups" &&
-    currentClientView !== "profile" &&
-    currentClientView !== "chat" &&
-    !isPrivacyFolder &&
     // Spec: private-rooms/sidebar-section, "No AI chat in the section"
-    !isPrivateRoomsRoute(location.pathname);
+    !isPrivateRoomsRoute(location.pathname) &&
+    (isPluginsSettings ||
+      (!isSettingsPage &&
+        currentClientView !== "users" &&
+        currentClientView !== "groups" &&
+        currentClientView !== "profile" &&
+        currentClientView !== "chat" &&
+        !isPrivacyFolder));
 
   // The Forms section takes a single attachment: a question there is about one
   // form and the responses collected in it, and two forms in one message
@@ -1149,7 +1154,11 @@ const Shell = ({ page = "home", ...rest }) => {
           // connect it, the user picks it in the composer like a knowledge
           // base.
           contextRoom={canUseAi ? aiChatContextRooms : undefined}
-          attachmentLimit={isFormsSection ? 1 : undefined}
+          attachmentLimit={
+            // Not on the plugins page of the settings: the section there is
+            // the one opened before them.
+            isFormsSection && !isPluginsSettings ? 1 : undefined
+          }
         >
           <AskAIChatBridge />
           <SkillSetChatBridge />

@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Tạo bằng AI",
+  "CreateWithAIPrompt": "Tôi muốn tạo một plugin cho không gian làm việc này. Hãy hỏi tôi plugin cần làm gì, sau đó hãy xây dựng nó.",
   "DeletePlugin": "Xóa plugin",
   "DeletePluginDescription": "Plugin này sẽ không còn khả dụng cho người dùng không gian làm việc. Bạn có chắc muốn tiếp tục?",
   "DeletePluginTitle": "Bạn muốn xóa plugin?",

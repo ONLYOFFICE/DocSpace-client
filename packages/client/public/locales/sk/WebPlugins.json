@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Vytvoriť pomocou AI",
+  "CreateWithAIPrompt": "Chcem vytvoriť plugin pre tento pracovný priestor. Spýtajte sa ma, čo má robiť, a potom ho zostavte.",
   "DeletePlugin": "Odstrániť plugin",
   "DeletePluginDescription": "Tento plugin už nebude používateľom pracovného priestoru k dispozícii. Ste si istí, že chcete pokračovať?",
   "DeletePluginTitle": "Odstrániť plugin?",

@@ -38,6 +38,8 @@ import { Link, LinkTarget } from "@onlyoffice/apps-ui-kit/components/link";
 import styles from "../Plugins.module.scss";
 import { UploadDecsriptionProps } from "../Plugins.types";
 
+import CreateWithAiButton from "./CreateWithAiButton";
+
 const UploadDescription = ({
   pluginsSdkUrl,
   currentColorScheme,
@@ -60,6 +62,7 @@ const UploadDescription = ({
           {t("Common:LearnMore")}
         </Link>
       ) : null}
+      <CreateWithAiButton t={t} />
     </div>
   );
 };

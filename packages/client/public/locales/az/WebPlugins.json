@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "AI ilə yaradın",
+  "CreateWithAIPrompt": "Bu iş sahəsi üçün plagin yaratmaq istəyirəm. Onun nə etməli olduğunu məndən soruşun, sonra onu qurun.",
   "DeletePlugin": "Plagini silin",
   "DeletePluginDescription": "Bu plagin artıq iş sahəsi istifadəçiləri üçün əlçatan olmayacaq. Davam etmək istədiyinizə əminsiniz?",
   "DeletePluginTitle": "Plagin silinsin?",

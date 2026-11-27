@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Luo AI:n avulla",
+  "CreateWithAIPrompt": "Haluan luoda liitännäisen tälle työtilalle. Kysy minulta, mitä sen pitää tehdä, ja rakenna se sitten.",
   "DeletePlugin": "Poista liitännäinen",
   "DeletePluginDescription": "Tämä liitännäinen ei ole enää saatavilla työtilan käyttäjille. Haluatko varmasti jatkaa?",
   "DeletePluginTitle": "Poistetaanko liitännäinen?",

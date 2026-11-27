@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Mit KI erstellen",
+  "CreateWithAIPrompt": "Ich möchte ein Plugin für diesen Arbeitsbereich erstellen. Fragen Sie mich, was es tun soll, und erstellen Sie es dann.",
   "DeletePlugin": "Plugin löschen",
   "DeletePluginDescription": "Dieses Plugin wird für Benutzer des Arbeitsbereichs nicht mehr verfügbar sein. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeletePluginTitle": "Plugin löschen?",

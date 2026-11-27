@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "AIで作成",
+  "CreateWithAIPrompt": "このワークスペース用のプラグインを作成したいです。何をするプラグインなのかを私に尋ねてから、ビルドしてください。",
   "DeletePlugin": "プラグインの削除",
   "DeletePluginDescription": "このプラグインはワークスペースのユーザーには提供されなくなります。このまま続けますか？",
   "DeletePluginTitle": "プラグインを削除しますか？",

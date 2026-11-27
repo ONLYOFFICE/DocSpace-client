@@ -25,13 +25,13 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | **External sharing** | | |
 | Initial state; restricted options appear; save; cancel; documents only; rooms only; default link type back | `packages/client/__tests__/access-control.spec.ts:61, 87, 133, 166, 200, 237, 276` | E2E-CONFIRMED |
 | **Password strength** | | |
-| 8 to 30 characters; upper case, digits, special characters | `ap/passwordStrength.js:209-320` | CODE-ONLY |
+| 8 to 30 characters; upper case, digits, special characters | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/passwordStrength.test.tsx:99, 106` | UNIT-CONFIRMED |
 | Password policy on the server | `server`, "Password policy"; "Changing the password policy" | SERVER-SPEC |
 | **Two-factor authentication** | | |
 | Methods offered by availability; setup page after saving | `ap/tfa.js:209-230, 270-290` | CODE-ONLY |
 | Setup page returned by the server | `server`, "Changing the two-factor policy"; "Policy change with a confirmation link" | SERVER-SPEC |
 | **Trusted mail domains** | | |
-| Three modes; checked on leaving; malformed and repeated domains block saving | `ap/trustedMail.js:160-251, 300-338` | CODE-ONLY |
+| Three modes; checked on leaving; malformed and repeated domains block saving; well-formed ones saved | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/trustedMail.test.tsx:92, 100, 119, 133, 145` | UNIT-CONFIRMED |
 | Trusted domains on the server | `serverSettings`, "Trusted mail domains" | SERVER-SPEC |
 | **Developer Tools access** | | |
 | Enabled and Disabled; save | `ap/devToolsAccess.tsx:165-240` | CODE-ONLY |
@@ -41,15 +41,14 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Invitation settings on the server | `../server/openspec/specs/invitations/spec.md`, "Invitation settings" | SERVER-SPEC |
 | **IP security** | | |
 | Saving with Disabled clears the allowed list | `packages/client/__tests__/ip-security.spec.ts:55` | E2E-CONFIRMED |
-| IPv4 check, repeated address, warning | `ap/ipSecurity.js:77-78, 190-255, 300-347` | CODE-ONLY |
+| Warning when enabled; IPv4 check and repeated address block saving; saved with a toast; Disabled saved without the list | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/ipSecurity.test.tsx:97, 107, 118, 129, 147` | UNIT-CONFIRMED |
 | IP restrictions on the server | `server`, "Saving IP restrictions"; "Enforcing IP restrictions" | SERVER-SPEC |
 | **Brute force protection** | | |
-| Whole numbers of up to four digits; empty marked; Restore to default | `ap/bruteForceProtection.js:150-156, 209-280, 372-387` | CODE-ONLY |
-| Limits on the server | `server`, "Failed sign-in limits"; "Range of the sign-in limits" | SERVER-SPEC |
+| Whole numbers of up to four digits; an empty attempts count marked and, with an empty check period, blocking saving; saved as numbers; Restore to default, disabled at the defaults | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/bruteForceProtection.test.tsx:124, 134, 148, 158, 175, 191` | UNIT-CONFIRMED || Limits on the server | `server`, "Failed sign-in limits"; "Range of the sign-in limits" | SERVER-SPEC |
 | **Administrator message** | | |
 | Enabled and Disabled; save | `ap/adminMessage.js:120-205` | CODE-ONLY |
 | **Session lifetime** | | |
-| Positive, at most four digits; sign-out warning | `ap/sessionLifetime.js:200-233, 250-310` | CODE-ONLY |
+| Sign-out warning; positive whole number of at most four digits; empty marked and blocking saving; saved; Disabled keeps the server's minutes | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/sessionLifetime.test.tsx:94, 102, 116, 128, 144` | UNIT-CONFIRMED |
 | Lifetime on the server | `serverSettings`, "Changing the session lifetime"; "Sessions after a lifetime change" | SERVER-SPEC |
 | **Single sign-on** | | |
 | Provider, certificates, mapping, users type, toggle, save and reset, metadata | `int/SingleSignOn/index.js:84-140`; `int/SingleSignOn/SubmitButton.js:54-80` | CODE-ONLY |
@@ -72,4 +71,5 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Developer Tools and Docs Connect by user type | Owned by `webhooks-and-api-keys` | `packages/client/__tests__/dev-tools-access.spec.ts` |
 | Login history and audit trail | Owned by `history-and-audit` | `packages/client/src/pages/PortalSettings/categories/security/login-history/` |
 | SMTP, Document Server, plugins | Owned by `notifications`, `files-settings`, `plugins` | `int/SMTPSettings/`; `int/DocumentService/`; `int/Plugins/` |
-| The fields of the user list of the security pages | Shared component of the history pages | `packages/client/src/pages/PortalSettings/categories/security/sub-components/__tests__/user-fields.test.tsx` |
+| Adding and deleting a field from the keyboard in the trusted domains and allowed IP lists | Keyboard of the shared field list, not a setting | `packages/client/src/pages/PortalSettings/categories/security/sub-components/__tests__/user-fields.test.tsx` |
+| An empty blocking time does not block saving; a failed save leaves the brute force page busy | Suspected defects, `deviations.md` C6, C7 | `ap/bruteForceProtection.js:154, 246, 271-273` |

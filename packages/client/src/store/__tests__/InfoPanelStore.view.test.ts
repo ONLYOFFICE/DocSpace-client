@@ -43,6 +43,8 @@ vi.mock("SRC_DIR/i18n", () => ({
 import { RoomsType } from "@docspace/shared/enums";
 import type { UserStore } from "@docspace/shared/store/UserStore";
 
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+
 import InfoPanelStore from "../InfoPanelStore";
 import type FilesStore from "../FilesStore";
 import type SelectedFolderStore from "../SelectedFolderStore";
@@ -84,5 +86,36 @@ describe("InfoPanelStore.setIsVisible - the tab the panel opens on", () => {
     });
     store.setIsVisible(true);
     expect(store.roomsView).toBe("info_details");
+  });
+});
+
+describe("InfoPanelStore - the tab of a skill", () => {
+  /** A store with `file` selected in the open skill set `folder`. */
+  const storeWith = (file: Record<string, unknown>) => {
+    const store = storeIn({ id: 12, roomType: RoomsType.InstructionsRoom });
+    store.filesStore = {
+      selection: [file],
+      bufferSelection: null,
+    } as unknown as FilesStore;
+    return store;
+  };
+  const skill = { id: 1, title: "review.md", fileExst: ".md", folderId: 12 };
+  const document = { id: 2, title: "notes.docx", fileExst: ".docx", folderId: 12 };
+
+  it("opens a skill on its Details while other files keep History", () => {
+    expect(storeWith(skill).currentFileView).toBe("info_details");
+    expect(storeWith(document).currentFileView).toBe("info_history");
+  });
+
+  it("keeps a tab picked for a skill to skills, and one picked for a file to files", () => {
+    const store = storeWith(skill);
+    store.setView(InfoPanelView.infoMetadata);
+    expect(store.currentFileView).toBe("info_metadata");
+    expect(store.fileView).toBe("info_history");
+
+    const other = storeWith(document);
+    other.setView(InfoPanelView.infoShare);
+    expect(other.currentFileView).toBe("info_share");
+    expect(other.skillView).toBe("info_details");
   });
 });

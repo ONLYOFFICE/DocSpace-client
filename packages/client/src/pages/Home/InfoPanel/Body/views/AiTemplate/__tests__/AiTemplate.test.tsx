@@ -86,7 +86,8 @@ beforeEach(async () => {
   templatesStore().select("agents/document/reviewer");
 });
 
-describe("AiTemplate", () => {
+// Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+describe.skip("AiTemplate", () => {
   it("tells on Details what the template is: its description, owner, type and category", () => {
     render(<AiTemplate view={InfoPanelView.infoDetails} />);
     expect(screen.getByTestId("info_panel_ai_template_description").textContent).toBe(

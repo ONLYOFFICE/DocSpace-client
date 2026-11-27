@@ -41,6 +41,7 @@ import { ToggleButton } from "@onlyoffice/apps-ui-kit/components/toggle-button";
 
 import type { ToggleBlockProps } from "./EditLinkPanel.types";
 import styles from "./EditLinkPanel.module.scss";
+import { ControlCaption } from "../../components/control-caption";
 
 const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
   headerText,
@@ -56,14 +57,17 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
   dataTestId,
 }) => {
   const tooltipId = useId();
+  const inputId = useId();
 
   return (
     <>
       <div className={styles.toggleBlock}>
         <div className={styles.toggleHeader}>
-          <Text fontSize="16px" fontWeight={700}>
-            {headerText}
-          </Text>
+          <ControlCaption htmlFor={inputId} isDisabled={isDisabled || !withToggle}>
+            <Text fontSize="16px" fontWeight={700}>
+              {headerText}
+            </Text>
+          </ControlCaption>
           {withToggle ? (
             <div className={styles.toggleWrapper} id={tooltipId}>
               <ToggleButton
@@ -71,6 +75,7 @@ const ToggleBlock: FC<PropsWithChildren<ToggleBlockProps>> = ({
                 isDisabled={isDisabled}
                 isChecked={isChecked}
                 onChange={onChange}
+                inputId={inputId}
                 dataTestId={dataTestId}
                 className={styles.toggle}
               />

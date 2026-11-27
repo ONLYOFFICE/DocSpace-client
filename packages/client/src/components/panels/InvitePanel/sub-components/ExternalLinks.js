@@ -38,7 +38,7 @@ import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
-import { useRef } from "react";
+import { useRef, useId } from "react";
 import { inject, observer } from "mobx-react";
 import classNames from "classnames";
 
@@ -66,6 +66,7 @@ import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 import { deleteInviteLink } from "@docspace/shared/api/portal";
 import { now, parseToDateTime, isAfter } from "@onlyoffice/apps-ui-kit/utils/date";
 import { LANGUAGE } from "@docspace/shared/constants";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const ExternalLinks = ({
   t,
@@ -94,6 +95,7 @@ const ExternalLinks = ({
   hideSelector,
   setInvitePanelOptions,
 }) => {
+  const linksToggleId = useId();
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
@@ -179,7 +181,9 @@ const ExternalLinks = ({
           [styles.inline]: true,
         })}
       >
-        {t("Common:InviteViaLink")}
+        <ControlCaption htmlFor={linksToggleId} isDisabled={isLinksToggling}>
+          {t("Common:InviteViaLink")}
+        </ControlCaption>
 
         <IconButton
           iconName={SettingsReactSvgUrl}
@@ -193,6 +197,7 @@ const ExternalLinks = ({
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
           isDisabled={isLinksToggling}
+          inputId={linksToggleId}
           dataTestId="invite_panel_external_links_toggle"
         />
       </Heading>

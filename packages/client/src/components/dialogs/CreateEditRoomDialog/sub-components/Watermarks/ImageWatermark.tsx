@@ -318,7 +318,6 @@ const ImageWatermark = ({
                 tooltipContent={
                   <Text fontSize="12px">{t("WatermarkPreviewHelp")}</Text>
                 }
-                offsetRight={0}
                 className="settings_unavailable"
               />
             </div>

@@ -76,7 +76,6 @@ const MembersSelectorBase = ({
             onParentPanelClose();
           }}
           withoutBackground
-          withBlur={false}
           isMultiSelect
           submitButtonLabel=""
           disableSubmitButton={false}

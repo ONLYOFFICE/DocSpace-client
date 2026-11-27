@@ -64,6 +64,7 @@ vi.mock("../DeleteAgentDialog", () => ({
 }));
 
 const openEditAiProject = vi.fn();
+const openAgentRooms = vi.fn();
 const changeSkillRooms = vi.fn();
 const inviteToRoom = vi.fn();
 vi.mock("@onlyoffice/apps-ui-kit/components/toast", () => ({ toastr }));
@@ -88,7 +89,7 @@ class FakeAiChatStore {
   agentActions: { id: string; label: string; isDanger?: boolean; onClick: () => void }[] | null = null;
 
   sourcesManager: {
-    onManage: (() => void) | null;
+    onManage: ((kind: "skills" | "knowledge") => void) | null;
     onSkillRoomsChange?: (change: { added: { id: string; name: string }[]; removed: string[] }) => void;
   } | null = null;
 
@@ -254,6 +255,7 @@ const renderBridge = (
         aiProjectsStore={{
           activeProject,
           openEditDialogById: openEditAiProject,
+          openRoomsSelector: openAgentRooms,
           changeSkillRooms,
           setPortalHasChatModel,
         }}
@@ -674,10 +676,10 @@ describe("AiPresetsBridge", () => {
   });
 
   describe("the actions of the picked agent", () => {
-    const withRights = (security: object, canEditSettings: boolean) => ({
+    // `canEdit` is the room's EditRoom right, which the agent's settings ask.
+    const withRights = (security: object, canEdit: boolean) => ({
       ...project(1, "Sales"),
-      security,
-      aiProject: { ...project(1, "Sales").aiProject, canEditSettings },
+      security: { ...security, EditRoom: canEdit },
     });
     const pick = async (store: AiPresetsStore, picked: object) => {
       api.getAiProject.mockResolvedValue(picked);
@@ -802,14 +804,17 @@ describe("AiPresetsBridge", () => {
       expect(screen.queryByTestId("delete-agent-dialog")).toBeNull();
     });
 
-    it("make the agent the owner of the chat's sources, managed by its form for an Agent manager", async () => {
+    it("make the agent the owner of the chat's sources, managed by its rooms selector for an Agent manager", async () => {
       const store = new AiPresetsStore();
       await pick(store, withRights({ EditAccess: true }, true));
       const manager = aiChatStore.sourcesManager;
       expect(manager).not.toBeNull();
 
-      act(() => manager?.onManage?.());
-      expect(openEditAiProject).toHaveBeenCalledWith(1);
+      act(() => manager?.onManage?.("skills"));
+      expect(openAgentRooms).toHaveBeenCalledWith(1, "instructions");
+      act(() => manager?.onManage?.("knowledge"));
+      expect(openAgentRooms).toHaveBeenCalledWith(1, "knowledge");
+      expect(openEditAiProject).not.toHaveBeenCalled();
 
       // A Skill set changed in the slash menu is saved to the agent.
       changeSkillRooms.mockResolvedValue(true);

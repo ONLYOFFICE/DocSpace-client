@@ -91,7 +91,6 @@ export const FileTypesFilter = (props) => {
       <LabelGroup>
         <CategorySubHeader>{t("AvailableFileTypes")}</CategorySubHeader>
         <HelpButton
-          offsetRight={0}
           size={12}
           place="right"
           tooltipContent={<Text fontSize="12px">{t("AllowedFileTypes")}</Text>}

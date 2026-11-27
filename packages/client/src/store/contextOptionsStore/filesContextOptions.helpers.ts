@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { isSkillFile } from "@docspace/shared/utils/skillFile";
 import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
@@ -426,11 +427,20 @@ export const getFilesContextOptionsImpl = (
           ? t("Common:Open")
           : t("Common:Preview"),
       icon: EyeReactSvgUrl,
-      onClick: () =>
-        self.treeFoldersStore.isRecentFolder ||
-        self.treeFoldersStore.isFavoritesFolder
-          ? self.gotoDocEditor(item)
-          : self.onPreviewClick(item),
+      onClick: () => {
+        // A skill is read as a skill, in the dialog of its instructions,
+        // not as the Markdown file that holds it in the document editor.
+        if (isSkillFile(item, self.selectedFolderStore)) {
+          self.dialogsStore.setEditSkillFile(item as unknown as TFile, true);
+          return;
+        }
+        if (
+          self.treeFoldersStore.isRecentFolder ||
+          self.treeFoldersStore.isFavoritesFolder
+        )
+          self.gotoDocEditor(item);
+        else self.onPreviewClick(item);
+      },
       disabled: false,
     },
     separator0,
@@ -879,7 +889,7 @@ export const getFilesContextOptionsImpl = (
     {
       id: "option_mark-read",
       key: "mark-read",
-      label: t("MarkRead"),
+      label: t("Common:MarkRead"),
       icon: TickRoundedSvgUrl,
       onClick: () => self.onClickMarkRead(item),
       disabled: false,

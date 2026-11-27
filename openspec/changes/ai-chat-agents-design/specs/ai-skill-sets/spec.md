@@ -4,7 +4,7 @@
 
 Defines the Skill sets list (Instructions rooms) and what an opened skill set shows about its skills, how a skill is read and how it is edited: boards 11 "Skill sets", 12 "Skill set open" and 13 "Edit skill". A skill is a Markdown file with a frontmatter (`name`, `description`) followed by its instructions.
 
-Implementation: `packages/shared/utils/skillFile.ts`; in the client the table columns of the two lists (`TableStore`, `TableHeader`, `SkillSetsRowData`, `SkillsRowData`), `SkillsStore` for the skill files read, the Details view with its `SkillSetInfo` and `UsedByAgents`, `getAiRoomProjects` in `packages/shared/api/ai/projects.ts`, the files context options and `components/dialogs/EditSkillDialog` with its Markdown toolbar.
+Implementation: `packages/shared/utils/skillFile.ts`; in the client the table columns of the two lists (`TableStore`, `TableHeader`, `SkillSetsRowData`, `SkillsRowData`), `SkillsStore` for the skill files read, the Details view with its `SkillSetInfo` and `UsedByAgents`, `getAiRoomProjects` in `packages/shared/api/ai/projects.ts`, the files context options, `components/dialogs/EditSkillDialog` with its Markdown toolbar and `components/dialogs/GenerateSkillDialog`.
 
 ## ADDED Requirements
 
@@ -26,6 +26,13 @@ The Details tab of a skill set SHALL show its owner, its content as the number o
 - **WHEN** a user selects "Document assistant", which holds three skills, with the Info panel open on Details
 - **THEN** the properties read "Skills: 3" and the panel lists the three skills with their commands, "/document-summary" among them
 
+### Requirement: Skills opened from a skill set's Details
+A click on a skill listed on the Details tab of its skill set SHALL open the dialog of "View instructions".
+
+#### Scenario: Skill opened from the Info panel
+- **WHEN** a user clicks "Document summary" in the skills listed on Details of its set
+- **THEN** its instructions are shown read-only in the skill dialog
+
 ### Requirement: Used by of a skill set
 Used by SHALL tell how many agents use the set, counting every such agent, readable by the user or not: "1 agent" (`Common:OneAgent`), "N agents" (`Common:AgentsNumber`), and a dash for a set no agent uses. The table column and the tile of a set SHALL tell it under the same label; the compact row SHALL tell it after the label and leave it out for a set no agent uses. It SHALL follow a change without a reload.
 
@@ -38,11 +45,15 @@ Used by SHALL tell how many agents use the set, counting every such agent, reada
 - **THEN** its Used by reads "1 agent" without a reload
 
 ### Requirement: Agents that use a skill set
-The Details tab of a skill set SHALL list, under "Used by agents" (`Common:UsedByAgents`), the agents that use the set, each by its logo and its name, sorted by name, and only those the user may read. Agents past the first hundred SHALL be told by their number ("+N"). A set with no agent to list SHALL show no such list. The list SHALL be read again when the set's Used by number changes.
+The Details tab of a skill set SHALL list, under "Used by agents" (`Common:UsedByAgents`), the agents that use the set, each by its logo and its name, sorted by name, and only those the user may read. Agents past the first hundred SHALL be told by their number ("+N"). A click on an agent SHALL open the agent's own page. A set with no agent to list SHALL show no such list. The list SHALL be read again when the set's Used by number changes.
 
 #### Scenario: Set used by two agents
 - **WHEN** a user selects "Document assistant", which "Contract reviewer" and "Sales desk" use, with the Info panel open on Details
 - **THEN** "Used by agents" lists "Contract reviewer" and "Sales desk"
+
+#### Scenario: Agent opened from Used by agents
+- **WHEN** a user clicks "Contract reviewer" under "Used by agents"
+- **THEN** the agent's own page opens
 
 #### Scenario: Agents the user may not read
 - **WHEN** a user selects a set used by two agents, neither of which the user is a member of
@@ -87,6 +98,35 @@ The Details tab of a skill SHALL show its description first, when the file gives
 - **WHEN** a user who may edit the skill chooses Edit in that dialog
 - **THEN** the dialog shows the Edit skill form on the same skill
 
+### Requirement: Formatted instructions
+The dialog of "View instructions" SHALL show the instructions laid out as formatted text: the Markdown rendered with its headings, lists, tables and code, not shown as its source and not in an editor.
+
+#### Scenario: Heading and list
+- **WHEN** a user opens the instructions of a skill whose text has "## Steps" and a numbered list under it
+- **THEN** the dialog shows the heading "Steps" and the numbered list, with no "##" and no editor
+
+### Requirement: Opening a skill
+A click on a skill in the list of its set and Preview (`Common:Preview`) in the skill's menu SHALL open the dialog of "View instructions", for those who may edit the skill too. A skill SHALL NOT be opened in the document editor.
+
+#### Scenario: Click on a skill
+- **WHEN** a user who may edit the skill clicks "Document summary" in the list of its set
+- **THEN** its instructions are shown read-only, with Edit, and not the Edit skill form
+
+#### Scenario: Reader clicks a skill
+- **WHEN** a user who may only read the skill set clicks "Document summary" in the list
+- **THEN** its instructions are shown read-only with no Edit
+
+#### Scenario: Preview
+- **WHEN** a user chooses Preview in the menu of "Document summary"
+- **THEN** its instructions are shown read-only in the dialog and the document editor is not opened
+
+### Requirement: The skill dialog
+The instructions of a skill, the New skill and Edit skill forms and "Create skill with AI" SHALL open as one modal dialog in the middle of the window, not as a side panel. On a desktop it SHALL be 720px wide, and narrower only when the window is; with the instructions or a skill's form in it, it SHALL be as tall as the window allows, the instructions taking the height the other fields leave. Its buttons SHALL keep their own width.
+
+#### Scenario: Width of the dialog
+- **WHEN** a user opens a skill's instructions, its Edit skill form or "Create skill with AI" in a window 1440px wide
+- **THEN** the dialog is 720px wide
+
 ### Requirement: Edit skill
 A skill's menu SHALL offer "Edit skill" (`Common:EditSkill`) to those who may edit and rename the file, and to no one else. It SHALL open a modal dialog with the Name, the command that name gives ("Command in chat:", `Common:SkillCommandInChat`), the Description with a hint that it tells the assistant when to apply the skill (`Common:SkillDescriptionHint`), and the Instructions (`Common:SkillInstructions`) in a Markdown editor under a toolbar.
 
@@ -97,6 +137,20 @@ A skill's menu SHALL offer "Edit skill" (`Common:EditSkill`) to those who may ed
 #### Scenario: Read-only user
 - **WHEN** a user who may only read the skill set opens a skill's menu
 - **THEN** no "Edit skill" is offered
+
+### Requirement: Create skill with AI
+Where AI is available, the create menu of a skill set SHALL offer "Create skill with AI" (`Common:CreateSkillWithAI`). It SHALL ask for a Name, which opens as "New skill", and a Description of what the skill should do, and SHALL end in "Generate skill" (`Common:GenerateSkill`) and Cancel, with nothing to save yet. "Generate skill" SHALL be disabled until the skill is described.
+
+#### Scenario: Request for a skill
+- **WHEN** a user chooses "Create skill with AI" in the create menu of a skill set
+- **THEN** the dialog opens on the name "New skill" and an empty description, with "Generate skill" disabled and no Save
+
+### Requirement: Generated skill
+The generated skill SHALL be shown in the fields of the Edit skill form, named by the AI when the name was left as it opened, with Save in place of "Generate skill" and a way back to the request. Nothing SHALL be stored before Save.
+
+#### Scenario: Create skill with AI
+- **WHEN** a user describes a skill, leaves the name "New skill" and chooses "Generate skill"
+- **THEN** the dialog shows the generated skill's name, command, description and instructions, with Save
 
 ### Requirement: Markdown toolbar
 The toolbar over the instructions SHALL offer Bold, Italic, Heading, Bulleted list, Numbered list, Code and Link, in that order, each named on hover, and SHALL carry the note "Markdown supported" (`Common:MarkdownSupported`). Using a button SHALL keep the focus in the editor. The toolbar SHALL be disabled while the skill loads or saves.

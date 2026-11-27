@@ -88,6 +88,7 @@ import PluginStore from "SRC_DIR/store/PluginStore";
 import type { TAvatarImage } from "SRC_DIR/store/AvatarEditorDialogStore";
 
 import styles from "./Profile.module.scss";
+import PluginFields from "./PluginFields";
 import { getConstName } from "@docspace/shared/constants/consts";
 
 const getDropdownHoverRules = () => [
@@ -133,6 +134,7 @@ type MainProfileProps = {
   getBanner?: CampaignsStore["getBanner"];
   updatePlugins?: PluginStore["updatePlugins"];
   enablePlugins?: SettingsStore["enablePlugins"];
+  pluginFields?: PluginStore["profileFieldItemsList"];
 };
 
 const MainProfile = (props: MainProfileProps) => {
@@ -147,7 +149,6 @@ const MainProfile = (props: MainProfileProps) => {
     setChangeEmailVisible,
     setChangePasswordVisible,
     setChangeNameVisible,
-    setChangeAvatarVisible,
     withActivationBar,
     sendActivationLink,
     updateProfileCulture,
@@ -163,6 +164,7 @@ const MainProfile = (props: MainProfileProps) => {
     getBanner,
     enablePlugins,
     updatePlugins,
+    pluginFields = [],
   } = props;
 
   const styleContainerRef = useRef<HTMLDivElement>(null);
@@ -399,7 +401,6 @@ const MainProfile = (props: MainProfileProps) => {
             editing={!profile!.isLDAP}
             hasAvatar={!!profile!.hasAvatar}
             model={model as unknown as TAvatarModel[]}
-            editAction={() => setChangeAvatarVisible?.(true)}
             onChangeFile={onChangeFileContext}
           />
           {profile!.isSSO ? (
@@ -583,7 +584,6 @@ const MainProfile = (props: MainProfileProps) => {
               {documentationEmail ? (
                 <HelpButton
                   size={12}
-                  offsetRight={0}
                   place={dirTooltip}
                   tooltipContent={tooltipLanguage}
                   dataTestId="language_help_button"
@@ -605,11 +605,9 @@ const MainProfile = (props: MainProfileProps) => {
                 scaled={isMobile()}
                 scaledOptions={false}
                 size="content"
-                showDisabledItems
                 dropDownMaxHeight={dropDownMaxHeight}
                 manualWidth="280px"
                 isDefaultMode={isMobileHorizontalOrientation || !isMobile()}
-                withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                 fillIcon={false}
                 modernView={!isMobile()}
                 dataTestId="language_combo_box"
@@ -636,7 +634,6 @@ const MainProfile = (props: MainProfileProps) => {
               {!isOwner ? (
                 <HelpButton
                   size={12}
-                  offsetRight={0}
                   place={dirTooltip}
                   tooltipContent={getUserTypeDescription(
                     isAdmin,
@@ -648,6 +645,8 @@ const MainProfile = (props: MainProfileProps) => {
                 />
               ) : null}
             </div>
+
+            <PluginFields items={pluginFields} />
           </div>
 
           <div className={styles.mobileProfileBlock}>
@@ -760,7 +759,6 @@ const MainProfile = (props: MainProfileProps) => {
                 <div className={styles.editButton}>
                   <HelpButton
                     size={12}
-                    offsetRight={0}
                     place={dirTooltip}
                     tooltipContent={getUserTypeDescription(
                       isAdmin,
@@ -784,7 +782,6 @@ const MainProfile = (props: MainProfileProps) => {
                 {documentationEmail ? (
                   <HelpButton
                     size={12}
-                    offsetRight={0}
                     place="right"
                     tooltipContent={tooltipLanguage}
                     dataTestId="language_help_button"
@@ -805,11 +802,9 @@ const MainProfile = (props: MainProfileProps) => {
                   scaled
                   scaledOptions={false}
                   size="content"
-                  showDisabledItems
                   dropDownMaxHeight={dropDownMaxHeight}
                   manualWidth="280px"
                   isDefaultMode={isMobileHorizontalOrientation || !isMobile()}
-                  withBlur={isMobileHorizontalOrientation ? false : isMobile()}
                   fillIcon={false}
                   modernView={false}
                   dataTestId="language_combo_box"
@@ -873,7 +868,7 @@ export default inject(
 
     const { getBanner } = campaignsStore;
 
-    const { updatePlugins } = pluginStore;
+    const { updatePlugins, profileFieldItemsList } = pluginStore;
 
     return {
       profile,
@@ -900,6 +895,7 @@ export default inject(
       getBanner,
       updatePlugins,
       enablePlugins,
+      pluginFields: profileFieldItemsList,
     };
   },
 )(withCultureNames<MainProfileProps>(observer(MainProfile)));

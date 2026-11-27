@@ -181,6 +181,17 @@ describe("SkillSetInfo", () => {
     expect(container).toBeEmptyDOMElement();
   });
 
+  it("opens a skill's instructions to read on a click on the skill", async () => {
+    api.getFolder.mockResolvedValue({ files: [{ id: 40, title: "Document summary.md" }] });
+    const onOpenSkill = vi.fn();
+    render(<SkillSetInfo selection={skillSet} onOpenSkill={onOpenSkill} />);
+    const [first] = await screen.findAllByTestId("skill-set-info-skill");
+    fireEvent.click(first);
+    expect(onOpenSkill).toHaveBeenCalledWith(
+      expect.objectContaining({ title: "Document summary.md" }),
+    );
+  });
+
   it("reads the set again when its number of skills changes", async () => {
     const { rerender } = render(<SkillSetInfo selection={skillSet} />);
     await waitFor(() => expect(api.getFolder).toHaveBeenCalledTimes(1));

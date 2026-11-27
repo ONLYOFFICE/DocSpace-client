@@ -279,11 +279,17 @@ export const AI_PROJECT_WITHOUT_SOURCES = AI_PROJECTS[2];
 const projectRoom = ({ aiProject: _aiProject, ...room }: AiProjectMock) => room;
 
 /**
- * The projects of the list the caller pinned, as the "AI rooms" root of
- * `files/@root` lists them (`rootHandler`'s `pinnedAiProjects`).
+ * The projects of the list as the "AI rooms" root of `files/@root` lists
+ * them (`rootHandler`'s `aiHubRootProjects`): five at most, the pinned ones
+ * first, then the others, each group in the order of the list.
  */
-export const aiPinnedProjectRooms = (projects: AiProjectMock[] = AI_PROJECTS) =>
-  projects.filter((project) => project.pinned).map(projectRoom);
+export const aiHubRootProjectRooms = (projects: AiProjectMock[] = AI_PROJECTS) =>
+  [
+    ...projects.filter((project) => project.pinned),
+    ...projects.filter((project) => !project.pinned),
+  ]
+    .slice(0, 5)
+    .map(projectRoom);
 
 /**
  * `PUT files/rooms/:id/pin` and `/unpin` for an agent

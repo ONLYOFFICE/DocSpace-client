@@ -325,7 +325,6 @@ export const User = ({
 							scaled={false}
 							scaledOptions={false}
 							isAside={isMobile}
-							withBlur={isMobile}
 							isLoading={isLoading}
 							isMobileView={isMobileOnly}
 							// fixedDirection={isMobile}

@@ -320,11 +320,10 @@ export const getAccessOptions = (
 			];
 			break;
 
-		// An AI project: the manager role is paid (room admins and up), so the
-		// invite panel leaves users with Member only. Its invitation link joins
-		// as Project manager alone (see ExternalLinks).
+		// An agent is shared as Member (Content creator) only: Agent manager
+		// (Room manager, a paid role) is no longer offered.
 		case RoomsType.AiProjectRoom:
-			options = [accesses.projectManager, accesses.projectMember];
+			options = [accesses.projectMember];
 			break;
 
 		case None:

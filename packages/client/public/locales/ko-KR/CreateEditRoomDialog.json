@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "이 공간은 링크를 가진 누구나 사용할 수 있습니다. 외부 사용자는 모든 양식에 대해 양식 작성자 권한을 갖습니다.",
   "GoToIntegrations": "통합 기능으로 이동",
   "Horizontal": "수평",
-  "Icon": "아이콘",
   "NeedMoreIntegrations": "더 많은 통합이 필요하신가요?",
   "NeedMoreIntegrationsDescription": "웹훅을 사용하여 데이터를 자체 시스템으로 전송하거나 Zapier를 통해 수천 개의 서비스에 양식을 연결하세요.",
   "NoDatabaseConnections": "데이터베이스 연결이 구성되지 않았습니다",

@@ -141,9 +141,7 @@ describe("getTourSteps — room admin", () => {
     expect(preview).toBeGreaterThan(0);
     expect(demoTitles[preview + 1]).toBe("RoomsTour:RoomsMembersTitle");
     // The section's own rooms need no such warning.
-    expect(titles(adminFlags)).not.toContain(
-      "RoomsTour:RoomsDemoPreviewTitle",
-    );
+    expect(titles(adminFlags)).not.toContain("RoomsTour:RoomsDemoPreviewTitle");
   });
 
   it("names the list as a sample over all three stand-in rows", () => {
@@ -161,7 +159,7 @@ describe("getTourSteps — room admin", () => {
 
     expect(closing.title).toBe("RoomsTour:RoomsCreateFirstTitle");
     expect(closing.target).toBe(
-      '#filter_search-input > div:has(> [data-testid="main-button"])',
+      '[data-testid="filter_search_input"] > div:has(> [data-testid="main-button"])',
     );
 
     // The filter bar holds that button on desktop only.

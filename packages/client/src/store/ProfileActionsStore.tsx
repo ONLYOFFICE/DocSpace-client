@@ -67,6 +67,7 @@ import axios from "axios";
 // unrelated copy whose queued commands nobody ever delivers.
 import { zendeskAPI } from "@onlyoffice/apps-ui-kit/components/article/zendesk/Zendesk.utils";
 import { CategoryType } from "@docspace/shared/constants";
+import { DeviceType } from "@docspace/shared/enums";
 import { getBrandName } from "@docspace/shared/constants/brands";
 
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
@@ -276,7 +277,17 @@ class ProfileActionsStore {
 
     this.selectedFolderStore.setSelectedFolder(null);
 
-    window.DocSpace.navigate(settingsUrl);
+    // On a phone the settings open on their section list: one section on
+    // screen hides that there are others. PortalSettingsSidebar reads the flag
+    // once the settings article is mounted, so the panel never shows the
+    // previous page's menu while the settings load.
+    const openArticle =
+      this.settingsStore.currentDeviceType === DeviceType.mobile;
+
+    window.DocSpace.navigate(
+      settingsUrl,
+      openArticle ? { state: { openArticle: true } } : undefined,
+    );
   };
 
   onAccountsClick = (

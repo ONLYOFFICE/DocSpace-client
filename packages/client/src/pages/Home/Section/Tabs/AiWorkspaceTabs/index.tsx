@@ -43,6 +43,7 @@ import { getCategoryType } from "@docspace/shared/utils/common";
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 
 import {
+  AI_TEMPLATES_ENABLED,
   getAiWorkspaceTabUrl,
   hasAiWorkspaceTemplates,
   isAiWorkspaceTemplates,
@@ -70,6 +71,8 @@ export const AiWorkspaceTabs = ({ userId, showLoader }: AiWorkspaceTabsProps) =>
   const location = useLocation();
   const navigate = useNavigate();
 
+  // The Templates tab is hidden for now, and My agents alone needs no tabs.
+  if (!AI_TEMPLATES_ENABLED) return null;
   if (getCategoryType(location) !== CategoryType.AiHub) return null;
   if (!hasAiWorkspaceTemplates(location.search)) return null;
 

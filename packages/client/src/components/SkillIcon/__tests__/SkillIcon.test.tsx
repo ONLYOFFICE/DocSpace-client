@@ -26,6 +26,13 @@ describe("SkillIcon", () => {
     expect(icon.querySelector("svg")?.getAttribute("width")).toBe("16");
   });
 
+  it("draws a plain skill set without its square, as a skill is drawn", () => {
+    render(<SkillIcon kind="set" size={24} isPlain />);
+    const icon = screen.getByTestId("skill-icon-set");
+    expect(icon.style.borderRadius).toBe("");
+    expect(icon.querySelector("svg")?.getAttribute("width")).toBe("12");
+  });
+
   it("gives the icon to every skill set, whatever logo is stored for it", () => {
     const set = { isRoom: true, roomType: RoomsType.InstructionsRoom };
     expect(isSkillSetIconRoom(set)).toBe(true);

@@ -39,7 +39,7 @@ type TTreeNode = {
   rootFolderType: FolderType;
   newItems: number;
   new: number;
-  pinnedAiProjects?: { id: number }[];
+  aiHubRootProjects?: { id: number }[];
 };
 
 const getTree = async () => (await getFoldersTree()) as unknown as TTreeNode[];
@@ -82,33 +82,30 @@ describe("getFoldersTree", () => {
     expect(rooms.new).toBe(5);
   });
 
-  it("lists the pinned AI projects of the AI rooms section", async () => {
+  it("lists the AI projects of the AI rooms section, pinned or not", async () => {
     response.push(section(1, FolderType.Rooms, 0, 0), {
       ...section(9, FolderType.AiHub, 0, 0),
       folders: [
         { id: 11, roomType: RoomsType.AiProjectRoom, pinned: true },
-        { id: 12, roomType: RoomsType.AiProjectRoom, pinned: true },
+        { id: 12, roomType: RoomsType.AiProjectRoom, pinned: false },
       ],
     });
 
     const tree = await getTree();
     const aiHub = tree.find((f) => f.rootFolderType === FolderType.AiHub);
 
-    expect(aiHub?.pinnedAiProjects?.map((room) => room.id)).toEqual([11, 12]);
-    expect(tree[0].pinnedAiProjects).toBeUndefined();
+    expect(aiHub?.aiHubRootProjects?.map((room) => room.id)).toEqual([11, 12]);
+    expect(tree[0].aiHubRootProjects).toBeUndefined();
   });
 
-  it("drops what a server without that listing answers in the AI rooms section", async () => {
+  it("drops a room that is no AI project, which a server without that listing answers in the AI rooms section", async () => {
     response.push({
       ...section(9, FolderType.AiHub, 0, 0),
-      folders: [
-        { id: 11, roomType: RoomsType.AiProjectRoom, pinned: false },
-        { id: 12, roomType: RoomsType.KnowledgeRoom, pinned: true },
-      ],
+      folders: [{ id: 12, roomType: RoomsType.KnowledgeRoom, pinned: true }],
     });
 
     const [aiHub] = await getTree();
 
-    expect(aiHub.pinnedAiProjects).toEqual([]);
+    expect(aiHub.aiHubRootProjects).toEqual([]);
   });
 });

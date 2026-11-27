@@ -120,11 +120,9 @@ const ScheduleComponent = ({
             styles.scheduleHelpButton,
             "schedule_help-button",
           )}
-          iconName={HelpReactSvgUrl}
           getContent={renderHelpContent}
           tooltipMaxWidth="310px"
           place="right"
-          offsetRight={0}
           tooltipContent={undefined}
           dataTestId="auto_save_perido_help_button"
         />
@@ -146,7 +144,6 @@ const ScheduleComponent = ({
             styles.daysOption,
             "schedule-backup_combobox days_option",
           )}
-          showDisabledItems
           directionY="both"
           dataTestId="auto_backup_period_combobox"
           dropDownTestId="auto_backup_period_dropdown"
@@ -169,7 +166,6 @@ const ScheduleComponent = ({
               styles.weeklyOption,
               "schedule-backup_combobox weekly_option",
             )}
-            showDisabledItems
             directionY="both"
             dataTestId="auto_backup_weekday_combobox"
             dropDownTestId="auto_backup_weekday_dropdown"
@@ -193,7 +189,6 @@ const ScheduleComponent = ({
               styles.monthOptions,
               "schedule-backup_combobox month_options",
             )}
-            showDisabledItems
             directionY="both"
             dataTestId="auto_backup_month_combobox"
             dropDownTestId="auto_backup_month_dropdown"
@@ -216,7 +211,6 @@ const ScheduleComponent = ({
             styles.timeOptions,
             "schedule-backup_combobox time_options",
           )}
-          showDisabledItems
           directionY="both"
           dataTestId="auto_backup_time_combobox"
           dropDownTestId="auto_backup_time_dropdown"
@@ -242,7 +236,6 @@ const ScheduleComponent = ({
             styles.maxCopies,
             "schedule-backup_combobox max_copies",
           )}
-          showDisabledItems
           directionY="both"
           dataTestId="auto_backup_max_copies_combobox"
           dropDownTestId="auto_backup_max_copies_dropdown"

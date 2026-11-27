@@ -62,7 +62,7 @@ const CONTEXT_MENU_SELECTOR = ".p-contextmenu";
 // ContextMenu renders each entry with the option's own id.
 const START_FILLING_OPTION_SELECTOR = "#option_start-filling";
 const NEW_BUTTON_SELECTOR =
-  '#filter_search-input > div:has(> [data-testid="main-button"])';
+  '[data-testid="filter_search_input"] > div:has(> [data-testid="main-button"])';
 
 // The empty screen's only option, "create a room"; it carries no test id.
 const EMPTY_SCREEN_CREATE_SELECTOR =

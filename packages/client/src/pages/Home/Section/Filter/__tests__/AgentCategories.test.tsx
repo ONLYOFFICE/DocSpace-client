@@ -29,7 +29,8 @@ const agentsFilter = (tags: string[] | null = null) => {
 
 const tabs = () => screen.queryAllByTestId("ai-agent-category").map((tab) => tab.textContent);
 
-describe("AgentCategories", () => {
+// Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+describe.skip("AgentCategories", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

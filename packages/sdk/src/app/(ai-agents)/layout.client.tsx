@@ -220,7 +220,6 @@ const SectionShell = observer(
           // auto-height scroll body and sizes to its content instead of the
           // section height. File tabs keep it on for their list scroll.
           withBodyScroll={!isAgentChat}
-          uploadFiles={false}
           settingsStudio={isAgentChat}
           // Section's `fullHeightBody` turns section-wrapper /
           // section-wrapper-content into flex columns with flex-grow:1, so

@@ -33,7 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
+import { observable, runInAction } from "mobx";
 import { Provider } from "mobx-react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -137,22 +138,23 @@ const ClientArticleSidebar = (await import("../index"))
   .default as unknown as React.ComponentType;
 
 type TRenderOptions = {
-  pinnedProjects?: { id: string; name: string }[];
+  aiProjects?: { id: string; name: string }[];
   recentThreads?: { id: string; title: string }[];
   hasMoreThreads?: boolean;
   selectedFolder?: Record<string, unknown>;
+  isAiProjectRoomRoot?: boolean;
 };
 
-const renderSidebar = (
+const sidebar = (
   extraFolders: unknown[] = [],
   {
-    pinnedProjects = [],
+    aiProjects = [],
     recentThreads = [],
     hasMoreThreads = false,
     selectedFolder = { id: 1, rootFolderType: FolderType.USER, isRootFolder: true },
+    isAiProjectRoomRoot = false,
   }: TRenderOptions = {},
-) =>
-  render(
+) => (
     <Provider
       authStore={{ isAdmin: true, isRoomAdmin: false }}
       userStore={{ user: { id: "user-1", isVisitor: false } }}
@@ -168,7 +170,8 @@ const renderSidebar = (
         myFolderId: 1,
         isTemplatesFolderRoot: false,
         isDocumentsFolder: false,
-        pinnedAiProjects: pinnedProjects.map((project) => ({
+        isAiProjectRoomRoot,
+        aiHubRootProjects: aiProjects.map((project) => ({
           ...project,
           logo: { color: "" },
         })),
@@ -195,8 +198,11 @@ const renderSidebar = (
       }}
     >
       <ClientArticleSidebar />
-    </Provider>,
-  );
+    </Provider>
+);
+
+const renderSidebar = (extraFolders: unknown[] = [], options: TRenderOptions = {}) =>
+  render(sidebar(extraFolders, options));
 
 describe("ClientArticleSidebar — Private section", () => {
   it("Private item rendered", () => {
@@ -231,7 +237,7 @@ describe("ClientArticleSidebar — Private section", () => {
 });
 
 describe("ClientArticleSidebar — AI Chat section", () => {
-  it("lists AI Chat, then Agents, Recent, Skill sets and Knowledge bases", () => {
+  it("lists AI Chat, then Agents, Skill sets and Knowledge bases", () => {
     renderSidebar([
       { id: 2010, title: "AI", rootFolderType: FolderType.AiHub },
     ]);
@@ -243,7 +249,6 @@ describe("ClientArticleSidebar — AI Chat section", () => {
     expect(ids).toEqual([
       "nav-ai-chat",
       "nav-ai-rooms",
-      "nav-ai-chat-recent",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
     ]);
@@ -296,18 +301,56 @@ describe("ClientArticleSidebar — an opened AI room on its short address", () =
       }),
     ).toBe("ai-rooms");
   });
+
+  it("stays on Skill sets while a skill set opened from its list is loading", () => {
+    // Observable, as the store is: the sidebar follows what it holds.
+    const selectedFolder = observable<Record<string, unknown>>({
+      id: 2010,
+      rootFolderType: FolderType.AiHub,
+      isRootFolder: true,
+      roomType: null,
+    });
+    const activeId = () => screen.getByTestId("nav").dataset.activeId;
+    try {
+      route.pathname = "/ai-rooms/filter";
+      route.search = `?type=${RoomsType.InstructionsRoom}`;
+      renderSidebar(aiHub, { selectedFolder });
+      expect(activeId()).toBe("ai-rooms-skills");
+
+      // The address names the room, which the store does not hold yet.
+      route.pathname = "/ai-rooms/32/filter";
+      route.search = "?folder=32";
+      act(() =>
+        runInAction(() => {
+          selectedFolder.isRootFolder = false;
+        }),
+      );
+      expect(activeId()).toBe("ai-rooms-skills");
+
+      act(() =>
+        runInAction(() => {
+          selectedFolder.id = 32;
+          selectedFolder.roomType = RoomsType.InstructionsRoom;
+        }),
+      );
+      expect(activeId()).toBe("ai-rooms-skills");
+    } finally {
+      route.pathname = "/private/filter";
+      route.search = "";
+    }
+  });
 });
 
 describe("ClientArticleSidebar — AI Chat section recent entries", () => {
-  it("lists every pinned project under Agents, and the conversations under Recent with Show more", () => {
-    const pinnedProjects = Array.from({ length: 7 }, (_, index) => ({
+  it("lists the conversations under AI Chat with All chats, then every listed project under Agents with All agents", () => {
+    const aiProjects = Array.from({ length: 7 }, (_, index) => ({
       id: String(100 + index),
       name: `Project ${index}`,
     }));
     renderSidebar(
       [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
       {
-        pinnedProjects,
+        aiProjects,
         recentThreads: [
           { id: "t1", title: "First" },
           { id: "t2", title: "Second" },
@@ -322,6 +365,9 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
 
     expect(ids).toEqual([
       "nav-ai-chat",
+      "nav-ai-nested-chat-t1",
+      "nav-ai-nested-chat-t2",
+      "nav-ai-nested-chats-more",
       "nav-ai-rooms",
       "nav-ai-nested-project-100",
       "nav-ai-nested-project-101",
@@ -330,10 +376,7 @@ describe("ClientArticleSidebar — AI Chat section recent entries", () => {
       "nav-ai-nested-project-104",
       "nav-ai-nested-project-105",
       "nav-ai-nested-project-106",
-      "nav-ai-chat-recent",
-      "nav-ai-nested-chat-t1",
-      "nav-ai-nested-chat-t2",
-      "nav-ai-nested-chats-more",
+      "nav-ai-nested-projects-more",
       "nav-ai-rooms-skills",
       "nav-ai-rooms-knowledge",
     ]);
@@ -346,7 +389,7 @@ describe("ClientArticleSidebar — collapsed", () => {
     route.search = "?folder=100";
     try {
       renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
-        pinnedProjects: [{ id: "100", name: "Only" }],
+        aiProjects: [{ id: "100", name: "Only" }],
         recentThreads: [{ id: "t1", title: "First" }],
         hasMoreThreads: true,
       });
@@ -362,24 +405,42 @@ describe("ClientArticleSidebar — collapsed", () => {
     expect(collapsed.filter((id) => id.startsWith("ai-"))).toEqual([
       "ai-chat",
       "ai-rooms",
-      "ai-chat-recent",
       "ai-rooms-skills",
       "ai-rooms-knowledge",
     ]);
   });
 });
 
-describe("ClientArticleSidebar — AI Chat section without more entries", () => {
-  it("offers no Show more while everything is listed", () => {
-    renderSidebar(
-      [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
-      {
-        pinnedProjects: [{ id: "100", name: "Only" }],
-        recentThreads: [{ id: "t1", title: "First" }],
-      },
-    );
+describe("ClientArticleSidebar — AI Chat section links to the whole lists", () => {
+  const aiHub = [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }];
+
+  it("offers All chats and All agents while a conversation and an agent are listed", () => {
+    renderSidebar(aiHub, {
+      aiProjects: [{ id: "100", name: "Only" }],
+      recentThreads: [{ id: "t1", title: "First" }],
+    });
+
+    expect(screen.getByTestId("nav-ai-nested-chats-more")).toBeInTheDocument();
+    expect(screen.getByTestId("nav-ai-nested-projects-more")).toBeInTheDocument();
+  });
+
+  it("offers neither with nothing listed", () => {
+    renderSidebar(aiHub);
 
     expect(screen.queryByTestId("nav-ai-nested-chats-more")).toBeNull();
+    expect(screen.queryByTestId("nav-ai-nested-projects-more")).toBeNull();
+  });
+
+  it("opens the Agents list from All agents", () => {
+    renderSidebar(aiHub, {
+      aiProjects: [{ id: "100", name: "Only" }],
+      recentThreads: [{ id: "t1", title: "First" }],
+    });
+
+    fireEvent.click(screen.getByTestId("nav-ai-nested-projects-more"));
+    expect(navigateMock).toHaveBeenCalledWith(
+      expect.stringMatching(/^\/ai-rooms\/filter\?/),
+    );
   });
 });
 
@@ -388,7 +449,7 @@ describe("ClientArticleSidebar — AI Chat section full names", () => {
     renderSidebar(
       [{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }],
       {
-        pinnedProjects: [{ id: "100", name: "A project with a very long name" }],
+        aiProjects: [{ id: "100", name: "A project with a very long name" }],
         recentThreads: [{ id: "t1", title: "A conversation with a long title" }],
       },
     );
@@ -448,6 +509,28 @@ describe("ClientArticleSidebar — leaving the AI Chat page", () => {
     vi.runAllTimers();
     expect(store.close).toHaveBeenCalledTimes(1);
     vi.useRealTimers();
+    chat.store = null;
+  });
+
+  it("leaves an agent's chat open for the agent picked next, and closes it for any other entry", () => {
+    const store = {
+      isVisible: true,
+      effectiveFullscreen: true,
+      isOnHistoryPage: false,
+      close: vi.fn(),
+      setFullscreen: vi.fn(),
+    };
+    chat.store = store;
+    renderSidebar([{ id: 2010, title: "AI", rootFolderType: FolderType.AiHub }], {
+      aiProjects: [{ id: "100", name: "Next" }],
+      isAiProjectRoomRoot: true,
+    });
+
+    fireEvent.click(screen.getByTestId("nav-ai-nested-project-100"));
+    expect(store.close).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByTestId("nav-ai-rooms"));
+    expect(store.close).toHaveBeenCalledTimes(1);
     chat.store = null;
   });
 

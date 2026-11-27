@@ -177,7 +177,6 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 					scaledOptions={scaledOptions}
 					dataTestId={dataTestId}
 					ariaLabel={ariaLabel}
-					showDisabledItems={true}
 				/>
 			) : null}
 
@@ -199,7 +198,6 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 					setIsOpenItemAccess={setIsOpenItemAccess}
 					manualY="0px"
 					withBackground={isMobileView}
-					withBlur={isMobileView}
 					isDisabled={isDisabled}
 					isSelectionDisabled={isSelectionDisabled}
 					selectionErrorText={selectionErrorText}
@@ -207,7 +205,6 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
 					scaledOptions={scaledOptions}
 					dataTestId={dataTestId}
 					ariaLabel={ariaLabel}
-					showDisabledItems={true}
 				/>
 			) : null}
 		</div>

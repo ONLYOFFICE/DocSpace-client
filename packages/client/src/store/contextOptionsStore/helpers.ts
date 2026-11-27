@@ -302,12 +302,12 @@ export const layoutRoomOptions = (
 };
 
 // An agent's menu (ai-agent-page, "Actions menu of an agent" and "Actions
-// menu on a card"): select and open on a card, then Edit agent, Share agent
-// and Agent info, pin and notifications, copy link, change owner and Leave
-// agent, and Delete agent last after a separator.
+// menu on a card"): select and open on a card, then Share agent and Agent
+// info, pin and notifications, copy link, change owner and Leave agent, and
+// Delete agent last after a separator. It offers no Edit agent.
 const AGENT_HEAD_KEYS = ["select", "open"];
+const AGENT_OMITTED_KEYS = new Set(["edit-room"]);
 const AGENT_MAIN_KEYS = [
-  "edit-room",
   "invite-users-to-room",
   "room-info",
   "pin-room",
@@ -330,7 +330,10 @@ export const layoutAgentOptions = (
   customActions: TContextOption[],
 ): TContextOption[] => {
   const shown = options.filter(
-    (option) => !option.isSeparator && !option.disabled,
+    (option) =>
+      !option.isSeparator &&
+      !option.disabled &&
+      !AGENT_OMITTED_KEYS.has(option.key),
   );
   const pick = (keys: string[]) =>
     keys.flatMap((key) => shown.filter((option) => option.key === key));

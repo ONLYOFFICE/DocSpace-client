@@ -145,9 +145,10 @@ test.describe("AI Chat section access", () => {
 });
 
 /**
- * An Agent manager lists, re-roles and removes the agent's members on the
- * Members tab of its Info panel, the room's members list; a Member is not
- * given the tab. A removal asks first and warns that the member's
+ * An Agent manager lists and removes the agent's members on the Members tab
+ * of its Info panel, the room's members list; Member is the only role there
+ * is to hold, so there is nothing to re-role to. A Member is not given the
+ * tab. A removal asks first and warns that the member's
  * conversations go with them.
  *
  * Spec: ai-agent-info-panel, "Members of an agent"; ai-agent-access,
@@ -182,6 +183,14 @@ test.describe("Members of an agent", () => {
     await expect(details).toBeVisible();
   };
 
+  // The Agents list opens as tiles until another view is picked there. The
+  // cases below read it as the table a user switched to.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
+    );
+  });
+
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       settingsHandler(TEST_PORT, TypeSettings.AuthenticatedNoStandalone),
@@ -192,7 +201,7 @@ test.describe("Members of an agent", () => {
     );
   });
 
-  test("an Agent manager re-roles and removes members, after a warning", async ({
+  test("an Agent manager removes members, after a warning, and has no other role to give", async ({
     page,
     baseUrl,
     mockRequest,
@@ -225,23 +234,14 @@ test.describe("Members of an agent", () => {
       name: new RegExp(`^Role of ${BOB.displayName}: `),
     });
 
-    // Bob becomes an Agent manager.
+    // Member is the only role of the list: Bob cannot be made an Agent manager.
+    await expect(roleOf).toHaveText("Member");
     await roleOf.click();
-    await page.getByText("Agent manager", { exact: true }).last().click();
-    await expect
-      .poll(() =>
-        membersHandle.current!.getRequests().some(
-          (r) =>
-            r.method === "PUT" &&
-            JSON.stringify(r.body).includes(BOB.id) &&
-            JSON.stringify(r.body).includes(`"access":${ShareAccessRights.RoomManager}`),
-        ),
-      )
-      .toBe(true);
+    await expect(page.getByText("Remove", { exact: true }).last()).toBeVisible();
+    await expect(page.getByText("Agent manager", { exact: true })).toHaveCount(0);
 
     // Removing him asks first, with the conversation warning, and sends nothing until confirmed.
     const sentBefore = membersHandle.current!.getRequests().length;
-    await roleOf.click();
     await page.getByText("Remove", { exact: true }).last().click();
     const confirmation = page.getByRole("dialog", { name: "Remove user" });
     await expect(confirmation).toBeVisible();
@@ -274,7 +274,9 @@ test.describe("Members of an agent", () => {
  * rights (the room's `security` and whether the user is in it), so each user
  * gets agents in the role the scenario names.
  *
- * Menu items by key: Edit agent `edit-room`, Share agent
+ * Menu items by key: Edit agent `edit-room` (in neither the card menu nor
+ * the page menu, whatever the role; the chat panel's "Agent actions" keeps
+ * it), Share agent
  * `invite-users-to-room`, Agent info `room-info`, copy link
  * `link-for-room-members`, change owner `change-room-owner`, Delete agent
  * `delete`, Leave agent `leave-room`, notifications `mute-room`.
@@ -402,6 +404,14 @@ const openAgentsMenu = async (page: Page) => {
 };
 
 test.describe("Agent access", () => {
+  // The Agents list opens as tiles until another view is picked there. The
+  // cases below read it as the table a user switched to.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
+    );
+  });
+
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -523,8 +533,8 @@ test.describe("Agent access", () => {
         );
 
         const ownerMenu = {
-          offered: ["edit-room", "invite-users-to-room", "change-room-owner", "delete"],
-          withheld: ["leave-room"],
+          offered: ["invite-users-to-room", "change-room-owner", "delete"],
+          withheld: ["edit-room", "leave-room"],
         };
 
         // The card menu answers as the page does.
@@ -552,8 +562,8 @@ test.describe("Agent access", () => {
     );
 
     const managerMenu = {
-      offered: ["edit-room", "invite-users-to-room", "leave-room"],
-      withheld: ["delete", "change-room-owner"],
+      offered: ["invite-users-to-room", "leave-room"],
+      withheld: ["edit-room", "delete", "change-room-owner"],
     };
 
     await page.goto(`${baseUrl}${AGENTS_URL}`);
@@ -705,9 +715,8 @@ test.describe("Agent access", () => {
 
 /**
  * The invite panel of an agent ("Share agent"): portal users by name only,
- * each offered the roles their type may hold - Agent manager for an admin or
- * a room admin, Member only for a User - and no guests, no groups and no
- * invitation link. The inviter is a DocSpace admin who is the agent's
+ * each invited as a Member, the only role the panel offers whatever their
+ * type - and no guests, no groups and no invitation link. The inviter is a DocSpace admin who is the agent's
  * Agent manager; the panel's search finds a room admin, a User, a guest and
  * a group by the same word.
  */
@@ -764,6 +773,14 @@ test.describe("Inviting to an agent", () => {
       .getByTestId("invite_panel_item_access_selector")
       .getByTestId(`access_right_option_${key}`);
 
+  // The Agents list opens as tiles until another view is picked there. The
+  // cases below read it as the table a user switched to.
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
+    );
+  });
+
   test.beforeEach(({ mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
@@ -797,18 +814,16 @@ test.describe("Inviting to an agent", () => {
     await openInvitePanel(page, baseUrl);
     await addInvitee(page, "Rita Stone");
 
-    // Agent manager is preselected, and Member can be chosen as well.
-    const role = roleOf(page, "Rita Stone", "Agent manager");
+    // Member is preselected and is the only role: a room admin is not
+    // offered Agent manager either.
+    const role = roleOf(page, "Rita Stone", "Member");
     await expect(role).toBeVisible();
     await role.click();
-    await expect(inviteeOption(page, "projectmanager")).not.toHaveAttribute(
-      "aria-disabled",
-      "true",
-    );
     await expect(inviteeOption(page, "projectmember")).not.toHaveAttribute(
       "aria-disabled",
       "true",
     );
+    await expect(inviteeOption(page, "projectmanager")).toHaveCount(0);
   });
 
   // Spec: ai-agent-access, "Roles of an agent"
@@ -820,40 +835,12 @@ test.describe("Inviting to an agent", () => {
     const role = roleOf(page, "Uma Stone", "Member");
     await expect(role).toBeVisible();
     await role.click();
-    const manager = inviteeOption(page, "projectmanager");
-    await expect(manager).toHaveAttribute("aria-disabled", "true");
     await expect(inviteeOption(page, "projectmember")).not.toHaveAttribute(
       "aria-disabled",
       "true",
     );
-  });
-
-  // Spec: ai-agent-access, "Roles of an agent". ui-kit's DropDownItem gives a
-  // disabled option its note only on a touch device (`isTouchDevice`); a
-  // desktop pointer gets no note at all, which is ui-kit's to fix.
-  test.describe("on a touch device", () => {
-    test.use({ hasTouch: true });
-
-    test("Inviting a User: the disabled Agent manager says who can hold it", async ({
-      page,
-      baseUrl,
-    }) => {
-      await openInvitePanel(page, baseUrl);
-      await addInvitee(page, "Uma Stone");
-
-      await roleOf(page, "Uma Stone", "Member").click();
-      const manager = inviteeOption(page, "projectmanager");
-      await expect(manager).toHaveAttribute("aria-disabled", "true");
-
-      // A tap on it shows the note and keeps the menu open.
-      await manager.click({ force: true });
-      await expect(
-        page.getByText(
-          "Guests and Users cannot be assigned as Agent managers. Only Room and Full admins are suitable for the specified role.",
-        ),
-      ).toBeVisible();
-      await expect(manager).toBeVisible();
-    });
+    // Agent manager is not in the list at all, rather than disabled with a note.
+    await expect(inviteeOption(page, "projectmanager")).toHaveCount(0);
   });
 
   // Spec: ai-agent-access, "Who may be invited to an agent"
@@ -903,6 +890,6 @@ test.describe("Inviting to an agent", () => {
     await expect(invitePanel(page).getByText("Invite via link", { exact: true })).toHaveCount(0);
     await expect(invitePanel(page).getByText("Everyone in DocSpace")).toHaveCount(0);
     await addInvitee(page, "Rita Stone");
-    await expect(roleOf(page, "Rita Stone", "Agent manager")).toBeVisible();
+    await expect(roleOf(page, "Rita Stone", "Member")).toBeVisible();
   });
 });

@@ -72,62 +72,8 @@ import InputParam from "SRC_DIR/components/CreateEditDialogParams/InputParam";
 
 import SkillForm from "../EditSkillDialog/SkillForm";
 
+import editStyles from "../EditSkillDialog/EditSkillDialog.module.scss";
 import styles from "./GenerateSkillDialog.module.scss";
-
-const WIDTH_STORAGE_KEY = "generate-skill-panel-width";
-// The default aside width is the narrowest the panel goes.
-const MIN_WIDTH = 480;
-// The page keeps at least this much room beside the panel.
-const MIN_PAGE_GAP = 120;
-
-const getMaxWidth = () => Math.max(MIN_WIDTH, window.innerWidth - MIN_PAGE_GAP);
-
-const readStoredWidth = () => {
-  try {
-    const stored = Number(localStorage.getItem(WIDTH_STORAGE_KEY));
-    return stored >= MIN_WIDTH ? Math.min(stored, getMaxWidth()) : MIN_WIDTH;
-  } catch {
-    return MIN_WIDTH;
-  }
-};
-
-/**
- * The panel's width, dragged from its inner edge and remembered per browser.
- * On a phone the aside is full width and the handle is hidden.
- */
-const usePanelWidth = () => {
-  const [width, setWidth] = React.useState(readStoredWidth);
-  const widthRef = React.useRef(width);
-
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const handle = e.currentTarget;
-    handle.setPointerCapture(e.pointerId);
-    const isRtl = document.documentElement.dataset.dir === "rtl";
-
-    const onMove = (event: PointerEvent) => {
-      const next = isRtl ? event.clientX : window.innerWidth - event.clientX;
-      widthRef.current = Math.min(Math.max(next, MIN_WIDTH), getMaxWidth());
-      setWidth(widthRef.current);
-    };
-    const onUp = () => {
-      handle.removeEventListener("pointermove", onMove);
-      handle.removeEventListener("pointerup", onUp);
-      handle.removeEventListener("pointercancel", onUp);
-      try {
-        localStorage.setItem(WIDTH_STORAGE_KEY, String(widthRef.current));
-      } catch {
-        // Storage is unavailable: the width lasts for this panel only.
-      }
-    };
-
-    handle.addEventListener("pointermove", onMove);
-    handle.addEventListener("pointerup", onUp);
-    handle.addEventListener("pointercancel", onUp);
-  };
-
-  return { width, onPointerDown };
-};
 
 // The server folds the title into the skill name and keeps only letters and
 // digits of it, so a title without any has no name.
@@ -174,8 +120,8 @@ const getGenerateError = (
 };
 
 /**
- * "Create skill with AI" in an Instructions room, laid out as the metadata AI
- * panel: the user describes the skill and may name it, "Generate skill" has
+ * "Create skill with AI" in an Instructions room, in the modal of New skill
+ * and Edit skill: the user describes the skill and may name it, "Generate skill" has
  * the AI service write the Markdown file, and the result opens in the fields
  * of the Edit skill form. The name opens as "New skill", as the New skill
  * form does; left that way or emptied, it is no name of the user's, and the
@@ -206,7 +152,6 @@ const GenerateSkillDialog = ({
   // or the one the AI gave a skill left unnamed; the file's own name is made from it again on Save.
   const [skill, setSkill] = React.useState<TSkillFile | null>(null);
   const abortRef = React.useRef<AbortController | null>(null);
-  const { width, onPointerDown } = usePanelWidth();
 
   React.useEffect(() => () => abortRef.current?.abort(), []);
 
@@ -219,6 +164,10 @@ const GenerateSkillDialog = ({
     targetRoomId != null;
 
   const onClose = () => {
+    // A skill being saved is not left. The cross stays in the header all
+    // the same: without it the title, which the back arrow shares the
+    // header with, is spread to the far edge.
+    if (isSaving) return;
     abortRef.current?.abort();
     setGenerateSkillDialogVisible?.(false);
   };
@@ -336,37 +285,27 @@ const GenerateSkillDialog = ({
   return (
     <ModalDialog
       visible
-      displayType={ModalDialogType.aside}
-      // The form of a generated skill fills the body and scrolls inside its
-      // editor; the panel scrolls the fields that come before it.
-      withBodyScroll={!skill}
+      // The modal of New skill and Edit skill. With the generated skill in
+      // its form it has their height too, for the instructions; the request
+      // before it is as tall as its few fields.
+      displayType={ModalDialogType.modal}
+      autoMaxHeight
+      className={skill ? editStyles.dialog : styles.dialog}
       withForm
       onSubmit={(e) => {
         e.preventDefault();
-        void onSave();
+        void (skill ? onSave() : onGenerate());
       }}
       onClose={onClose}
-      isCloseable={!isSaving}
       // The generated skill hides the form it was asked for with; the back
       // arrow returns to it and drops the skill, which "Generate skill"
       // writes anew.
       isBackButton={!!skill}
       onBackClick={isSaving ? undefined : () => setSkill(null)}
-      // `style` lands on the dialog element, below the root that resolves
-      // `--modal-dialog-aside-default-width` into the aside width, so the
-      // resolved variable itself is set here and the aside inherits it.
-      style={{ "--modal-dialog-aside-width": `${width}px` } as React.CSSProperties}
       dataTestId="generate-skill-dialog"
     >
       <ModalDialog.Header>{t("Common:CreateSkillWithAI")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div
-          className={styles.resizer}
-          role="separator"
-          aria-orientation="vertical"
-          onPointerDown={onPointerDown}
-          data-testid="generate-skill-resizer"
-        />
         {skill ? (
           <SkillForm
             name={skill.name}
@@ -407,7 +346,6 @@ const GenerateSkillDialog = ({
               <Label
                 htmlFor="generate-skill-description"
                 text={t("Common:DescriptionLabel")}
-                display="display"
               />
               <Textarea
                 id="generate-skill-description"
@@ -421,16 +359,6 @@ const GenerateSkillDialog = ({
                 dataTestId="generate-skill-description"
               />
             </div>
-            <Button
-              scale
-              size={ButtonSize.small}
-              icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}
-              label={t("Common:GenerateSkill")}
-              isLoading={isGenerating}
-              isDisabled={!canGenerate || isSaving}
-              onClick={() => void onGenerate()}
-              testId="generate-skill-run-button"
-            />
             {error ? (
               <Text className={styles.error} fontSize="12px" lineHeight="16px">
                 {error}
@@ -440,20 +368,32 @@ const GenerateSkillDialog = ({
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          label={t("Common:SaveButton")}
-          size={ButtonSize.normal}
-          primary
-          scale
-          type="submit"
-          isLoading={isSaving}
-          isDisabled={!canSave || isGenerating}
-          testId="generate-skill-save"
-        />
+        {/* The request has one thing to do, and the skill it gives another. */}
+        {skill ? (
+          <Button
+            label={t("Common:SaveButton")}
+            size={ButtonSize.normal}
+            primary
+            type="submit"
+            isLoading={isSaving}
+            isDisabled={!canSave}
+            testId="generate-skill-save"
+          />
+        ) : (
+          <Button
+            icon={<ReactSVG className={styles.runIcon} src={AISvgUrl} />}
+            label={t("Common:GenerateSkill")}
+            size={ButtonSize.normal}
+            primary
+            type="submit"
+            isLoading={isGenerating}
+            isDisabled={!canGenerate}
+            testId="generate-skill-run-button"
+          />
+        )}
         <Button
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
-          scale
           onClick={onClose}
           isDisabled={isSaving}
           testId="generate-skill-cancel"

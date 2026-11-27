@@ -77,7 +77,6 @@
   "MarkAsRevision": "Mark as revision",
   "MarkAsVersion": "Mark as version",
   "MarkingRead": "Marking is read",
-  "MarkRead": "Mark as read",
   "MeAndGroups": "Me and groups ({{ groupsCount }})",
   "MeAndMembers": "Me and members ({{ membersCount }})",
   "MeAndMembersAndGroups": "Me, members ({{ membersCount }}) and groups ({{ groupsCount }})",

@@ -435,8 +435,6 @@ const Item: React.FC<ItemProps> = ({
         <div className={styles.errorWrapper}>
           <HelpButton
             className={styles.helpButton}
-            iconName={InfoEditReactSvgUrl}
-            offsetRight={0}
             tooltipContent={
               hasNotFoundEmail
                 ? t("Common:EmailErrorMessageUserNotFound")
@@ -467,7 +465,6 @@ const Item: React.FC<ItemProps> = ({
               <HelpButton
                 className={styles.helpButton}
                 tooltipContent={warning}
-                iconName={InfoRoleSvgUrl}
                 size={16}
               />
             </div>

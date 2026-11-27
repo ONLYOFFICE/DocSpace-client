@@ -34,6 +34,8 @@
  */
 
 import { http } from "msw";
+import type { Page } from "@playwright/test";
+import { LDAPCertificateProblem } from "@docspace/shared/enums";
 import { expect, test, TEST_PORT } from "./fixtures/base";
 import {
   settingsHandler,
@@ -86,10 +88,26 @@ const done = { id: "op", completed: true, percents: 100, error: "", status: "", 
 
 type TCalls = {
   saved?: Record<string, unknown>;
+  saves: Record<string, unknown>[];
   cron?: { Cron: string | null };
   syncs: number;
   statusChecks: number;
+  certificateRequested?: boolean;
 };
+
+const CERTIFICATE_REQUEST = {
+  Approved: false,
+  Requested: true,
+  SerialNumber: "0A1B2C3D",
+  IssuerName: "CN=Example CA",
+  SubjectName: "CN=ldap.example.com",
+  ValidFrom: "2026-01-01T00:00:00",
+  ValidUntil: "2027-01-01T00:00:00",
+  Hash: "5F3A9C7E",
+  CertificateErrors: [LDAPCertificateProblem.CertUntrustedCa],
+};
+
+const started = { id: "op", completed: false, percents: 0, error: "" };
 
 const ldapHandlers = (enabled: boolean, calls: TCalls) => [
   http.get(LDAP_PATH, () => json(ldapSettings(enabled))),
@@ -97,14 +115,25 @@ const ldapHandlers = (enabled: boolean, calls: TCalls) => [
   http.get(`${LDAP_PATH}/cron`, () => json({ cron: null })),
   http.post(LDAP_PATH, async ({ request }) => {
     calls.saved = (await request.json()) as Record<string, unknown>;
-    return json(done);
+    calls.saves.push(calls.saved);
+    return calls.certificateRequested && calls.saves.length === 1
+      ? json(started)
+      : json(done);
   }),
   http.get(`${LDAP_PATH}/sync`, () => {
     calls.syncs += 1;
-    return json({ id: "op", completed: false, percents: 0, error: "" });
+    return json(started);
   }),
   http.get(`${LDAP_PATH}/status`, () => {
     calls.statusChecks += 1;
+    if (calls.certificateRequested) {
+      return json({
+        ...done,
+        error: "Certificate verification",
+        certificateConfirmRequest: JSON.stringify(CERTIFICATE_REQUEST),
+        operationType: "SaveAndSync",
+      });
+    }
     return calls.statusChecks === 1
       ? json({
           id: "op",
@@ -139,7 +168,18 @@ const quotaWithoutLdap = () =>
     );
   });
 
-const newCalls = (): TCalls => ({ syncs: 0, statusChecks: 0 });
+const newCalls = (): TCalls => ({ saves: [], syncs: 0, statusChecks: 0 });
+
+const openSettingsWithLdapOn = async (page: Page, baseUrl: string) => {
+  await page.goto(`${baseUrl}${URL}`);
+  await expect(
+    page.getByTestId("ldap_toggle_button").locator("input"),
+  ).toBeChecked();
+  await page.getByTestId("hide_show_ldap_link").click();
+  await expect(page.getByTestId("server_field_input")).toHaveValue(
+    "ldap.example.com",
+  );
+};
 
 test.describe("LDAP", () => {
   test("Without the LDAP feature the switches and the sync are disabled and marked as paid", async ({
@@ -256,5 +296,130 @@ test.describe("LDAP", () => {
     await expect(
       page.getByText("Settings have been successfully updated"),
     ).toBeVisible();
+  });
+
+  test("Group membership makes its fields editable and required, and sends them", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const calls = newCalls();
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      ...ldapHandlers(true, calls),
+    );
+
+    await openSettingsWithLdapOn(page, baseUrl);
+
+    const groupDN = page.getByTestId("group_dn_field_input");
+    await expect(groupDN).toBeDisabled();
+
+    await page.getByText("Group Membership", { exact: true }).click();
+    await expect(groupDN).toBeEnabled();
+
+    const save = page.getByRole("button", { name: "Save", exact: true }).first();
+    await save.click();
+    await expect(groupDN).toHaveAttribute("data-error", "true");
+    await expect(page.getByTestId("user_attribute_field_input")).toHaveAttribute(
+      "data-error",
+      "true",
+    );
+
+    await groupDN.fill("ou=groups,dc=example,dc=com");
+    await page.getByTestId("user_attribute_field_input").fill("uid");
+    await page
+      .getByTestId("group_filter_field_textarea")
+      .fill("(objectClass=groupOfNames)");
+    await page.getByTestId("group_name_attribute_field_input").fill("cn");
+    await page.getByTestId("group_attribute_field_input").fill("member");
+    await save.click();
+
+    await expect
+      .poll(() => calls.saved?.GroupDN)
+      .toBe("ou=groups,dc=example,dc=com");
+    expect(calls.saved).toMatchObject({
+      GroupMembership: true,
+      UserAttribute: "uid",
+      GroupFilter: "(objectClass=groupOfNames)",
+      GroupNameAttribute: "cn",
+      GroupAttribute: "member",
+    });
+  });
+
+  test("Authentication makes the login and password required, then sends them", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const calls = newCalls();
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      ...ldapHandlers(true, calls),
+    );
+
+    await openSettingsWithLdapOn(page, baseUrl);
+
+    const login = page.locator('input[name="login"]');
+    const password = page.locator('input[name="password"]');
+    await expect(login).toBeDisabled();
+
+    await page.getByText("Authentication", { exact: true }).click();
+    await expect(login).toBeEnabled();
+
+    const save = page.getByRole("button", { name: "Save", exact: true }).first();
+    await save.click();
+    await expect(login).toHaveAttribute("data-error", "true");
+    expect(calls.saves).toHaveLength(0);
+
+    await login.fill("cn=admin,dc=example,dc=com");
+    await password.fill("secret");
+    await save.click();
+
+    await expect.poll(() => calls.saves.length).toBe(1);
+    expect(calls.saved).toMatchObject({
+      Authentication: true,
+      Login: "cn=admin,dc=example,dc=com",
+      Password: "secret",
+    });
+  });
+
+  test("A certificate the server cannot trust is shown for confirmation, and confirming it saves again with its hash", async ({
+    page,
+    mockRequest,
+    baseUrl,
+  }) => {
+    const calls = newCalls();
+    calls.certificateRequested = true;
+    mockRequest.use(
+      settingsHandler(TEST_PORT, TypeSettings.Authenticated),
+      ...ldapHandlers(true, calls),
+    );
+
+    await openSettingsWithLdapOn(page, baseUrl);
+
+    await page.getByTestId("server_field_input").fill("ldaps://ldap.example.org");
+    await page.getByRole("button", { name: "Save", exact: true }).first().click();
+
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.getByText("Confirm certificate")).toBeVisible();
+    await expect(dialog.getByText("Serial number: 0A1B2C3D")).toBeVisible();
+    await expect(dialog.getByText("Unique hash: 5F3A9C7E")).toBeVisible();
+    await expect(
+      dialog.getByText(
+        "Certificate Authority who issued the certificate is not trusted",
+      ),
+    ).toBeVisible();
+    expect(calls.saves).toHaveLength(1);
+    expect(calls.saves[0]).toMatchObject({ AcceptCertificate: false });
+
+    calls.certificateRequested = false;
+    await dialog.getByRole("button", { name: "OK" }).click();
+
+    await expect.poll(() => calls.saves.length).toBe(2);
+    expect(calls.saves[1]).toMatchObject({
+      AcceptCertificate: true,
+      acceptCertificateHash: "5F3A9C7E",
+    });
+    await expect(dialog).toBeHidden();
   });
 });

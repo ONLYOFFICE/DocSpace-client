@@ -42,7 +42,10 @@ import { DeviceType, RoomsType } from "@docspace/shared/enums";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 
 import { createGroup } from "SRC_DIR/helpers/contacts";
-import { getSectionCreateButton } from "SRC_DIR/helpers/getSectionCreateButton";
+import {
+  getSectionCreateButton,
+  isCreateButtonFloating,
+} from "SRC_DIR/helpers/getSectionCreateButton";
 
 import CreateButtonMobileView from "./CreateButtonMobileView";
 
@@ -110,10 +113,10 @@ const CreateButtonMobile = ({
     createGroup,
   });
 
-  // The floating Create button is for phones only; a tablet keeps the button
-  // in the filter row in both orientations, like the desktop.
-  const isMobileView = currentDeviceType === DeviceType.mobile;
-  const isCreateFabVisible = showMainButton && isMobileView && !showBodyLoader;
+  const isCreateFabVisible =
+    showMainButton &&
+    isCreateButtonFloating(currentDeviceType) &&
+    !showBodyLoader;
 
   React.useEffect(() => {
     setMainButtonVisible?.(isCreateFabVisible);

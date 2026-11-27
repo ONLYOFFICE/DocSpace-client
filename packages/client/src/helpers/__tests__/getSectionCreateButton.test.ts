@@ -1,6 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { getSectionCreateButton } from "../getSectionCreateButton";
+import { DeviceType } from "@docspace/shared/enums";
+
+import {
+  getSectionCreateButton,
+  isCreateButtonFloating,
+} from "../getSectionCreateButton";
 
 const model = [{ key: "upload-from-device", label: "Upload from device" }];
 
@@ -42,5 +47,23 @@ describe("getSectionCreateButton", () => {
         params({ isKnowledgeBase: true, getFolderModel: () => [] }),
       ).showMainButton,
     ).toBe(false);
+  });
+});
+
+describe("isCreateButtonFloating", () => {
+  it("floats the Create button on a phone", () => {
+    expect(isCreateButtonFloating(DeviceType.mobile)).toBe(true);
+  });
+
+  it("keeps the Create button in the filter row on a tablet in either orientation", () => {
+    expect(isCreateButtonFloating(DeviceType.tablet)).toBe(false);
+  });
+
+  it("keeps the Create button in the filter row on a desktop", () => {
+    expect(isCreateButtonFloating(DeviceType.desktop)).toBe(false);
+  });
+
+  it("does not float the button before the device type is known", () => {
+    expect(isCreateButtonFloating(undefined)).toBe(false);
   });
 });

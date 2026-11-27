@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { DeviceType } from "@docspace/shared/enums";
 import type { TTranslation } from "@docspace/shared/types";
 import type { ContextMenuModel } from "@onlyoffice/apps-ui-kit/components/context-menu";
 import type { MainButtonProps } from "@onlyoffice/apps-ui-kit/components/main-button/MainButton.types";
@@ -77,6 +78,10 @@ export type SectionCreateButtonResult = {
 };
 
 const HIDDEN: SectionCreateButtonResult = { showMainButton: false };
+
+/** Only a phone gets the floating Create button; a tablet and a desktop show it in the filter row. */
+export const isCreateButtonFloating = (deviceType?: DeviceType) =>
+  deviceType === DeviceType.mobile;
 
 export const getSectionCreateButton = ({
   t,

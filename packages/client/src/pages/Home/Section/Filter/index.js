@@ -88,7 +88,10 @@ import { getManyPDFTitle } from "@docspace/shared/utils/getPDFTite";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { createGroup } from "SRC_DIR/helpers/contacts";
-import { getSectionCreateButton } from "SRC_DIR/helpers/getSectionCreateButton";
+import {
+  getSectionCreateButton,
+  isCreateButtonFloating,
+} from "SRC_DIR/helpers/getSectionCreateButton";
 import { getAiWorkspaceListType } from "SRC_DIR/helpers/aiWorkspace";
 
 import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
@@ -271,11 +274,6 @@ const SectionFilterContent = ({
     onCreateRoom,
     createGroup,
   });
-
-  // A tablet keeps the Create button in the filter row in both orientations
-  // (portrait used to switch to the floating button). Only a phone gets the
-  // floating button.
-  const isMainButtonInFilter = currentDeviceType !== DeviceType.mobile;
 
   const isMetadataFilterAvailable =
     !isPublicRoom &&
@@ -1888,7 +1886,9 @@ const SectionFilterContent = ({
       isFormsSection={isFormsFolder}
       organizeRoomsGrouping={organizeRoomsGrouping}
       isFilterOrSearchActive={isFilterOrSearchActive}
-      showMainButton={showMainButton && isMainButtonInFilter}
+      showMainButton={
+        showMainButton && !isCreateButtonFloating(currentDeviceType)
+      }
       mainButtonProps={mainButtonProps}
     />
   );

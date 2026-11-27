@@ -49,17 +49,28 @@ import {
   useChatNoAccess,
 } from "SRC_DIR/Hooks/useChatNoAccess";
 
+import styles from "./ChatSection.module.scss";
+
 type ChatSectionProps = SectionProps & {
+  /** The page has the AI chat beside it. */
+  withChat: boolean;
   aiNoAccessStores: ChatNoAccessStoreProps;
 };
 
 /**
- * The settings section with the AI chat docked beside it, as the Files
- * sections have it: the plugins page, where "Create with AI" opens the chat
- * to build a plugin. Below the desktop width the open chat covers the
- * section, as it does there.
+ * The settings section, with the AI chat docked beside it on the page that
+ * has one, as the Files sections have it: the plugins page, where "Create
+ * with AI" opens the chat to build a plugin. Fullscreen, and any open chat
+ * below the desktop width, collapses the section under the chat, as it does
+ * there.
+ *
+ * Every settings page renders this one component, and `withChat` only
+ * switches the chat's props: a different component for the page with the
+ * chat would remount the page under it whenever the chat appears or the
+ * user moves between that page and its neighbours, and load it again.
  */
 const ChatSection = ({
+  withChat,
   aiNoAccessStores,
   children,
   ...rest
@@ -67,31 +78,45 @@ const ChatSection = ({
   const isDesktop = useIsDesktop();
   const { aiReady, noAccessProps, topUpDialog } =
     useChatNoAccess(aiNoAccessStores);
-  const chatPanel = useAiChatPanel(true, { aiReady, noAccessProps });
+  const chatPanel = useAiChatPanel(withChat, { aiReady, noAccessProps });
+
+  const isFullscreen =
+    !!chatPanel?.isChatPanelVisible &&
+    (chatPanel.isChatPanelFullscreen || !isDesktop);
+
+  const chatProps = chatPanel
+    ? {
+        isChatPanelAvailable: true,
+        isChatPanelVisible: chatPanel.isChatPanelVisible,
+        setIsChatPanelVisible: (visible: boolean) => {
+          if (!visible) chatPanel.closeChatPanel();
+        },
+        isChatPanelResizable: true,
+        isChatPanelFullscreen: isFullscreen,
+        chatPanelWidth: chatPanel.chatPanelWidth,
+        setChatPanelWidth: chatPanel.setChatPanelWidth,
+        setChatPanelFullscreen: chatPanel.setChatPanelFullscreen,
+        unsetChatPanelFullscreen: chatPanel.unsetChatPanelFullscreen,
+        // Collapsed to no width under the fullscreen chat, the section
+        // stays mounted: out of the tab order and of pointer's reach.
+        inert: isFullscreen,
+      }
+    : null;
 
   return (
     <>
-      <SectionWrapper
-        {...rest}
-        isChatPanelAvailable
-        isChatPanelVisible={chatPanel.isChatPanelVisible}
-        setIsChatPanelVisible={(visible: boolean) => {
-          if (!visible) chatPanel.closeChatPanel();
-        }}
-        isChatPanelResizable
-        isChatPanelFullscreen={
-          chatPanel.isChatPanelVisible &&
-          (chatPanel.isChatPanelFullscreen || !isDesktop)
-        }
-        chatPanelWidth={chatPanel.chatPanelWidth}
-        setChatPanelWidth={chatPanel.setChatPanelWidth}
-        setChatPanelFullscreen={chatPanel.setChatPanelFullscreen}
-        unsetChatPanelFullscreen={chatPanel.unsetChatPanelFullscreen}
+      <div
+        className={styles.chatHost}
+        data-layout-mode={isFullscreen ? "ai-fullscreen" : undefined}
       >
-        {children}
-        <Section.ChatPanel>{chatPanel.chatPanelContent}</Section.ChatPanel>
-      </SectionWrapper>
-      {topUpDialog}
+        <SectionWrapper {...rest} {...chatProps}>
+          {children}
+          {chatPanel ? (
+            <Section.ChatPanel>{chatPanel.chatPanelContent}</Section.ChatPanel>
+          ) : null}
+        </SectionWrapper>
+      </div>
+      {chatPanel ? topUpDialog : null}
     </>
   );
 };

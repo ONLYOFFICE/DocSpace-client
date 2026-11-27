@@ -1,0 +1,109 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@onlyoffice/apps-ui-kit/styles/mixins";
+
+// The host of the settings section and the AI chat docked beside it. It is
+// out of layout and only scopes the rules below.
+.chatHost {
+  display: contents;
+}
+
+// Chat fullscreen: collapse the section (it stays mounted, marked `inert` by
+// the host) and let the panel fill the main area, leaving the settings
+// sidebar visible. Mirrors the Home page's `ai-fullscreen` layout mode (see
+// Home.module.scss).
+.chatHost[data-layout-mode="ai-fullscreen"] {
+  :global(#section) {
+    flex: 0 0 0 !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  :global(.chat-panel) {
+    flex: 1 1 auto !important;
+    max-width: 100% !important;
+    border-inline-start: none;
+    z-index: 204;
+
+    @include mixins.not-mobile {
+      width: calc(100% - var(--ai-sidebar-width, 0px)) !important;
+    }
+  }
+}
+
+// Width of the sidebar the fullscreen chat leaves visible. A copy of the Home
+// page's rules (Home.module.scss): they target the global `.main-container`,
+// but live in the lazily-loaded Home chunk, which is not necessarily loaded
+// when the settings are opened directly.
+@include mixins.not-mobile {
+  :global(.main-container) {
+    --ai-sidebar-width: 0px;
+  }
+
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-desktop-width, 252px);
+  }
+
+  :global(.main-container):has(
+    :global(#article-container[data-show-text="false"])
+  ) {
+    --ai-sidebar-width: var(--article-tablet-width-collapsed, 60px);
+  }
+}
+
+@include mixins.tablet {
+  :global(.main-container):has(:global(#article-container)) {
+    --ai-sidebar-width: var(--article-tablet-width, 243px);
+  }
+}
+
+// Tablet and below: the panel's own CSS makes it a fixed overlay over the
+// viewport; keep it clear of the collapsed sidebar, as on the Home page.
+@include mixins.tablet-and-below {
+  .chatHost :global(.chat-panel) {
+    inset-inline-start: auto;
+    max-width: calc(100vw - 69px);
+  }
+}
+
+@include mixins.mobile {
+  .chatHost :global(.chat-panel) {
+    inset-inline-start: 0;
+    max-width: 100vw;
+  }
+}

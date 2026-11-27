@@ -48,7 +48,6 @@ import {
   isPluginsSettingsPath,
 } from "SRC_DIR/helpers/plugins/utils";
 
-import SectionWrapper from "SRC_DIR/components/Section";
 import PortalSettingsSidebar from "SRC_DIR/components/PortalSettingsSidebar";
 
 import SectionHeaderContent from "./Section/Header";
@@ -96,16 +95,19 @@ const Layout = ({
 
   // The plugins page has the AI chat beside it, where the chat is on at all.
   const isAiChatAvailable = useIsAiChatAvailable();
-  const SettingsSection =
-    isAiChatAvailable && isPluginsSettingsPath(location.pathname)
-      ? ChatSection
-      : SectionWrapper;
+  const withChat =
+    isAiChatAvailable && isPluginsSettingsPath(location.pathname);
 
   return (
     <>
       <PortalSettingsSidebar />
       {!isGeneralPage ? (
-        <SettingsSection viewAs="settings" withBodyScroll settingsStudio>
+        <ChatSection
+          viewAs="settings"
+          withBodyScroll
+          settingsStudio
+          withChat={withChat}
+        >
           {!isPluginPage() ? (
             <Section.SectionHeader>
               <SectionHeaderContent />
@@ -119,7 +121,7 @@ const Layout = ({
           ) : null}
 
           <Section.SectionBody>{children}</Section.SectionBody>
-        </SettingsSection>
+        </ChatSection>
       ) : null}
     </>
   );

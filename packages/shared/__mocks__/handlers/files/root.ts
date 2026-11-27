@@ -956,34 +956,34 @@ export type RootOptions = {
    */
   withAiHub?: boolean;
   /**
-   * The AI projects the caller pinned, which the "AI rooms" root lists in
-   * `folders` whatever `count` asks for, with `total` and `count` set to
-   * their number (FoldersControllerCommon.GetRootFoldersAsync). A function
-   * is read on every request, for a spec that pins or unpins. Defaults to
-   * none.
+   * The AI projects the "AI rooms" root lists in `folders` whatever `count`
+   * asks for - five at most, the pinned ones first - with `total` and
+   * `count` set to their number
+   * (FoldersControllerCommon.GetRootFoldersAsync). A function is read on
+   * every request, for a spec that pins or unpins. Defaults to none.
    */
-  pinnedAiProjects?: unknown[] | (() => unknown[]);
+  aiHubRootProjects?: unknown[] | (() => unknown[]);
 };
 
 export const rootResolve = ({
   withAiHub = true,
   withPrivateRoot = true,
   privateRootNew = 0,
-  pinnedAiProjects = [],
+  aiHubRootProjects = [],
 }: RootOptions = {}): Response => {
-  const pinned =
-    typeof pinnedAiProjects === "function"
-      ? pinnedAiProjects()
-      : pinnedAiProjects;
+  const projects =
+    typeof aiHubRootProjects === "function"
+      ? aiHubRootProjects()
+      : aiHubRootProjects;
   const roots = withAiHub
     ? successRoot.response.map((root) =>
         root.current.rootFolderType === AI_HUB_FOLDER_TYPE
           ? {
               ...root,
-              folders: pinned as never[],
+              folders: projects as never[],
               startIndex: 0,
-              count: pinned.length,
-              total: pinned.length,
+              count: projects.length,
+              total: projects.length,
             }
           : root,
       )

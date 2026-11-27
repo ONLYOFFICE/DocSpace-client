@@ -65,6 +65,7 @@ const PluginPage = ({
 
   theme,
   isEmptyList,
+  isLoaded,
   currentColorScheme,
   pluginsSdkUrl,
 
@@ -82,9 +83,7 @@ const PluginPage = ({
 
   return (
     <>
-      {showPortalSettingsLoader ||
-      (!isEmptyList && pluginList.length === 0) ||
-      !ready ? (
+      {showPortalSettingsLoader || !isLoaded || !ready ? (
         <div className={styles.container}>
           <ListLoader withUpload={withUpload} />
         </div>
@@ -171,6 +170,7 @@ export default inject(
       addPlugin,
 
       isEmptyList,
+      isLoaded,
     } = pluginStore;
 
     const openSettingsDialog = (pluginName: string) => {
@@ -193,6 +193,7 @@ export default inject(
       currentColorScheme,
       theme,
       isEmptyList,
+      isLoaded,
       pluginsSdkUrl,
 
       showPortalSettingsLoader,

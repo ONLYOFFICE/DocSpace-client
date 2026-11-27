@@ -62,7 +62,6 @@ const HistoryTableRow = (props) => {
     item,
     toggleEventId,
     isIdChecked,
-    hideColumns,
     fetchHistoryItems,
     historyFilters,
     isRetryPending,
@@ -140,7 +139,6 @@ const HistoryTableRow = (props) => {
         className={styles.historyTableRow}
         contextOptions={contextOptions}
         checked={isChecked}
-        hideColumns={hideColumns}
       >
         <TableCell>
           <TableCell checked={isChecked} className="checkboxWrapper">

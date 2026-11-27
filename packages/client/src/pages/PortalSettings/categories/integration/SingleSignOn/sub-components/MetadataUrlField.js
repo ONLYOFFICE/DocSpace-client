@@ -66,7 +66,6 @@ const MetadataUrlField = ({
         {labelText}
         <HelpButton
           place="right"
-          offsetRight={0}
           tooltipContent={tooltipContent}
           className={tooltipClass}
           dataTestId={dataTestId ? `${dataTestId}_help_button` : undefined}

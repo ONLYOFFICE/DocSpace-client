@@ -49,7 +49,7 @@ export const RowContent = ({
   handleToggleEnabled,
 }: RowContentProps) => {
   return (
-    <UIRowContent className={styles.styledRowContent} sectionWidth={sectionWidth}>
+    <UIRowContent className={styles.styledRowContent}>
       <div className={styles.contentWrapper}>
         <div className={styles.flexWrapper}>
           <Text

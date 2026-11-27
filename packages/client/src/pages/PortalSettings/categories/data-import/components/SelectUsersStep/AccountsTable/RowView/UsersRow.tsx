@@ -44,7 +44,6 @@ const UsersRow = (props: UsersRowProps) => {
     <Row
       checked={isChecked}
       onSelect={toggleAccount}
-      contextButtonSpacerWidth="0"
       onRowClick={toggleAccount}
     >
       <UsersRowContent

@@ -62,7 +62,6 @@ export const Period = memo(
         scaledOptions
         noBorder={false}
         options={options}
-        showDisabledItems
         onSelect={onSelect}
         size={ComboBoxSize.content}
         selectedOption={selectedOption}

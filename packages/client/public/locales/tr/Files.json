@@ -77,7 +77,6 @@
   "MarkAsRevision": "Düzeltme olarak işaretle",
   "MarkAsVersion": "Sürüm olarak işaretle",
   "MarkingRead": "Okundu olarak işaretleniyor",
-  "MarkRead": "Okundu olarak işaretle",
   "MeAndGroups": "Ben ve gruplar ({{ groupsCount }})",
   "MeAndMembers": "Ben ve üyeler ({{ membersCount }})",
   "MeAndMembersAndGroups": "Ben, üyeler ({{ membersCount }}) ve gruplar ({{ groupsCount }})",

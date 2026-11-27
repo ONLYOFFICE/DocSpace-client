@@ -346,7 +346,6 @@ const GenerateSkillDialog = ({
               <Label
                 htmlFor="generate-skill-description"
                 text={t("Common:DescriptionLabel")}
-                display="display"
               />
               <Textarea
                 id="generate-skill-description"

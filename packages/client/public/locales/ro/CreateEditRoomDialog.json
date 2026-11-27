@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Acest spațiu este disponibil tuturor la link-ul. Utilizatorii externi vor avea permisiunea de completator de formulare pentru toate formularele.",
   "GoToIntegrations": "Accesați Integrații",
   "Horizontal": "Pe orizontală",
-  "Icon": "Pictogramă",
   "NeedMoreIntegrations": "Doriți mai multe integrari?",
   "NeedMoreIntegrationsDescription": "Folosiți webhook-uri pentru a trimite date către sistemul dvs. sau conectați formularele la mii de servicii prin Zapier.",
   "NoDatabaseConnections": "Nicio conexiune la bază de date configurată",

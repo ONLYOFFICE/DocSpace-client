@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Ārējiem lietotājiem būs veidlapu aizpildītāja atļauja visām veidlapām.",
   "GoToIntegrations": "Atbrauc uz integrāciju",
   "Horizontal": "Horizontāli",
-  "Icon": "Ikona",
   "NeedMoreIntegrations": "Vai jums ir nepieciešamas vairāk integrāciju?",
   "NeedMoreIntegrationsDescription": "Izmantojiet webhooks, lai nosūtītu datus savā sistēmā, vai savienojiet ekrānbalstīšos formu ar tūkstošiem dienestiem caur Zapier.",
   "NoDatabaseConnections": "Nav konfigurēti datu bāzes savienojumi",

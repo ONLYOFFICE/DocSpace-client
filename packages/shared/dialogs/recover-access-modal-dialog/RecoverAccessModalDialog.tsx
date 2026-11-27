@@ -356,7 +356,6 @@ errorMessage={emailErrorText}
 						className={styles.recoverButtonDialog}
 						label={loading ? t("Common:Sending") : t("Common:SendButton")}
 						onClick={onSendRecoverRequest}
-						aria-label="Send recover request"
 						testId="recover_access_modal_submit_button"
 					/>
 					<Button

@@ -590,7 +590,6 @@ const Appearance = (props) => {
     <ModalDialog
       visible={openHexColorPickerButtons}
       onClose={onCloseHexColorPickerButtons}
-      blur={8}
       autoMaxHeight
     >
       <ModalDialog.Body>
@@ -634,7 +633,6 @@ const Appearance = (props) => {
     <ModalDialog
       visible={openHexColorPickerAccent}
       onClose={onCloseHexColorPickerAccent}
-      blur={8}
       autoMaxHeight
     >
       <ModalDialog.Body>

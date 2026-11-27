@@ -40,7 +40,7 @@ import { TTableColumn, TableHeader } from "@onlyoffice/apps-ui-kit/components/ta
 import { HeaderProps } from "../TableView.types";
 
 const Header = (props: HeaderProps) => {
-  const { sectionWidth, tableRef, columnStorageName, tagRef } = props;
+  const { tableRef, columnStorageName, tagRef } = props;
   const { t } = useTranslation(["OAuth", "Files", "Webhooks", "Common"]);
 
   const defaultColumns: TTableColumn[] = [
@@ -90,7 +90,6 @@ const Header = (props: HeaderProps) => {
       columns={defaultColumns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName="oauthInfoPanelTable"
-      sectionWidth={sectionWidth}
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}

@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Bu sahə linkə keçidi olan hər kəs üçün əlçatandır. Xarici istifadəçilər bütün formalar üçün forma doldurucu icazəsinə sahib olacaqlar.",
   "GoToIntegrations": "İnteqrasiyalara keçin",
   "Horizontal": "Üfüqi",
-  "Icon": "Simvol",
   "NeedMoreIntegrations": "Daha çox inteqrasiyaya ehtiyacınız var?",
   "NeedMoreIntegrationsDescription": "Webhooks vasitəsilə məlumatı öz sisteminizə göndərin, və ya formları Zapier vasitəsilə minlərlə xidmətə bağlayın.",
   "NoDatabaseConnections": "Verilənlər bazası bağlantıları konfiqurasiya edilməmişdir",

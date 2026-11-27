@@ -239,8 +239,6 @@ const AmazonSettings = ({
     return (
       <HelpButton
         className={className}
-        offsetRight={0}
-        iconName={HelpReactSvgUrl}
         tooltipContent={
           <Trans t={t as TFunction} i18nKey={`${helpInfo}`} ns="Common">
             {helpInfo}
@@ -321,7 +319,6 @@ const AmazonSettings = ({
           isDefaultMode={false}
           dropDownMaxHeight={300}
           isDisabled={isDisabled}
-          showDisabledItems
           dataTestId="amazon_settings_region_combobox"
           dropDownTestId="amazon_settings_region_dropdown"
         />
@@ -430,7 +427,6 @@ const AmazonSettings = ({
           scaledOptions
           dropDownMaxHeight={300}
           isDisabled={isDisabled}
-          showDisabledItems
           data-testid="amazon-sse-method-combobox"
         />
       </div>
@@ -487,7 +483,6 @@ const AmazonSettings = ({
                 scaledOptions
                 dropDownMaxHeight={300}
                 isDisabled={isDisabled}
-                showDisabledItems
                 dataTestId="amazon_managed_cmk_combobox"
               />
 

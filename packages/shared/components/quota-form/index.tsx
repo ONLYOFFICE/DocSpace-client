@@ -279,7 +279,6 @@ export const QuotaForm = forwardRef<{ focus: () => void }, QuotaFormProps>(
             selectedOption={options.find((elem) => elem.key === power)!}
             size={ComboBoxSize.content}
             onSelect={onSelectComboBox}
-            showDisabledItems
             manualWidth="auto"
             directionY="both"
             dataTestId={

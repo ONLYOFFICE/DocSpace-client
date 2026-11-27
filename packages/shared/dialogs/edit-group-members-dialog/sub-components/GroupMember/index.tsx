@@ -220,7 +220,6 @@ const GroupMember = ({ member }: GroupMemberProps) => {
 				{hasIndividualRightsInRoom ? (
 					<HelpButton
 						place="left"
-						offsetRight={0}
 						openOnClick={false}
 						tooltipContent={
 							<Text fontSize="12px" fontWeight={600}>

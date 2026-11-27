@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "任何人都能通过此链接访问该空间。外部用户将获得所有表单的表单填写者权限。",
   "GoToIntegrations": "前往集成",
   "Horizontal": "水平线",
-  "Icon": "图标",
   "NeedMoreIntegrations": "需要更多集成吗？",
   "NeedMoreIntegrationsDescription": "使用 Webhooks 将数据发送到您自己的系统，或通过 Zapier 将表单连接到数千个服务。",
   "NoDatabaseConnections": "未配置数据库连接",

@@ -94,7 +94,6 @@ const ForgotContainer = ({
 								<HelpButton
 									id="login_remember-hint"
 									className="help-button"
-									offsetRight={0}
 									tooltipContent={
 										<Text fontSize="12px">{t("RememberHelper")}</Text>
 									}

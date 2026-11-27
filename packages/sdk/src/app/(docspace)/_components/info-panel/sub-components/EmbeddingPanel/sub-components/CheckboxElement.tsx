@@ -69,7 +69,6 @@ export const CheckboxElement = ({
       />
       <HelpButton
         place="right"
-        offsetRight={4}
         size={12}
         dataTestId={`${dataTestId}_embedding_panel_help_button`}
         tooltipContent={

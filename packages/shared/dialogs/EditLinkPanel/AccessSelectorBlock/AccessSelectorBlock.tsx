@@ -75,7 +75,6 @@ const AccessSelectorBlock: FC<AccessSelectorBlockProps> = ({
         selectedOption={selectedOption}
         scaledOptions
         onSelect={onSelect}
-        showDisabledItems
         isDefaultMode={false}
       />
       {disabledTooltip ? (

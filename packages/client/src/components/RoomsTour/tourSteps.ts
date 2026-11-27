@@ -77,7 +77,7 @@ const MEMBER_ROW_SELECTOR = '[data-testid="info_panel_members_list_item_0"]';
 
 // The "New room" button of the filter bar; the test id covers its label alone.
 const NEW_BUTTON_SELECTOR =
-  '#filter_search-input > div:has(> [data-testid="main-button"])';
+  '[data-testid="filter_search_input"] > div:has(> [data-testid="main-button"])';
 
 // EmptyView gives its options no test id, so "create a room" is positional.
 const EMPTY_SCREEN_CREATE_SELECTOR =

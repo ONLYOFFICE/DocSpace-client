@@ -154,7 +154,7 @@ describe("getTourSteps — room admin", () => {
 
     expect(closing.title).toBe("FormsTour:FormsCreateFirstTitle");
     expect(closing.target).toBe(
-      '#filter_search-input > div:has(> [data-testid="main-button"])',
+      '[data-testid="filter_search_input"] > div:has(> [data-testid="main-button"])',
     );
 
     expect(titles({ ...adminFlags, isDesktop: false })).not.toContain(
@@ -334,10 +334,7 @@ describe("getTourSteps — inside a space", () => {
     inner.getBoundingClientRect = () => new DOMRect(0, 0, 0, 0);
     cell.getBoundingClientRect = () => new DOMRect(0, 100, 400, 40);
 
-    const inProgress = stepTitled(
-      adminFlags,
-      "FormsTour:FormsInProgressTitle",
-    );
+    const inProgress = stepTitled(adminFlags, "FormsTour:FormsInProgressTitle");
 
     expect((inProgress.target as () => Element | null)()).toBe(cell);
 

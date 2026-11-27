@@ -67,6 +67,18 @@ describe("LanguageCombobox", () => {
     expect(screen.getByTestId("language-combobox")).toBeInTheDocument();
   });
 
+  it("names the icon-only button, and leaves the drawn name to name itself", () => {
+    const { rerender } = render(<LanguageCombobox {...defaultProps} />);
+    expect(
+      screen.getByRole("button", { name: "Common:Language" }),
+    ).toBeInTheDocument();
+
+    rerender(<LanguageCombobox {...defaultProps} showLanguageName />);
+    expect(
+      screen.queryByRole("button", { name: "Common:Language" }),
+    ).not.toBeInTheDocument();
+  });
+
   it("applies custom className", () => {
     render(<LanguageCombobox {...defaultProps} />);
     expect(screen.getByTestId("language-combobox")).toHaveClass("test-class");

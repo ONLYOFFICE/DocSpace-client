@@ -94,7 +94,6 @@ export const getStepsData = (
           />
           <HelpButton
             place="bottom"
-            offsetRight={0}
             tooltipContent={
               <Text>
                 <Trans

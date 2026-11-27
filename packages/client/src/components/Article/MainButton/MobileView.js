@@ -50,12 +50,7 @@ const MobileView = ({
   isRoomsFolder,
   mainButtonMobileVisible,
 }) => {
-  const [isOpenButton, setIsOpenButton] = React.useState(false);
   const mainButtonRef = React.useRef(null);
-
-  const openButtonToggler = React.useCallback(() => {
-    setIsOpenButton((prevState) => !prevState);
-  }, []);
 
   return (
     mainButtonMobileVisible && (
@@ -63,11 +58,7 @@ const MobileView = ({
         className={styles.mobileView}
         ref={mainButtonRef}
         actionOptions={actionOptions}
-        isOpenButton={isOpenButton}
-        onUploadClick={openButtonToggler}
-        onClose={openButtonToggler}
         buttonOptions={buttonOptions}
-        title={titleProp}
         withoutButton={withoutButton}
         withMenu={withMenu}
         onClick={onMainButtonClick}

@@ -65,13 +65,14 @@ const CREATE_TILE_SELECTORS = [
 
 // The test id covers the label alone; the plus belongs to the wrapper around it.
 const NEW_BUTTON_SELECTOR =
-  '#filter_search-input > div:has(> [data-testid="main-button"])';
+  '[data-testid="filter_search_input"] > div:has(> [data-testid="main-button"])';
 // MainButton keeps its click handler one level inside the test id.
 const NEW_BUTTON_TRIGGER_SELECTOR = '[data-testid="main-button"] > *';
 const NEW_MENU_SELECTOR = ".p-contextmenu";
 
 // The field, not the block around it: the "New" button lives in there too.
-const SEARCH_SELECTOR = "#filter_search-input .search-input-block";
+const SEARCH_SELECTOR =
+  '[data-testid="filter_search_input"] .search-input-block';
 
 const FILTER_BUTTON_SELECTOR = "#filter-button";
 
@@ -405,4 +406,3 @@ export function getTourSteps(
     ? getSharedWithMeSteps(t, callbacks, flags)
     : getPersonalSteps(t, callbacks, flags);
 }
-

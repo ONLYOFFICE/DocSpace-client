@@ -1290,6 +1290,7 @@
   "Homepage": "Главная страница",
   "Hotkeys": "Горячие клавиши",
   "Hour": "час",
+  "Icon": "Значок",
   "Image": "Изображение",
   "ImageInputCurrency": "Ввод изображений ({{currency}}/1M)",
   "ImageOutputCurrency": "Вывод изображений ({{currency}}/1M)",
@@ -1606,6 +1607,7 @@
   "MarkdownNumberedList": "Нумерованный список",
   "MarkdownSupported": "Поддерживается Markdown",
   "MarkedAsFavorite": "Добавлено в избранное",
+  "MarkRead": "Отметить как прочитанное",
   "MaxCopies": "{{copiesCount}} - максимальное количество сохраняемых резервных копий",
   "MaxCurrency": "максимум {{currency}}",
   "MaximumNumberOfExternalLinksCreated": "Максимальное количество созданных внешних ссылок",
@@ -2849,5 +2851,11 @@
   "NewRoomWillExceedLimit": "Невозможно создать данную комнату, поскольку достигнут лимит количества комнат, включенных в ваш текущий тарифный план.",
   "RoomsQuotaAlmostExhausted": "Квота комнат почти исчерпана.",
   "NumberOfRoomsAccordingToTariff": "Количество комнат в соответствии с вашим тарифным планом: {{currentValue}}/{{maxValue}}",
-  "ContactToUpgradeTariff": "Обратитесь к суперадминистратору для обновления тарифного плана."
+  "ContactToUpgradeTariff": "Обратитесь к суперадминистратору для обновления тарифного плана.",
+  "DropzoneFileArea": "Область загрузки файлов",
+  "DropzoneFolderArea": "Область загрузки папки",
+  "DropzoneFileInput": "Поле выбора файла",
+  "DropzoneFolderInput": "Поле выбора папки",
+  "DropzoneFileTypes": "Поддерживаемые типы файлов",
+  "CurrentTimeLabel": "Текущее время: {{time}}"
 }

@@ -111,10 +111,8 @@ const DataManagementWrapper = (props) => {
     return (
       <HelpButton
         size={12}
-        offsetRight={5}
         place={directionTooltip}
         className={className}
-        iconName={HelpReactSvgUrl}
         tooltipContent={
           <Text fontSize="12px">
             <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">

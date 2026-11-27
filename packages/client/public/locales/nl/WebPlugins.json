@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Maken met AI",
+  "CreateWithAIPrompt": "Ik wil een plug-in maken voor deze werkruimte. Vraag me wat de plug-in moet doen en bouw hem daarna.",
   "DeletePlugin": "Plugin verwijderen",
   "DeletePluginDescription": "Deze plug-in zal niet langer beschikbaar zijn voor gebruikers van de werkruimte. Weet u zeker dat u door wilt gaan?",
   "DeletePluginTitle": "Plug-in verwijderen?",

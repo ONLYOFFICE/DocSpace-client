@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Napravi uz AI",
+  "CreateWithAIPrompt": "Želim da napravim dodatak za ovaj radni prostor. Pitaj me šta treba da radi, a zatim ga napravi.",
   "DeletePlugin": "Obriši dodatak",
   "DeletePluginDescription": "Ovaj dodatak više neće biti dostupan korisnicima radnog prostora. Da li ste sigurni da želite da nastavite?",
   "DeletePluginTitle": "Obriši dodatak?",

@@ -1,0 +1,29 @@
+{
+  "key_path": "PluginsFileType",
+  "content": "Open a file type",
+  "content_en_sha1_hash": "a5154021ff7111d7ff2d65193d979fa88ac1da9b",
+  "created_at": "2026-11-27T07:54:49.978Z",
+  "updated_at": "2026-11-27T07:55:09.550Z",
+  "comment": {
+    "text": "Suggestion chip in the AI chat opened on the Plugins settings page; picking it asks the assistant for a plugin that lets the workspace open files of one more format. Short label, verb in the imperative; file type means a file format or extension.",
+    "is_auto": true,
+    "updated_at": "2026-11-27T07:55:09.550Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 1025,
+      "context": "{\n name: t(\"AiSuggestions:PluginsSidebarPage\"),\n prompt: t(\"AiSuggestions:PluginsSidebarPagePrompt\"),\n },\n {\n name: t(\"AiSuggestions:PluginsFileType\"),\n prompt: t(\"AiSuggestions:PluginsFileTypePrompt\"),\n },\n {\n name: t(\"AiSuggestions:PluginsExternalService\"),\n prompt: t(\"AiSuggestions:PluginsExternalServicePrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

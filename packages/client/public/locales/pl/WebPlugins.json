@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Utwórz z AI",
+  "CreateWithAIPrompt": "Chcę utworzyć wtyczkę dla tej przestrzeni roboczej. Zapytaj mnie, co ma robić, a następnie ją zbuduj.",
   "DeletePlugin": "Usuń wtyczkę",
   "DeletePluginDescription": "Dana wtyczka nie będzie już dostępna dla użytkowników przestrzeni roboczej. Czy na pewno chcesz kontynuować?",
   "DeletePluginTitle": "Usunąć wtyczkę?",

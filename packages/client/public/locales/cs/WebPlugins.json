@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Vytvořit pomocí AI",
+  "CreateWithAIPrompt": "Chci vytvořit zásuvný modul pro tento pracovní prostor. Zeptejte se mě, co má dělat, a poté jej sestavte.",
   "DeletePlugin": "Smazat plugin",
   "DeletePluginDescription": "Tento zásuvný modul již nebude uživatelům pracovního prostoru k dispozici. Jste si jisti, že chcete pokračovat?",
   "DeletePluginTitle": "Smazat zásuvný modul?",

@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Ustvari z AI",
+  "CreateWithAIPrompt": "Želim ustvariti vtičnik za ta delovni prostor. Vprašaj me, kaj naj počne, in ga nato zgradi.",
   "DeletePlugin": "Izbriši vtičnik",
   "DeletePluginDescription": "Ta vtičnik ne bo več na voljo uporabnikom delovnega prostora. Ste prepričani, da želite nadaljevati?",
   "DeletePluginTitle": "Izbrišati vtičnik?",

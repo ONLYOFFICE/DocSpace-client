@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "使用 AI 创建",
+  "CreateWithAIPrompt": "我想为此工作区创建一个插件。请询问我它应该做什么，然后构建它。",
   "DeletePlugin": "移除插件",
   "DeletePluginDescription": "此插件将不再可供工作区用户使用。您确定您要继续吗？",
   "DeletePluginTitle": "移除插件？",

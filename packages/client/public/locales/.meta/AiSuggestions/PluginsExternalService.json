@@ -1,0 +1,29 @@
+{
+  "key_path": "PluginsExternalService",
+  "content": "Connect an external service",
+  "content_en_sha1_hash": "bbf0bb4b30a23f09e9c138afc5e77d5f09f18e84",
+  "created_at": "2026-11-27T07:54:49.947Z",
+  "updated_at": "2026-11-27T07:55:09.550Z",
+  "comment": {
+    "text": "Suggestion chip in the AI chat opened on the Plugins settings page; picking it asks the assistant for a plugin that works with a third-party online service. Short label, verb in the imperative.",
+    "is_auto": true,
+    "updated_at": "2026-11-27T07:55:09.550Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 1029,
+      "context": "{\n name: t(\"AiSuggestions:PluginsFileType\"),\n prompt: t(\"AiSuggestions:PluginsFileTypePrompt\"),\n },\n {\n name: t(\"AiSuggestions:PluginsExternalService\"),\n prompt: t(\"AiSuggestions:PluginsExternalServicePrompt\"),\n },\n {\n name: t(\"AiSuggestions:PluginsChangePlugin\"),\n prompt: t(\"AiSuggestions:PluginsChangePluginPrompt\"),",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

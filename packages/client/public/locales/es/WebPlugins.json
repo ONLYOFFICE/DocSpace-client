@@ -1,4 +1,6 @@
 {
+  "CreateWithAI": "Crear con IA",
+  "CreateWithAIPrompt": "Quiero crear un plugin para este espacio de trabajo. Pregúnteme qué debe hacer y, a continuación, créelo.",
   "DeletePlugin": "Eliminar plugin",
   "DeletePluginDescription": "Este plugin ya no estará disponible para los usuarios del espacio de trabajo. ¿Está seguro de que desea continuar?",
   "DeletePluginTitle": "¿Eliminar el plugin?",

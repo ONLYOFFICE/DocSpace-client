@@ -1,0 +1,29 @@
+{
+  "key_path": "PluginsExternalServicePrompt",
+  "content": "Create a plugin that connects this workspace to an external service. Ask me which service it is and what the plugin should do with it, then build the plugin.",
+  "content_en_sha1_hash": "efea01e395f8d27884871156927ec3e4c1e52afb",
+  "created_at": "2026-11-27T07:54:49.955Z",
+  "updated_at": "2026-11-27T07:55:09.550Z",
+  "comment": {
+    "text": "Message sent to the AI assistant when the chip about an external service is picked in the chat on the Plugins settings page. Written in the first person, addressed to the assistant; external service is a third-party online service outside the workspace.",
+    "is_auto": true,
+    "updated_at": "2026-11-27T07:55:09.550Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/helpers/aiSuggestions.ts",
+      "line_number": 1030,
+      "context": "name: t(\"AiSuggestions:PluginsFileType\"),\n prompt: t(\"AiSuggestions:PluginsFileTypePrompt\"),\n },\n {\n name: t(\"AiSuggestions:PluginsExternalService\"),\n prompt: t(\"AiSuggestions:PluginsExternalServicePrompt\"),\n },\n {\n name: t(\"AiSuggestions:PluginsChangePlugin\"),\n prompt: t(\"AiSuggestions:PluginsChangePluginPrompt\"),\n },",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

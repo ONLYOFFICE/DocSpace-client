@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-11-17T13:13:27.008Z",
+  "updated_at": "2026-11-27T15:01:39.644Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -78,15 +78,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 464,
-      "context": "withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setSelector(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]}\n sortSelectedFirst\n onSubmit={onRoomsSelected}\n />\n </ModalDialog.Container>",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 815,
-      "context": "withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"Common:CancelButton\")}\n onCancel={() => setRoomsPicker(null)}\n submitButtonLabel={t(\"Common:SelectAction\")}\n selectedItems={\n pickedRooms.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[]\n }\n sortSelectedFirst\n onSubmit={onRoomsSelected}",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/AgentRoomsSelector.tsx",
+      "line_number": 149,
+      "context": "getRoomDisabledReason(room) ?? undefined,\n withSearch: true,\n withCancelButton: true as const,\n cancelButtonLabel: t(\"Common:CancelButton\"),\n onCancel: onClose,\n submitButtonLabel: t(\"Common:SelectAction\"),\n selectedItems: selected.map((room) => ({ id: room.id, label: room.title })) as unknown as TSelectorItem[],\n sortSelectedFirst: true,\n onSubmit: (items: TSelectorItem[]) => onSubmit(toSources(items, roomType)),\n };",
       "module": "/packages/client"
     },
     {
@@ -109,31 +103,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1310,
+      "line_number": 1322,
       "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const ownerOptions = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 1310,
+      "line_number": 1322,
       "context": "if (!isCollaborator && !isVisitor) {\n subjectOptions.push({\n id: \"filter_author-other\",\n key: FilterKeys.other,\n group: FilterGroups.roomFilterSubject,\n label: t(\"Common:SelectAction\"),\n });\n }\n \n const ownerOptions = [\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
-      "line_number": 286,
+      "line_number": 288,
       "context": "// Nothing chosen yet, or a profile that is gone, shows as the portal's\n // default; saving stores that profile (see shownProfileId).\n const selectedProfile =\n profileOptions.find((option) => option.key === draft.profileId) ??\n profileOptions[0] ??\n ({ key: \"none\", label: t(\"Common:SelectAction\") } as TOption);\n // The effort follows the chosen model: its own depths to pick from, and\n // its default level until one is picked by hand (`reasoning` stays\n // \"default\" then). A level the model has not got falls back to its default.\n const activeProfile = (profiles as TProfileLike[]).find(\n (profile) => profile.id === String(selectedProfile.key),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/knowledge/index.tsx",
-      "line_number": 307,
-      "context": "<ComboBox\n options={items}\n showDisabledItems\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as KnowledgeType)",
+      "line_number": 306,
+      "context": ">\n <ComboBox\n options={items}\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as KnowledgeType)",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/DefaultTemplates/TemplatesRow.tsx",
-      "line_number": 243,
+      "line_number": 263,
       "context": "filterParam={filterParam}\n withSubFolders={false}\n isPanelVisible={isSelectorVisible}\n onSelectFile={(file) => onSelectFile(file as TFile)}\n onClose={() => setIsSelectorVisible(false)}\n acceptButtonLabel={t(\"Common:SelectAction\")}\n isMultiSelect={false}\n withRecentTreeFolder\n withFavoritesTreeFolder\n openRoot\n isSelect",
       "module": "/packages/client"
     },
@@ -151,13 +145,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 863,
+      "line_number": 855,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 863,
+      "line_number": 855,
       "context": "<ComboBox\n onSelect={onColumnSelect}\n options={\n columnsOptions || {\n key: \"Select\",\n label: t(\"Common:SelectAction\"),\n }\n }\n scaled\n directionY=\"top\"\n selectedOption={{",
       "module": "/packages/client"
     },
@@ -169,7 +163,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 365,
+      "line_number": 367,
       "context": "roomType={RoomsType.PublicRoom}\n withSearch\n withCancelButton\n onSubmit={onChangeFolderId}\n withHeader\n headerProps={{ headerLabel: t(\"Common:SelectAction\") }}\n dataTestId=\"room_selector_input\"\n />\n </FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (",
       "module": "/packages/client"
     },
@@ -187,7 +181,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 334,
+      "line_number": 343,
       "context": "const optionsModel: (TContextOption | false)[] = [\n {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => self.onSelect(item),\n disabled: false,\n },\n withOpen && {",
       "module": "/packages/client"
     },
@@ -223,8 +217,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/ai-settings/knowledge/index.tsx",
-      "line_number": 327,
-      "context": "<ComboBox\n options={items}\n showDisabledItems\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as KnowledgeType)",
+      "line_number": 326,
+      "context": ">\n <ComboBox\n options={items}\n scaledOptions={hasSystemProvider}\n selectedOption={\n selectedItem ?? ({ label: t(\"Common:SelectAction\") } as TOption)\n }\n scaled\n displayArrow\n onSelect={(option) =>\n setSelectedOption(option.key as KnowledgeType)",
       "module": "/packages/sdk"
     },
     {
@@ -283,26 +277,26 @@
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
-      "line_number": 46,
+      "line_number": 61,
       "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
-      "line_number": 46,
+      "line_number": 61,
       "context": "filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)\n return t(\"Common:CreateMasterFormFromFile\");\n if (filterParam) return t(\"Common:SelectFile\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelectorInput.tsx",
-      "line_number": 262,
+      "line_number": 264,
       "context": "isLoading={isLoading}\n path={newPath || basePath}\n isDisabled={isDisabled || isLoading}\n hasError={isError || isErrorPath}\n isDocumentIcon={isDocumentIcon}\n placeholder={t(\"Common:SelectAction\")}\n />\n <Portal element={<div>{selectorComponent}</div>} />\n </div>\n );\n };",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/selector/index.tsx",
-      "line_number": 159,
-      "context": "filter={filter}\n withBlur={false}\n roomId={item.id}\n withoutBackground={false}\n onClose={onClose}\n submitButtonLabel={t(\"Common:SelectAction\")}\n disableSubmitButton={false}\n onSubmit={handleSubmit}\n targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}",
+      "line_number": 158,
+      "context": "useAside\n filter={filter}\n roomId={item.id}\n withoutBackground={false}\n onClose={onClose}\n submitButtonLabel={t(\"Common:SelectAction\")}\n disableSubmitButton={false}\n onSubmit={handleSubmit}\n targetEntityType={targetEntityType}\n data-test-id=\"share_to_people_selector\"\n disabledInvitedText={t(\"Common:Shared\")}",
       "module": "/packages/shared"
     },
     {

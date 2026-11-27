@@ -3,7 +3,7 @@
   "content": "AI agent notifications disabled",
   "content_en_sha1_hash": "119d83d665e3d1134c4b870d61e86a4910da92e2",
   "created_at": "2026-06-02T22:17:29.738Z",
-  "updated_at": "2026-10-31T12:58:29.633Z",
+  "updated_at": "2026-11-27T15:01:39.987Z",
   "comment": {
     "text": "Status message or notification text indicating that notifications for a specific AI agent are muted; includes the `aiAgent` variable.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
+      "line_number": 174,
+      "context": "treeFolders[treeIndex].newItems =\n (count as number) + (newCount as number);\n }\n \n const notificationsDisabled = isAgent(item)\n ? t(\"Common:AIAgentNotificationsDisabled\")\n : t(\"Common:RoomNotificationsDisabled\");\n const notificationsEnabled = isAgent(item)\n ? t(\"Common:AIAgentNotificationsEnabled\")\n : t(\"Common:RoomNotificationsEnabled\");",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_store/AgentsListStore.tsx",
       "line_number": 237,

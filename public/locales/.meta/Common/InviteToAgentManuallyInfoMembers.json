@@ -3,7 +3,7 @@
   "content": "Add existing members to the agent.",
   "content_en_sha1_hash": "192e847de3ebea4f496683ae53a0e5890123fa70",
   "created_at": "2026-11-18T08:05:52.359Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.759Z",
   "comment": {
     "text": "Hint under the manual invite field of the Invite panel of an agent: people already on the portal are added to the agent by name, as an agent has no invitation links. Imperative sentence, the agent counterpart of Add existing members to the room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 646,
+      "line_number": 651,
       "context": "})}\n >\n {roomId === -1\n ? t(\"InviteMembersManuallyDescription\")\n : roomType === RoomsType.AiProjectRoom\n ? t(\"Common:InviteToAgentManuallyInfoMembers\")\n : !allowInvitingGuests\n ? t(\"Common:InviteToRoomManuallyInfoMembers\")\n : t(\"Common:InviteToRoomManuallyInfoGuest\")}\n </Text>\n {roomId === -1 || allowInvitingGuests ? (",
       "module": "/packages/client"
     }

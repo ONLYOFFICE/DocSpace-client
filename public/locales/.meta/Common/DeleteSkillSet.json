@@ -3,7 +3,7 @@
   "content": "Delete skill set",
   "content_en_sha1_hash": "3936c549cd18e419a6d1dc8b11a4adca1e6c2703",
   "created_at": "2026-11-21T13:03:28.228Z",
-  "updated_at": "2026-11-21T13:04:52.624Z",
+  "updated_at": "2026-11-27T15:01:39.974Z",
   "comment": {
     "text": "Item in the actions menu of a skill set in the AI Chat section, the last one after a separator; deletes the whole skill set with what it holds. Verb, imperative or the form the language uses for menu commands. Short menu label, no full stop. Skill set = a room of skills, Markdown instructions the AI assistant follows; never call it a room. Match Common:CreateSkillSet.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 1027,
+      "line_number": 1037,
       "context": "? isAgent\n ? t(\"Common:DeleteAgent\")\n : isKnowledgeBase\n ? t(\"Common:DeleteKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:DeleteSkillSet\")\n : isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,",
       "module": "/packages/client"
     }

@@ -3,7 +3,7 @@
   "content": "Turn this on to let people send invitations through the {{sectionName}} section, or turn it off if you want invitations to go through LDAP only.",
   "content_en_sha1_hash": "0d681f683af928c3d5d0ffe41fc3914bdd74fdeb",
   "created_at": "2026-08-31T18:23:40.681Z",
-  "updated_at": "2026-08-31T20:42:21.328Z",
+  "updated_at": "2026-11-27T15:01:39.909Z",
   "comment": {
     "text": "Checkbox description in the invitation settings explaining how the toggle affects invitation routing between a specific section and LDAP; includes a variable `{{sectionName}}` for the section name.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 307,
+      "line_number": 311,
       "context": "fontSize=\"12px\"\n fontWeight=\"400\"\n lineHeight=\"16px\"\n className={styles.checkboxDescription}\n >\n {t(\"ContactsInviteNote\", {\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     }

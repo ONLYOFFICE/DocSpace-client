@@ -34,12 +34,42 @@ const stores = await vi.hoisted(async () => {
     filesActionsStore: { downloadFiles: vi.fn() },
     filesStore,
     infoPanelStore: { setIsMobileHidden: vi.fn() },
+    mediaViewerDataStore: {
+      setCurrentItem: vi.fn(),
+      setMediaViewerData: vi.fn(),
+    },
+  };
+});
+
+// The socket, as a plain emitter: what the server sends is handed to the
+// listeners of that event.
+const socket = vi.hoisted(() => {
+  const listeners = new Map<string, Set<(data?: unknown) => void>>();
+  return {
+    listeners,
+    on: (event: string, listener: (data?: unknown) => void) => {
+      if (!listeners.has(event)) listeners.set(event, new Set());
+      listeners.get(event)?.add(listener);
+    },
+    off: (event: string, listener: (data?: unknown) => void) => {
+      listeners.get(event)?.delete(listener);
+    },
+    send: (event: string, data?: unknown) => {
+      listeners.get(event)?.forEach((listener) => listener(data));
+    },
   };
 });
 
 vi.mock("@docspace/shared/api/ai/threadFiles", () => api);
+vi.mock("@onlyoffice/apps-ui-kit/utils/socket", () => ({
+  default: socket,
+  SocketEvents: { ModifyThreadFiles: "s:modify-thread-files" },
+}));
 vi.mock("SRC_DIR/store/useStore", () => ({
   useStore: (name: keyof typeof stores) => stores[name],
+}));
+vi.mock("@onlyoffice/apps-ui-kit/context/ThemeContext", () => ({
+  useTheme: () => ({ isBase: true }),
 }));
 vi.mock("mobx-react", () => ({ observer: (component: unknown) => component }));
 vi.mock("react-i18next", () => ({
@@ -66,6 +96,8 @@ vi.mock("@onlyoffice/apps-ui-kit/components/context-menu-button", () => ({
 
 import AiAgentContent, { REFRESH_DELAY_MS } from "../index";
 
+const MODIFY_THREAD_FILES_EVENT = "s:modify-thread-files";
+
 const file = (id: number, title: string) => ({
   id,
   title,
@@ -89,6 +121,10 @@ const signal = (threadId: string) => {
   stores.dialogsStore.aiChatThreadFilesChange = { threadId, seq: seq + 1 };
 };
 
+/** The server announces a file saved to a conversation. */
+const announce = (threadId: string, kind = "artifacts", cmd = "create") =>
+  socket.send(MODIFY_THREAD_FILES_EVENT, { cmd, id: 9, threadId, kind });
+
 const wait = (ms: number) =>
   act(async () => {
     await vi.advanceTimersByTimeAsync(ms);
@@ -104,6 +140,7 @@ const deferred = <T,>() => {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  socket.listeners.clear();
   stores.dialogsStore.aiChatActiveThreadId = "t-1";
   stores.dialogsStore.aiChatThreadFilesChange = { threadId: "", seq: 0 };
   stores.dialogsStore.setCopyPanelVisible(false);
@@ -165,6 +202,52 @@ describe("AiAgentContent", () => {
     open.mockRestore();
   });
 
+  it("opens an image in the viewer of the same tab, and any other file by its link", async () => {
+    const image = {
+      ...file(1, "Chart.png"),
+      viewAccessibility: { ImageView: true, MediaView: false },
+    };
+    api.getAiThreadArtifacts.mockResolvedValue([image, file(5, "Proposal.docx")]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const links = screen.getAllByTestId("ai-agent-content-open");
+
+    // fireEvent returns false when the default action was prevented.
+    expect(fireEvent.click(links[0])).toBe(false);
+    expect(stores.mediaViewerDataStore.setCurrentItem).toHaveBeenCalledWith({
+      fileId: 1,
+      fileInfo: image,
+    });
+    expect(stores.mediaViewerDataStore.setMediaViewerData).toHaveBeenCalledWith({
+      visible: true,
+      id: 1,
+    });
+
+    // A click that asks for a new tab keeps the link's own way.
+    expect(fireEvent.click(links[0], { ctrlKey: true })).toBe(true);
+    expect(fireEvent.click(links[1])).toBe(true);
+    expect(stores.mediaViewerDataStore.setMediaViewerData).toHaveBeenCalledTimes(1);
+  });
+
+  it("opens a file by the server's link without the version it pins", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([
+      {
+        ...file(5, "Proposal.docx"),
+        webUrl: "http://localhost/doceditor?fileId=5&version=2&share=key",
+      },
+      file(6, "Notes.docx"),
+    ]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    const links = screen.getAllByTestId("ai-agent-content-open");
+
+    expect(links[0].getAttribute("href")).toBe(
+      "http://localhost/doceditor?fileId=5&share=key",
+    );
+    // A link without a version is left as the server gave it.
+    expect(links[1].getAttribute("href")).toBe("/doceditor?fileId=6");
+  });
+
   // The agent's page has no list whose click would take the buffer away.
   it("gives the Info panel back to the agent once the copy panel closes", async () => {
     render(<AiAgentContent projectId={7} />);
@@ -201,12 +284,45 @@ describe("AiAgentContent", () => {
     });
   });
 
-  it("shows both sections empty for a new chat, without a request", async () => {
+  it("shows the empty screen for a new chat, without a request", async () => {
     stores.dialogsStore.aiChatActiveThreadId = "";
     render(<AiAgentContent projectId={7} />);
     await flush();
     expect(api.getAiThreadArtifacts).not.toHaveBeenCalled();
-    expect(screen.getAllByText("Common:AiContentEmpty")).toHaveLength(2);
+    const empty = screen.getByTestId("ai-agent-content-empty");
+    expect(empty.querySelector("img")).not.toBeNull();
+    expect(empty.textContent).toContain("Common:AiContentEmpty");
+    expect(empty.textContent).toContain("Common:AiContentEmptyDescription");
+    // The screen stands in place of the two sections.
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-content-attachments")).toBeNull();
+  });
+
+  it("shows the empty screen for a conversation without a file", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([]);
+    api.getAiThreadAttachments.mockResolvedValue([]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.getByTestId("ai-agent-content-empty")).not.toBeNull();
+  });
+
+  it("shows no section for a list without a file when the other has files", async () => {
+    api.getAiThreadArtifacts.mockResolvedValue([]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.queryByTestId("ai-agent-content-empty")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    expect(screen.queryByText("Common:AiArtifacts")).toBeNull();
+    expect(screen.queryByText("Common:AiContentEmpty")).toBeNull();
+    expect(titles("ai-agent-content-attachments")).toHaveLength(2);
+  });
+
+  it("shows no Attachments section when only the artifacts have files", async () => {
+    api.getAiThreadAttachments.mockResolvedValue([]);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.queryByTestId("ai-agent-content-attachments")).toBeNull();
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
   });
 
   it("follows the conversation", async () => {
@@ -225,7 +341,7 @@ describe("AiAgentContent", () => {
     api.getAiThreadArtifacts.mockRejectedValue(new Error("404"));
     render(<AiAgentContent projectId={7} />);
     await flush();
-    expect(titles("ai-agent-content-artifacts")).toEqual([]);
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
     expect(titles("ai-agent-content-attachments")).toHaveLength(2);
   });
 
@@ -347,7 +463,33 @@ describe("AiAgentContent", () => {
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
   });
 
-  it("goes from the empty lists of a new chat to its files without going blank", async () => {
+  it("shows a list as soon as it comes, without waiting for the other", async () => {
+    const artifacts = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockReturnValueOnce(artifacts.promise);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    // The attachments are here, the artifacts still on their way.
+    expect(titles("ai-agent-content-attachments")).toEqual(["Agreement.docx", "Notes.jpg"]);
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    artifacts.resolve([file(1, "Chart.png")]);
+    await flush();
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png"]);
+  });
+
+  it("shows nothing for a list that came empty until the other comes, then the empty screen", async () => {
+    const attachments = deferred<unknown[]>();
+    api.getAiThreadArtifacts.mockResolvedValue([]);
+    api.getAiThreadAttachments.mockReturnValueOnce(attachments.promise);
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
+    expect(screen.queryByTestId("ai-agent-content-empty")).toBeNull();
+    attachments.resolve([]);
+    await flush();
+    expect(screen.getByTestId("ai-agent-content-empty")).not.toBeNull();
+  });
+
+  it("goes from the empty screen of a new chat to its files without going blank", async () => {
     stores.dialogsStore.aiChatActiveThreadId = "";
     const { rerender } = render(<AiAgentContent projectId={7} />);
     await flush();
@@ -356,8 +498,9 @@ describe("AiAgentContent", () => {
     stores.dialogsStore.aiChatActiveThreadId = "t-new";
     rerender(<AiAgentContent projectId={7} />);
     await flush();
-    // Still the empty lists, not nothing, while its files are on their way.
-    expect(screen.getAllByText("Common:AiContentEmpty")).toHaveLength(2);
+    // The attachments that came are shown, the artifacts have no section yet.
+    expect(titles("ai-agent-content-attachments")).toHaveLength(2);
+    expect(screen.queryByTestId("ai-agent-content-artifacts")).toBeNull();
     answer.resolve([file(1, "Chart.png")]);
     await flush();
     expect(api.getAiThreadArtifacts).toHaveBeenCalledWith(7, "t-new");
@@ -392,5 +535,62 @@ describe("AiAgentContent", () => {
     await flush();
     expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
     expect(titles("ai-agent-content-artifacts")).toEqual(["Chart.png", "Report.docx"]);
+  });
+
+  it("reads a list again when the server announces a new file of its kind, leaving the other alone", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    api.getAiThreadArtifacts.mockResolvedValue([file(9, "Report.docx"), file(1, "Chart.png")]);
+    // The server writes the id in its own case.
+    announce("T-1");
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(1);
+    expect(titles("ai-agent-content-artifacts")).toEqual(["Report.docx", "Chart.png"]);
+  });
+
+  it("reads both lists once when files of both kinds are announced together", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-1", "artifacts");
+    announce("t-1", "attachments");
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(2);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+  });
+
+  it("reads once for the files announced together", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-1", "attachments");
+    await wait(REFRESH_DELAY_MS / 2);
+    announce("t-1", "attachments");
+    await wait(REFRESH_DELAY_MS);
+    expect(api.getAiThreadAttachments).toHaveBeenCalledTimes(2);
+  });
+
+  it("ignores a file announced for another conversation, or another command", async () => {
+    vi.useFakeTimers();
+    render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-other");
+    announce("t-1", "artifacts", "delete");
+    await wait(REFRESH_DELAY_MS * 2);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
+  });
+
+  it("stops listening once it is put away", async () => {
+    vi.useFakeTimers();
+    const { unmount } = render(<AiAgentContent projectId={7} />);
+    await flush();
+    announce("t-1");
+    unmount();
+    expect(socket.listeners.get(MODIFY_THREAD_FILES_EVENT)?.size).toBe(0);
+    await wait(REFRESH_DELAY_MS * 2);
+    expect(api.getAiThreadArtifacts).toHaveBeenCalledTimes(1);
   });
 });

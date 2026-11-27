@@ -53,7 +53,7 @@ export const WebhookRowContent = ({
   handleToggleEnabled,
 }) => {
   return (
-    <RowContent className={styles.styledRowContent} sectionWidth={sectionWidth}>
+    <RowContent className={styles.styledRowContent}>
       <div className={styles.contentWrapper}>
         <div className={styles.flexWrapper}>
           <Text

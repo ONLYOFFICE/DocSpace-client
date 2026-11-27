@@ -3,7 +3,7 @@
   "content": "Room cover",
   "content_en_sha1_hash": "629fe77eb87170248f519263ffdf53af11eb35b4",
   "created_at": "2025-05-19T21:30:53.318Z",
-  "updated_at": "2026-11-09T09:26:33.307Z",
+  "updated_at": "2026-11-27T15:01:39.674Z",
   "comment": {
     "text": "This is a dialog title for uploading or editing the cover image for a room. It appears when a user wants to customize the visual representation of a room.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/AvatarEditorDialog/index.js",
-      "line_number": 77,
+      "line_number": 76,
       "context": "const editorBorderRadius = isProfileUpload ? 400 : 110;\n \n const avatarTitle = isProfileUpload\n ? t(\"Ldap:LdapAvatar\")\n : t(\"Common:RoomCover\");\n \n const onCloseModal = () => {\n onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });\n setPreview && setPreview(\"\");\n onClose && onClose();",
       "module": "/packages/client"
     },

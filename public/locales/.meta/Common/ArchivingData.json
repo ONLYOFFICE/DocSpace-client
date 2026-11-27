@@ -3,7 +3,7 @@
   "content": "Archiving data",
   "content_en_sha1_hash": "0b71d55f4a461ddcbdf534bd0d205365234b8127",
   "created_at": "2025-05-19T21:30:43.080Z",
-  "updated_at": "2026-11-17T13:13:27.226Z",
+  "updated_at": "2026-11-27T15:01:39.800Z",
   "comment": {
     "text": "This text appears as a temporary message (e.g., in a toast notification or status bar) while files or folders are being prepared for download. It indicates that the system is compressing or packaging the data.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContent/index.tsx",
+      "line_number": 438,
+      "context": "// One archive, through the portal's download operation.\n onClick={() =>\n downloadFiles(\n list.map((file) => file.id),\n [],\n { label: t(\"Common:ArchivingData\") },\n )\n }\n dataTestId=\"ai-agent-content-download-all\"\n >\n {t(\"Files:DownloadAll\")}",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.tsx",
       "line_number": 510,
@@ -31,7 +37,7 @@
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 552,
+      "line_number": 542,
       "context": "if (!identity) return;\n \n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,\n percent: 0,\n label: i18n.t(\"Common:ArchivingData\"),\n operationId,\n });\n \n const entries = await listEntries();\n const total = entries.length;",
       "module": "/packages/client"
     },

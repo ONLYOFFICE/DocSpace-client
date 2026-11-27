@@ -3,7 +3,7 @@
   "content": "Link",
   "content_en_sha1_hash": "d0517071aa376e797705058bbad4b658954b9930",
   "created_at": "2026-06-09T09:42:49.273Z",
-  "updated_at": "2026-11-02T07:10:46.787Z",
+  "updated_at": "2026-11-27T15:01:39.711Z",
   "comment": {
     "text": "Label in the Embedding Panel header that identifies the shared link dropdown menu.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/dialogs/EditSkillDialog/MarkdownToolbar.tsx",
+      "line_number": 101,
+      "context": "{ action: \"italic\", label: t(\"Common:MarkdownItalic\") },\n { action: \"heading\", label: t(\"Common:MarkdownHeading\") },\n { action: \"bulleted\", label: t(\"Common:MarkdownBulletedList\") },\n { action: \"numbered\", label: t(\"Common:MarkdownNumberedList\") },\n { action: \"code\", label: t(\"Common:MarkdownCode\") },\n { action: \"link\", label: t(\"Common:Link\") },\n ];\n \n return (\n <div className={styles.toolbar} role=\"toolbar\" data-testid=\"edit-skill-toolbar\">\n {actions.map(({ action, label }) => (",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/components/panels/EmbeddingPanel/index.tsx",
       "line_number": 451,

@@ -51,7 +51,6 @@ import styles from "../../../../StyledDataImport.module.scss";
 const UsersRowContent = (props: TypeSelectRowContentProps) => {
   const {
     id,
-    sectionWidth,
     displayName,
     email,
     typeOptions,
@@ -93,7 +92,7 @@ const UsersRowContent = (props: TypeSelectRowContentProps) => {
   ];
 
   return (
-    <RowContent className={styles.styledRowContentType} sectionWidth={sectionWidth}>
+    <RowContent className={styles.styledRowContentType}>
       {contentData}
     </RowContent>
   );

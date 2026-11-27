@@ -3,7 +3,7 @@
   "content": "Knowledge Room",
   "content_en_sha1_hash": "b22fababfed00dcf63629de470df5ef54897c46f",
   "created_at": "2026-10-31T12:57:30.328Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-11-27T15:01:40.010Z",
   "comment": {
     "text": "Name of the Knowledge room type in the room creation picker and room info. Singular noun phrase, title case like other room type names.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
       "line_number": 68,
-      "context": "case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomTitle\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRoomTitle\");\n case RoomsType.AiProjectRoom:\n return t(\"Common:AIProjectRoomTitle\");\n default:\n return \"\";\n }",
+      "context": "case RoomsTypePrivate:\n return t(\"Common:PrivateRoomTitle\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomTitle\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRoomTitle\");\n case RoomsType.AiProjectRoom:\n return t(\"Common:AIAgent\");\n default:\n return \"\";\n }",
       "module": "/packages/shared"
     }
   ],

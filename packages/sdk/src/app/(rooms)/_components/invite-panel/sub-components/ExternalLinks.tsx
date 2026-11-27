@@ -67,7 +67,7 @@ import ClockIconUrl from "PUBLIC_DIR/images/clock.react.svg?url";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/icons/12/person-plus.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 
-import { useRef } from "react";
+import { useRef, useId } from "react";
 import classNames from "classnames";
 
 import { getCorrectDate } from "@onlyoffice/apps-ui-kit/utils/date/getCorrectDate";
@@ -94,6 +94,7 @@ import type { ShareLink } from "../index";
 import AccessSelector from "./AccessSelector";
 import styles from "../InvitePanel.module.scss";
 import { getFreeUsersRoleArray } from "../utils";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 export type ExternalLinksProps = {
   t: TTranslation;
@@ -141,6 +142,7 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
   setIsLinksToggling,
   culture,
 }) => {
+  const linksToggleId = useId();
   const showUsersJoinedBlock = !!activeLink?.maxUseCount;
   const showLifetimeBlock = !!activeLink?.expirationDate;
   const showUsersLimitWarning =
@@ -231,7 +233,9 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
           [styles.inline]: true,
         })}
       >
-        {t("Common:InviteViaLink")}
+        <ControlCaption htmlFor={linksToggleId} isDisabled={isLinksToggling}>
+          {t("Common:InviteViaLink")}
+        </ControlCaption>
 
         <IconButton
           iconName={SettingsReactSvgUrl}
@@ -245,6 +249,7 @@ const ExternalLinks: React.FC<ExternalLinksProps> = ({
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
           isDisabled={isLinksToggling}
+          inputId={linksToggleId}
           dataTestId="invite_panel_external_links_toggle"
         />
       </Heading>

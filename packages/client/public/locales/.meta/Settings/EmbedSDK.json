@@ -3,7 +3,7 @@
   "content": "Embed SDK",
   "content_en_sha1_hash": "a9ccf1a96c44b79062482e5c0b3db74a1df2a6dd",
   "created_at": "2026-04-03T21:51:36.584Z",
-  "updated_at": "2026-11-17T13:13:26.959Z",
+  "updated_at": "2026-11-27T15:01:39.613Z",
   "comment": {
     "text": "This is a title for a section in the Developer Tools settings, referring to the Embed SDK. It also appears as a card title in the same section.",
     "is_auto": true,
@@ -31,14 +31,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 83,
+      "line_number": 85,
       "context": "if (slug === \"docspace\") return getBrandName(\"ProductName\");\n const title = getSdkPresetTitle(slug, t);\n if (title) return title;\n }\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 139,
-      "context": "handleOnClick: navigateToUploader,\n },\n ];\n \n useEffect(() => {\n if (tReady) setDocumentTitle(t(\"Settings:EmbedSDK\"));\n }, [tReady]);\n \n return (\n <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>\n <div className={styles.categoryDescription}>",
+      "line_number": 148,
+      "context": "handleOnClick: navigateToMediaViewer,\n },\n ];\n \n useEffect(() => {\n if (tReady) setDocumentTitle(t(\"Settings:EmbedSDK\"));\n }, [tReady]);\n \n return (\n <div className={classNames(styles.sdkContainer, { [styles.isMobile]: isMobile() })}>\n <div className={styles.categoryDescription}>",
       "module": "/packages/client"
     },
     {
@@ -63,6 +63,12 @@
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
       "line_number": 144,
       "context": "const Manager = (props) => {\n const { t, fetchExternalLinks, theme, currentColorScheme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"Settings:EmbedSDK\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/MediaViewer.js",
+      "line_number": 90,
+      "context": "];\n \n const MediaViewer = (props) => {\n const { t, theme, myFolderId, fetchTreeFolders } = props;\n \n setDocumentTitle(t(\"Settings:EmbedSDK\"));\n \n const [version, onSetVersion] = useState(sdkVersion[230]);\n const [source, onSetSource] = useState(sdkSource.Package);\n \n const [config, setConfig] = useState({",
       "module": "/packages/client"
     },
     {

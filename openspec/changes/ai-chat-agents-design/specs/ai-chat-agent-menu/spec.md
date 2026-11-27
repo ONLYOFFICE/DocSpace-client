@@ -30,11 +30,11 @@ The title SHALL read "AI Chat" (`Common:AIChatButton`) while the chat runs on th
 - **THEN** the title shows the logo of "Legal Reviewer" and its name
 
 ### Requirement: Save as new agent
-For a user who may create agents, the agent menu SHALL end, after a separator, with "Save as new agent" (`Common:SaveAsNewAgent`), a row in the link colour with a plus. Choosing it SHALL close the menu and ask for a name, pre-filled with "New agent" (`Common:NewAgent`), and create an agent from the chat's model and its DocSpace skill sets and knowledge bases. The panel header SHALL have no save button.
+For a user who may create agents, the agent menu SHALL end, after a separator, with "Save as new agent" (`Common:SaveAsNewAgent`), a row in the link colour with a plus. Choosing it SHALL close the menu and ask for a name, pre-filled with "New agent" (`Common:NewAgent`), and create an agent from the chat's model and its DocSpace skill sets and knowledge bases, which SHALL then open on its own page. The panel header SHALL have no save button.
 
 #### Scenario: Room admin saves the chat
 - **WHEN** a room admin with a model and two connected DocSpace rooms chooses "Save as new agent" and names it "Research"
-- **THEN** an agent "Research" is created with that model and those rooms, and a notice names it
+- **THEN** an agent "Research" is created with that model and those rooms, a notice names it, and the agent opens on its own page
 
 #### Scenario: User
 - **WHEN** a User opens the title menu

@@ -33,10 +33,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import fs from "fs";
 import path from "path";
 import type { UserConfig } from "vite";
 import { rootDir } from "./utils";
-import { uiKitDevRoot } from "./ui-kit-dev";
+import { uiKitDevRoot, uiKitDir } from "./ui-kit-dev";
 
 export const server: UserConfig["server"] = {
   host: true,
@@ -63,7 +64,11 @@ export const server: UserConfig["server"] = {
       path.resolve(rootDir, "../../public"),
       path.resolve(rootDir, "../shared"),
       path.resolve(rootDir),
-      ...(uiKitDevRoot ? [uiKitDevRoot] : []),
+      // ui-kit itself, by its real path under node_modules/.pnpm: a part of
+      // it that is not pre-bundled (a subpath first imported while the server
+      // runs, ai-agent/markdown) is served file by file with its CSS, and a
+      // file outside this list is refused.
+      ...(uiKitDevRoot ? [uiKitDevRoot] : [fs.realpathSync(uiKitDir)]),
     ],
   },
 };

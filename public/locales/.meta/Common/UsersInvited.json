@@ -3,7 +3,7 @@
   "content": "Users invited",
   "content_en_sha1_hash": "72c2af47b22442f2b4c2dd3ce416b620691f6ca7",
   "created_at": "2025-05-19T21:30:49.475Z",
-  "updated_at": "2026-11-19T16:14:54.004Z",
+  "updated_at": "2026-11-27T15:01:39.754Z",
   "comment": {
     "text": "This is a toast message confirming that users have been successfully invited. It appears after an invitation process is completed.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 578,
+      "line_number": 610,
       "context": "setIsLoading(false);\n onClose();\n }\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n responses.forEach((response) => {\n if (response?.warning) toastr.warning(response.warning);\n response?.aiProjectWarnings?.forEach((warning) =>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 578,
+      "line_number": 610,
       "context": "setIsLoading(false);\n onClose();\n }\n \n if (!isPrivateInvite) {\n toastr.success(t(\"Common:UsersInvited\"));\n }\n \n responses.forEach((response) => {\n if (response?.warning) toastr.warning(response.warning);\n response?.aiProjectWarnings?.forEach((warning) =>",
       "module": "/packages/client"
     },
@@ -31,8 +31,8 @@
     },
     {
       "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
-      "line_number": 414,
-      "context": "text: t(\"Common:EncryptedReencryptPartialFailure\", {\n count: failures.length,\n }),\n });\n } else if (allSkipped.length === 0) {\n notices.push({ level: \"success\", text: t(\"Common:UsersInvited\") });\n }\n \n void backfillEncryptedFilesForRoomMembers(roomId, {\n currentUserId,\n identity,",
+      "line_number": 457,
+      "context": "failures.map((r) => r.fileId),\n keyReplacedFileIds,\n ),\n });\n } else if (allSkipped.length === 0) {\n notices.push({ level: \"success\", text: t(\"Common:UsersInvited\") });\n }\n \n void backfillEncryptedFilesForRoomMembers(roomId, {\n currentUserId,\n identity,",
       "module": "/packages/shared"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Access not changed: the member has no encryption keys.",
   "content_en_sha1_hash": "7129cf631a7b822964c64175cd199f4d5362d03d",
   "created_at": "2026-11-11T07:13:28.209Z",
-  "updated_at": "2026-11-11T07:15:49.072Z",
+  "updated_at": "2026-11-27T15:01:39.819Z",
   "comment": {
     "text": "Error toast shown in a private (end-to-end encrypted) room when the server refuses a member's leave, removal or role change, which happens while that member has no encryption keys. A toast read in passing: keep it as short as the English, one clause for the outcome and one for the cause. The member is the person whose access was being changed, who is the user themself when they tried to leave the room.",
     "is_auto": true,
@@ -13,13 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/sub-components/User.tsx",
-      "line_number": 157,
+      "line_number": 159,
       "context": "await changeUserRole(option, user.id, currentUser?.id, hasNextPage);\n })\n .catch((err) => {\n // Spec: private-rooms/room-membership, \"Refused access change in a private room is explained\"\n if (room.private && isAccessChangeRefused(err)) {\n toastr.error(t(\"Common:EncryptedAccessChangeRefused\"));\n return;\n }\n \n toastr.error(err);\n });",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 627,
+      "line_number": 670,
       "context": "})\n .catch((error: unknown) => {\n // Spec: private-rooms/room-membership, \"Refused access change in a private room is explained\"\n if (room.private !== true || !isAccessChangeRefused(error)) throw error;\n \n toastr.error(t(\"Common:EncryptedAccessChangeRefused\"));\n })\n .finally(() => {\n setSelected(\"none\");\n });",
       "module": "/packages/client"
     },
@@ -27,6 +27,12 @@
       "file_path": "/packages/sdk/src/app/(private)/_components/members/PrivateMemberUser.tsx",
       "line_number": 192,
       "context": "onRoleChanged?.();\n } catch (error) {\n // Spec: private-rooms/sdk-surface, \"SDK explains a refused access change in a private room\"\n toastr.error(\n isAccessChangeRefused(error)\n ? t(\"Common:EncryptedAccessChangeRefused\")\n : getEncryptionErrorMessage(t, error),\n );\n } finally {\n setIsRoleChanging(false);\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
+      "line_number": 161,
+      "context": "} catch (error) {\n // The transfer took place: the dialog closes on the new owner.\n // Spec: private-rooms/sdk-surface, \"SDK explains a refused access change in a private room\"\n toastr.error(\n isAccessChangeRefused(error)\n ? t(\"Common:EncryptedAccessChangeRefused\")\n : getEncryptionErrorMessage(t, error),\n );\n onChanged?.(roomId);\n onClose();\n return;",
       "module": "/packages/sdk"
     },
     {

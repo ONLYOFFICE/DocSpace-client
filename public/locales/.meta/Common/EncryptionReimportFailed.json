@@ -3,7 +3,7 @@
   "content": "This file is an encrypted copy downloaded from a private room. To upload it, the original file must still be in this room so that access keys can be restored. The file was not sent.",
   "content_en_sha1_hash": "0bf559cb855dac2ccafba95bddf6ea2aafb0ae13",
   "created_at": "2026-09-01T09:49:37.494Z",
-  "updated_at": "2026-11-17T13:13:27.243Z",
+  "updated_at": "2026-11-27T15:01:39.990Z",
   "comment": {
     "text": "Error text displayed in the file upload list when an encrypted file cannot be reimported because the original file is missing from the private room.",
     "is_auto": true,
@@ -13,14 +13,20 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/uploadDataStore/chunkUpload.helpers.ts",
-      "line_number": 973,
-      "context": ");\n failUploadItem(\n self,\n indexOfFile,\n isReimport\n ? i18n.t(\"Common:EncryptionReimportFailed\")\n : getEncryptedUploadRefusalMessage(i18n.t, \"locked\"),\n t,\n createNewIfExist,\n );\n return;",
+      "line_number": 977,
+      "context": ");\n failUploadItem(\n self,\n uniqueId,\n isReimport\n ? i18n.t(\"Common:EncryptionReimportFailed\")\n : getEncryptedUploadRefusalMessage(i18n.t, \"locked\"),\n t,\n createNewIfExist,\n );\n return;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/uploadDataStore/start.helpers.ts",
+      "line_number": 310,
+      "context": "identity,\n );\n failQueuedItems(\n self,\n failed.map(({ item }) => item),\n i18n.t(\"Common:EncryptionReimportFailed\"),\n );\n const recovered = new Set(\n named.filter((n) => n.recovered).map((n) => n.item.uniqueId),\n );\n resolveNameClashes(named, existingNames).forEach(",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/services/private-room/encrypted-upload-orchestrator.ts",
-      "line_number": 361,
-      "context": "}\n \n /** The message a row whose upload failed is marked with. */\n export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => {\n if (error instanceof EncryptedReimportError) {\n return t(\"Common:EncryptionReimportFailed\");\n }\n if (error instanceof EncryptedUploadNotKeptError) {\n return t(\"Common:EncryptionUploadNotKept\");\n }\n if (error instanceof EncryptedWrapError) {",
+      "line_number": 377,
+      "context": "}\n \n /** The message a row whose upload failed is marked with. */\n export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => {\n if (error instanceof EncryptedReimportError) {\n return t(\"Common:EncryptionReimportFailed\");\n }\n if (error instanceof EncryptedUploadNotKeptError) {\n return t(\"Common:EncryptionUploadNotKept\");\n }\n if (error instanceof EncryptedNameCheckError) {",
       "module": "/packages/shared"
     }
   ],

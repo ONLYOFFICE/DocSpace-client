@@ -3,7 +3,7 @@
   "content": "Agent owner",
   "content_en_sha1_hash": "da658143e67eb58d6fd36ea0dabf552b942dc53c",
   "created_at": "2025-10-27T16:14:10.214Z",
-  "updated_at": "2026-10-31T12:58:29.621Z",
+  "updated_at": "2026-11-27T15:01:39.788Z",
   "comment": {
     "text": "This is a label identifying the owner of an agent, appearing in the interface for changing room ownership.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 498,
+      "context": "<div className={styles.owner}>\n <ChangeRoomOwner\n roomOwner={project.createdBy as never}\n canChangeOwner={project.security.ChangeOwner}\n onOwnerChange={onOwnerChange}\n label={t(\"Common:AgentOwner\")}\n />\n </div>\n ) : null}\n {avatarEditorDialogVisible ? (\n <AvatarEditorDialog",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/change-room-owner/index.tsx",
       "line_number": 112,

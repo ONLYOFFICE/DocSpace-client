@@ -3,7 +3,7 @@
   "content": "Decrypted copy",
   "content_en_sha1_hash": "1d2af4a03d3200774c0292b7830d27b45475f763",
   "created_at": "2026-11-13T11:47:17.227Z",
-  "updated_at": "2026-11-13T11:48:56.184Z",
+  "updated_at": "2026-11-27T15:01:39.976Z",
   "comment": {
     "text": "Entry of the Download submenu in the context menu of an encrypted file, a folder of a private room or a private room. It saves the decrypted file (for a folder or a room, an archive of decrypted files). Noun phrase without a verb: the parent menu item already says Download. Keep it parallel to the neighbouring entry Encrypted copy.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 1136,
+      "line_number": 1199,
       "context": "// Spec: private-rooms/file-operations, \"Download submenu names both results\"\n const originalDownloadOption = {\n ...downloadOption,\n key: \"download-original\",\n label: downloadEncryptedOption\n ? t(\"Common:DownloadDecryptedCopy\")\n : t(\"Common:OriginalFormat\"),\n };\n \n newOptions = [\n ...newOptions",
       "module": "/packages/client"
     }

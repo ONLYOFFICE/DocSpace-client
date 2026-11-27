@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "This space is available to anyone with the link. External users will have Form Filler permission for all the forms.",
   "GoToIntegrations": "Go to Integrations",
   "Horizontal": "Horizontal",
-  "Icon": "Icon",
   "NeedMoreIntegrations": "Need more integrations?",
   "NeedMoreIntegrationsDescription": "Use webhooks to send data to your own system, or connect forms to thousands of services via Zapier.",
   "NoDatabaseConnections": "No database connections configured",

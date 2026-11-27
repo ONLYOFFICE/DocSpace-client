@@ -33,13 +33,12 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import type { DateTime } from "luxon";
 import {
   now,
   addToDate,
-  subtractFromDate,
   parseToDateTime,
   isAfter,
 } from "@onlyoffice/apps-ui-kit/utils/date";
@@ -65,6 +64,7 @@ import { TOption } from "@onlyoffice/apps-ui-kit/components/combobox";
 import { getCookie } from "@onlyoffice/apps-ui-kit/utils/cookie";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getConstName } from "@docspace/shared/constants/consts";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 const MAX_USERS_COUNT = 1000;
 
@@ -83,6 +83,7 @@ const LinkSettingsPanel = ({
   isContacts,
 }: LinkSettingsPanelProps) => {
   const { t, ready } = useTranslation(["Common"]);
+  const userLimitToggleId = useId();
   const locale = getCookie(LANGUAGE) ?? culture ?? "en";
 
   const usersNumber = activeLink.currentUseCount ?? 0;
@@ -191,16 +192,19 @@ const LinkSettingsPanel = ({
             ) : null}
 
             <div className={styles.linkSettingsUserLimit}>
-              <Text
-                fontSize="16px"
-                fontWeight={700}
-                className={styles.linkSettingsText}
-              >
-                {t("Common:UserLimit")}
-              </Text>
+              <ControlCaption htmlFor={userLimitToggleId}>
+                <Text
+                  fontSize="16px"
+                  fontWeight={700}
+                  className={styles.linkSettingsText}
+                >
+                  {t("Common:UserLimit")}
+                </Text>
+              </ControlCaption>
               <ToggleButton
                 className={styles.linkSettingsToggle}
                 isChecked={userLimitIsChecked}
+                inputId={userLimitToggleId}
                 onChange={() => setUserLimitIsChecked(!userLimitIsChecked)}
               />
             </div>
@@ -321,7 +325,7 @@ const LinkSettingsPanel = ({
             className={styles.linkSettingsDatePicker}
             selectDateText={t("Common:SelectDate")}
             initialDate={limitDate}
-            minDate={subtractFromDate(now(), 1, "days") ?? undefined}
+            minDate={now()}
             maxDate={maxDate}
             useMaxTime={!activeLink.expirationDate}
             translations={{ AM: t("Common:AM"), PM: getConstName("PM") }}

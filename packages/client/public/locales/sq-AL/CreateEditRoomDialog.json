@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Kjo hapësirë është e disponueshme për këdo me lidhjen. Përdoruesit e jashtëm do të kenë lejen e plotësuesit të formularit për të gjithë formularët.",
   "GoToIntegrations": "Shko te Integrimet",
   "Horizontal": "Horizontale",
-  "Icon": "Ikon",
   "NeedMoreIntegrations": "Dëshironi më shumë integrime?",
   "NeedMoreIntegrationsDescription": "Përdorni webhook-e për të dërguar të dhëna në sistemin tuaj, ose lidhni formularët me mijëra shërbime përmes Zapier.",
   "NoDatabaseConnections": "Nuk ka lidhje me bazë të dhënash të konfiguruar",

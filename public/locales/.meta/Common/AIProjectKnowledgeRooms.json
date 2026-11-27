@@ -3,7 +3,7 @@
   "content": "Knowledge bases",
   "content_en_sha1_hash": "ddd73033cc739852dd9cb7a249b964debb484902",
   "created_at": "2026-10-31T12:56:51.846Z",
-  "updated_at": "2026-11-17T13:13:27.101Z",
+  "updated_at": "2026-11-27T15:01:39.623Z",
   "comment": {
     "text": "Field label and selector header in the AI project form for the linked Knowledge rooms, i.e. the knowledge bases the chat searches. Plural noun.",
     "is_auto": true,
@@ -12,15 +12,57 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 455,
-      "context": ": undefined\n }\n withSearch\n withHeader\n headerProps={{\n headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t(\"Common:InstructionsRooms\") : t(\"Common:AIProjectKnowledgeRooms\"),\n onCloseClick: () => setSelector(null),\n onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}",
+      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
+      "line_number": 910,
+      "context": "icon: CatalogSkillSetsReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),\n },\n {\n id: \"ai-rooms-knowledge\",\n label: t(\"Common:AIProjectKnowledgeRooms\"),\n icon: CatalogKnowledgeReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.KnowledgeRoom)),\n },\n ],\n });",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
+      "line_number": 90,
+      "context": "): string => {\n switch (type) {\n case RoomsType.InstructionsRoom:\n return t(\"Common:SkillSets\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:AIProjectKnowledgeRooms\");\n default:\n return t(\"Common:Agents\");\n }\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/AgentRoomsSelector.tsx",
+      "line_number": 131,
+      "context": "default:\n return null;\n }\n };\n \n const headerLabel = isKnowledge ? t(\"Common:AIProjectKnowledgeRooms\") : t(\"Common:SkillSets\");\n const common = {\n isMultiSelect: true,\n // Room rows come with `disableMultiSelect`; this overrules it, as the\n // \"add rooms to a group\" dialog does.\n forceIsMultiSelect: true,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 455,
-      "context": ": undefined\n }\n withSearch\n withHeader\n headerProps={{\n headerLabel: selector === INSTRUCTIONS_ROOM_TYPE ? t(\"Common:InstructionsRooms\") : t(\"Common:AIProjectKnowledgeRooms\"),\n onCloseClick: () => setSelector(null),\n onBackClick: () => setSelector(null),\n withoutBackButton: false,\n withoutBorder: false,\n }}",
+      "line_number": 491,
+      "context": "<Text className={styles.hint} fontSize=\"12px\" lineHeight=\"16px\" noSelect>\n {t(\"Common:AIProjectModelHint\")}\n </Text>\n </div>\n {roomsBlock(t(\"Common:SkillSets\"), t(\"Common:AIProjectInstructionsHint\"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}\n {roomsBlock(t(\"Common:AIProjectKnowledgeRooms\"), t(\"Common:AIProjectKnowledgeHint\"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}\n {project?.createdBy ? (\n <div className={styles.owner}>\n <ChangeRoomOwner\n roomOwner={project.createdBy as never}\n canChangeOwner={project.security.ChangeOwner}",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
+      "line_number": 173,
+      "context": "<div className={styles.sources}>\n {instructionsRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:SkillSets\")} rooms={instructionsRooms} kind=\"instructions\" />\n ) : null}\n {knowledgeRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:AIProjectKnowledgeRooms\")} rooms={knowledgeRooms} kind=\"knowledge\" />\n ) : null}\n </div>\n ) : null}\n </div>\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContext/index.tsx",
+      "line_number": 428,
+      "context": "\"instructions\",\n ),\n )}\n {section(\n \"ai-agent-context-knowledge\",\n t(\"Common:AIProjectKnowledgeRooms\"),\n chatT(\"KnowledgeBasesHint\"),\n context.knowledgeBases,\n (room) => (\n <React.Fragment key={room.id}>\n {sourceRow(",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiTemplate/index.tsx",
+      "line_number": 250,
+      "context": "</div>\n )),\n )}\n {section(\n \"info_panel_ai_template_knowledge\",\n t(\"Common:AIProjectKnowledgeRooms\"),\n knowledgeBases.map((base) => (\n <React.Fragment key={base.id}>\n {source(\"knowledge\", base.name)}\n </React.Fragment>\n )),",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
+      "line_number": 277,
+      "context": "setCategory(null);\n };\n \n const labels = {\n skills: t(\"Common:SkillSets\"),\n knowledge: t(\"Common:AIProjectKnowledgeRooms\"),\n files: t(\"Common:Files\"),\n };\n const installLabel = t(\"Common:Install\");\n \n const row = (label: string, value: React.ReactNode, key: string) => (",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/AiProjectTile.tsx",
+      "line_number": 183,
+      "context": "...(category ? [{ key: \"category\", label: t(\"Common:Category\"), value: text(\"category\", category) }] : []),\n { key: \"model\", label: t(\"Common:AIAgentModel\"), value: text(\"model\", model) },\n { key: \"skills\", label: t(\"Common:SkillSets\"), value: sources(\"skills\", SkillSetReactSvgUrl, summary?.skills) },\n {\n key: \"knowledge\",\n label: t(\"Common:AIProjectKnowledgeRooms\"),\n value: sources(\"knowledge\", KnowledgeReactSvgUrl, summary?.knowledge),\n },\n ];\n \n // Only a member chats with the agent: a DocSpace admin sees every agent of",
       "module": "/packages/client"
     }
   ],

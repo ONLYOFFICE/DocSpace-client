@@ -3,7 +3,7 @@
   "content": "Create a space with a ready-made form from the template gallery. You can edit the form and invite members to fill it out.",
   "content_en_sha1_hash": "f2a28fe36466d4390b7d26d4806be13cb317c6c4",
   "created_at": "2026-10-06T10:42:05.909Z",
-  "updated_at": "2026-11-17T13:13:26.992Z",
+  "updated_at": "2026-11-27T15:01:39.631Z",
   "comment": {
     "text": "Description under the template gallery option in the empty Forms section and the form space creation dialog, explaining that a form space is created with a ready-made gallery form that can be edited and filled out by invited members.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/components/room-type/index.tsx",
-      "line_number": 85,
-      "context": "type: roomType,\n title: isTemplateGallery\n ? t(\"Common:FromTemplateGallery\")\n : getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection),\n description: isTemplateGallery\n ? t(\"Common:FromTemplateGalleryDescription\")\n : getRoomTypeDescriptionTranslation(\n t,\n roomType,\n isTemplate,\n isFormSection,",
+      "line_number": 94,
+      "context": "title: isTemplateGallery\n ? t(\"Common:FromTemplateGallery\")\n : (aiSourceTitle ??\n getRoomTypeTitleTranslation(t, roomType, isTemplate, isFormSection)),\n description: isTemplateGallery\n ? t(\"Common:FromTemplateGalleryDescription\")\n : getRoomTypeDescriptionTranslation(\n t,\n roomType,\n isTemplate,\n isFormSection,",
       "module": "/packages/shared"
     }
   ],

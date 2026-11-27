@@ -3,7 +3,7 @@
   "content": "A room for confidential files with end-to-end encryption: files are encrypted in your browser, and only room members can read them. A private room cannot be turned into a regular room.",
   "content_en_sha1_hash": "f3121617a1fdb8694c34c4e2c57e6a19ea3c8c55",
   "created_at": "2026-11-13T11:17:35.916Z",
-  "updated_at": "2026-11-13T11:18:36.816Z",
+  "updated_at": "2026-11-27T15:01:40.011Z",
   "comment": {
     "text": "Description under the Private Room title in the room type block of the create-room and edit-room panels (client and SDK). Two sentences: what an end-to-end encrypted private room is for and who can read its files, then that a private room cannot later be made an ordinary room. Use the same words for private room and end-to-end encryption as the other private-room texts.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 103,
+      "line_number": 122,
       "context": "case RoomsType.PublicRoom:\n return t(\"Common:PublicRoomInfo\");\n case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomPanelDescription\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomDescription\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRoomDescription\");\n case RoomsType.AiProjectRoom:",
       "module": "/packages/shared"
     }

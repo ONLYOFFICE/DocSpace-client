@@ -3,14 +3,33 @@
   "content": "{{count}} files here were encrypted for an encryption key you no longer have. Your current key cannot open them.",
   "content_en_sha1_hash": "ac11aba7782c6414228f4703d0e3972aff2134d3",
   "created_at": "2026-11-23T15:53:21.394Z",
-  "updated_at": "2026-11-23T15:54:28.558Z",
+  "updated_at": "2026-11-27T15:01:39.825Z",
   "comment": {
     "text": "Text of the notice under the heading Some files cannot be opened, above the file list of a private room; the plural form, where count is the number of such files in the open folder. Two full sentences stating a fact with no remedy; here means in this folder, and key means the user's personal encryption key. In a language with several plural forms, put the number after a colon so one wording fits every count.",
     "is_auto": true,
     "updated_at": "2026-11-23T15:54:28.558Z",
     "model": "claude-fable-5-2"
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/PrivateRoomReplacedKeyNotice.tsx",
+      "line_number": 76,
+      "context": "{t(\"Common:PrivateRoomReplacedKeyBarTitle\")}\n </Text>\n <Text fontSize=\"13px\" className={styles.text}>\n {count === 1\n ? t(\"Common:PrivateRoomReplacedKeyBarText_one\", { count })\n : t(\"Common:PrivateRoomReplacedKeyBarText_other\", { count })}\n </Text>\n </div>\n </section>\n );\n };",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
+      "line_number": 652,
+      "context": "if (replacedKeyFailures === failures.length) {\n const count = failures.length;\n toastr.error(\n count === 1\n ? i18n.t(\"Common:PrivateRoomReplacedKeyBarText_one\", { count })\n : i18n.t(\"Common:PrivateRoomReplacedKeyBarText_other\", { count }),\n );\n } else {\n toastr.error(i18n.t(\"Files:DecryptAllFailed\"));\n }\n return;",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/shared/services/private-room/room-member-flows.ts",
+      "line_number": 261,
+      "context": "const count = failed.length;\n const replaced = new Set(keyReplacedFileIds);\n if (count > 0 && failed.every((id) => replaced.has(id))) {\n return count === 1\n ? t(\"Common:PrivateRoomReplacedKeyBarText_one\", { count })\n : t(\"Common:PrivateRoomReplacedKeyBarText_other\", { count });\n }\n return t(\"Common:EncryptedReencryptPartialFailure\", { count });\n };\n \n const getInviteOutcome = (",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

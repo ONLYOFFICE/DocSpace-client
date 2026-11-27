@@ -3,7 +3,7 @@
   "content": "Encryption keys are managed in your {{productName}} profile, on the Keys management tab.",
   "content_en_sha1_hash": "2bd844eb9bd974bf73df7bdb41fcc85671e238d0",
   "created_at": "2026-10-26T08:14:02.636Z",
-  "updated_at": "2026-10-26T08:16:30.560Z",
+  "updated_at": "2026-11-27T15:01:40.091Z",
   "comment": {
     "text": "Info toast in the embedded private-rooms view, shown instead of opening the keys page when the user's profile cannot be opened from the host site (from the forgot-passphrase link or the device-setup hint). {{productName}} is the product name and stays untranslated; Keys management is the name of the profile tab and should match its translation (Common:KeysManagement).",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useKeysManagementLink.ts",
-      "line_number": 60,
-      "context": "const url = getKeysManagementUrl(sdkConfig?.src);\n \n const explain = React.useCallback(() => {\n toastr.info(\n t(\"Common:EncryptionKeysManagedInProfile\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n }, [t]);",
+      "line_number": 57,
+      "context": "const url = getKeysManagementUrl();\n \n const explain = React.useCallback(() => {\n toastr.info(\n t(\"Common:EncryptionKeysManagedInProfile\", {\n productName: getBrandName(\"ProductName\"),\n }),\n );\n }, [t]);",
       "module": "/packages/sdk"
     }
   ],

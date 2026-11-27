@@ -3,7 +3,7 @@
   "content": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "content_en_sha1_hash": "fba22904e71580d8ea3a4b8838ac44bbd60ffca4",
   "created_at": "2025-05-26T07:15:49.630Z",
-  "updated_at": "2026-11-17T13:13:27.293Z",
+  "updated_at": "2026-11-27T15:01:40.039Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over the help icon next to the logo upload fields. It explains how logo dimensions are handled for different display types.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
       "line_number": 90,
-      "context": "fontSize=\"13px\"\n >\n {t(\"WhiteLabelLogoSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"\n offsetRight={0}\n dataTestId=\"white_label_helper_button\"\n />",
+      "context": "fontSize=\"13px\"\n >\n {t(\"WhiteLabelLogoSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"\n dataTestId=\"white_label_helper_button\"\n />\n </Text>",
       "module": "/packages/shared"
     }
   ],

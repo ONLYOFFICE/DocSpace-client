@@ -3,7 +3,7 @@
   "content": "Identity provider public certificates",
   "content_en_sha1_hash": "5734c0943dcc46bc49c3fe1cf17e272c020be354",
   "created_at": "2026-08-31T18:23:39.997Z",
-  "updated_at": "2026-08-31T20:54:56.523Z",
+  "updated_at": "2026-11-27T15:01:39.902Z",
   "comment": {
     "text": "Section heading in the Single Sign-On settings that labels the list of public certificates for the Identity Provider.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
       "line_number": 102,
-      "context": "return (\n <div className={styles.styledWrapper}>\n <div className={styles.certificatesBox}>\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600}>\n {prefix === \"idp\" ? t(\"idpCertificates\") : t(\"spCertificates\")}\n </Text>\n \n <HelpButton\n offsetRight={0}\n tooltipContent={",
+      "context": "return (\n <div className={styles.styledWrapper}>\n <div className={styles.certificatesBox}>\n <Text as=\"h2\" fontSize=\"15px\" fontWeight={600}>\n {prefix === \"idp\" ? t(\"idpCertificates\") : t(\"spCertificates\")}\n </Text>\n \n <HelpButton\n tooltipContent={\n prefix === \"idp\" ? (",
       "module": "/packages/client"
     }
   ],

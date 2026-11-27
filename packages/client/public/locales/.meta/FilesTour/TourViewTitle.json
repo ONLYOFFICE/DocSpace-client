@@ -3,7 +3,7 @@
   "content": "Choose your view",
   "content_en_sha1_hash": "bd9bc6061aaaa6c064680b808b9a456f240a135f",
   "created_at": "2026-10-16T12:15:09.440Z",
-  "updated_at": "2026-10-16T12:17:13.826Z",
+  "updated_at": "2026-11-27T15:01:39.646Z",
   "comment": {
     "text": "Title of the Files onboarding tour step that highlights the sort and view-switch controls; short heading, imperative.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 154,
+      "line_number": 155,
       "context": "FILES_TOUR_LABEL,\n ),\n elementGroupStep(\n SORT_AND_VIEW_TARGET,\n SORT_AND_VIEW_SELECTORS,\n t(\"FilesTour:TourViewTitle\"),\n t(\"FilesTour:TourView\"),\n callbacks,\n FILES_TOUR_LABEL,\n ),\n ];",
       "module": "/packages/client"
     }

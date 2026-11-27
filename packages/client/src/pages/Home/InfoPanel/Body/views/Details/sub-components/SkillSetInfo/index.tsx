@@ -56,6 +56,8 @@ import styles from "./SkillSetInfo.module.scss";
 
 type SkillSetInfoProps = {
   selection: unknown;
+  /** Opens a skill's instructions to read, as a click on it in its set does. */
+  onOpenSkill?: (file: TFile) => void;
 };
 
 type TSkillSetRoom = {
@@ -74,8 +76,9 @@ const isSkillTitle = (title: string) =>
  * The skills of a skill set selected in the list: each by its icon, its name
  * and the command that calls it in the chat. They are the Markdown files of the
  * room, read when the set is selected and again when their number changes.
+ * A click on a skill opens its instructions to read.
  */
-export const SkillSetInfo = ({ selection }: SkillSetInfoProps) => {
+export const SkillSetInfo = ({ selection, onOpenSkill }: SkillSetInfoProps) => {
   const { t } = useTranslation(["Common"]);
   const room = selection as TSkillSetRoom;
   const isSkillSet =
@@ -86,9 +89,7 @@ export const SkillSetInfo = ({ selection }: SkillSetInfoProps) => {
   const id = isSkillSet ? room.id : null;
   const filesCount = isSkillSet ? room.filesCount : null;
 
-  const [skills, setSkills] = React.useState<Pick<TFile, "id" | "title">[]>(
-    [],
-  );
+  const [skills, setSkills] = React.useState<TFile[]>([]);
 
   React.useEffect(() => {
     setSkills([]);
@@ -117,14 +118,27 @@ export const SkillSetInfo = ({ selection }: SkillSetInfoProps) => {
       </div>
       <ul className={styles.list} data-testid="skill-set-info-skills">
         {skills.map((skill) => (
-          <li key={skill.id} className={styles.item}>
-            <SkillIcon kind="skill" size={32} />
-            <Text fontSize="13px" truncate className={styles.name}>
-              {skill.title.slice(0, -SKILL_EXTENSION.length)}
-            </Text>
-            <Text fontSize="11px" lineHeight="16px" className={styles.command}>
-              {toSkillCommand(getSkillNameByTitle(skill.title))}
-            </Text>
+          <li key={skill.id}>
+            <button
+              type="button"
+              className={styles.item}
+              onClick={() => onOpenSkill?.(skill)}
+              disabled={!onOpenSkill}
+              data-testid="skill-set-info-skill"
+            >
+              <SkillIcon kind="skill" size={32} />
+              <Text as="span" fontSize="13px" truncate className={styles.name}>
+                {skill.title.slice(0, -SKILL_EXTENSION.length)}
+              </Text>
+              <Text
+                as="span"
+                fontSize="11px"
+                lineHeight="16px"
+                className={styles.command}
+              >
+                {toSkillCommand(getSkillNameByTitle(skill.title))}
+              </Text>
+            </button>
           </li>
         ))}
       </ul>

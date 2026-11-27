@@ -77,7 +77,6 @@
   "MarkAsRevision": "Marcar como revisión",
   "MarkAsVersion": "Marcar como versión",
   "MarkingRead": "Marcando como leído",
-  "MarkRead": "Marcar como leído",
   "MeAndGroups": "Yo y los grupos ({{ groupsCount }})",
   "MeAndMembers": "Yo y los miembros ({{ membersCount }})",
   "MeAndMembersAndGroups": "Yo, los miembros ({{ membersCount }}) y los grupos ({{ groupsCount }})",

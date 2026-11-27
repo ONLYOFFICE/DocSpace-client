@@ -3,7 +3,7 @@
   "content": "Select folder",
   "content_en_sha1_hash": "20e97c9844509f09cc9df74473a387bfe234b56e",
   "created_at": "2025-05-19T21:30:48.430Z",
-  "updated_at": "2026-11-05T16:49:39.825Z",
+  "updated_at": "2026-11-27T15:01:39.642Z",
   "comment": {
     "text": "This is a button label or tooltip text that prompts the user to choose a folder. It appears when selecting a destination for files or when configuring a folder input.",
     "is_auto": true,
@@ -24,14 +24,20 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/MediaViewer.js",
+      "line_number": 221,
+      "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"RoomOrFolder\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFolder\")} />\n <HelpButton\n size={12}\n place=\"right-end\"\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"RoomOrFolderDescription\")}</Text>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 447,
-      "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"DestinationFolderId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFolder\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right-end\"\n tooltipContent={",
+      "line_number": 443,
+      "context": "/>\n <ControlsSection>\n <CategorySubHeader>{t(\"DestinationFolderId\")}</CategorySubHeader>\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:SelectFolder\")} />\n <HelpButton\n size={12}\n place=\"right-end\"\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"SelectDestinationFolder\")}</Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/files-selector-input/FilesSelector.helpers.ts",
-      "line_number": 44,
+      "line_number": 59,
       "context": "t: TTranslation,\n isSelect?: boolean,\n filterParam?: string,\n isSelectFolder?: boolean,\n ) => {\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (filterParam === FilesSelectorFilterTypes.DOCX)",
       "module": "/packages/shared"
     }

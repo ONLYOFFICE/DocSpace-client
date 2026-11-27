@@ -3,7 +3,7 @@
   "content": "Used by",
   "content_en_sha1_hash": "f5060abc58cee2e86496cca15aff611f1014f6e3",
   "created_at": "2026-11-20T08:00:44.235Z",
-  "updated_at": "2026-11-20T08:14:17.509Z",
+  "updated_at": "2026-11-27T15:01:39.826Z",
   "comment": {
     "text": "Column header of the Skill sets and Knowledge bases lists in the AI section, also a label on their tiles and, followed by a colon, in their compact rows. The value next to it tells how many AI agents use the skill set or knowledge base, for example '4 agents', so it reads as 'Used by: 4 agents'; keep it a short label that such a value can follow.",
     "is_auto": true,
@@ -13,14 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/RowsView/aiRowInfo.ts",
-      "line_number": 129,
-      "context": "const values = (() => {\n switch (kind) {\n case \"skillSet\":\n return [\n `${t(\"Common:Skills\")}: ${item.filesCount ?? 0}`,\n `${t(\"Common:UsedBy\")}: ${item.linkedProjectsCount ?? 0}`,\n fileOwner,\n updatedDate,\n ];\n case \"knowledgeBase\":\n return [",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/Home/Section/Body/RowsView/aiRowInfo.ts",
-      "line_number": 129,
-      "context": "const values = (() => {\n switch (kind) {\n case \"skillSet\":\n return [\n `${t(\"Common:Skills\")}: ${item.filesCount ?? 0}`,\n `${t(\"Common:UsedBy\")}: ${item.linkedProjectsCount ?? 0}`,\n fileOwner,\n updatedDate,\n ];\n case \"knowledgeBase\":\n return [",
+      "line_number": 127,
+      "context": "createdDate?: string;\n skillDescription?: string;\n },\n ): string[] => {\n const usedBy = item.linkedProjectsCount\n ? `${t(\"Common:UsedBy\")}: ${getUsedByText(t, item.linkedProjectsCount)}`\n : undefined;\n const values = (() => {\n switch (kind) {\n case \"skillSet\":\n return [",
       "module": "/packages/client"
     },
     {
@@ -37,8 +31,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/AiSourceRoomTile.tsx",
-      "line_number": 158,
-      "context": "<>\n {label(t(\"Common:Skills\"))}\n {value(\"skills\", String(room.filesCount ?? 0))}\n </>\n ) : null}\n {label(t(\"Common:UsedBy\"))}\n {value(\"used-by\", String(room.linkedProjectsCount ?? 0))}\n {label(t(\"Common:Owner\"))}\n {owner ? (\n <Link\n isHovered",
+      "line_number": 160,
+      "context": "<>\n {label(t(\"Common:Skills\"))}\n {value(\"skills\", String(room.filesCount ?? 0))}\n </>\n ) : null}\n {label(t(\"Common:UsedBy\"))}\n {value(\"used-by\", getUsedByText(t, room.linkedProjectsCount))}\n {label(t(\"Common:Owner\"))}\n {owner ? (\n <Link\n isHovered",
       "module": "/packages/client"
     }
   ],

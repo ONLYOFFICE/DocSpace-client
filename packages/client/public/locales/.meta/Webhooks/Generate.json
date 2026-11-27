@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-19T21:30:49.766Z",
-  "updated_at": "2026-11-02T07:10:46.887Z",
+  "updated_at": "2026-11-27T15:01:39.861Z",
   "comment": {
     "text": "Button label. It generates a new API key, developer token, or secret key.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 521,
+      "line_number": 526,
       "context": "const createFooter = (\n <>\n <Button\n key=\"OKButton\"\n label={isEdit ? t(\"Common:EditButton\") : t(\"Webhooks:Generate\")}\n size={ButtonSize.normal}\n primary\n onClick={onGenerate}\n scale\n isDisabled={isRequestRunning || editIsDisabled || generateIsDisabled}",
       "module": "/packages/client"
     },
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/SecretKeyInput.js",
-      "line_number": 172,
+      "line_number": 171,
       "context": "isHovered\n onClick={generatePassword}\n className=\"link dotted\"\n dataTestId=\"generate_link\"\n >\n {t(\"Generate\")}\n </Link>\n </div>\n </div>\n );\n };",
       "module": "/packages/client"
     }

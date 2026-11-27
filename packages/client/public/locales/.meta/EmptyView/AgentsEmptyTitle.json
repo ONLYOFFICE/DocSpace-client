@@ -3,7 +3,7 @@
   "content": "No agents yet",
   "content_en_sha1_hash": "637a9987ec0decdebf31afcfb171f678f4f22676",
   "created_at": "2026-11-20T10:53:41.441Z",
-  "updated_at": "2026-11-20T10:54:39.928Z",
+  "updated_at": "2026-11-27T15:01:39.776Z",
   "comment": {
     "text": "Title of the empty screen of the Agents list in the AI Chat section for a user who may create one, when the list holds nothing. Short heading, no full stop. Terms: agent = an AI assistant set up with a model, skill sets and knowledge bases; skill set = a room of skills (Markdown instructions); knowledge base = a room of files the assistant searches. Match Common:Agents, Common:SkillSets, Common:AIProjectKnowledgeRooms.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
-      "line_number": 150,
-      "context": "userDescription: t(\"EmptyView:KnowledgeBasesEmptyUserDescription\"),\n createDescription: t(\"EmptyView:KnowledgeBasesCreateDescription\"),\n };\n default:\n return {\n title: t(\"EmptyView:AgentsEmptyTitle\"),\n description: t(\"EmptyView:AgentsEmptyDescription\"),\n userTitle: t(\"EmptyView:AgentsEmptyUserTitle\"),\n userDescription: t(\"EmptyView:AgentsEmptyUserDescription\"),\n createDescription: t(\"EmptyView:AgentsCreateDescription\"),\n };",
+      "line_number": 153,
+      "context": "createTitle: t(\"EmptyView:KnowledgeBasesCreateTitle\"),\n createDescription: t(\"EmptyView:KnowledgeBasesCreateDescription\"),\n };\n default:\n return {\n title: t(\"EmptyView:AgentsEmptyTitle\"),\n description: t(\"EmptyView:AgentsEmptyDescription\"),\n userTitle: t(\"EmptyView:AgentsEmptyUserTitle\"),\n userDescription: t(\"EmptyView:AgentsEmptyUserDescription\"),\n createTitle: t(\"EmptyView:AgentsCreateTitle\"),\n createDescription: t(\"EmptyView:AgentsCreateDescription\"),",
       "module": "/packages/client"
     }
   ],

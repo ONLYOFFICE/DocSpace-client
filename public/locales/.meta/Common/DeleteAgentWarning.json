@@ -3,7 +3,7 @@
   "content": "I understand the consequences and want to delete the agent",
   "content_en_sha1_hash": "99959fbd30cf7d70abde7ebf6ceb1f554e089d08",
   "created_at": "2026-11-18T08:05:30.605Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.705Z",
   "comment": {
     "text": "Checkbox label in the delete confirmation dialog for agents; it must be ticked before the Delete button becomes active. First-person statement, the agent counterpart of I understand the consequences and want to delete the room.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 309,
+      "line_number": 341,
       "context": "style={{ marginTop: \"16px\" }}\n label={\n isTemplate\n ? t(\"DeleteTemplateWarning\")\n : isAgentDelete\n ? t(\"Common:DeleteAgentWarning\")\n : isFormSpace\n ? t(\"Common:DeleteFormSpaceWarning\")\n : t(\"Common:DeleteRoomWarning\")\n }\n dataTestId=\"delete_warning_checkbox\"",
       "module": "/packages/client"
     }

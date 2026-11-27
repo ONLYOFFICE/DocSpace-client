@@ -3,7 +3,7 @@
   "content": "Customize the display",
   "content_en_sha1_hash": "38487dfe6680a86d7000a778b0c610080e789af4",
   "created_at": "2026-08-26T16:05:57.764Z",
-  "updated_at": "2026-11-05T16:49:39.948Z",
+  "updated_at": "2026-11-27T15:01:39.876Z",
   "comment": {
     "text": "Category subheader in the developer tools settings that introduces a section for adjusting the visual parameters of the Javascript SDK presets.",
     "is_auto": true,
@@ -36,6 +36,12 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/MediaViewer.js",
+      "line_number": 245,
+      "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector.js",
       "line_number": 281,
       "context": "setConfig={setConfig}\n isButtonMode={config.isButtonMode}\n />\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
@@ -43,13 +49,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom.js",
-      "line_number": 403,
+      "line_number": 404,
       "context": "</ControlsGroup>\n ) : null}\n </ControlsSection>\n \n <ControlsSection>\n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
-      "line_number": 572,
+      "line_number": 567,
       "context": "onChange={onChangeSecondaryText}\n testId=\"helper_text_input\"\n />\n </ControlsGroup>\n \n <CategorySubHeader>{t(\"CustomizingDisplay\")}</CategorySubHeader>\n <WidthSetter\n t={t}\n setConfig={setConfig}\n dataDimensions={dimensionsModel}\n defaultDimension={defaultDimension}",
       "module": "/packages/client"
     },

@@ -653,12 +653,6 @@ const FormsShellContent = ({ commonData, children }: FormsShellProps) => {
           }}
           settingsStudio={false}
           viewAs={isSettings ? "settings" : "tile"}
-          isEmptyPage={
-            !isEditing &&
-            !isLoading &&
-            items.length === 0 &&
-            folders.length === 0
-          }
           currentDeviceType={currentDeviceType}
         >
           <Section.SectionHeader>

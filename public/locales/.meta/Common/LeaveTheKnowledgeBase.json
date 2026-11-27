@@ -3,7 +3,7 @@
   "content": "Leave knowledge base",
   "content_en_sha1_hash": "e319ccd73ea6e5d8755b9dd9fed75b0aadb1a177",
   "created_at": "2026-11-21T13:03:53.854Z",
-  "updated_at": "2026-11-21T13:04:52.624Z",
+  "updated_at": "2026-11-27T15:01:39.728Z",
   "comment": {
     "text": "Item in the actions menu of a knowledge base in the AI Chat section; the current user stops being its member. Verb, imperative or the form the language uses for menu commands. Short menu label, no full stop. Knowledge base = a room of files the AI assistant searches; never call it a room. Match Common:CreateKnowledgeBase.",
     "is_auto": true,
@@ -12,8 +12,20 @@
   },
   "usage": [
     {
+      "file_path": "/packages/client/src/components/dialogs/LeaveRoomDialog/index.js",
+      "line_number": 100,
+      "context": "// A knowledge base and a skill set are named as such, not as a room.\n const titleText = isAgentRoom\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
+      "line_number": 170,
+      "context": ": t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIProject\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\");",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 975,
+      "line_number": 985,
       "context": "id: \"option_leave-room\",\n key: \"leave-room\",\n label: isAgent\n ? t(\"Common:LeaveTheAgent\")\n : isKnowledgeBase\n ? t(\"Common:LeaveTheKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:LeaveTheSkillSet\")\n : isFormSpace\n ? t(\"Common:LeaveTheFormSpace\")\n : t(\"Common:LeaveTheRoom\"),",
       "module": "/packages/client"
     }

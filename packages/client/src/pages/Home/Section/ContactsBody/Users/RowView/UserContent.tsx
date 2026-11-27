@@ -119,7 +119,7 @@ const UserContent = ({
   const aiSpending = getAiSpendingAsText(i18n.language, aiServicesLimit);
 
   return (
-    <RowContent className={styles.styledRowContent} sideColor={sideInfoColor} sectionWidth={sectionWidth}>
+    <RowContent className={styles.styledRowContent} sideColor={sideInfoColor}>
       <Link
         className="name-block"
         type={LinkType.page}

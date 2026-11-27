@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -47,6 +47,14 @@ describe("UsedByAgents", () => {
     expect(screen.getByTestId("logo-2")).toBeInTheDocument();
     expect(screen.queryByTestId("used-by-agents-more")).toBeNull();
     expect(api.getAiRoomProjects).toHaveBeenCalledWith(12, { count: 100 }, expect.anything());
+  });
+
+  it("opens an agent's page on a click on the agent", async () => {
+    const onOpenAgent = vi.fn();
+    render(<UsedByAgents selection={skillSet} onOpenAgent={onOpenAgent} />);
+    const [legal] = await screen.findAllByTestId("used-by-agents-open");
+    fireEvent.click(legal);
+    expect(onOpenAgent).toHaveBeenCalledWith(2);
   });
 
   it("lists them for a knowledge base as well", async () => {

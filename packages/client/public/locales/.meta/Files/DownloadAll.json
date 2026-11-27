@@ -3,7 +3,7 @@
   "content": "Download all",
   "content_en_sha1_hash": "d69edf7c454524ac387fdee404dcf0ca1812a1b5",
   "created_at": "2025-05-19T21:30:55.475Z",
-  "updated_at": "2026-08-17T17:23:21.821Z",
+  "updated_at": "2026-11-27T15:01:39.800Z",
   "comment": {
     "text": "This is a button label that allows users to download all selected files or all files within a folder.",
     "is_auto": true,
@@ -11,6 +11,12 @@
     "model": "google/gemini-2.5-flash"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContent/index.tsx",
+      "line_number": 443,
+      "context": "{ label: t(\"Common:ArchivingData\") },\n )\n }\n dataTestId=\"ai-agent-content-download-all\"\n >\n {t(\"Files:DownloadAll\")}\n </Link>\n ) : null}\n </div>\n {list.map((file) => row(file))}\n </section>",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/headerOptions.helpers.ts",
       "line_number": 156,

@@ -65,7 +65,6 @@ const FieldMapping = (props) => {
 
         <HelpButton
           className="attribute-matching-tooltip icon-button"
-          offsetRight={0}
           tooltipContent={
             <Text fontSize="12px">{t("AttributeMatchingTooltip")}</Text>
           }

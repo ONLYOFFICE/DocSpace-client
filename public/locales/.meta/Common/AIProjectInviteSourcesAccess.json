@@ -3,7 +3,7 @@
   "content": "Access to the agent's skill sets and knowledge bases",
   "content_en_sha1_hash": "2499fb3db8e13730872a5b79ce00bb819b402bbd",
   "created_at": "2026-11-18T08:05:11.761Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.755Z",
   "comment": {
     "text": "Bold header of the grey info bar at the top of the Invite panel, shown only when inviting people to an agent; a short noun phrase about access to the skill sets and knowledge bases linked to the agent.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/index.js",
-      "line_number": 927,
+      "line_number": 969,
       "context": "<div style={{ display: \"contents\" }} ref={invitePanelBodyRef}>\n {/* A project member reads its linked rooms through the project. */}\n {roomType === RoomsType.AiProjectRoom ? (\n <PublicRoomBar\n className={styles.aiProjectSourcesBar}\n headerText={t(\"Common:AIProjectInviteSourcesAccess\")}\n bodyText={t(\"Common:AIProjectInviteSourcesAccessDescription\")}\n dataTestId=\"invite_panel_ai_project_sources_bar\"\n />\n ) : null}\n {hasLinkInvites ? (",
       "module": "/packages/client"
     }

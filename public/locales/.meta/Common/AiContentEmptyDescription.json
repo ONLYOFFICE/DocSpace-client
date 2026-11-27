@@ -1,0 +1,29 @@
+{
+  "key_path": "AiContentEmptyDescription",
+  "content": "Files created by the agent and files you attach in this conversation will appear here.",
+  "content_en_sha1_hash": "e2e893520bb1cdeb86a1f962db26a81fdf986035",
+  "created_at": "2026-11-25T09:44:34.590Z",
+  "updated_at": "2026-11-27T15:01:39.799Z",
+  "comment": {
+    "text": "Description line of the empty screen on the Content tab of the Info panel on an AI agent's page, shown under the heading 'No files yet' when the open chat conversation has neither artifacts nor attachments. It says which files will be listed there: files the AI agent generates in its replies and files the user attaches to messages; 'you' is the user, 'this conversation' is the current chat thread.",
+    "is_auto": true,
+    "updated_at": "2026-11-25T09:46:30.679Z",
+    "model": "claude-fable-5-2"
+  },
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/AiAgentContent/index.tsx",
+      "line_number": 310,
+      "context": "/>\n <Text fontSize=\"16px\" fontWeight={700} lineHeight=\"22px\" textAlign=\"center\">\n {t(\"Common:AiContentEmpty\")}\n </Text>\n <Text fontSize=\"12px\" lineHeight=\"16px\" textAlign=\"center\" className={styles.emptyDescription}>\n {t(\"Common:AiContentEmptyDescription\")}\n </Text>\n </div>\n );\n \n // A copy goes through the portal's copy panel, which copies the buffered",
+      "module": "/packages/client"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-11-19T16:14:53.932Z",
+  "updated_at": "2026-11-27T15:01:39.609Z",
   "comment": {
     "text": "This is a button label or tooltip text. It allows users to remove a selected item, such as a chat or an image.",
     "is_auto": true,
@@ -16,6 +16,12 @@
       "line_number": 95,
       "context": "\"icon_cropper-delete_button\",\n styles.buttonDelete,\n className,\n )}\n onClick={onClick}\n title={t(\"Common:Delete\")}\n data-testid=\"cropper_delete_button\"\n >\n <TrashReactSvg />\n <div\n className={classNames(\"icon_cropper-delete_button-text\", styles.text)}",
       "module": "@onlyoffice/apps-ui-kit"
+    },
+    {
+      "file_path": "/packages/client/src/components/AiPresetsBridge/DeleteAgentDialog.tsx",
+      "line_number": 82,
+      "context": "<ModalDialog.Footer>\n <Button\n primary\n scale\n size={ButtonSize.normal}\n label={t(\"Common:Delete\")}\n isLoading={isDeleting}\n onClick={onConfirm}\n testId=\"delete_ai_agent_confirm\"\n />\n <Button",
+      "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ConfirmDeleteDialog/index.tsx",
@@ -37,7 +43,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 213,
+      "line_number": 242,
       "context": "};\n }, [onKeyUp]);\n \n const getAccessButtonLabel = () => {\n if (isTemplate) {\n return t(\"Common:Delete\");\n }\n \n if (isRoomDelete) {\n return t(\"Common:DeletePermanently\");\n }",
       "module": "/packages/client"
     },
@@ -223,8 +229,8 @@
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 982,
-      "context": "? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => self.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
+      "line_number": 1041,
+      "context": ": isSkillSet\n ? t(\"Common:DeleteSkillSet\")\n : isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon: item.isRoom ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => self.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,\n },\n {",
       "module": "/packages/client"
     },
     {
@@ -241,7 +247,7 @@
     },
     {
       "file_path": "/packages/client/src/store/DialogsStore.ts",
-      "line_number": 1266,
+      "line_number": 1371,
       "context": "ref!.current!.click(),\n },\n \n hasImage\n ? {\n label: t(\"Common:Delete\"),\n icon: TrashIconSvgUrl,\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),\n }\n : {",
       "module": "/packages/client"
     },
@@ -370,24 +376,6 @@
       "line_number": 192,
       "context": "ref?.current?.click(),\n },\n hasImage\n ? {\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_DELETE,\n label: t(\"Common:Delete\"),\n icon: DeleteSvgUrl,\n onClick: onDeleteLogo,\n }\n : {\n key: ROOM_ACTION_KEYS.CREATE_EDIT_ROOM_CUSTOMIZE_COVER,",
       "module": "/packages/sdk"
-    },
-    {
-      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 146,
-      "context": "isSeparator: true,\n disabled: false,\n },\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => funcs.onClickDelete?.(item, t),\n disabled: !item.security.Delete,\n },\n ];",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 146,
-      "context": "isSeparator: true,\n disabled: false,\n },\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => funcs.onClickDelete?.(item, t),\n disabled: !item.security.Delete,\n },\n ];",
-      "module": "/packages/shared"
-    },
-    {
-      "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",
-      "line_number": 146,
-      "context": "isSeparator: true,\n disabled: false,\n },\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n icon: TrashReactSvgUrl,\n onClick: () => funcs.onClickDelete?.(item, t),\n disabled: !item.security.Delete,\n },\n ];",
-      "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/share/hooks/useShare.tsx",

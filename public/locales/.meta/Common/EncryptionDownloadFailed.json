@@ -3,7 +3,7 @@
   "content": "Could not download the encrypted file.",
   "content_en_sha1_hash": "f74ab9087d44c414fa12cd462a163ad7bdda895b",
   "created_at": "2026-05-24T17:27:26.463Z",
-  "updated_at": "2026-11-17T13:13:27.140Z",
+  "updated_at": "2026-11-27T15:01:39.823Z",
   "comment": {
     "text": "Error toast message appearing when an attempt to download an encrypted file fails.",
     "is_auto": true,
@@ -19,43 +19,37 @@
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 360,
-      "context": "const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(\n (k) => String(k.userId) === String(userId),\n );\n if (!hasOwnEntry) {\n // Spec: file-operations, \"Download decrypts on the client\"\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n return Promise.resolve();\n }\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {",
+      "line_number": 429,
+      "context": "toastr.error(i18n.t(\"Common:EncryptedFileKeyReplaced\"));\n } else {\n if (result.error) {\n console.error(\"[ENCRYPTION] downloadEncryptedFile:\", result.error);\n }\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n }\n }\n } catch (error) {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 360,
-      "context": "const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(\n (k) => String(k.userId) === String(userId),\n );\n if (!hasOwnEntry) {\n // Spec: file-operations, \"Download decrypts on the client\"\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n return Promise.resolve();\n }\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {",
+      "line_number": 429,
+      "context": "toastr.error(i18n.t(\"Common:EncryptedFileKeyReplaced\"));\n } else {\n if (result.error) {\n console.error(\"[ENCRYPTION] downloadEncryptedFile:\", result.error);\n }\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n }\n }\n } catch (error) {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 360,
-      "context": "const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(\n (k) => String(k.userId) === String(userId),\n );\n if (!hasOwnEntry) {\n // Spec: file-operations, \"Download decrypts on the client\"\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n return Promise.resolve();\n }\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/filesActionsStore/download.helpers.ts",
-      "line_number": 360,
-      "context": "const hasOwnEntry = !!encryptionInfo?.fileKeys?.some(\n (k) => String(k.userId) === String(userId),\n );\n if (!hasOwnEntry) {\n // Spec: file-operations, \"Download decrypts on the client\"\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n return Promise.resolve();\n }\n \n const identity = await requireUnlock(String(userId));\n if (!identity) {",
+      "line_number": 429,
+      "context": "toastr.error(i18n.t(\"Common:EncryptedFileKeyReplaced\"));\n } else {\n if (result.error) {\n console.error(\"[ENCRYPTION] downloadEncryptedFile:\", result.error);\n }\n toastr.error(i18n.t(\"Common:EncryptionDownloadFailed\"));\n }\n }\n } catch (error) {\n setSecondaryProgressBarData({\n operation: OPERATIONS_NAME.download,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
-      "line_number": 132,
+      "line_number": 133,
       "context": "});\n \n if (controller.signal.aborted) return;\n \n if (!result.success || !result.file) {\n toastr.error(t(\"Common:EncryptionDownloadFailed\"));\n return;\n }\n triggerFileDownload(result.file, result.file.name);\n } catch (error) {\n if (controller.signal.aborted) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
-      "line_number": 132,
+      "line_number": 133,
       "context": "});\n \n if (controller.signal.aborted) return;\n \n if (!result.success || !result.file) {\n toastr.error(t(\"Common:EncryptionDownloadFailed\"));\n return;\n }\n triggerFileDownload(result.file, result.file.name);\n } catch (error) {\n if (controller.signal.aborted) return;",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_hooks/useEncryptedDownload.ts",
-      "line_number": 132,
+      "line_number": 133,
       "context": "});\n \n if (controller.signal.aborted) return;\n \n if (!result.success || !result.file) {\n toastr.error(t(\"Common:EncryptionDownloadFailed\"));\n return;\n }\n triggerFileDownload(result.file, result.file.name);\n } catch (error) {\n if (controller.signal.aborted) return;",
       "module": "/packages/sdk"
     }

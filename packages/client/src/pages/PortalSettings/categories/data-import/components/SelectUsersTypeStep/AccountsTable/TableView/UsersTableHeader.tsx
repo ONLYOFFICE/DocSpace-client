@@ -59,7 +59,6 @@ const getColumns = (defaultColumns: TTableColumn[], userId?: string) => {
 const UsersTableHeader = (props: UsersTableHeaderProps) => {
   const {
     t,
-    sectionWidth,
     userId,
     tableRef,
     columnStorageName,
@@ -133,7 +132,6 @@ const UsersTableHeader = (props: UsersTableHeaderProps) => {
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
-      sectionWidth={sectionWidth!}
       showSettings={false}
       useReactWindow
       infoPanelVisible={false}

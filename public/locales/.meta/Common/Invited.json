@@ -3,7 +3,7 @@
   "content": "Invited",
   "content_en_sha1_hash": "53469df1c48ff6abdcf1b528fd8c8ac2baf05099",
   "created_at": "2025-05-19T21:30:45.993Z",
-  "updated_at": "2026-11-19T16:14:54.008Z",
+  "updated_at": "2026-11-27T15:01:39.758Z",
   "comment": {
     "text": "This is a label indicating that a user has been invited. It appears next to a user's name in a list, for example, when searching for users to invite.",
     "is_auto": true,
@@ -25,13 +25,13 @@
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 433,
+      "line_number": 434,
       "context": "<Text\n className={classNames(styles.searchItemText, {\n [styles.isInfo]: true,\n })}\n >\n {t(\"Common:Invited\")}\n </Text>\n ) : null}\n {isDisabled ? (\n <Text\n className={classNames(styles.searchItemText, {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteResult.js",
-      "line_number": 99,
+      "line_number": 104,
       "context": "<section\n data-testid=\"invite_panel_result_granted\"\n aria-labelledby={grantedId}\n >\n <Heading id={grantedId} className={styles.subHeader}>\n {t(\"Common:Invited\")}\n </Heading>\n <Text>{namesOf(granted)}</Text>\n </section>\n ) : null}",
       "module": "/packages/client"
     },
@@ -49,7 +49,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(rooms)/_components/invite-panel/sub-components/InviteResult.tsx",
-      "line_number": 108,
+      "line_number": 113,
       "context": "<section\n data-testid=\"invite_panel_result_granted\"\n aria-labelledby={grantedId}\n >\n <Heading id={grantedId} className={styles.subHeader}>\n {t(\"Common:Invited\")}\n </Heading>\n <Text>{namesOf(granted)}</Text>\n </section>\n ) : null}",
       "module": "/packages/sdk"
     }

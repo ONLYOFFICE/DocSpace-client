@@ -3,7 +3,7 @@
   "content": "You don't have enough permission",
   "content_en_sha1_hash": "0100053d13b47532703554baf465379a9dc4dc52",
   "created_at": "2025-08-04T07:29:37.418Z",
-  "updated_at": "2026-08-24T22:30:00.619Z",
+  "updated_at": "2026-11-27T15:01:39.654Z",
   "comment": {
     "text": "This is a tooltip message indicating that the user lacks the necessary permissions to perform an action. It appears when hovering over a disabled UI element.",
     "is_auto": true,
@@ -18,8 +18,14 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/AgentRoomsSelector.tsx",
+      "line_number": 125,
+      "context": "const getRoomDisabledReason = (room: { security?: { EditRoom?: boolean } | null }) => {\n switch (roomLinkRefusal(room, isKnowledge, vectorizationEnabled)) {\n case \"vectorizationOff\":\n return t(\"Common:KnowledgeRoomsNeedVectorization\");\n case \"noManageRights\":\n return t(\"Common:YouDontHaveEnoughPermission\");\n default:\n return null;\n }\n };",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/CreateApiKeyDialog/index.tsx",
-      "line_number": 177,
+      "line_number": 179,
       "context": "{showTooltip ? (\n <Tooltip\n id=\"emailTooltip\"\n getContent={() => (\n <Text isInline fontSize=\"12px\">\n {t(\"Common:YouDontHaveEnoughPermission\")}\n </Text>\n )}\n place=\"bottom\"\n />\n ) : null}",
       "module": "/packages/client"
     }

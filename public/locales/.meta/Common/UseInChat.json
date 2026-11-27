@@ -3,7 +3,7 @@
   "content": "Use in chat",
   "content_en_sha1_hash": "74e19814a5c066bb8153f950fbce7129225c19bf",
   "created_at": "2026-11-18T08:06:37.379Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:40.009Z",
   "comment": {
     "text": "Tooltip of the chat-bubble quick button on a skill set (a room of AI skills) or on a skill in it; starts a new AI chat that uses that skill set. Short imperative verb phrase.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
       "line_number": 300,
-      "context": "className=\"badge use-in-chat icons-group\"\n size={sizeQuickButton}\n onClick={onUseInChat}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:UseInChat\")}\n />\n ) : null}\n {isAvailableShareFile && !isAvailableShareForUser ? (\n <IconButton\n iconName={LinkReactSvgUrl}",
+      "context": "className=\"badge use-in-chat icons-group\"\n size={sizeQuickButton}\n onClick={onUseInChat}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:UseInChat\")}\n dataTestId=\"quick-buttons-use-in-chat\"\n />\n ) : null}\n {isAvailableShareFile && !isAvailableShareForUser ? (\n <IconButton",
       "module": "/packages/shared"
     }
   ],

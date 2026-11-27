@@ -3,7 +3,7 @@
   "content": "Your encryption key protects files in private rooms. Your passphrase unlocks the key; your recovery phrase helps restore access if you forget it.",
   "content_en_sha1_hash": "52ef8516a81b4d5e3e80d12c512fe85fc752c917",
   "created_at": "2026-11-19T16:14:17.615Z",
-  "updated_at": "2026-11-19T16:14:54.121Z",
+  "updated_at": "2026-11-27T15:01:39.917Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/keys-management/KeysManagement.tsx",
-      "line_number": 301,
+      "line_number": 312,
       "context": "return (\n <div className={styles.sectionBody}>\n {/* Spec: private-rooms/key-management, \"Keys management opens with an introduction\" */}\n <Text as=\"p\" className={styles.intro} dataTestId=\"keys_management_intro\">\n {t(\"Common:KeysManagementIntro\")}\n </Text>\n {/* A list that failed to load is reported by the block below. */}\n {!keysKnown && keysLoadFailed ? null : (\n <KeysList\n keyState={hasKeys ? (isUnlocked ? \"unlocked\" : \"locked\") : undefined}",
       "module": "/packages/client"
     }

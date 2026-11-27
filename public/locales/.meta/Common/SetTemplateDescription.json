@@ -3,7 +3,7 @@
   "content": "Create a space from a template. Settings, users, folders, and forms will be copied from the selected template.",
   "content_en_sha1_hash": "7fe73cf40e6a2ee94c5012524bba8b6c2946b1ad",
   "created_at": "2026-06-25T19:30:50.943Z",
-  "updated_at": "2026-11-17T13:13:26.992Z",
+  "updated_at": "2026-11-27T15:01:39.630Z",
   "comment": {
     "text": "Instructional text in a form section explaining that settings, users, folders, and forms are cloned when creating a new set from a template.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 84,
+      "line_number": 103,
       "context": "isTemplate: boolean = false,\n isFormSection: boolean = false,\n ) => {\n if (isFormSection)\n return isTemplate\n ? t(\"Common:SetTemplateDescription\")\n : t(\"Common:FormSetDescription\");\n \n if (isTemplate) return t(\"Common:FromTemplateRoomInfo\");\n \n switch (roomType) {",
       "module": "/packages/shared"
     }

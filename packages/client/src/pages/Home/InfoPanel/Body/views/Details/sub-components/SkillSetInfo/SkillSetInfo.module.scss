@@ -40,12 +40,34 @@
   list-style: none;
 }
 
+// A skill as one row, a button that opens its instructions.
 .item {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
   min-width: 0;
   height: 32px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &:hover:not(:disabled) .name {
+    text-decoration: underline dashed;
+  }
+
+  // A click focuses it; only keyboard focus gets the ring.
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 .name {

@@ -3,7 +3,7 @@
   "content": "No knowledge bases match this filter. Try another or remove the filter to view all knowledge bases.",
   "content_en_sha1_hash": "48e60d5a7ee8072601e753492405156a3a2b0e7d",
   "created_at": "2026-11-20T10:53:31.503Z",
-  "updated_at": "2026-11-20T10:54:39.928Z",
+  "updated_at": "2026-11-27T15:01:39.777Z",
   "comment": {
     "text": "Description of the No findings screen when a search or filter of the Knowledge bases list in the AI Chat section matches nothing; a Clear filter link follows it. Knowledge bases as in Common:AIProjectKnowledgeRooms.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
-      "line_number": 180,
+      "line_number": 184,
       "context": "): string | null => {\n if (isAiHubFolder) {\n if (listType === RoomsType.InstructionsRoom)\n return t(\"Common:EmptyFilterSkillSetsDescription\");\n if (listType === RoomsType.KnowledgeRoom)\n return t(\"Common:EmptyFilterKnowledgeBasesDescription\");\n return t(\"Common:EmptyFilterAIAgentsDescription\");\n }\n if (roomType === RoomsType.InstructionsRoom)\n return t(\"Common:EmptyFilterSkillsDescription\");\n if (roomType === RoomsType.KnowledgeRoom)",
       "module": "/packages/client"
     }

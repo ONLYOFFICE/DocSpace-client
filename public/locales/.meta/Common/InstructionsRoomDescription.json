@@ -3,7 +3,7 @@
   "content": "A room for AI skills. Markdown files added here are used as instructions by the AI agents and chats that reference this room.",
   "content_en_sha1_hash": "bdbe8a117e541855ec628adc2b04614fe2dc375a",
   "created_at": "2026-10-31T12:57:26.678Z",
-  "updated_at": "2026-11-17T13:13:27.262Z",
+  "updated_at": "2026-11-27T15:01:40.011Z",
   "comment": {
     "text": "Description of the Instructions room type in the room creation picker and type lists: Markdown files in it are skills the AI follows.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/room-type/RoomType.utils.ts",
-      "line_number": 105,
+      "line_number": 124,
       "context": "case RoomsType.FormRoom:\n return t(\"Common:FormFilingRoomInfo\");\n case RoomsTypePrivate:\n return t(\"Common:PrivateRoomPanelDescription\");\n case RoomsType.InstructionsRoom:\n return t(\"Common:InstructionsRoomDescription\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:KnowledgeRoomDescription\");\n case RoomsType.AiProjectRoom:\n return t(\"Common:AIProjectRoomDescription\");\n default:",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "The new owner must be a Full admin or a Room admin. Users and guests cannot own an agent. If you also leave the agent, your conversations with it, including the files in them, will be permanently deleted.",
   "content_en_sha1_hash": "3ec3206e1856d850d8b33472c7aa2aaa06fc131b",
   "created_at": "2026-11-18T11:47:48.999Z",
-  "updated_at": "2026-11-18T11:49:40.510Z",
+  "updated_at": "2026-11-27T15:01:39.745Z",
   "comment": {
     "text": "Info note at the top of the Change owner people selector of an AI agent, shown to the current owner, who also sees a Leave agent checkbox; Full admin and Room admin are portal user types, and the last sentence warns that ticking Leave agent permanently deletes the owner's own conversations (chat threads) with the agent and their files.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/ChangeRoomOwnerPanel/index.js",
-      "line_number": 150,
-      "context": ": t(\"Common:ChangeTheRoomOwner\");\n \n // The owner may tick \"Leave agent\", which deletes their conversations there.\n const infoText = isAIProject\n ? ownerIsCurrentUser && !showBackButton\n ? t(\"Common:AIProjectChangeOwnerLeaveInfo\")\n : t(\"Common:AIProjectChangeOwnerInfo\")\n : t(\"Common:PeopleSelectorInfo\");\n \n const footerCheckboxLabel = isAIProject\n ? t(\"Common:LeaveTheAgent\")",
+      "line_number": 159,
+      "context": ": t(\"Common:ChangeTheRoomOwner\");\n \n // Spec: ai-agent-access, \"Who may own an agent\"\n const infoText = isAIProject\n ? ownerIsCurrentUser && !showBackButton\n ? t(\"Common:AIProjectChangeOwnerLeaveInfo\")\n : t(\"Common:AIProjectChangeOwnerInfo\")\n : isKnowledgeBase\n ? t(\"Common:KnowledgeBaseOwnerSelectorInfo\")\n : isSkillSet\n ? t(\"Common:SkillSetOwnerSelectorInfo\")",
       "module": "/packages/client"
     }
   ],

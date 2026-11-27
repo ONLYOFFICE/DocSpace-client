@@ -3,7 +3,7 @@
   "content": "New skill",
   "content_en_sha1_hash": "a7b4904c579cc116db7b39e3c5c96c1715aea5c3",
   "created_at": "2026-11-18T08:35:56.500Z",
-  "updated_at": "2026-11-18T08:38:08.350Z",
+  "updated_at": "2026-11-27T15:01:39.712Z",
   "comment": {
     "text": "Title of the dialog that creates a skill, the default name of the new skill, and the item in the + New menu and empty view of a skill set. Short noun phrase; it also becomes the file name, so keep it short.",
     "is_auto": true,
@@ -24,15 +24,9 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 444,
-      "context": "// a Knowledge room holds files to index. Neither takes a folder.\n // A skill is uploaded, written by AI, or created from the skill template\n // by the AI service: the server refuses a Markdown file without its\n // name / description.\n const createMarkdown: EmptyViewItemType = {\n title: t(\"Common:NewSkill\"),\n description: t(\"Common:InstructionsRoomMarkdownOnly\"),\n icon: <CreateNewFormIcon />,\n key: \"create-markdown\",\n disabled: !security?.Create,\n onClick: () => actions.onCreate(\"md\"),",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/store/contextOptionsStore/folderModel.helpers.ts",
-      "line_number": 408,
-      "context": "};\n // A new skill is created from the skill template by the AI service,\n // whether or not the Markdown plugin is there to open it.\n const createSkillOptions: TContextOption[] = self.isCreateSkillAvailable\n ? [\n { ...createNewMarkdown, label: t(\"Common:NewSkill\") },\n { key: \"separator\", isSeparator: true },\n ]\n : [];\n const sourceRoomOptions: TContextOption[] =\n roomType === RoomsType.KnowledgeRoom",
+      "file_path": "/packages/client/src/components/dialogs/GenerateSkillDialog/index.tsx",
+      "line_number": 144,
+      "context": "}: GenerateSkillDialogProps) => {\n const { t } = useTranslation([\"Common\", \"Metadata\"]);\n // The room the panel was opened in: the skill is generated for it and\n // saved into it, wherever the user has gone meanwhile.\n const [targetRoomId] = React.useState(roomId);\n const defaultTitle = t(\"Common:NewSkill\");\n const [title, setTitle] = React.useState(defaultTitle);\n const [description, setDescription] = React.useState(\"\");\n const [isValidTitle, setIsValidTitle] = React.useState(true);\n const [isGenerating, setIsGenerating] = React.useState(false);\n const [isSaving, setIsSaving] = React.useState(false);",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "You have appointed a new owner.",
   "content_en_sha1_hash": "bfdff63ec08042212380b8b5ed1aeed73a496e37",
   "created_at": "2025-05-19T21:30:55.262Z",
-  "updated_at": "2026-11-17T13:13:27.242Z",
+  "updated_at": "2026-11-27T15:01:39.989Z",
   "comment": {
     "text": "Toast message. It appears after successfully appointing a new owner for a file or room.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/filesActionsStore/rooms.helpers.ts",
-      "line_number": 702,
-      "context": "const isMe = userId === self.userStore.user!.id;\n if (isMe) setInRoom(true);\n }\n \n if (isLeaveChecked) await self.onLeaveRoom(t);\n else toastr.success(t(\"Common:AppointNewOwner\"));\n } catch (e) {\n // The server refuses the transfer while the candidate lacks an entry on\n // an encrypted file, for example one uploaded since they were wrapped\n // above; it lists those files on request.\n const listed =",
+      "line_number": 741,
+      "context": "const isMe = userId === self.userStore.user!.id;\n if (isMe) setInRoom(true);\n }\n \n if (isLeaveChecked) await self.onLeaveRoom(t);\n else toastr.success(t(\"Common:AppointNewOwner\"));\n } catch (e) {\n const count = isPrivateRoom\n ? await countMissingFilesOfRefusedOwnerChange(e, roomId, userId)\n : 0;\n if (count > 0) {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/sdk/src/app/(private)/_components/owner-change/PrivateChangeOwnerDialog.tsx",
-      "line_number": 149,
-      "context": "leaving && String(filesListStore.currentFolder?.id) === String(roomId);\n if (leaving) {\n await leaveRoom({ roomId, userId: currentUserId as string });\n toastr.success(t(\"Common:YouLeftTheRoom\"));\n } else {\n toastr.success(t(\"Common:AppointNewOwner\"));\n }\n \n onChanged?.(roomId);\n onClose();\n if (leftOpenRoom) router.push(privateRoute(\"/private\"));",
+      "line_number": 170,
+      "context": "onClose();\n return;\n }\n toastr.success(t(\"Common:YouLeftTheRoom\"));\n } else {\n toastr.success(t(\"Common:AppointNewOwner\"));\n }\n \n onChanged?.(roomId);\n onClose();\n if (leftOpenRoom) router.push(privateRoute(\"/private\"));",
       "module": "/packages/sdk"
     },
     {

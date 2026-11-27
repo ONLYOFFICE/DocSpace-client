@@ -3,7 +3,7 @@
   "content": "Files in the selected knowledge bases are searched by the chat. Several knowledge bases can be selected.",
   "content_en_sha1_hash": "afbc5a2bd65f94b29d3f6b4267b264bff9930722",
   "created_at": "2026-11-18T08:05:11.881Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.788Z",
   "comment": {
     "text": "Hint under the Knowledge bases selector in the agent form: the chat searches the files of the chosen knowledge bases (AI Knowledge rooms). Use the same term as the Knowledge bases label in the form.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 557,
+      "line_number": 491,
       "context": "<Text className={styles.hint} fontSize=\"12px\" lineHeight=\"16px\" noSelect>\n {t(\"Common:AIProjectModelHint\")}\n </Text>\n </div>\n {roomsBlock(t(\"Common:SkillSets\"), t(\"Common:AIProjectInstructionsHint\"), instructions, INSTRUCTIONS_ROOM_TYPE, setInstructions)}\n {roomsBlock(t(\"Common:AIProjectKnowledgeRooms\"), t(\"Common:AIProjectKnowledgeHint\"), knowledge, KNOWLEDGE_ROOM_TYPE, setKnowledge)}\n {project?.createdBy ? (\n <div className={styles.owner}>\n <ChangeRoomOwner\n roomOwner={project.createdBy as never}\n canChangeOwner={project.security.ChangeOwner}",
       "module": "/packages/client"
     }

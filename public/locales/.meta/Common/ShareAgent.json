@@ -1,26 +1,31 @@
 {
-  "key_path": "MarkRead",
-  "content": "Mark as read",
-  "content_en_sha1_hash": "c1ee860bc3a94be1ae96eaa05833713b79c6634b",
-  "created_at": "2025-05-19T21:30:55.828Z",
-  "updated_at": "2026-11-17T13:13:27.021Z",
+  "key_path": "ShareAgent",
+  "content": "Share agent",
+  "content_en_sha1_hash": "7bdf7d08e7f85d395c9ffb3a8a55c6697e89f775",
+  "created_at": "2026-11-27T15:01:21.525Z",
+  "updated_at": "2026-11-27T15:01:39.611Z",
   "comment": {
-    "text": "This is a button label that marks new files or updates as read, removing the \"new\" indicator.",
-    "is_auto": true,
-    "updated_at": "2026-04-11T21:09:02.480Z",
-    "model": "google/gemini-2.5-flash"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/NewFilesBadge/sub-components/NewFilesPanel.tsx",
-      "line_number": 266,
-      "context": "const markAsReadButton = (\n <Button\n className=\"mark-as-read-button\"\n scale\n label={t(\"MarkRead\")}\n size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}\n onClick={markAsReadAction}\n isLoading={isMarkAsReadRunning}\n testId=\"mark_as_read_button\"\n />",
+      "file_path": "/packages/client/src/components/AiPresetsBridge/index.tsx",
+      "line_number": 368,
+      "context": "});\n }\n if (canShareAgent) {\n actions.push({\n id: \"share\",\n label: t(\"Common:ShareAgent\"),\n icon: ShareReactSvgUrl,\n onClick: () => inviteToRoom(Number(id), RoomsType.AiProjectRoom),\n });\n }\n actions.push({",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
+      "line_number": 945,
+      "context": "? getAgentRights(selectedFolder)\n : null;\n const showShareAgent = !!agentRights?.share;\n \n const navigationButtonLabel = showShareAgent\n ? t(\"Common:ShareAgent\")\n : showNavigationButton\n ? isFormRoomRoot\n ? t(\"Files:ShareSpace\")\n : t(\"Files:ShareRoom\")\n : null;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 854,
-      "context": "isSeparator: true,\n },\n {\n id: \"option_mark-read\",\n key: \"mark-read\",\n label: t(\"MarkRead\"),\n icon: TickRoundedSvgUrl,\n onClick: () => self.onClickMarkRead(item),\n disabled: false,\n },\n {",
+      "line_number": 500,
+      "context": "disabled: false,\n },\n {\n id: \"option_invite-users-to-room\",\n key: \"invite-users-to-room\",\n label: isAgent ? t(\"Common:ShareAgent\") : t(\"Common:InviteContacts\"),\n icon: PersonReactSvgUrl,\n onClick: () => self.onClickInviteUsers(item.id, item.roomType),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }
   ],
@@ -155,7 +160,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-06-02T14:55:40.201651Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,
@@ -170,6 +175,12 @@
       "approved_at": null
     },
     "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

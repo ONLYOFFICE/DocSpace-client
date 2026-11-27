@@ -73,7 +73,6 @@ const SsoComboBox = (props) => {
           scaled
           scaledOptions
           selectedOption={currentOption}
-          showDisabledItems
           tabIndex={tabIndex}
           size="content"
           dropDownMaxHeight={364}

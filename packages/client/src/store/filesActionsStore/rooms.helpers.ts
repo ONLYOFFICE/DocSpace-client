@@ -658,7 +658,7 @@ self: FilesActionStore,t: TTranslation, isOwner = false, force = false
         // A left agent leaves the sidebar and the chat's agents menu.
         if (isAgent(room)) {
           void self.aiPresetsStore?.fetchPresets();
-          self.treeFoldersStore.removePinnedAiProject(roomId);
+          self.treeFoldersStore.removeAiHubRootProject(roomId);
         }
 
         toastr.success(successText);

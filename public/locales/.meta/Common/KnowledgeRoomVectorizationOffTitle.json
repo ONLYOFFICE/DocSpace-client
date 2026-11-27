@@ -3,7 +3,7 @@
   "content": "Vectorization is off",
   "content_en_sha1_hash": "50282831e8abdacfff2c2c02a8ba7cf4626c55e2",
   "created_at": "2026-10-31T12:57:30.433Z",
-  "updated_at": "2026-10-31T12:59:25.206Z",
+  "updated_at": "2026-11-27T15:01:39.824Z",
   "comment": {
     "text": "Title of the banner inside a Knowledge room when vectorization (preparing files for AI search) is off. Short heading.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/KnowledgeVectorizationBar.tsx",
-      "line_number": 88,
-      "context": "t(\"Common:KnowledgeRoomVectorizationOffUser\")\n );\n \n return (\n <PublicRoomBar\n headerText={t(\"Common:KnowledgeRoomVectorizationOffTitle\")}\n bodyText={bodyText}\n iconName={InfoReactSvgUrl}\n barIsVisible\n live\n dataTestId=\"knowledge_vectorization_bar\"",
+      "line_number": 94,
+      "context": "// The table container has a -25px top margin and a fixed header, so a\n // block above it needs that much room or the header covers its bottom.\n return (\n <div style={isTableView ? { paddingBlockEnd: 25 } : undefined}>\n <PublicRoomBar\n headerText={t(\"Common:KnowledgeRoomVectorizationOffTitle\")}\n bodyText={bodyText}\n iconName={InfoReactSvgUrl}\n barIsVisible\n live\n dataTestId=\"knowledge_vectorization_bar\"",
       "module": "/packages/client"
     }
   ],

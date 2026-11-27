@@ -3,7 +3,7 @@
   "content": "An agent brings a model, skill sets and knowledge bases together and shares that setup with the people you invite.",
   "content_en_sha1_hash": "6e37de8407ce3e7f52b411810caaa45c9f90662c",
   "created_at": "2026-11-20T10:53:41.439Z",
-  "updated_at": "2026-11-20T10:54:39.928Z",
+  "updated_at": "2026-11-27T15:01:39.776Z",
   "comment": {
     "text": "Description on the empty screen of the Agents list in the AI Chat section for a user who may create one: what a agent is and why to create it. Terms: agent = an AI assistant set up with a model, skill sets and knowledge bases; skill set = a room of skills (Markdown instructions); knowledge base = a room of files the assistant searches. Match Common:Agents, Common:SkillSets, Common:AIProjectKnowledgeRooms.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
-      "line_number": 151,
-      "context": "createDescription: t(\"EmptyView:KnowledgeBasesCreateDescription\"),\n };\n default:\n return {\n title: t(\"EmptyView:AgentsEmptyTitle\"),\n description: t(\"EmptyView:AgentsEmptyDescription\"),\n userTitle: t(\"EmptyView:AgentsEmptyUserTitle\"),\n userDescription: t(\"EmptyView:AgentsEmptyUserDescription\"),\n createDescription: t(\"EmptyView:AgentsCreateDescription\"),\n };\n }",
+      "line_number": 154,
+      "context": "createDescription: t(\"EmptyView:KnowledgeBasesCreateDescription\"),\n };\n default:\n return {\n title: t(\"EmptyView:AgentsEmptyTitle\"),\n description: t(\"EmptyView:AgentsEmptyDescription\"),\n userTitle: t(\"EmptyView:AgentsEmptyUserTitle\"),\n userDescription: t(\"EmptyView:AgentsEmptyUserDescription\"),\n createTitle: t(\"EmptyView:AgentsCreateTitle\"),\n createDescription: t(\"EmptyView:AgentsCreateDescription\"),\n };",
       "module": "/packages/client"
     }
   ],

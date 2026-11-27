@@ -3,7 +3,7 @@
   "content": "A knowledge base can be created once vectorization works. Contact the Full admin to configure the embeddings provider.",
   "content_en_sha1_hash": "cb52419ba635856550b21d6cfbfe54c382684c37",
   "created_at": "2026-11-20T10:53:41.477Z",
-  "updated_at": "2026-11-20T10:54:39.928Z",
+  "updated_at": "2026-11-27T15:01:39.625Z",
   "comment": {
     "text": "Description on the empty screen of the Knowledge bases list in the AI Chat section, shown to a non-admin while vectorization (indexing of files with an embeddings model) is off and no knowledge base can be created. Full admin is a user role.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/EmptyContainer/EmptyAiRoomsContainer.tsx",
-      "line_number": 200,
+      "line_number": 199,
       "context": "title={canManage ? texts.title : texts.userTitle}\n description={\n isCreateRefused\n ? isAdmin\n ? t(\"EmptyView:KnowledgeBasesNeedVectorizationAdmin\")\n : t(\"EmptyView:KnowledgeBasesNeedVectorizationUser\")\n : canManage\n ? texts.description\n : texts.userDescription\n }\n options={options}",
       "module": "/packages/client"
     }

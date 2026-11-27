@@ -731,13 +731,7 @@ test.describe("Billing wallet", () => {
     await expect(dialog).toContainText(
       "When the balance drops to $10, the wallet will be automatically topped up to $100.",
     );
-    await expect(dialog.getByTestId("edit_auto_payment_button")).toBeVisible();
-    await expect(
-      dialog.getByTestId("top_up_min_balance_input"),
-    ).toHaveCount(0);
-
-    await dialog.getByTestId("edit_auto_payment_button").click();
-
+    await expect(dialog.getByTestId("edit_auto_payment_button")).toHaveCount(0);
     await expect(
       dialog.getByTestId("top_up_min_balance_input").first(),
     ).toHaveValue("10");

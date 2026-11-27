@@ -3,7 +3,7 @@
   "content": "Create room",
   "content_en_sha1_hash": "bc487b9d588a5f906e3f1cf66e5d6096e1b21ed5",
   "created_at": "2025-05-19T21:30:43.921Z",
-  "updated_at": "2026-11-19T16:14:53.980Z",
+  "updated_at": "2026-11-27T15:01:39.689Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears on buttons that create a new room, or as the title of a dialog for creating a room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/CreateRoomDialog.js",
-      "line_number": 393,
-      "context": "const dialogHeader = !roomParams.type\n ? chooseTypeHeader\n : roomParams.type === RoomsType.FormRoom\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\");\n \n return (\n <>\n {keyGate.keyGenerationModals}\n <ModalDialog",
+      "line_number": 399,
+      "context": "case RoomsType.InstructionsRoom:\n return t(\"Common:CreateSkillSet\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:CreateKnowledgeBase\");\n default:\n return t(\"Common:CreateRoom\");\n }\n };\n \n const dialogHeader = !roomParams.type ? chooseTypeHeader : getCreateHeader();",
       "module": "/packages/client"
     },
     {
@@ -37,19 +37,19 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/index.tsx",
-      "line_number": 246,
+      "line_number": 411,
       "context": "</Text>\n <Button\n label={\n isFormSpaceTemplate\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\")\n }\n className={styles.roomTemplateButton}\n onClick={onCreateRoom}\n size={ButtonSize.extraSmall}\n primary",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 588,
+      "line_number": 614,
       "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 588,
+      "line_number": 614,
       "context": "{\n id: \"option_create-room\",\n key: \"create-room-from-template\",\n label: isFormSpace\n ? t(\"Common:CreateFormSpaceAction\")\n : t(\"Common:CreateRoom\"),\n icon: CreateRoomReactSvgUrl,\n onClick: () => self.filesActionsStore.onCreateRoomFromTemplate(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     },
@@ -73,13 +73,13 @@
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 632,
+      "line_number": 635,
       "context": "styles.iconBadge,\n \"badge tablet-row-create-room icons-group  tablet-badge\",\n )}\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n title={t(\"Common:CreateRoom\")}\n hoverColor=\"accent\"\n />\n ) : null}\n {showNew && !isTile ? newFilesBadge : null}\n {showNew && isTile && isRoom ? (",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 271,
+      "line_number": 278,
       "context": "className=\"badge create-room icons-group\"\n size={IconSizeType.medium}\n onClick={onCreateRoom}\n isDisabled={isDisabled}\n hoverColor=\"accent\"\n title={t(\"Common:CreateRoom\")}\n />\n ) : null}\n {showCopyLinkIcon ? (\n <IconButton\n iconName={TabletLinkReactSvgUrl}",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Language",
   "content_en_sha1_hash": "89b86ab0e66f527166d98df92ddbcf5416ed58f6",
   "created_at": "2025-05-19T21:30:46.038Z",
-  "updated_at": "2026-11-05T16:49:39.839Z",
+  "updated_at": "2026-11-27T15:01:39.669Z",
   "comment": {
     "text": "This is a label for a dropdown menu or a section heading where users can select their preferred language for the interface.",
     "is_auto": true,
@@ -25,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 582,
-      "context": "<Text\n as=\"div\"\n className={classNames(styles.label, styles.profileLanguage)}\n >\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}",
+      "line_number": 583,
+      "context": "<Text\n as=\"div\"\n className={classNames(styles.label, styles.profileLanguage)}\n >\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n place={dirTooltip}\n tooltipContent={tooltipLanguage}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 582,
-      "context": "<Text\n as=\"div\"\n className={classNames(styles.label, styles.profileLanguage)}\n >\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n offsetRight={0}\n place={dirTooltip}",
+      "line_number": 583,
+      "context": "<Text\n as=\"div\"\n className={classNames(styles.label, styles.profileLanguage)}\n >\n {t(\"Common:Language\")}\n {documentationEmail ? (\n <HelpButton\n size={12}\n place={dirTooltip}\n tooltipContent={tooltipLanguage}",
       "module": "/packages/client"
     },
     {
@@ -40,6 +40,12 @@
       "line_number": 470,
       "context": "</Text>\n </div>\n \n <div className={styles.infoWrapper}>\n <Text className={styles.text} fontWeight={400}>\n {t(\"Common:Language\")}\n </Text>\n <div className={styles.wrapperLanguageSelector}>\n <ComboBox\n withoutPadding\n directionY=\"both\"",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/shared/components/language-combobox/LanguageCombobox.tsx",
+      "line_number": 127,
+      "context": "withBackdrop={withBackdrop}\n shouldShowBackdrop={shouldShowBackdrop}\n dataTestId={dataTestId ?? \"language-combobox\"}\n // The icon alone names nothing: without the language name drawn, the\n // button is named for what it chooses.\n aria-label={showLanguageName ? undefined : t(\"Common:Language\")}\n />\n );\n };\n export { LanguageCombobox };",
+      "module": "/packages/shared"
     }
   ],
   "languages": {

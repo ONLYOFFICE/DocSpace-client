@@ -60,7 +60,6 @@ const getColumns = (defaultColumns, userId) => {
 const HistoryTableHeader = (props) => {
   const {
     userId,
-    sectionWidth,
     tableRef,
     columnStorageName,
     columnInfoPanelStorageName,
@@ -130,7 +129,6 @@ const HistoryTableHeader = (props) => {
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
-      sectionWidth={sectionWidth}
       checkboxMargin="12px"
       showSettings={false}
       useReactWindow

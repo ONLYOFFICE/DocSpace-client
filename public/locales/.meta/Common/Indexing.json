@@ -3,7 +3,7 @@
   "content": "Indexing",
   "content_en_sha1_hash": "9951861c21df18489a5872209655d6f9039b5e2a",
   "created_at": "2026-11-18T08:35:44.380Z",
-  "updated_at": "2026-11-18T08:38:08.350Z",
+  "updated_at": "2026-11-27T15:01:39.658Z",
   "comment": {
     "text": "Short status label: a small badge beside a knowledge base or a file while its content is being indexed for AI search, and the Status value in Details. Progressive form (in progress), keep it very short for a narrow badge.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 575,
+      "line_number": 579,
       "context": "};\n \n getItemIndexingStatus = () => {\n switch (this.getIndexingStatus()) {\n case VectorizationStatus.InProgress:\n return text(this.t(\"Common:Indexing\"));\n case VectorizationStatus.Failed:\n return text(this.t(\"Common:Error\"));\n case VectorizationStatus.Completed:\n return text(this.t(\"Common:Indexed\"));\n default:",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/badges/index.tsx",
-      "line_number": 532,
+      "line_number": 534,
       "context": "\"badge-version badge-version-current tablet-badge icons-group\",\n )}\n backgroundColor={\n themeIsBase ? globalColors.gray : globalColors.grayDark\n }\n label={t(\"Common:Indexing\")}\n borderRadius=\"50px\"\n color={globalColors.white}\n fontSize=\"9px\"\n fontWeight={700}\n data-tooltip-id={preparingForAITooltipId}",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Edit agent",
   "content_en_sha1_hash": "8e424aecf7369d4b8b043b8b333a738fbc42d9f2",
   "created_at": "2026-08-31T18:23:02.045Z",
-  "updated_at": "2026-10-31T12:58:29.616Z",
+  "updated_at": "2026-11-27T15:01:39.611Z",
   "comment": {
     "text": "Dialog title and menu item label used to open the interface for modifying an existing agent.",
     "is_auto": true,
@@ -11,6 +11,24 @@
     "model": "gemma4:26b"
   },
   "usage": [
+    {
+      "file_path": "/packages/client/src/components/AiPresetsBridge/index.tsx",
+      "line_number": 360,
+      "context": "const id = activeAgentId;\n const actions: AiChatAgentAction[] = [];\n if (canEditAgent) {\n actions.push({\n id: \"edit\",\n label: t(\"Common:EditAgent\"),\n icon: PencilReactSvgUrl,\n onClick: () => void openEditAiProject(Number(id)),\n });\n }\n if (canShareAgent) {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
+      "line_number": 427,
+      "context": "onClose={() => setSelector(null)}\n />\n </ModalDialog.Container>\n ) : null}\n <ModalDialog.Header>\n {project ? t(\"Common:EditAgent\") : t(\"Common:CreateAgent\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className=\"logo-name-container\">\n <RoomIcon",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
+      "line_number": 485,
+      "context": "},\n {\n id: \"option_edit-room\",\n key: \"edit-room\",\n label: isAgent\n ? t(\"Common:EditAgent\")\n : isKnowledgeBase\n ? t(\"Common:EditKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:EditSkillSet\")\n : isFormSpace",
+      "module": "/packages/client"
+    },
     {
       "file_path": "/packages/sdk/src/app/(ai-agents)/_components/agents-list/useAgentContextOptions.tsx",
       "line_number": 243,

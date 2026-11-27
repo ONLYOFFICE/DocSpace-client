@@ -3,7 +3,7 @@
   "content": "Delete knowledge base",
   "content_en_sha1_hash": "c64e4227664142e3442d271e20fa4e61e3330b2f",
   "created_at": "2026-11-21T13:03:28.192Z",
-  "updated_at": "2026-11-21T13:04:52.624Z",
+  "updated_at": "2026-11-27T15:01:39.974Z",
   "comment": {
     "text": "Item in the actions menu of a knowledge base in the AI Chat section, the last one after a separator; deletes the whole knowledge base with what it holds. Verb, imperative or the form the language uses for menu commands. Short menu label, no full stop. Knowledge base = a room of files the AI assistant searches; never call it a room. Match Common:CreateKnowledgeBase.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/contextOptionsStore/filesContextOptions.helpers.ts",
-      "line_number": 1025,
+      "line_number": 1035,
       "context": "? t(\"Files:DeleteTemplateAction\")\n : item.isRoom\n ? isAgent\n ? t(\"Common:DeleteAgent\")\n : isKnowledgeBase\n ? t(\"Common:DeleteKnowledgeBase\")\n : isSkillSet\n ? t(\"Common:DeleteSkillSet\")\n : isFormSpace\n ? t(\"Common:DeleteFormSpace\")\n : t(\"Common:DeleteRoom\")",
       "module": "/packages/client"
     }

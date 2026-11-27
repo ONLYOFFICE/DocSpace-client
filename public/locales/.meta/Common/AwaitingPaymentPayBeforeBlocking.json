@@ -1,0 +1,28 @@
+{
+  "key_path": "AwaitingPaymentPayBeforeBlocking",
+  "content": "Awaiting payment. Once the funds reach your wallet, pay for the plan before {{date}} to avoid portal blocking.",
+  "content_en_sha1_hash": "e3693b61672c0d4cbb6f0204b2817708b5772f05",
+  "created_at": "2026-11-27T15:00:38.053Z",
+  "updated_at": "2026-11-27T15:00:38.053Z",
+  "comment": {
+    "text": "Warning under the wallet balance on the billing overview page, shown during an unrestricted grace period while a bank transfer (e.g. SEPA) is still on its way. Tells the admin that payment is pending and that, once the money arrives in the wallet, they must pay for the plan before {{date}} (the grace period end date) or the portal gets blocked. Rendered as small bold text.",
+    "is_auto": false,
+    "updated_at": "2026-11-27T15:02:13.381Z"
+  },
+  "usage": [
+    {
+      "file_path": "@onlyoffice/apps-ui-kit/billing/overview/sub-components/AvailableCredits.tsx",
+      "line_number": 107,
+      "context": "{isGracePeriodRestricted\n ? t(\"InsufficientCreditsTopUpToday\", { amount, date: gracePeriodEndDate })\n : t(\"AwaitingPaymentPayBeforeBlocking\", {\n date: gracePeriodEndDate,\n })}",
+      "module": "@onlyoffice/apps-ui-kit"
+    }
+  ],
+  "languages": {
+    "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    }
+  }
+}

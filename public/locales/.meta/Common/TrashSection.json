@@ -3,7 +3,7 @@
   "content": "Trash",
   "content_en_sha1_hash": "e3bf62bb7f5af7ba291b2df1a11d573bdb55d7e9",
   "created_at": "2025-05-19T21:30:49.325Z",
-  "updated_at": "2026-11-19T16:14:53.916Z",
+  "updated_at": "2026-11-27T15:01:39.603Z",
   "comment": {
     "text": "This is a noun referring to the \"Trash\" section where deleted files are stored. It appears as a label in various UI components, often as part of a longer sentence or as a section name.",
     "is_auto": true,
@@ -13,19 +13,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 473,
+      "line_number": 703,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 473,
-      "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 473,
+      "line_number": 703,
       "context": "}),\n ]\n : []),\n {\n id: \"rooms-trash\",\n label: t(\"Common:TrashSection\"),\n icon: getCatalogIconUrlByType(FolderType.TRASH),\n ...nav(\n scopedUrl(\n CategoryType.Trash,\n \"/rooms/trash\",",
       "module": "/packages/client"
     },
@@ -37,43 +31,43 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 160,
+      "line_number": 235,
       "context": "<strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 160,
+      "line_number": 235,
       "context": "<strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 160,
+      "line_number": 235,
       "context": "<strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 160,
+      "line_number": 235,
       "context": "<strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/DeleteDialog.helper.js",
-      "line_number": 160,
+      "line_number": 235,
       "context": "<strong>{{ name: selection[0]?.title }}</strong>.\n </Trans>{\" \"}\n {!isThirdParty\n ? isFolder\n ? t(\"FolderPermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"FilePermanentlyDeleted\", {\n trashSection: t(\"Common:TrashSection\"),\n })\n : t(\"DeleteItemsSharedNote\")}{\" \"}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 131,
+      "line_number": 148,
       "context": "setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n if (!selection.length) return;",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteDialog/index.js",
-      "line_number": 131,
+      "line_number": 148,
       "context": "setSelected(\"none\");\n onClose();\n \n const translations = {\n deleteFromTrash: t(\"Translations:TrashItemsDeleteSuccess\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n };\n \n if (!selection.length) return;",
       "module": "/packages/client"
     },
@@ -97,13 +91,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 346,
+      "line_number": 361,
       "context": "t(\"Files:ArchiveEmptyScreenUser\"),\n )\n .with([FolderType.TRASH, P._], () =>\n t(\"Common:TrashFunctionalityDescription\", {\n appName: getSectionAppName(t, filterFolderType),\n sectionName: t(\"Common:TrashSection\"),\n }),\n )\n .otherwise(() => \"\");\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 187,
+      "line_number": 188,
       "context": "t(\"FilesTour:TourPlacesFavorites\", {\n sectionName: t(\"Common:Favorites\"),\n }),\n trashId &&\n t(\"FilesTour:TourPlacesTrash\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n ].filter(Boolean) as string[];\n \n // Any sub-item works: the spotlight covers the list they share.\n const anchorId = sharedId ?? recentId ?? favoritesId ?? trashId;",
       "module": "/packages/client"
     },
@@ -145,7 +139,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 478,
+      "line_number": 626,
       "context": "}),\n )\n : text(\n this.t(\"Files:ScheduledTrashMove\", {\n date: getCorrectDate(this.culture, this.item.expired as string),\n sectionName: this.t(\"Common:TrashSection\"),\n }),\n );\n };\n \n getItemVersions = () => {",
       "module": "/packages/client"
     },
@@ -205,14 +199,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Header/index.js",
-      "line_number": 639,
+      "line_number": 648,
       "context": "period: getLifetimePeriodTranslation(lifetime.period, t),\n })}. ${\n lifetime.deletePermanently\n ? t(\"Files:AfterFilesWillBeDeletedPermanently\")\n : t(\"Files:FilesMovedToTrashNotice\", {\n sectionName: t(\"Common:TrashSection\"),\n })\n }`;\n \n return null;\n }, [sharedType, isEncryptedRoom, lifetime, t]);",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/index.tsx",
-      "line_number": 172,
-      "context": "isChecked={confirmDelete}\n dataTestId=\"display_notification_toggle_button\"\n />\n <Text>\n {t(\"Common:TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>",
+      "line_number": 182,
+      "context": "dataTestId=\"display_notification_toggle_button\"\n />\n <ControlCaption htmlFor={`${captionId}-trash-confirmation`}>\n <Text>\n {t(\"Common:TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </ControlCaption>\n </div>",
       "module": "/packages/client"
     },
     {
@@ -235,7 +229,7 @@
     },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
-      "line_number": 117,
+      "line_number": 167,
       "context": "break;\n case FolderType.Archive:\n folder.title = i18n.t(\"Common:Archive\");\n break;\n case FolderType.TRASH:\n folder.title = i18n.t(\"Common:TrashSection\");\n break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:",
       "module": "/packages/client"
     },
@@ -259,7 +253,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_components/header/index.tsx",
-      "line_number": 145,
+      "line_number": 146,
       "context": "const navigationTitles = useMemo(\n () =>\n isTrashSection\n ? {\n warningText: t(\"Common:TrashAutoDeleteWarning\", {\n sectionName: t(\"Common:TrashSection\"),\n }),\n }\n : undefined,\n [isTrashSection, t],\n );",
       "module": "/packages/sdk"
     },
@@ -301,19 +295,19 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 660,
+      "line_number": 658,
       "context": "<WarningComponent\n title={t(\n \"Common:TrashAutoDeleteWarning\",\n {\n sectionName: t(\n \"Common:TrashSection\",\n ),\n },\n )}\n />\n ) : undefined",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
-      "line_number": 152,
-      "context": "onChange={onChangeDeleteConfirm}\n isChecked={settings.confirmDelete}\n />\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>",
+      "line_number": 162,
+      "context": "isChecked={settings.confirmDelete}\n />\n <ControlCaption htmlFor={`${captionId}-trash-confirmation`}>\n <Text>\n {t(\"TrashMoveConfirmation\", {\n sectionName: t(\"Common:TrashSection\"),\n })}\n </Text>\n </ControlCaption>\n </div>",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/quick-buttons/index.tsx",
-      "line_number": 158,
+      "line_number": 165,
       "context": "const getTooltipContent = () => {\n const text = roomLifetime?.deletePermanently\n ? t(\"Common:FileWillBeDeletedPermanently\", { date: expiredDate || \"\" })\n : t(\"Common:SectionMoveNotification\", {\n sectionName: t(\"Common:TrashSection\"),\n date: expiredDate || \"\",\n });\n return text;\n };",
       "module": "/packages/shared"
     }

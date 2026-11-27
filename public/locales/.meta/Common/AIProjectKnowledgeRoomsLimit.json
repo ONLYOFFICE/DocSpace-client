@@ -3,7 +3,7 @@
   "content": "An agent can include up to {{limit}} knowledge bases.",
   "content_en_sha1_hash": "946c4a84218ba3effe1cae43eaa375abef472119",
   "created_at": "2026-11-18T08:05:11.952Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.786Z",
   "comment": {
     "text": "Warning toast in the agent form, shown when the user ticks one more knowledge base in the room selector than an agent can link; that room stays unticked. {{limit}} is the maximum number of knowledge bases (20). Use the same term as the Knowledge bases label in the form.",
     "is_auto": true,
@@ -12,9 +12,9 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/CreateEditProjectDialog.tsx",
-      "line_number": 347,
-      "context": "// The limit is never shown up front: only ticking a room past it is told.\n const onRoomsLimitReached = () =>\n toastr.warning(\n selector === INSTRUCTIONS_ROOM_TYPE\n ? t(\"Common:AIProjectInstructionsRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })\n : t(\"Common:AIProjectKnowledgeRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),\n );\n \n const onRoomsSelected = (items: TSelectorItem[]) => {\n if (selector === null) return;\n // The logo the selector read with the room, so the saved project shows",
+      "file_path": "/packages/client/src/pages/AiProjects/sub-components/dialogs/AgentRoomsSelector.tsx",
+      "line_number": 112,
+      "context": "// The limit is never shown up front: only ticking a room past it is told.\n const onRoomsLimitReached = () =>\n toastr.warning(\n isKnowledge\n ? t(\"Common:AIProjectKnowledgeRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE })\n : t(\"Common:AIProjectInstructionsRoomsLimit\", { limit: AI_PROJECT_MAX_ROOMS_PER_TYPE }),\n );\n \n // Why a room cannot be linked, or `null` when it can. The server links\n // only rooms the user may manage, and refuses the whole save over one that",
       "module": "/packages/client"
     }
   ],

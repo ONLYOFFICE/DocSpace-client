@@ -670,9 +670,7 @@ const InviteInput = ({
               scaledOptions={false}
               size="content"
               manualWidth="280px"
-              showDisabledItems
               dropDownMaxHeight={364}
-              withBlur={isMobileView}
               isDefaultMode={!isMobileView}
               fillIcon={false}
               modernView

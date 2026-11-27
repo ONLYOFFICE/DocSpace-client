@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Tämä tila on kaikille, joilla on linkki. Ulkoisilla käyttäjillä on lomakkeen täyttäjän oikeudet kaikkiin lomakkeisiin.",
   "GoToIntegrations": "Siirry integraatioihin",
   "Horizontal": "Vaakasuora",
-  "Icon": "Kuvake",
   "NeedMoreIntegrations": "Tarvitsetko lisää integraatioita?",
   "NeedMoreIntegrationsDescription": "Käytä webhooks-tekniikkaa lähettämään tiedot omalle järjestelmällesi, tai yhdistä lomakkeet tuhansiin palveluihin Zapierin kautta.",
   "NoDatabaseConnections": "Ei määritettyjä tietokantayhteyksiä",

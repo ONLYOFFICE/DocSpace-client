@@ -128,6 +128,11 @@ const nextConfig = {
       alias: {
         ...config.resolve?.alias,
         "@docspace/shared": path.resolve(__dirname, "../shared"),
+        // The Mistral SDK, a peer of @onlyoffice/ai-chat, imports its voice
+        // agents' Node transport from its root entry, and that transport
+        // imports this optional peer. Nothing in the browser runs it, and it
+        // is not installed.
+        "@livekit/rtc-node": false,
       },
       fallback: {
         ...config.resolve?.fallback,
@@ -135,9 +140,23 @@ const nextConfig = {
         // server bundles. We're encryption-client-only — stub them out so the
         // bundle doesn't pull in Node polyfills.
         fs: false,
+        "fs/promises": false,
         crypto: false,
       },
     };
+
+    // The same SDK reads a service account's token with a lazy
+    // `import("node:fs/promises")`, which only a Node host reaches. Webpack
+    // has no handler for the `node:` scheme, so the import is turned into
+    // the bare name, and the fallback below leaves it empty.
+    config.plugins.push(
+      new webpack.NormalModuleReplacementPlugin(
+        /^node:fs\/promises$/,
+        (resource) => {
+          resource.request = "fs/promises";
+        },
+      ),
+    );
 
     const uiKitSrc = applyUiKitSourceMode(config, __dirname);
 

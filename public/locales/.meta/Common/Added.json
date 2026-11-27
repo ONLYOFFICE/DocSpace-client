@@ -3,7 +3,7 @@
   "content": "Added",
   "content_en_sha1_hash": "b68734c259106d131c65a8db8af829cf4fc02fda",
   "created_at": "2026-11-18T08:35:02.262Z",
-  "updated_at": "2026-11-18T08:38:08.350Z",
+  "updated_at": "2026-11-27T15:01:39.826Z",
   "comment": {
     "text": "Column header in the file list of a knowledge base (an AI Knowledge room): the date a file was added. Past participle used as a short column title, like Created in other lists.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
-      "line_number": 328,
+      "line_number": 336,
       "context": "onClick: this.onFilter,\n onChange: this.onColumnChange,\n },\n {\n key: \"CreatedKnowledgeFile\",\n title: t(\"Common:Added\"),\n enable: createdKnowledgeFileColumnIsEnabled,\n resizable: true,\n sortBy: SortByFieldName.CreationDate,\n onClick: this.onFilter,\n onChange: this.onColumnChange,",
       "module": "/packages/client"
     }

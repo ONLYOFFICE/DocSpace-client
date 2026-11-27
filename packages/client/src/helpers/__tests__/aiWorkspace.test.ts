@@ -94,7 +94,8 @@ describe("The list of a room of the AI Chat section", () => {
 describe("AI Chat section list tabs", () => {
   const search = (url: string) => `?${url.split("?")[1]}`;
 
-  it("keeps both tabs of the agents on that list of the section", () => {
+  // Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+  it.skip("keeps both tabs of the agents on that list of the section", () => {
     for (const isTemplates of [false, true]) {
       const url = getAiWorkspaceTabUrl(isTemplates, RoomsType.AiProjectRoom);
       expect(url).toMatch(/^\/ai-rooms\/filter\?/);

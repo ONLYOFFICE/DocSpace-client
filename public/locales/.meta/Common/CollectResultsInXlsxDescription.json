@@ -3,7 +3,7 @@
   "content": "Form responses are automatically saved to spreadsheets. Spreadsheets are created in the same folder where filled form copies are stored. A separate XLSX file is generated for each form. Each row represents a single filled form, and columns correspond to form fields.",
   "content_en_sha1_hash": "bc663adcefeee4d03fc5f774ce8fb1e27b8b57ff",
   "created_at": "2026-08-31T18:22:55.074Z",
-  "updated_at": "2026-08-31T19:26:18.553Z",
+  "updated_at": "2026-11-27T15:01:39.691Z",
   "comment": {
     "text": "Subtext for a toggle parameter in form settings that explains how form responses are automatically converted into XLSX spreadsheets.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 176,
-      "context": "isChecked={store.collectXlsx}\n onChange={onToggleXlsx}\n />\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:CollectResultsInXlsxDescription\")}\n </Text>\n </div>\n \n <div className={styles.toggleBlock}>\n <div className={styles.toggleHeader}>",
+      "line_number": 181,
+      "context": "inputId={`${captionId}-xlsx`}\n onChange={onToggleXlsx}\n />\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:CollectResultsInXlsxDescription\")}\n </Text>\n </div>\n \n <div className={styles.toggleBlock}>\n <div className={styles.toggleHeader}>",
       "module": "/packages/sdk"
     }
   ],

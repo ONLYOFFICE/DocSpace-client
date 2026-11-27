@@ -49,7 +49,7 @@ import {
   aiAgentLeaveHandler,
   aiAgentSkillsRefusedHandler,
   aiAgentPinHandlers,
-  aiPinnedProjectRooms,
+  aiHubRootProjectRooms,
   aiProjectMock,
   AiProjectMockAccess,
   AI_HUB_ROOMS,
@@ -93,7 +93,7 @@ const table = (page: Page) => page.getByTestId("table-body");
 
 const sidebar = (page: Page) => page.locator("#article-container");
 
-/** The entry of a pinned agent, listed under Agents in the sidebar. */
+/** The entry of an agent listed under Agents in the sidebar. */
 const sidebarAgent = (page: Page, id: number) =>
   sidebar(page).locator(`[data-item-id="ai-nested-project-${id}"]`);
 
@@ -189,7 +189,7 @@ const OUTSIDE_AGENT = aiProjectMock({
 const [SKILL_SET] = MEMBER_AGENT.aiProject.instructionsRooms;
 
 test.describe("AI Chat section", () => {
-  test.beforeEach(({ mockRequest }) => {
+  test.beforeEach(async ({ page, mockRequest }) => {
     mockRequest.use(
       rootHandler(TEST_PORT),
       filesSettingsHandler(TEST_PORT),
@@ -197,6 +197,12 @@ test.describe("AI Chat section", () => {
       selfActivationStatusHandler(TEST_PORT, null, false, true),
       aiConfigHandler(TEST_PORT),
       ...aiChatStoreHandlers(TEST_PORT),
+    );
+    // The Agents list opens as tiles until another view is picked there,
+    // and keeps the pick apart from the rest of Files. The cases below read
+    // it as the table a user switched to; "agent cards" goes back to tiles.
+    await page.addInitScript(() =>
+      window.localStorage.setItem("viewAs_aiAgents", "table"),
     );
   });
 
@@ -408,10 +414,12 @@ test.describe("AI Chat section", () => {
     });
   });
 
-  test.describe("the pinned agents of the sidebar", () => {
+  test.describe("the agents of the sidebar", () => {
     const [PINNED_AGENT, UNPINNED_AGENT] = AI_PROJECTS;
+    const sidebarAgents = (page: Page) =>
+      sidebar(page).locator('[data-item-id^="ai-nested-project-"]');
 
-    test("lists the agents the user pinned under Agents, and opens one on its page", async ({
+    test("lists the agents under Agents, the pinned one first, and opens one on its page", async ({
       page,
       mockRequest,
       baseUrl,
@@ -420,7 +428,7 @@ test.describe("AI Chat section", () => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
         rootHandler(TEST_PORT, {
-          pinnedAiProjects: () => aiPinnedProjectRooms(projects),
+          aiHubRootProjects: () => aiHubRootProjectRooms(projects),
         }),
         ...aiSectionsHandlers(TEST_PORT, projects),
       );
@@ -428,13 +436,15 @@ test.describe("AI Chat section", () => {
       await page.goto(`${baseUrl}${AGENTS_URL}`);
       await expect(table(page)).toBeVisible();
 
-      // The pinned agent alone: the others stay on the Agents list.
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toContainText(
+      // Every agent of the list, as it holds fewer than five: the pinned
+      // one first, then the others.
+      await expect(sidebarAgents(page)).toHaveCount(projects.length);
+      await expect(sidebarAgents(page).first()).toContainText(
         PINNED_AGENT.title,
       );
-      await expect(
-        sidebar(page).locator('[data-item-id^="ai-nested-project-"]'),
-      ).toHaveCount(1);
+      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toContainText(
+        UNPINNED_AGENT.title,
+      );
 
       await sidebarAgent(page, PINNED_AGENT.id).click();
 
@@ -444,7 +454,7 @@ test.describe("AI Chat section", () => {
       await expect(page.getByTestId("ai-project-intro")).toBeVisible();
     });
 
-    test("lists no agent while none is pinned", async ({
+    test("lists no agent while the section has none", async ({
       page,
       mockRequest,
       baseUrl,
@@ -460,12 +470,10 @@ test.describe("AI Chat section", () => {
         sidebar(page).getByText("Agents", { exact: true }),
       ).toBeVisible();
 
-      await expect(
-        sidebar(page).locator('[data-item-id^="ai-nested-project-"]'),
-      ).toHaveCount(0);
+      await expect(sidebarAgents(page)).toHaveCount(0);
     });
 
-    test("adds an agent pinned from its menu, and drops one that is unpinned", async ({
+    test("moves an agent pinned from its menu up, and one that is unpinned down", async ({
       page,
       mockRequest,
       baseUrl,
@@ -474,7 +482,7 @@ test.describe("AI Chat section", () => {
       mockRequest.use(
         selfByTypeHandler(TEST_PORT, "owner"),
         rootHandler(TEST_PORT, {
-          pinnedAiProjects: () => aiPinnedProjectRooms(projects),
+          aiHubRootProjects: () => aiHubRootProjectRooms(projects),
         }),
         ...aiSectionsHandlers(TEST_PORT, projects),
         ...aiAgentPinHandlers(TEST_PORT, projects),
@@ -482,8 +490,10 @@ test.describe("AI Chat section", () => {
 
       await page.goto(`${baseUrl}${AGENTS_URL}`);
       await expect(table(page)).toBeVisible();
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
-      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toHaveCount(0);
+      await expect(sidebarAgents(page)).toHaveCount(projects.length);
+      await expect(sidebarAgents(page).first()).toContainText(
+        PINNED_AGENT.title,
+      );
 
       await rowOf(page, UNPINNED_AGENT.title)
         .getByTestId("context-menu-button")
@@ -491,10 +501,13 @@ test.describe("AI Chat section", () => {
         .click();
       await page.locator("#option_pin-room").click();
 
-      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toContainText(
+      // Both are pinned now, in the order of the list.
+      await expect(sidebarAgents(page).nth(1)).toContainText(
         UNPINNED_AGENT.title,
       );
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
+      await expect(sidebarAgents(page).first()).toContainText(
+        PINNED_AGENT.title,
+      );
 
       await rowOf(page, PINNED_AGENT.title)
         .getByTestId("context-menu-button")
@@ -502,8 +515,12 @@ test.describe("AI Chat section", () => {
         .click();
       await page.locator("#option_unpin-room").click();
 
-      await expect(sidebarAgent(page, PINNED_AGENT.id)).toHaveCount(0);
-      await expect(sidebarAgent(page, UNPINNED_AGENT.id)).toBeVisible();
+      // The one still pinned leads; the unpinned one stays listed.
+      await expect(sidebarAgents(page).first()).toContainText(
+        UNPINNED_AGENT.title,
+      );
+      await expect(sidebarAgent(page, PINNED_AGENT.id)).toBeVisible();
+      await expect(sidebarAgents(page)).toHaveCount(projects.length);
     });
   });
 
@@ -514,7 +531,7 @@ test.describe("AI Chat section", () => {
         ...aiSectionsHandlers(TEST_PORT, [...AI_PROJECTS, OUTSIDE_AGENT]),
       );
       await page.addInitScript(() =>
-        window.localStorage.setItem("viewAs", "tile"),
+        window.localStorage.setItem("viewAs_aiAgents", "tile"),
       );
     });
 
@@ -616,7 +633,8 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agents-list, "Category row"; "Choosing a category"
-    test("narrows the agents to a category from the row under the filter", async ({
+    // Skipped while the Templates tab is hidden (AI_TEMPLATES_ENABLED in helpers/aiWorkspace.ts).
+    test.skip("narrows the agents to a category from the row under the filter", async ({
       page,
       baseUrl,
     }) => {
@@ -726,7 +744,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-page, "Actions menu of an agent"
-    test("offers the Agent owner Edit, Share, Agent info, copy link, change owner and Delete agent, and no Leave agent", async ({
+    test("offers the Agent owner Share, Agent info, copy link, change owner and Delete agent, and neither Edit agent nor Leave agent", async ({
       page,
       baseUrl,
     }) => {
@@ -737,14 +755,12 @@ test.describe("AI Chat section", () => {
       await expect
         .poll(() => menuItems(page))
         .toEqual([
-          "option_edit-room",
           "option_invite-users-to-room",
           "option_room-info",
           "option_link-for-room-members",
           "option_change-room-owner",
           "option_delete",
         ]);
-      await expect(page.locator("#option_edit-room")).toHaveText("Edit agent");
       await expect(page.locator("#option_invite-users-to-room")).toHaveText(
         "Share agent",
       );
@@ -897,7 +913,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-page, "Actions menu of an agent"
-    test("offers an Agent manager Edit, Share, Agent info, copy link and Leave agent, without change owner or Delete agent", async ({
+    test("offers an Agent manager Share, Agent info, copy link and Leave agent, without Edit agent, change owner or Delete agent", async ({
       page,
       mockRequest,
       baseUrl,
@@ -911,7 +927,6 @@ test.describe("AI Chat section", () => {
       await expect
         .poll(() => menuItems(page))
         .toEqual([
-          "option_edit-room",
           "option_invite-users-to-room",
           "option_room-info",
           "option_link-for-room-members",
@@ -1092,7 +1107,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-info-panel, "Context tab"; "Skills of a skill set"; "Managing sources from Context"
-    test("lists a Member the agent's skill sets and knowledge bases on Context, a skill set unfolding to its skills, with no Manage rows", async ({
+    test("lists a Member the agent's skill sets and knowledge bases on Context, a skill set unfolded to its skills until folded, with no Manage rows", async ({
       page,
       baseUrl,
     }) => {
@@ -1114,11 +1129,16 @@ test.describe("AI Chat section", () => {
         await expect(knowledgeBases).toContainText(room.title);
       }
 
-      // The skill set unfolds to the names of its skills.
-      await expect(skillSets).not.toContainText("Pitch builder");
-      await page.getByTestId(`ai-project-room-expander-${SKILL_SET.id}`).click();
+      // The skill set is unfolded to the names of its skills until folded.
       await expect(skillSets).toContainText("Pitch builder");
       await expect(skillSets).toContainText("Follow-up writer");
+      await page.getByTestId(`ai-project-room-expander-${SKILL_SET.id}`).click();
+      await expect(skillSets).not.toContainText("Pitch builder");
+
+      // A Member may not edit the agent: no bin on a row.
+      await expect(
+        page.getByTestId(/^ai-agent-context-remove-/),
+      ).toHaveCount(0);
 
       // A Member may not edit the agent: no "Manage ..." row.
       await expect(page.getByTestId("ai-agent-context-manage-skills")).toHaveCount(0);
@@ -1145,7 +1165,7 @@ test.describe("AI Chat section", () => {
     });
 
     // Spec: ai-agent-info-panel, "Managing sources from Context" ("Agent manager")
-    test("lets an Agent manager open the agent's edit form from Manage knowledge bases on Context", async ({
+    test("lets an Agent manager open the picker of the agent's knowledge bases from Manage knowledge bases on Context, and shows a row's bin under the pointer", async ({
       page,
       baseUrl,
     }) => {
@@ -1167,9 +1187,22 @@ test.describe("AI Chat section", () => {
           .getByTestId("ai-agent-context-manage-knowledge"),
       ).toBeVisible();
 
+      // The bin of a row shows while the pointer is on the row.
+      const source = page
+        .getByTestId("ai-agent-context-knowledge")
+        .getByTestId("ai-agent-context-source")
+        .first();
+      const bin = source.getByTestId("ai-agent-context-remove-knowledge");
+      await manageKnowledge.hover();
+      await expect(bin).toHaveCSS("opacity", "0");
+      await source.hover();
+      await expect(bin).toHaveCSS("opacity", "1");
+
       await manageKnowledge.click();
-      await expect(page.getByTestId("ai-project-dialog")).toBeAttached();
-      await expect(page.getByTestId("ai-project-title")).toHaveValue(MANAGED_AGENT.title);
+      await expect(
+        page.getByTestId("aside").filter({ hasText: "Knowledge bases" }).first(),
+      ).toBeVisible();
+      await expect(page.getByTestId("ai-project-dialog")).toHaveCount(0);
     });
 
     // Spec: ai-agent-info-panel, "Context that cannot be read"

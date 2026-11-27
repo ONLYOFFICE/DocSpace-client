@@ -33,6 +33,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { useId } from "react";
+
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 
@@ -48,6 +50,7 @@ import { METADATA_NAME_MAX_LENGTH } from "@docspace/shared/utils/metadata";
 import type { TTemplateDraft } from "../../types";
 import FieldsList, { type FieldsListProps } from "./FieldsList";
 import styles from "./TemplatePanel.module.scss";
+import { ControlCaption } from "@docspace/shared/components/control-caption";
 
 type TemplateFormProps = Omit<FieldsListProps, "fields"> & {
   draft: TTemplateDraft;
@@ -62,6 +65,7 @@ const TemplateForm = ({
   ...fieldsListProps
 }: TemplateFormProps) => {
   const { t } = useTranslation(["Metadata", "Common"]);
+  const visibleToggleId = useId();
 
   return (
     <div className={classNames(styles.form, styles.templateForm)}>
@@ -71,13 +75,16 @@ const TemplateForm = ({
             className={styles.toggle}
             isChecked={draft.visible}
             onChange={() => onChange({ visible: !draft.visible })}
+            inputId={visibleToggleId}
             dataTestId="metadata_template_visible_toggle"
           />
         </div>
         <div className={styles.visibleText}>
-          <Text fontWeight={600} lineHeight="20px">
-            {t("Metadata:Visible")}
-          </Text>
+          <ControlCaption htmlFor={visibleToggleId}>
+            <Text fontWeight={600} lineHeight="20px">
+              {t("Metadata:Visible")}
+            </Text>
+          </ControlCaption>
           <Text fontSize="12px" lineHeight="16px">
             {t("Metadata:HiddenTemplateHint")}
           </Text>

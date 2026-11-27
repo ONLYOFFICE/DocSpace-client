@@ -60,9 +60,15 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import DialogComponent from "SRC_DIR/components/GlobalEvents/sub-components/Dialog";
 import type AiPresetsStore from "SRC_DIR/store/AiPresetsStore";
-import { errorMessage, isPaymentRequired } from "SRC_DIR/store/AiProjectsStore";
+import {
+  errorMessage,
+  isPaymentRequired,
+  toAgentRoomsKind,
+  type TAgentRoomsKind,
+} from "SRC_DIR/store/AiProjectsStore";
 import { canManageProjects, hasPortalChatModel } from "SRC_DIR/pages/AiProjects/utils";
 import { ProjectLogo } from "SRC_DIR/pages/AiProjects/sub-components/list/ProjectLogo";
+import { getAgentPageUrl } from "SRC_DIR/helpers/aiWorkspace";
 import { InfoPanelView, showInfoPanel } from "SRC_DIR/helpers/info-panel";
 import { aiProjectToRoom, getAiProject } from "@docspace/shared/api/ai/projects";
 
@@ -108,11 +114,17 @@ type AiPresetsBridgeProps = {
   isAiProjectOpen: boolean;
   /** Opens the edit form of a project, read first. */
   openEditAiProject: (id: number) => void | Promise<void>;
+  /** Opens the selector of a project's Skill sets or Knowledge bases, read first. */
+  openAgentRooms: (id: number, kind: TAgentRoomsKind) => void | Promise<void>;
   /**
    * Saves a change of the Skill sets made in the chat to the project;
    * resolves to `false` when nothing was saved.
    */
   changeAgentSkillRooms: (id: number, change: AiChatSkillRoomsChange) => Promise<boolean>;
+  /** Unlinks one room of an agent's Skill sets or Knowledge bases. */
+  unlinkAgentRoom: (id: number, kind: TAgentRoomsKind, roomId: number) => Promise<boolean>;
+  /** Read in a reaction: set anew each time a model picked in the chat on an agent was not saved. */
+  aiProjectsModelRejected: () => { id: number } | null;
   /** Opens the invite panel of a room. */
   inviteToRoom: (roomId: number, roomType: RoomsType) => void;
   /**
@@ -158,7 +170,10 @@ const AiPresetsBridge = ({
   setPortalHasChatModel,
   isAiProjectOpen,
   openEditAiProject,
+  openAgentRooms,
   changeAgentSkillRooms,
+  unlinkAgentRoom,
+  aiProjectsModelRejected,
   inviteToRoom,
   selectForInfoPanel,
   setInfoPanelView,
@@ -380,7 +395,7 @@ const AiPresetsBridge = ({
         // Already open beside the chat of this agent's own page.
         if (wasVisible && window.location.pathname.includes(`/ai-rooms/${id}/`)) return;
         // No Info panel here: the agent's page has its own chat.
-        navigate(`/ai-rooms/${id}/filter?folder=${id}`);
+        navigate(getAgentPageUrl(id));
         showInfoPanel();
       },
     });
@@ -413,17 +428,17 @@ const AiPresetsBridge = ({
 
   // A picked agent's Skill sets and Knowledge bases are its settings, as on
   // its page (AiProjectView): the composer lists them as they are, "Manage
-  // ..." opens the agent's form and a Skill set changed in the slash menu is
-  // saved to the agent - for those who may edit it. A member gets the lists
-  // with no remove control and no Manage row, and no one may drop a
-  // knowledge base from the chat alone. When a save fails, the chat goes
+  // ..." opens the selector of the agent's rooms of that list and a Skill set changed in the slash menu is
+  // saved to the agent - for those who may edit it, as is a Knowledge base
+  // unlinked by the bin of its row in the "+" menu. A member gets the lists
+  // with no remove control and no Manage row. When a save fails, the chat goes
   // back to the rooms the agent has. Cleared only while it is this one: the
   // agent's page sets its own.
   React.useEffect(() => {
     if (isInsideOpenProject || activeAgentId === null) return undefined;
     const id = Number(activeAgentId);
     const manager: AiChatSourcesManager = {
-      onManage: canEditAgent ? () => void openEditAiProject(id) : null,
+      onManage: canEditAgent ? (kind) => void openAgentRooms(id, toAgentRoomsKind(kind)) : null,
       onSkillRoomsChange: canEditAgent
         ? (change) => {
             void changeAgentSkillRooms(id, change).then((saved) => {
@@ -438,6 +453,9 @@ const AiPresetsBridge = ({
             });
           }
         : undefined,
+      onKnowledgeRoomRemove: canEditAgent
+        ? (roomId) => void unlinkAgentRoom(id, "knowledge", Number(roomId))
+        : undefined,
     };
     aiChatStore.setSourcesManager(manager);
     return () => {
@@ -446,8 +464,9 @@ const AiPresetsBridge = ({
   }, [
     aiChatStore,
     aiPresetsStore,
-    openEditAiProject,
+    openAgentRooms,
     changeAgentSkillRooms,
+    unlinkAgentRoom,
     isInsideOpenProject,
     activeAgentId,
     canEditAgent,
@@ -499,6 +518,27 @@ const AiPresetsBridge = ({
         },
       ),
     [aiChatStore, aiPresetsStore],
+  );
+
+  // A model picked in the composer of a chat on an agent is saved as the
+  // agent's model (Shell's `onProfilePickerSelect`); when it was not saved,
+  // the chat goes back to the model the agent has.
+  React.useEffect(
+    () =>
+      reaction(
+        () => aiProjectsModelRejected(),
+        (rejected) => {
+          const preset = aiPresetsStore.activePreset;
+          if (!rejected || preset?.id !== String(rejected.id)) return;
+          aiChatStore.applyPreset({
+            profileId: preset.profileId,
+            profileName: preset.profileName,
+            contextRooms: preset.contextRooms,
+            knowledgeRooms: preset.knowledgeRooms,
+          });
+        },
+      ),
+    [aiChatStore, aiPresetsStore, aiProjectsModelRejected],
   );
 
   // With vectorization off no Knowledge room can be searched, so the
@@ -596,6 +636,8 @@ const AiPresetsBridge = ({
       );
       // A linked room that could not be shared with a member, and the like.
       saved.project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));
+      // The new agent opens, as one made in the create form does.
+      navigate(getAgentPageUrl(saved.project.id));
     } catch (e) {
       // An unpaid portal: the warning shown for a new room says why.
       if (isPaymentRequired(e)) showPaymentWarning();
@@ -646,7 +688,10 @@ export default inject(
   showPaymentWarning: () => dialogsStore.setQuotaWarningDialogVisible(true),
   isAiProjectOpen: aiProjectsStore.activeProject !== null,
   openEditAiProject: aiProjectsStore.openEditDialogById,
+  openAgentRooms: aiProjectsStore.openRoomsSelector,
   changeAgentSkillRooms: aiProjectsStore.changeSkillRooms,
+  unlinkAgentRoom: aiProjectsStore.unlinkRoom,
+  aiProjectsModelRejected: aiProjectsStore.getModelRejected,
   inviteToRoom: contextOptionsStore.onClickInviteUsers,
   // The Info panel shows the list's selection: the agent takes its place.
   selectForInfoPanel: (room: ReturnType<typeof aiProjectToRoom> | null) => {

@@ -3,7 +3,7 @@
   "content": "Files",
   "content_en_sha1_hash": "6ce6c512ea433a7fc5c8841628e7696cd0ff7f2b",
   "created_at": "2025-05-19T21:30:45.269Z",
-  "updated_at": "2026-11-19T16:14:53.928Z",
+  "updated_at": "2026-11-27T15:01:39.621Z",
   "comment": {
     "text": "This is a noun, used as a label for a button to upload files, a heading in a file list, and as part of a sentence displaying a count of files.",
     "is_auto": true,
@@ -25,7 +25,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 400,
+      "line_number": 630,
       "context": "const childFolders = [sharedFolder, recentFolder, favFolder];\n if (!isVisitor && myDocsFolder) childFolders.push(trashFolder);\n \n mainItems.push({\n id: myDocsFolder ? String(myDocsFolder.id) : \"files\",\n label: myDocsFolder ? myDocsFolder.title : t(\"Common:Files\"),\n icon: getCatalogIconUrlByType(FolderType.USER),\n ...(primaryFolder\n ? nav(folderUrl(primaryFolder.id, primaryFolder.rootFolderType))\n : {}),\n ...sectionBadge(",
       "module": "/packages/client"
     },
@@ -109,25 +109,25 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 200,
+      "line_number": 202,
       "context": "filterFolderType: Nullable<number[]>,\n ) => {\n if (isFormsSectionScope(filterFolderType)) return t(\"Common:Forms\");\n if (isRoomsSectionScope(filterFolderType)) return t(\"Common:Rooms\");\n \n return t(\"Common:Files\");\n };\n \n export const getFolderDescription = (\n t: TTranslation,\n access: AccessType,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 257,
+      "line_number": 258,
       "context": "// 2. AI chat tile is the last one and may sit past the carousel fold.\n canCreateFiles &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n FILES_TOUR_LABEL,\n 6,\n revealQuickActionTile('[data-testid=\"quick-ai-chat\"]'),\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 257,
+      "line_number": 258,
       "context": "// 2. AI chat tile is the last one and may sit past the carousel fold.\n canCreateFiles &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n FILES_TOUR_LABEL,\n 6,\n revealQuickActionTile('[data-testid=\"quick-ai-chat\"]'),\n ),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/FilesTour/tourSteps.ts",
-      "line_number": 257,
+      "line_number": 258,
       "context": "// 2. AI chat tile is the last one and may sit past the carousel fold.\n canCreateFiles &&\n elementStep(\n '[data-testid=\"quick-ai-chat\"]',\n t(\"FilesTour:TourAiAssistantTitle\"),\n t(\"FilesTour:TourAiAssistant\", { sectionName: t(\"Common:Files\") }),\n callbacks,\n FILES_TOUR_LABEL,\n 6,\n revealQuickActionTile('[data-testid=\"quick-ai-chat\"]'),\n ),",
       "module": "/packages/client"
     },
@@ -175,8 +175,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
-      "line_number": 436,
-      "context": "getItemContent = () => {\n if (!(\"foldersCount\" in this.item) || !(\"filesCount\" in this.item))\n return null;\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );\n };\n \n getItemSize = () => {",
+      "line_number": 555,
+      "context": "return text(`${this.t(\"Common:Skills\")}: ${this.item.filesCount}`);\n if (\n \"roomType\" in this.item &&\n this.item.roomType === RoomsType.KnowledgeRoom\n )\n return text(`${this.t(\"Common:Files\")}: ${this.item.filesCount}`);\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 555,
+      "context": "return text(`${this.t(\"Common:Skills\")}: ${this.item.filesCount}`);\n if (\n \"roomType\" in this.item &&\n this.item.roomType === RoomsType.KnowledgeRoom\n )\n return text(`${this.t(\"Common:Files\")}: ${this.item.filesCount}`);\n return text(\n `${this.t(\"Common:Folders\")}: ${this.item.foldersCount} | ${this.t(\n \"Common:Files\",\n )}: ${this.item.filesCount}`,\n );",
       "module": "/packages/client"
     },
     {
@@ -192,20 +198,26 @@
       "module": "/packages/client"
     },
     {
+      "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/index.tsx",
+      "line_number": 278,
+      "context": "};\n \n const labels = {\n skills: t(\"Common:SkillSets\"),\n knowledge: t(\"Common:AIProjectKnowledgeRooms\"),\n files: t(\"Common:Files\"),\n };\n const installLabel = t(\"Common:Install\");\n \n const row = (label: string, value: React.ReactNode, key: string) => (\n <React.Fragment key={key}>",
+      "module": "/packages/client"
+    },
+    {
       "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/FilesTileContainer.js",
-      "line_number": 170,
-      "context": "isDesc={isDesc}\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n noSelect={!withContentSelection}\n >\n {filesListNode}\n </TileContainer>\n </FileTileProvider>",
+      "line_number": 169,
+      "context": "<TileContainer\n className=\"tile-container\"\n useReactWindow\n infiniteGrid={InfiniteGrid}\n headingFolders={t(\"Common:Folders\")}\n headingFiles={t(\"Common:Files\")}\n noSelect={!withContentSelection}\n >\n {filesListNode}\n </TileContainer>\n </FileTileProvider>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 854,
+      "line_number": 866,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/index.js",
-      "line_number": 854,
+      "line_number": 866,
       "context": "break;\n case FilterType.MediaOnly.toString():\n label = t(\"Common:Media\");\n break;\n case FilterType.FilesOnly.toString():\n label = t(\"Common:Files\");\n break;\n case FilterType.PDFForm.toString():\n label = getManyPDFTitle(t, true);\n break;\n case FilterType.Pdf.toString():",
       "module": "/packages/client"
     },
@@ -223,7 +235,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/Stepper/index.tsx",
-      "line_number": 143,
+      "line_number": 142,
       "context": "usersExportDetails={{\n name: t(\"Common:People\"),\n icon: UserSolidIcon,\n }}\n personalExportDetails={{\n name: t(\"Common:Files\"),\n icon: UserSolidIcon,\n }}\n sharedFilesAndFoldersExportDetails={{\n name: t(\"Common:SharedWithMe\"),\n icon: SharedIcon,",
       "module": "/packages/client"
     },
@@ -248,7 +260,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Uploader.js",
       "line_number": 141,
-      "context": "const uploadModeOptions = [\n {\n value: \"files\",\n label: (\n <LabelGroup>\n {t(\"Common:Files\")}\n <HelpButton\n offsetRight={0}\n size={12}\n place=\"right\"\n tooltipContent={",
+      "context": "const uploadModeOptions = [\n {\n value: \"files\",\n label: (\n <LabelGroup>\n {t(\"Common:Files\")}\n <HelpButton\n size={12}\n place=\"right\"\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"UploadFilesDescription\")}</Text>",
       "module": "/packages/client"
     },
     {
@@ -295,26 +307,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/file-management/sub-components/DefaultPageSetting.tsx",
-      "line_number": 78,
+      "line_number": 82,
       "context": "{\n label: t(\"Common:Home\"),\n key: FolderType.DEFAULT,\n },\n {\n label: t(\"Common:Files\"),\n key: FolderType.USER,\n },\n {\n label: t(\"Common:Rooms\"),\n key: FolderType.Rooms,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActionsContainer.tsx",
-      "line_number": 96,
+      "line_number": 103,
       "context": "dataTestId=\"actions_rooms_toggle_button\"\n />\n </div>\n <Text {...textDescriptionsProps}>\n {t(\"ActionsWithFilesDescription\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n </div>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 78,
-      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n <ToggleButton",
+      "line_number": 83,
+      "context": "<div className={styles.notificationContainer}>\n <div className={styles.row}>\n <ControlCaption htmlFor={inputId}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n </ControlCaption>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/RoomsActivityContainer.tsx",
-      "line_number": 78,
-      "context": "return (\n <div className={styles.notificationContainer}>\n <div className={styles.row}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n <ToggleButton",
+      "line_number": 83,
+      "context": "<div className={styles.notificationContainer}>\n <div className={styles.row}>\n <ControlCaption htmlFor={inputId}>\n <Text {...textProps} className=\"subscription-title\">\n {t(\"RoomUpdateNotify\", {\n files: t(\"Common:Files\"),\n rooms: t(\"Common:Rooms\"),\n forms: t(\"Common:Forms\"),\n })}\n </Text>\n </ControlCaption>",
       "module": "/packages/client"
     },
     {
@@ -331,7 +343,7 @@
     },
     {
       "file_path": "/packages/client/src/store/TreeFoldersStore.ts",
-      "line_number": 105,
+      "line_number": 155,
       "context": "const treeFolders = (await getFoldersTree()) as TTreeFolder[];\n \n treeFolders.forEach((folder) => {\n switch (folder.rootFolderType) {\n case FolderType.USER:\n folder.title = i18n.t(\"Common:Files\");\n break;\n case FolderType.SHARE:\n folder.title = i18n.t(\"Common:SharedWithMe\");\n break;\n case FolderType.Rooms:",
       "module": "/packages/client"
     },
@@ -409,7 +421,7 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/auto-backup/index.tsx",
-      "line_number": 520,
+      "line_number": 525,
       "context": "styles.backupDescription,\n \"backup-description\",\n )}\n >\n {t(\"Common:RoomsModuleDescription\", {\n roomName: t(\"Common:Files\"),\n })}\n </Text>\n {isCheckedDocuments ? (\n <RoomsModule\n settingsFileSelector={settingsFileSelector}",
       "module": "/packages/shared"
     },

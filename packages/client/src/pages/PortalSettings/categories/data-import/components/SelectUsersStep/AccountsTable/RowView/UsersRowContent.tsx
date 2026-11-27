@@ -40,7 +40,7 @@ import { UsersRowContentProps } from "../../../../types";
 import styles from "../../../../StyledDataImport.module.scss";
 
 const UsersRowContent = (props: UsersRowContentProps) => {
-  const { t, data, sectionWidth, displayName, email, isDuplicate } = props;
+  const { t, data, displayName, email, isDuplicate } = props;
 
   const contentData = [
     <div key={data.key}>
@@ -58,9 +58,7 @@ const UsersRowContent = (props: UsersRowContentProps) => {
   ];
 
   return (
-    <RowContent className={styles.styledRowContent} sectionWidth={sectionWidth}>
-      {contentData}
-    </RowContent>
+    <RowContent className={styles.styledRowContent}>{contentData}</RowContent>
   );
 };
 

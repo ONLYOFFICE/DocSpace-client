@@ -3,7 +3,7 @@
   "content": "Set up automatic submission of completed forms from this space to an external database. A table will be created in the database for each standard form after a copy is filled out or on a schedule.",
   "content_en_sha1_hash": "35579cdf55362383297760bebb4cbe29347991c9",
   "created_at": "2026-08-31T18:23:06.320Z",
-  "updated_at": "2026-08-31T19:05:50.378Z",
+  "updated_at": "2026-11-27T15:01:39.691Z",
   "comment": {
     "text": "Description text for a toggle setting that explains the automatic submission of completed forms to an external database.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
-      "line_number": 193,
-      "context": "isDisabled={tourStore.showMockItems}\n onChange={onToggleSendToDb}\n />\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:ExportResultsToDatabaseDescription\")}\n </Text>\n </div>\n \n {sendToDb ? (\n <div className={styles.formBlock}>",
+      "line_number": 201,
+      "context": "inputId={`${captionId}-db`}\n onChange={onToggleSendToDb}\n />\n </div>\n <Text fontSize=\"12px\" fontWeight={400}>\n {t(\"Common:ExportResultsToDatabaseDescription\")}\n </Text>\n </div>\n \n {sendToDb ? (\n <div className={styles.formBlock}>",
       "module": "/packages/sdk"
     }
   ],

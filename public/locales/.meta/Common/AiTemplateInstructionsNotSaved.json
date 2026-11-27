@@ -3,7 +3,7 @@
   "content": "{{name}} has been installed without the template's instructions, as they could not be saved.",
   "content_en_sha1_hash": "b2c3821aa9909a393892f65ae80d4aca791393c5",
   "created_at": "2026-11-18T12:00:00.000Z",
-  "updated_at": "2026-11-18T13:48:00.749Z",
+  "updated_at": "2026-11-27T15:01:39.823Z",
   "comment": {
     "text": "Warning toast shown instead of the success message after an agent template is installed but its instructions (the agent's system prompt from the template) could not be stored; when the model was not set either, the model warning sentence follows it in the same toast. {{name}} is the new agent's name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/Section/Body/AiTemplatesCatalog/useInstallAiTemplate.ts",
-      "line_number": 73,
-      "context": "if (warnings.includes(\"instructionsNotSaved\"))\n messages.push(t(\"Common:AiTemplateInstructionsNotSaved\", { name }));",
+      "line_number": 74,
+      "context": ") => {\n const name = installed.title;\n const warnings = installed.warnings ?? [];\n const messages: string[] = [];\n if (warnings.includes(\"instructionsNotSaved\"))\n messages.push(t(\"Common:AiTemplateInstructionsNotSaved\", { name }));\n if (warnings.includes(\"modelNotSaved\"))\n messages.push(t(\"Common:AiTemplateModelNotSaved\", { name }));\n return messages;\n };",
       "module": "/packages/client"
     }
   ],

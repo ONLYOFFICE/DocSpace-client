@@ -262,7 +262,6 @@ class FileRow extends Component {
 								{item.skippedMembers?.length ? (
 									<HelpButton
 										className="upload-panel_not-shared"
-										iconName={InfoReactSvgUrl}
 										size={12}
 										tooltipContent={t("Common:EncryptedUploadNotSharedWith", {
 											names: item.skippedMembers

@@ -3,7 +3,7 @@
   "content": "The file was not saved: its encryption could not be completed. Upload it again.",
   "content_en_sha1_hash": "66b959f7477f7f32b12962e76b63a37d0a9bb15a",
   "created_at": "2026-11-11T12:34:03.213Z",
-  "updated_at": "2026-11-11T12:36:16.847Z",
+  "updated_at": "2026-11-27T15:01:40.054Z",
   "comment": {
     "text": "Error text on the row of a failed upload in the uploads panel of a private (end-to-end encrypted) room, in the web client and the SDK. Shown when the file reached the server but its encryption key could not be saved for the uploader, so the file was deleted again; the row offers a retry. Two short sentences: a statement that nothing was saved, then an imperative asking to upload the file again.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/services/private-room/encrypted-upload-orchestrator.ts",
-      "line_number": 364,
-      "context": "export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => {\n if (error instanceof EncryptedReimportError) {\n return t(\"Common:EncryptionReimportFailed\");\n }\n if (error instanceof EncryptedUploadNotKeptError) {\n return t(\"Common:EncryptionUploadNotKept\");\n }\n if (error instanceof EncryptedWrapError) {\n return t(\"Common:EncryptionUploadWrapFailed\");\n }\n if (error instanceof CryptoError) return getEncryptionErrorMessage(t, error);",
+      "line_number": 380,
+      "context": "export const getEncryptedUploadErrorMessage = (t: TFunction, error: unknown) => {\n if (error instanceof EncryptedReimportError) {\n return t(\"Common:EncryptionReimportFailed\");\n }\n if (error instanceof EncryptedUploadNotKeptError) {\n return t(\"Common:EncryptionUploadNotKept\");\n }\n if (error instanceof EncryptedNameCheckError) {\n return t(\"Common:EncryptedNameCheckFailed\");\n }\n if (error instanceof EncryptedWrapError) {",
       "module": "/packages/shared"
     }
   ],

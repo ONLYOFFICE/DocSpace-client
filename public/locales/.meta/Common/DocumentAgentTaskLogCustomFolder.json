@@ -3,7 +3,7 @@
   "content": "A folder of your choice",
   "content_en_sha1_hash": "dce3cfa3927dc83b1e0c54a43c0c2e760e255224",
   "created_at": "2026-11-09T08:03:21.266Z",
-  "updated_at": "2026-11-17T13:13:27.158Z",
+  "updated_at": "2026-11-27T15:01:39.843Z",
   "comment": {
     "text": "Radio option under 'Save logs to' on the Document Agent tab: the log goes into one folder the administrator picks with the folder selector that appears below. Completes the label above it; noun phrase, no period.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/document-agent/index.tsx",
-      "line_number": 474,
+      "line_number": 482,
       "context": "label: t(\"Common:DocumentAgentTaskLogNextToResults\"),\n dataTestId: \"document-agent-tasklog-folder-results\",\n },\n {\n value: \"custom\",\n label: t(\"Common:DocumentAgentTaskLogCustomFolder\"),\n dataTestId: \"document-agent-tasklog-folder-custom\",\n },\n ]}\n selected={customLogFolder ? \"custom\" : \"results\"}\n onClick={(e) => {",
       "module": "/packages/client"
     }

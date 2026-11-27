@@ -3,7 +3,7 @@
   "content": "Skills",
   "content_en_sha1_hash": "e09212c7d3eaa769fbcf66f82a6263794e715931",
   "created_at": "2026-11-09T09:36:09.719Z",
-  "updated_at": "2026-11-17T13:13:26.978Z",
+  "updated_at": "2026-11-27T15:01:39.805Z",
   "comment": {
     "text": "Sidebar entry of the AI Chat section listing the Instructions rooms, whose files are the skills the chat uses. Short plural noun, no trailing punctuation.",
     "is_auto": true,
@@ -12,45 +12,33 @@
   },
   "usage": [
     {
-      "file_path": "/packages/client/src/components/ClientArticleSidebar/index.tsx",
-      "line_number": 621,
-      "context": "...nav(searchAreaUrl(\"/ai-rooms/filter\", RoomSearchArea.AiHub)),\n ...sectionBadge(aiHubFolder.id, newCount(aiHubFolder)),\n children: [\n {\n id: \"ai-rooms-skills\",\n label: t(\"Common:Skills\"),\n icon: CatalogSkillsReactSvgUrl,\n ...nav(aiHubTypeUrl(RoomsType.InstructionsRoom)),\n },\n {\n id: \"ai-rooms-knowledge\",",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/Details.utils.tsx",
+      "line_number": 550,
+      "context": "return null;\n if (\n \"roomType\" in this.item &&\n this.item.roomType === RoomsType.InstructionsRoom\n )\n return text(`${this.t(\"Common:Skills\")}: ${this.item.filesCount}`);\n if (\n \"roomType\" in this.item &&\n this.item.roomType === RoomsType.KnowledgeRoom\n )\n return text(`${this.t(\"Common:Files\")}: ${this.item.filesCount}`);",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/helpers/aiWorkspace.ts",
-      "line_number": 65,
-      "context": "t: (key: string) => string,\n search: string,\n ): string => {\n switch (getAiWorkspaceListType(search)) {\n case RoomsType.InstructionsRoom:\n return t(\"Common:Skills\");\n case RoomsType.KnowledgeRoom:\n return t(\"Common:AiWorkspaceKnowledge\");\n default:\n return t(\"Common:AiWorkspace\");\n }",
+      "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Details/sub-components/SkillSetInfo/index.tsx",
+      "line_number": 116,
+      "context": "return (\n <>\n <div className={commonStyles.subtitle}>\n <Text fontWeight=\"600\" fontSize=\"14px\">\n {t(\"Common:Skills\")}\n </Text>\n </div>\n <ul className={styles.list} data-testid=\"skill-set-info-skills\">\n {skills.map((skill) => (\n <li key={skill.id}>",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectIntro.tsx",
-      "line_number": 165,
-      "context": "</Text>\n )}\n {instructionsRooms.length > 0 || knowledgeRooms.length > 0 ? (\n <div className={styles.sources}>\n {instructionsRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:Skills\")} rooms={instructionsRooms} kind=\"instructions\" />\n ) : null}\n {knowledgeRooms.length > 0 ? (\n <SourceGroup label={t(\"Common:AiWorkspaceKnowledge\")} rooms={knowledgeRooms} kind=\"knowledge\" />\n ) : null}\n </div>",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/RowsView/aiRowInfo.ts",
+      "line_number": 133,
+      "context": ": undefined;\n const values = (() => {\n switch (kind) {\n case \"skillSet\":\n return [\n `${t(\"Common:Skills\")}: ${item.filesCount ?? 0}`,\n usedBy,\n fileOwner,\n updatedDate,\n ];\n case \"knowledgeBase\":",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 492,
-      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TableView/TableHeader.js",
+      "line_number": 371,
+      "context": "minWidth: 210,\n onClick: this.onRoomsFilter,\n },\n {\n key: \"SkillsSkillSets\",\n title: t(\"Common:Skills\"),\n enable: skillsSkillSetsColumnIsEnabled,\n resizable: true,\n onChange: this.onColumnChange,\n },\n {",
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 492,
-      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 492,
-      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
-      "module": "/packages/client"
-    },
-    {
-      "file_path": "/packages/client/src/pages/AiProjects/sub-components/project/ProjectSources.tsx",
-      "line_number": 492,
-      "context": "// For a member a kind with no available linked room has no card and no\n // tab: only a manager links rooms, and an empty card would only say so.\n const instructionsSection = instructionsRooms.length === 0 && !canAddRooms ? null : (\n <Section\n title={t(\"Common:Skills\")}\n count={skillsCount}\n menuTitle={t(\"Common:Skills\")}\n testId=\"ai-project-instructions\"\n headless={compact}\n >",
+      "file_path": "/packages/client/src/pages/Home/Section/Body/TilesView/AiSourceRoomTile.tsx",
+      "line_number": 156,
+      "context": "const bottomContent = (\n <div className={styles.wrapper} data-testid=\"ai-source-room-tile-summary\">\n {!isKnowledgeBase ? (\n <>\n {label(t(\"Common:Skills\"))}\n {value(\"skills\", String(room.filesCount ?? 0))}\n </>\n ) : null}\n {label(t(\"Common:UsedBy\"))}\n {value(\"used-by\", getUsedByText(t, room.linkedProjectsCount))}",
       "module": "/packages/client"
     }
   ],

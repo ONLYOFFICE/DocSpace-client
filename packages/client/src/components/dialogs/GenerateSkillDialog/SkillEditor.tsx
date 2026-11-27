@@ -84,7 +84,7 @@ const darkTheme = githubDarkInit({
   },
 });
 
-/** A skill's text as Markdown, in the Edit skill form and its read-only view. */
+/** A skill's text as Markdown, in the skill forms. */
 const SkillEditor = ({
   value,
   isDisabled,

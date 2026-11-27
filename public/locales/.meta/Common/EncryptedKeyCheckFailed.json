@@ -3,7 +3,7 @@
   "content": "The sender's encryption key could not be checked on this device. Reload the page and try again.",
   "content_en_sha1_hash": "ba958c6ca75e58b1a450549f2a9fd31193827ba3",
   "created_at": "2026-11-19T13:36:09.171Z",
-  "updated_at": "2026-11-19T13:38:33.389Z",
+  "updated_at": "2026-11-27T15:01:40.054Z",
   "comment": {
     "text": "Error toast shown when a file of a private room cannot be downloaded, copied or previewed because the encryption key of the room member who uploaded or last saved it could not be checked on this device. Sender means that member, not an email sender; the second sentence is an instruction to the user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/services/encryption/error-i18n.ts",
-      "line_number": 93,
+      "line_number": 97,
       "context": "}\n if (error instanceof KeyNotFoundError) {\n return t(\"Common:NoEncryptionKey\");\n }\n if (error instanceof KeyCheckUnavailableError) {\n return t(\"Common:EncryptedKeyCheckFailed\");\n }\n return null;\n }\n \n export function getEncryptionErrorMessage(",
       "module": "/packages/shared"
     }

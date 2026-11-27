@@ -3,7 +3,7 @@
   "content": "Agent \"{{name}}\" saved",
   "content_en_sha1_hash": "efdd74b56dd157b60db70b7b90fa27845e86965a",
   "created_at": "2026-11-18T08:05:12.354Z",
-  "updated_at": "2026-11-18T08:13:34.331Z",
+  "updated_at": "2026-11-27T15:01:39.611Z",
   "comment": {
     "text": "Success toast after the current AI chat setup (model, skill sets, knowledge bases) is saved as a new agent. {{name}} is the agent name; keep the quotes around it.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/AiPresetsBridge/index.tsx",
-      "line_number": 625,
-      "context": "const onSave = async (_e: unknown, value: string) => {\n try {\n const saved = await aiPresetsStore.savePreset(value);\n if (!saved) return;\n toastr.success(t(\"Common:AIProjectSaved\", { name: saved.preset.name }));\n // A linked room that could not be shared with a member, and the like.\n saved.project.aiProject.warnings?.forEach((warning) => toastr.warning(warning.message));\n } catch (e) {\n toastr.error(errorMessage(e));\n }",
+      "line_number": 632,
+      "context": "const onSave = async (_e: unknown, value: string) => {\n try {\n const saved = await aiPresetsStore.savePreset(value);\n if (!saved) return;\n toastr.success(t(\"Common:AIProjectSaved\", { name: saved.preset.name }));\n // A room the user may not link: the agent was made without it.\n saved.notLinked.forEach((room) =>\n toastr.warning(t(\"Common:AgentRoomNotLinked\", { roomName: room.name })),\n );\n // A linked room that could not be shared with a member, and the like.",
       "module": "/packages/client"
     }
   ],

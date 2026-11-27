@@ -161,13 +161,19 @@ feature the switch, saving and the metadata download SHALL be disabled and the s
 
 Where the tariff includes LDAP, Integration → LDAP SHALL let an administrator set the connection, the attribute and
 group mapping and the authentication, save them, synchronize at once with progress, and schedule automatic
-synchronization showing the next run in UTC. Without the feature the controls SHALL be disabled and the switch SHALL
-carry the paid badge.
+synchronization showing the next run in UTC. A certificate to confirm SHALL be shown with its details, and confirming
+it SHALL save again with it accepted. Without the feature the controls SHALL be disabled and the switch SHALL carry the
+paid badge.
 
 #### Scenario: Manual sync
 
 - **WHEN** an administrator presses the synchronize button with LDAP on
 - **THEN** a synchronization starts and its progress is shown
+
+#### Scenario: Certificate to confirm
+
+- **WHEN** saving reaches an LDAP server whose certificate is not trusted and the administrator confirms it
+- **THEN** the settings are saved again with the certificate and its hash accepted
 
 ### Requirement: Third-party services
 

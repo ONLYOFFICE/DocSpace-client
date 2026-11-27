@@ -44,21 +44,22 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | Warning when enabled; IPv4 check and repeated address block saving; saved with a toast; Disabled saved without the list | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/ipSecurity.test.tsx:97, 107, 118, 129, 147` | UNIT-CONFIRMED |
 | IP restrictions on the server | `server`, "Saving IP restrictions"; "Enforcing IP restrictions" | SERVER-SPEC |
 | **Brute force protection** | | |
-| Whole numbers of up to four digits; an empty attempts count marked and, with an empty check period, blocking saving; saved as numbers; Restore to default, disabled at the defaults | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/bruteForceProtection.test.tsx:124, 134, 148, 158, 175, 191` | UNIT-CONFIRMED || Limits on the server | `server`, "Failed sign-in limits"; "Range of the sign-in limits" | SERVER-SPEC |
+| Whole numbers of up to four digits; an empty attempts count marked and, with an empty check period, blocking saving; saved as numbers; Restore to default, disabled at the defaults | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/bruteForceProtection.test.tsx:124, 134, 148, 158, 175, 191` | UNIT-CONFIRMED |
+| Limits on the server | `server`, "Failed sign-in limits"; "Range of the sign-in limits" | SERVER-SPEC |
 | **Administrator message** | | |
 | Enabled and Disabled; save | `ap/adminMessage.js:120-205` | CODE-ONLY |
 | **Session lifetime** | | |
 | Sign-out warning; positive whole number of at most four digits; empty marked and blocking saving; saved; Disabled keeps the server's minutes | `packages/client/src/pages/PortalSettings/categories/security/access-portal/__tests__/sessionLifetime.test.tsx:94, 102, 116, 128, 144` | UNIT-CONFIRMED |
 | Lifetime on the server | `serverSettings`, "Changing the session lifetime"; "Sessions after a lifetime change" | SERVER-SPEC |
 | **Single sign-on** | | |
-| Switching on opens the provider settings; saving waits for the entity ID and the sign-on and sign-out addresses, then sends them with the field mapping; Default settings resets at once with SSO off and after a confirmation with SSO on, which turns it off | `packages/client/__tests__/sso-settings.spec.ts:158, 209, 227` | E2E-CONFIRMED |
-| Provider from its metadata file or address, certificates, users type, metadata download | `int/SingleSignOn/index.js:84-140`; `int/SingleSignOn/sub-components/UploadXML.js`; `int/SingleSignOn/Certificates.js` | CODE-ONLY |
-| Disabled with the paid badge without the feature | `packages/client/__tests__/sso-settings.spec.ts:131` | E2E-CONFIRMED |
+| Switching on opens the provider settings; saving waits for the entity ID and the sign-on and sign-out addresses, then sends them with the field mapping; Default settings resets at once with SSO off and after a confirmation with SSO on, which turns it off | `packages/client/__tests__/sso-settings.spec.ts:230, 281, 299` | E2E-CONFIRMED |
+| Provider from its metadata address (a malformed address marked, a failed load reported) or XML file (another type not sent), filling the addresses and the signing certificate; provider and service certificates validated, listed, refused a second time, removed, a generated one saved; type of new users among the types the administrator may grant; with SSO on the metadata shown and downloaded in a new tab | `packages/client/__tests__/sso-settings.spec.ts:330, 380, 413, 470, 511, 534` | E2E-CONFIRMED |
+| Disabled with the paid badge without the feature | `packages/client/__tests__/sso-settings.spec.ts:203` | E2E-CONFIRMED |
 | Single sign-on on the server | `server`, "Saving single sign-on settings"; "Required single sign-on fields"; "Switching single sign-on off" | SERVER-SPEC |
 | **LDAP** | | |
-| Switching on and saving waits for the server and the user DN, then sends them without the protocol; Sync users shows the progress to the end; Auto sync shows the next run in UTC and saves the schedule | `packages/client/__tests__/ldap-settings.spec.ts:167, 207, 235` | E2E-CONFIRMED |
-| Group membership, authentication, certificate confirmation | `int/LDAP/sub-components/GroupMembership.js`; `int/LDAP/sub-components/AuthenticationContainer.js`; `int/LDAP/sub-components/CertificateDialog.js` | CODE-ONLY |
-| Disabled with the paid badge without the feature | `packages/client/__tests__/ldap-settings.spec.ts:145` | E2E-CONFIRMED |
+| Switching on and saving waits for the server and the user DN, then sends them without the protocol; Sync users shows the progress to the end; Auto sync shows the next run in UTC and saves the schedule | `packages/client/__tests__/ldap-settings.spec.ts:207, 247, 275` | E2E-CONFIRMED |
+| Group membership makes its fields editable, marks them when empty and sends them; authentication blocks saving without the login and password, then sends them; a certificate to confirm shows its details and errors, and confirming saves again with the certificate and its hash accepted | `packages/client/__tests__/ldap-settings.spec.ts:301, 349, 386` | E2E-CONFIRMED |
+| Disabled with the paid badge without the feature | `packages/client/__tests__/ldap-settings.spec.ts:185` | E2E-CONFIRMED |
 | **Third-party services** | | |
 | Services with keys, request block, Business plan badge | `int/ThirdPartyServicesSettings/index.js:160-250` | CODE-ONLY |
 | External database: fields shown by the chosen options | `int/ThirdPartyServicesSettings/sub-components/ExternalDbModal/__tests__/ExternalDbField.utils.test.ts` | UNIT-CONFIRMED |
@@ -75,3 +76,4 @@ asserts it), **CODE-ONLY** (read from the code, no test), **SERVER-SPEC** (the s
 | SMTP, Document Server, plugins | Owned by `notifications`, `files-settings`, `plugins` | `int/SMTPSettings/`; `int/DocumentService/`; `int/Plugins/` |
 | Adding and deleting a field from the keyboard in the trusted domains and allowed IP lists | Keyboard of the shared field list, not a setting | `packages/client/src/pages/PortalSettings/categories/security/sub-components/__tests__/user-fields.test.tsx` |
 | An empty blocking time does not block saving; a failed save leaves the brute force page busy | Suspected defects, `deviations.md` C6, C7 | `ap/bruteForceProtection.js:154, 246, 271-273` |
+| Empty group membership fields are marked but do not block saving | Suspected defect, `deviations.md` C8 | `packages/client/src/store/LdapFormStore.ts:625-651` |

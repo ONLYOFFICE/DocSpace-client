@@ -101,7 +101,6 @@ const TableRow = (props: TableRowProps) => {
           [styles.hideColumns]: hideColumns,
         })}
         contextOptions={contextOptions}
-        hideColumns={hideColumns}
       >
         <TableCell>
           <div className="api-keys_name">

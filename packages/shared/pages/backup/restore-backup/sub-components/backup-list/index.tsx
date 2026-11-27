@@ -327,8 +327,6 @@ const BackupListModalDialog = ({
                   styles.backupListTooltip,
                   "backup-list_tooltip",
                 )}
-                offsetLeft={100}
-                iconName={HelpReactSvgUrl}
                 getContent={helpContent}
                 tooltipMaxWidth="286px"
                 dataTestId="backup_list_agreement_help_button"

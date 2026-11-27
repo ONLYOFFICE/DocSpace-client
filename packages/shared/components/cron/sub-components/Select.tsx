@@ -124,7 +124,6 @@ export const Select = ({
         scaled
         scaledOptions
         noBorder={false}
-        showDisabledItems
         options={options}
         onSelect={onSelect}
         size={ComboBoxSize.content}

@@ -486,7 +486,6 @@ const LanguageAndTimeZoneComponent = (props) => {
             isDefaultMode={false}
             dropDownMaxHeight={300}
             className="dropdown-item-width combo-box-settings"
-            showDisabledItems
             dataTestId="language_and_time_zone_combo_box_language"
           />
           {isBetaLang ? <BetaBadge place="right-start" /> : null}
@@ -510,7 +509,6 @@ const LanguageAndTimeZoneComponent = (props) => {
           isDefaultMode={false}
           dropDownMaxHeight={300}
           className="dropdown-item-width combo-box-settings"
-          showDisabledItems
           dataTestId="language_and_time_zone_combo_box_timezone"
         />
       </FieldContainer>

@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Dieser Space ist für jeden zugänglich, der den Link hat. Externe Nutzer erhalten für alle Formulare die Berechtigung als Formularausfüller.",
   "GoToIntegrations": "Zu Integrationen",
   "Horizontal": "Horizontal",
-  "Icon": "Icon",
   "NeedMoreIntegrations": "Brauchen Sie mehr Integrationen?",
   "NeedMoreIntegrationsDescription": "Nutzen Sie Webhooks, um Daten an Ihr eigenes System zu senden, oder verbinden Sie Formulare mit Tausenden von Diensten über Zapier.",
   "NoDatabaseConnections": "Keine Datenbankverbindungen konfiguriert",

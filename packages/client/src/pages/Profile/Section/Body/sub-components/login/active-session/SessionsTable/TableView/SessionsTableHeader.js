@@ -58,7 +58,6 @@ const SessionsTableHeader = (props) => {
   const {
     t,
     userId,
-    sectionWidth,
     setHideColumns,
     containerRef,
     columnStorageName,
@@ -121,7 +120,6 @@ const SessionsTableHeader = (props) => {
       columns={columns}
       columnStorageName={columnStorageName}
       columnInfoPanelStorageName={columnInfoPanelStorageName}
-      sectionWidth={sectionWidth}
       checkboxMargin="12px"
       showSettings={false}
       useReactWindow

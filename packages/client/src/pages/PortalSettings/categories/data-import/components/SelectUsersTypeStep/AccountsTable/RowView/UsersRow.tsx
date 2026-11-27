@@ -62,7 +62,6 @@ const UsersRow = (props: TypeSelectUsersRowProps) => {
     <Row
       key={data.key}
       checked={isChecked}
-      contextButtonSpacerWidth="0"
       onRowClick={handleAccountToggle}
       onSelect={handleAccountToggle}
     >

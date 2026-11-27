@@ -67,7 +67,6 @@ const LDAPContainer = ({
 						<HelpButton
 							id="login_ldap-hint"
 							className="help-button"
-							offsetRight={0}
 							tooltipContent={
 								<Text fontSize="12px">{t("SignInLdapHelper")}</Text>
 							}

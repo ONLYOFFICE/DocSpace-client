@@ -281,7 +281,6 @@ const ThirdPartyStorageModule = ({
           isDefaultMode
           scaledOptions
           noBorder={false}
-          showDisabledItems
           directionY="both"
           manualWidth="400px"
           displaySelectedOption

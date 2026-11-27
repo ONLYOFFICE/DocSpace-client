@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Questo spazio è disponibile per chiunque abbia il link. Gli utenti esterni avranno l'autorizzazione di compilatore di moduli per tutti i moduli.",
   "GoToIntegrations": "Vai a Integrazioni",
   "Horizontal": "Orizzontale",
-  "Icon": "Icona",
   "NeedMoreIntegrations": "Hai bisogno di più integrazioni?",
   "NeedMoreIntegrationsDescription": "Utilizza gli webhook per inviare dati al tuo sistema o collega i moduli a migliaia di servizi tramite Zapier.",
   "NoDatabaseConnections": "Nessuna connessione al database configurata",

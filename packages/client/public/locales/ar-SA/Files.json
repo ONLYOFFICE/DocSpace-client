@@ -77,7 +77,6 @@
   "MarkAsRevision": "وضع إشارة تمت مراجعته",
   "MarkAsVersion": "وضع علامة كإصدار",
   "MarkingRead": "جارٍ التعليم كمقروء",
-  "MarkRead": "ضع إشارة مقروء",
   "MeAndGroups": "أنا والمجموعات ({{ groupsCount }})",
   "MeAndMembers": "أنا والأعضاء ({{ membersCount }})",
   "MeAndMembersAndGroups": "أنا، الأعضاء ({{ membersCount }}) والمجموعات ({{ groupsCount }})",

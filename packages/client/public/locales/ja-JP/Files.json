@@ -77,7 +77,6 @@
   "MarkAsRevision": "修正マーク",
   "MarkAsVersion": "バージョンとしてマークする",
   "MarkingRead": "マークが読み取られました",
-  "MarkRead": "既読にする",
   "MeAndGroups": "私とグループ（{{ groupsCount }}）",
   "MeAndMembers": "私とメンバー（{{ membersCount }}）",
   "MeAndMembersAndGroups": "私、メンバー（{{ membersCount }}）とグループ（{{ groupsCount }}）",

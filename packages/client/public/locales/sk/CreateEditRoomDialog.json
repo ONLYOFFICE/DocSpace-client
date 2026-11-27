@@ -20,7 +20,6 @@
   "FormRoomBarDescription": "Tento priestor je dostupný každému, kto má odkaz. Externí používatelia budú mať pre všetky formuláre oprávnenie vypĺňať formuláre.",
   "GoToIntegrations": "Prejsť na integrácie",
   "Horizontal": "Horizontála",
-  "Icon": "Ikona",
   "NeedMoreIntegrations": "Potrebujete viac integrácií?",
   "NeedMoreIntegrationsDescription": "Použite webhooks na odoslanie údajov do vlastného systému alebo pripojte formuláre k tisícom službami cez Zapier.",
   "NoDatabaseConnections": "Nie je nakonfigurované žiadne pripojenie k databáze",

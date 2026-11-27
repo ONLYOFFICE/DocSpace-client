@@ -43,10 +43,7 @@ import styles from "../../authorized-apps.module.scss";
 
 export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
   return (
-    <RowContentComponent
-      sectionWidth={sectionWidth}
-      className={styles.rowContent}
-    >
+    <RowContentComponent className={styles.rowContent}>
       <div className={styles.contentWrapper}>
         <div className={styles.flexWrapper}>
           <Text
